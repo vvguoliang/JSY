@@ -5,7 +5,7 @@
             <!-- 相当于padding -->
             <item android:left="@dimen/common_10dp" android:top="@dimen/common_10dp">
                 <shape>
-                    <solid android:width="2dp" android:color="#66000000" />
+                    <solid android:width="2dp" android:color="@color/white" />
                     <corners android:radius="@dimen/common_10dp" />
                 </shape>
             </item>
@@ -23,10 +23,10 @@
             </item>
             <!-- CONTENT LAYER -->
             <!-- 相当于padding -->
-            <item android:bottom="@dimen/common_2dp" android:right="@dimen/common_2dp">
+            <item android:bottom="@dimen/common_1dp" android:right="@dimen/common_1dp">
                 <shape>
                     <solid android:color="@color/white" />
-                    <corners android:radius="@dimen/common_5dp" android:topLeftRadius="@dimen/common_2dp" android:topRightRadius="@dimen/common_2dp" />
+                    <corners android:radius="@dimen/common_5dp" android:topLeftRadius="@dimen/common_2dp" />
                     <stroke android:width="0.2dp" android:color="@color/common_loan_personal" />
                 </shape>
             </item>

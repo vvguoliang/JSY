@@ -34,6 +34,36 @@
         <activity
             android:name=".activity.CommissioningActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalDataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalDataCreditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalDataEnterpriseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalDataFamilyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalDataOtherActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalDataHosePropertyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalDataCarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalDataOperatorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalDataCertificatesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalDataBankCardActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
