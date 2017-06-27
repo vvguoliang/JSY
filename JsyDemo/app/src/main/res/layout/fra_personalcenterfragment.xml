@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_light_grey"
+    android:orientation="vertical">
+
+
+    <include
+        layout="@layout/tab_activity_fra"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_48dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_personal_src"
+        android:padding="@dimen/common_10dp">
+
+        <ImageView
+            android:id="@+id/personal_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/common_15dp"
+            android:src="@mipmap/ic_personal_camera"
+            tools:ignore="RtlHardcoded" />
+
+        <com.jsy.jsydemo.control.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/common_30dp"
+            android:layout_toRightOf="@id/personal_camera"
+            android:autoLink="all"
+            android:text="@string/name_loan_personal_logn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_16dp"
+            tools:ignore="RtlHardcoded" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/common_10dp"
+            android:src="@drawable/bg_personal_rigint_selector"
+            tools:ignore="RtlHardcoded" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_10dp"
+        android:background="@drawable/bg_fillet_shadow_selector"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/common_10dp"
+        android:paddingTop="@dimen/common_10dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_my_loan" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name_loan_my"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/common_14dp" />
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name_loan_my_details"
+                    android:textColor="@color/common_loan_personal"
+                    android:textSize="@dimen/common_14dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="@dimen/common_2dp"
+                android:layout_height="match_parent"
+                android:padding="@dimen/common_10dp"
+                android:src="@color/common_loan_personal_line" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/common_15dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                tools:ignore="RtlHardcoded">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/ic_my_package" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name_loan_my_ic_my_package"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/common_14dp" />
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name_loan_my_ic_my_package_use"
+                        android:textColor="@color/common_loan_personal"
+                        android:textSize="@dimen/common_14dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">及时雨贷款</string>
+    <string name="network_timed">网络连接超时，请重试</string>
+    <string name="no_network_timed">暂无网络,请稍后再试</string>
+    <string name="name_loan">借款</string>
+    <string name="name_loan_supermarket">贷款超市</string>
+    <string name="name_quick_card">快速办卡</string>
+    <string name="name_personal_center">个人中心</string>
+    <string name="name_sky_loan">极速贷款</string>
+    <string name="name_Loan_classification">贷款分类引导</string>
+    <string name="name_Loan_recommend">贷款推荐</string>
+    <string name="name_Loan_recommend_accurately">精确推荐贷款</string>
+    <string name="name_loan_credit_report">征信报告</string>
+    <string name="name_loan_personal_credit">个人信用查询</string>
+    <string name="name_loan_batch">换一批</string>
+    <string name="name_loan_hot_sky_loan">热门极速贷款</string>
+    <string name="name_loan_praise_recommend">好评推荐</string>
+    <string name="name_loan_personal_logn">点击登录</string>
+    <string name="name_loan_my">我的借款</string>
+    <string name="name_loan_my_details">查看借款详情</string>
+    <string name="name_loan_my_ic_my_package">我的卡包</string>
+    <string name="name_loan_my_ic_my_package_use">一张卡可用</string>
+</resources>

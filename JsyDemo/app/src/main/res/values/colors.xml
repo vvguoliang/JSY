@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#3F51B5</color>
+    <color name="primaryDark">#303F9F</color>
+    <color name="accent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="common_navy_blue">#305591</color>
+    <color name="common_transparent">#ffffff00</color>
+    <color name="common_sky_blue">#40b9b1</color>
+    <color name="common_gray">#a6a6a6</color>
+    <color name="common_green">#5fab6c</color>
+    <color name="common_violet">#463da8</color>
+    <color name="common_light_grey">#f0f0f0</color>
+    <color name="common_deep_blue">#327ac9</color>
+    <color name="common_brown_text">#655f5f</color>
+    <color name="common_loan_view_text">#2e2e2e</color>
+    <color name="common_loan_personal">#787878</color>
+    <color name="common_loan_personal_line">#e7e7e7</color>
+</resources>
