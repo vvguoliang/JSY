@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/common_light_grey"
+    android:orientation="vertical">
 
+    <include
+        layout="@layout/tab_activity_fra"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_48dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_10dp">
+
+        <com.jsy.jsydemo.control.MyTextView
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_10dp"
+            android:layout_weight="1"
+            android:text="@string/name_loan_bank_savings_card"
+            android:textColor="@color/common_loan_personal"
+            android:textSize="@dimen/common_14dp" />
+
+        <com.jsy.jsydemo.control.MyTextView
+            android:id="@+id/personal_bank_savings_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/common_10dp"
+            android:text="@string/name_loan_bank_no_verification"
+            android:textColor="@color/common_loan_personal"
+            android:textSize="@dimen/common_14dp" />
+
+        <ImageView
+            android:layout_width="@dimen/common_20dp"
+            android:layout_height="@dimen/common_20dp"
+            android:paddingLeft="@dimen/common_10dp"
+            android:src="@drawable/bg_personal_right_selector" />
+    </LinearLayout>
 </LinearLayout>

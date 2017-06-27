@@ -61,4 +61,6 @@
     <string name="name_loan_family_city">所在城市</string>
     <string name="name_loan_family_address">居住详情地址</string>
     <string name="name_loan_family_household_register">户籍所在地</string>
+    <string name="name_loan_bank_savings_card">储蓄卡</string>
+    <string name="name_loan_bank_no_verification">未验证</string>
 </resources>

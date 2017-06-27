@@ -90,18 +90,24 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 startActivity(new Intent(PersonalDataActivity.this, PersonalDataFamilyActivity.class));
                 break;
             case R.id.personal_data_other://其他情况
+                startActivity(new Intent(PersonalDataActivity.this, PersonalDataOtherActivity.class));
                 break;
             case R.id.personal_data_hose_property://房产
+                startActivity(new Intent(PersonalDataActivity.this, PersonalDataHosePropertyActivity.class));
                 break;
             case R.id.personal_data_car_production://车产
+                startActivity(new Intent(PersonalDataActivity.this, PersonalDataCarActivity.class));
                 break;
-            case R.id.personal_data_operator://运营商验证nn
+            case R.id.personal_data_operator://运营商验证
+                startActivity(new Intent(PersonalDataActivity.this, PersonalDataOperatorActivity.class));
                 break;
             case R.id.personal_data_online_shopping://网购信用
                 break;
             case R.id.personal_data_certificates://证件上传
+                startActivity(new Intent(PersonalDataActivity.this, PersonalDataCertificatesActivity.class));
                 break;
             case R.id.personal_data_bank_card://我的银行卡
+                startActivity(new Intent(PersonalDataActivity.this, PersonalDataBankCardActivity.class));
                 break;
         }
 

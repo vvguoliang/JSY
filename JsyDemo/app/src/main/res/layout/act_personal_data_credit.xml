@@ -24,7 +24,7 @@
             android:padding="@dimen/common_10dp">
 
             <com.jsy.jsydemo.control.MyTextView
-                android:layout_width="0dp"
+                android:layout_width="275dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_10dp"
                 android:layout_weight="1"
