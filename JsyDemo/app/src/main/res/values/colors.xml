@@ -17,4 +17,5 @@
     <color name="common_loan_view_text">#2e2e2e</color>
     <color name="common_loan_personal">#787878</color>
     <color name="common_loan_personal_line">#e7e7e7</color>
+    <color name="common_loan_personal_data_other">#6a8def</color>
 </resources>

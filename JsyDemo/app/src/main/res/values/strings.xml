@@ -63,4 +63,33 @@
     <string name="name_loan_family_household_register">户籍所在地</string>
     <string name="name_loan_bank_savings_card">储蓄卡</string>
     <string name="name_loan_bank_no_verification">未验证</string>
+    <string name="name_loan_other_import">快捷导入</string>
+    <string name="name_loan_other_relatives">亲属/配偶姓名</string>
+    <string name="name_loan_other_contacts">紧急联系人</string>
+    <string name="name_loan_house_estate">名下房产</string>
+    <string name="name_loan_house_location">房产所在地</string>
+    <string name="name_loan_house_type">房产类型</string>
+    <string name="name_loan_house_market_price">房产当前市价(万元)</string>
+    <string name="name_loan_house_mortgage">目前该放是否存在按揭</string>
+    <string name="name_loan_house_no_mortgage">目前该放是否抵押</string>
+    <string name="name_loan_car_estate">名下车产</string>
+    <string name="name_loan_car_new_car">新车市价(万元)</string>
+    <string name="name_loan_car_life">使用年限</string>
+    <string name="name_loan_car_mortgage">目前该车是否存在按揭</string>
+    <string name="name_loan_car_no_mortgage">目前该车是否存抵押</string>
+    <string name="name_loan_operator_no_authorization">未授权</string>
+    <string name="name_loan_set_up_about">关于我们</string>
+    <string name="name_loan_set_up_password">修改密码</string>
+    <string name="name_loan_set_up_sign_out">安全退出</string>
+    <string name="name_loan_set_up_about_text">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;及时雨贷款成立于2016年7月,公司位于北京.及时雨贷款通过移动互联网和大数据应用技术,为用户提供线上纯信用贷款服务的平台.及时雨贷款全程线上操作、申请、审批,手续渐变快捷,用户应急周转和线上消费的备用钱包.截止目前,及时雨APP累计注册用户50万人,入驻多家主流正规贷款机构,包括消费金融公司、小贷公司、汽车金融公司、互联网金融公司等.</string>
+
+    <string name="name_loan_set_up_password_phone">输入手机号</string>
+    <string name="name_loan_set_up_password_phone11">请输入11位手机号码</string>
+    <string name="name_loan_set_up_password_code">验证码</string>
+    <string name="name_loan_set_up_password_code11">请输入验证码</string>
+    <string name="name_loan_set_up_password_obtain_code">获取验证码</string>
+    <string name="name_loan_set_up_password_password">密码</string>
+    <string name="name_loan_set_up_password_password11">请输入6位以上新密码</string>
+    <string name="name_loan_set_up_password_confirm">确认密码</string>
+    <string name="name_loan_set_up_password_confirm11">请再次输入密码</string>
 </resources>

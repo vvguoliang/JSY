@@ -23,7 +23,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     private TextView personal_data_id;//身份证
 
     private TextView personal_data_complete0, personal_data_complete1, personal_data_complete2, personal_data_complete3,
-            personal_data_complete4, personal_data_complete5, personal_data_complete6, personal_data_complete7,
+            personal_data_complete4, personal_data_complete5, personal_data_complete6, //personal_data_complete7,
             personal_data_complete8, personal_data_complete9;
 
     @Override
@@ -48,7 +48,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         findViewById(R.id.personal_data_hose_property).setOnClickListener(this);
         findViewById(R.id.personal_data_car_production).setOnClickListener(this);
         findViewById(R.id.personal_data_operator).setOnClickListener(this);
-        findViewById(R.id.personal_data_online_shopping).setOnClickListener(this);
+//        findViewById(R.id.personal_data_online_shopping).setOnClickListener(this);
         findViewById(R.id.personal_data_certificates).setOnClickListener(this);
         findViewById(R.id.personal_data_bank_card).setOnClickListener(this);
         personal_data_phone = (TextView) findViewById(R.id.personal_data_phone);
@@ -61,7 +61,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         personal_data_complete4 = (TextView) findViewById(R.id.personal_data_complete4);
         personal_data_complete5 = (TextView) findViewById(R.id.personal_data_complete5);
         personal_data_complete6 = (TextView) findViewById(R.id.personal_data_complete6);
-        personal_data_complete7 = (TextView) findViewById(R.id.personal_data_complete7);
+//        personal_data_complete7 = (TextView) findViewById(R.id.personal_data_complete7);
         personal_data_complete8 = (TextView) findViewById(R.id.personal_data_complete8);
         personal_data_complete9 = (TextView) findViewById(R.id.personal_data_complete9);
 
@@ -101,8 +101,8 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             case R.id.personal_data_operator://运营商验证
                 startActivity(new Intent(PersonalDataActivity.this, PersonalDataOperatorActivity.class));
                 break;
-            case R.id.personal_data_online_shopping://网购信用
-                break;
+//            case R.id.personal_data_online_shopping://网购信用
+//                break;
             case R.id.personal_data_certificates://证件上传
                 startActivity(new Intent(PersonalDataActivity.this, PersonalDataCertificatesActivity.class));
                 break;

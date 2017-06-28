@@ -64,6 +64,15 @@
         <activity
             android:name=".activity.personaldata.PersonalDataBankCardActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SetUp.SetUPActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SetUp.SetUpAboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.helpFeedbackFriendsMyPackage.HelpCenterActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
