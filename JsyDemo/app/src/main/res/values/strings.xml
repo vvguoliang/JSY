@@ -92,4 +92,7 @@
     <string name="name_loan_set_up_password_password11">请输入6位以上新密码</string>
     <string name="name_loan_set_up_password_confirm">确认密码</string>
     <string name="name_loan_set_up_password_confirm11">请再次输入密码</string>
+    <string name="name_loan_you">有</string>
+    <string name="name_loan_wu">无</string>
+    <string name="name_loan_cancel">取消</string>
 </resources>

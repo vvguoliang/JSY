@@ -73,6 +73,15 @@
         <activity
             android:name=".activity.helpFeedbackFriendsMyPackage.HelpCenterActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.helpFeedbackFriendsMyPackage.FriendsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.helpFeedbackFriendsMyPackage.FeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LogoActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

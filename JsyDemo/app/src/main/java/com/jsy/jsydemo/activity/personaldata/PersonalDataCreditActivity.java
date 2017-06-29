@@ -1,11 +1,22 @@
 package com.jsy.jsydemo.activity.personaldata;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.StringUtil;
+import com.jsy.jsydemo.utils.TimeUtils;
+import com.jsy.jsydemo.view.PublicDialog;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -28,10 +39,15 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
 
     private TextView personal_credit_purpose;
 
+    private String[] purpose = new String[]{"购车贷款", "购房贷款", "网购贷款", "过桥短期资金", "装修贷款", "教育培训贷款", "旅游贷款", "三农贷款", "其他"};
+
+    private int purpose_int = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_personal_data_credit);
+        findViewById();
     }
 
     @Override
@@ -54,10 +70,8 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
 
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
-
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_data_credit));
-
         findViewById(R.id.title_complete).setVisibility(View.VISIBLE);
         findViewById(R.id.title_complete).setOnClickListener(this);
 
@@ -84,6 +98,12 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
             case R.id.personal_credit_no_taobao://是否实名淘宝
                 break;
             case R.id.personal_credit_purpose://贷款用途
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    //弹出Toast或者Dialog
+                    getDialog(getList_purpose(), "credit_purpose");
+                }
                 break;
             case R.id.title_image:
                 finish();
@@ -91,6 +111,42 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
             case R.id.title_complete://完成
                 break;
         }
-
     }
+
+    private void getDialog(List<Map<String, Object>> list, String name) {
+        PublicDialog.Builder builder = new PublicDialog.Builder(this);
+        String stringa = SharedPreferencesUtils.get(this, name, "").toString();
+        if (!StringUtil.isNullOrEmpty(stringa)) {
+            List<Map<String, Object>> listViewEntities = SharedPreferencesUtils.getInfo(this, stringa);
+            if (null != listViewEntities && listViewEntities.size() > 0) {
+                list.clear();
+                list = listViewEntities;
+            }
+        }
+        final List<Map<String, Object>> finalList = list;
+        builder.setItems(list, name, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                for (int i = 0; finalList.size() > i; i++) {
+                    if (finalList.get(i).get("boolean").equals("2")) {
+                        personal_credit_purpose.setText(finalList.get(i).get("name").toString());
+                    }
+                }
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    private List<Map<String, Object>> getList_purpose() {
+        List<Map<String, Object>> list_purpose = new ArrayList<>();
+        for (String aPurpose : purpose) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", aPurpose);
+            map.put("boolean", "1");
+            list_purpose.add(map);
+        }
+        return list_purpose;
+    }
+
 }
