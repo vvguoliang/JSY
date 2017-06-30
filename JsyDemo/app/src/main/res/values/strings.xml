@@ -106,4 +106,8 @@
     <string name="name_loan_personal_data_upload_front_hold_id">手持身份证照片</string>
     <string name="name_loan_personal_data_upload_house">房产证</string>
     <string name="name_loan_personal_data_upload_vehicle">机动车驾驶证</string>
+    <string name="name_loan_personal_camera">拍照</string>
+    <string name="name_loan_personal_album">相册中选择</string>
+    <string name="read_photo_error">获取图片失败</string>
+    <string name="parse_photo_error">解析图片失败</string>
 </resources>

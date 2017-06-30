@@ -65,10 +65,12 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
             case R.id.house_market_price:
                 break;
             case R.id.house_mortgage:
-                ShowDialog.getInstance().showDialog(this, "house_mortgage");
+                ShowDialog.getInstance().showDialog(this, "house_mortgage", this.getString(R.string.name_loan_wu),
+                        this.getString(R.string.name_loan_you), 1);
                 break;
             case R.id.house_no_mortgage:
-                ShowDialog.getInstance().showDialog(this, "house_no_mortgage");
+                ShowDialog.getInstance().showDialog(this, "house_no_mortgage", this.getString(R.string.name_loan_wu),
+                        this.getString(R.string.name_loan_you), 1);
                 break;
         }
 

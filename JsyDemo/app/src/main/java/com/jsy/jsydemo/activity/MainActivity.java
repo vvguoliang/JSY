@@ -1,16 +1,21 @@
 package com.jsy.jsydemo.activity;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.IntentFilter;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.fragment.LoanFragment;
@@ -19,11 +24,15 @@ import com.jsy.jsydemo.activity.fragment.PersonalCenterFragment;
 import com.jsy.jsydemo.activity.fragment.QuickCardFragment;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.base.BaseActivityManager;
+import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.CameraUtils.BitmapUtils;
+import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.MainActivityView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -40,7 +49,8 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
     private MainActivityView mainActivityView;
 
     private int[] titles = {R.string.name_loan, R.string.name_loan_supermarket, R.string.name_quick_card, R.string.name_personal_center};
-    private int[] selectedImage = {R.mipmap.ic_loan_dark, R.mipmap.ic_loansupermarket_dark, R.mipmap.ic_quickcrd_dark, R.mipmap.ic_personalcenter_dark};
+    private int[] selectedImage = {R.mipmap.ic_loan_dark, R.mipmap.ic_loansupermarket_dark, R.mipmap.ic_quickcrd_dark,
+            R.mipmap.ic_personalcenter_dark};
     private int[] unSelectedImage = {R.mipmap.ic_loan_brightness, R.mipmap.ic_loansupermarket_brightness, R.mipmap.ic_quickcard_brightness,
             R.mipmap.ic_personalcenter_brightness};
 
@@ -53,12 +63,15 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
 
     private List<Fragment> listnewftagment = new ArrayList<>();
 
+    private UserCenterRealize userCenterRealize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setImmerStateBar(false);
         this.activity = this;
+        userCenterRealize = new UserCenterRealize();
         setContentView(R.layout.activity_main);
         findViewById();
     }
@@ -86,14 +99,14 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
             setTranslucentStatus(true);
         }
 
-        if (mSelectPosition % 2 == 0) {//初始化设置状态栏颜色
-            stateBarTint("#ffffff", false);
-            SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "WHITE");
-        } else {
-            //fragment产品页和发现页状态栏字体颜色为黑色
-            SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "BLACK");
-            stateBarTint("#000000", true);
-        }
+//        if (mSelectPosition == 1) {//初始化设置状态栏颜色
+        stateBarTint("#ffffff", false);
+        SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "WHITE");
+//        } else {
+//            //fragment产品页和发现页状态栏字体颜色为黑色
+//            SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "BLACK");
+//            stateBarTint("#000000", true);
+//        }
     }
 
     @Override
@@ -156,17 +169,17 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
                 } else {
                     transaction.show(listfragment.get(i));
                 }
-                if (position % 2 == 0) {
-                    //fragment首页和我的页状态栏字体颜色为白色
-                    SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "WHITE");
-                    //stateBarTint("#ffffff", false);
-                    //清除状态栏黑色字体
-                    statusFragmentBarDarkMode();
-                } else {
-                    //fragment产品页和发现页状态栏字体颜色为黑色
-                    SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "BLACK");
-                    stateBarTint("#000000", true);
-                }
+//                if (position % 2 == 0) {
+                //fragment首页和我的页状态栏字体颜色为白色
+                SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "WHITE");
+                //stateBarTint("#ffffff", false);
+                //清除状态栏黑色字体
+                statusFragmentBarDarkMode();
+//                } else {
+//                    //fragment产品页和发现页状态栏字体颜色为黑色
+//                    SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "BLACK");
+//                    stateBarTint("#000000", true);
+//                }
             }
         }
         transaction.commitAllowingStateLoss();
@@ -218,4 +231,84 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
         return super.onKeyDown(keyCode, event);
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == AppUtil.MY_PERMISSIONS_REQUEST_CAMERA) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.getFileByPhotograph(this);
+            } else {
+                Toast.makeText(this, "请授予相机权限", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == AppUtil.MY_PERMISSIONS_REQUEST_READ_SD) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.getFileByPhotograph(this);
+            } else {
+                Toast.makeText(this, "请授予读SD卡权限", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == AppUtil.MY_PERMISSIONS_REQUEST_WRITE_SK) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.getFileByPhotograph(this);
+            } else {
+                Toast.makeText(this, "请授予写SD卡权限", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == AppUtil.MY_PERMISSIONS_REQUEST_READ_SD_PHOTOALBUM) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.startPhotoAlbum(this);
+            } else {
+                Toast.makeText(this, "请授予读SD卡权限", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == AppUtil.MY_PERMISSIONS_REQUEST_WRITE_SK_PHOTOALBUM) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.startPhotoAlbum(this);
+            } else {
+                Toast.makeText(this, "请授予写SD卡权限", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 拍照
+        if (AppUtil.CAPTURE_IMAGE_REQUEST == requestCode) {
+            if (RESULT_OK == resultCode) {
+                Log.d("拍照得到图片", AppUtil.mImageFile.toString());
+                int mDegree = BitmapUtils.getBitmapDegree(AppUtil.mImageFile.getAbsolutePath());
+                Log.d("拍照得到图片的角度：", String.valueOf(mDegree));
+                if (mDegree == 90 || mDegree == 180 || mDegree == 270) {
+                    try {
+                        Bitmap mBitmap = BitmapUtils.getFileBitmap(AppUtil.mImageFile);
+                        Bitmap bitmap = BitmapUtils.rotateBitmapByDegree(mBitmap, mDegree);
+                        if (BitmapUtils.saveBitmapFile(bitmap, AppUtil.mImageFile)) {
+                            userCenterRealize.startClip(this, AppUtil.mImageFile);
+                        } else {
+                            Toast.makeText(this, "保存图片失败", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "读取图片失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    userCenterRealize.startClip(this, AppUtil.mImageFile);
+                }
+            }
+            //相册
+        } else if (AppUtil.LOAD_IMAGE_REQUEST == requestCode) {
+            if (data != null) {
+                Uri uri = data.getData();
+                String filepath = BitmapUtils.FileUtils.getImageAbsolutePath(this, uri);
+                Log.d("相册获取到的文件路径", filepath);
+                File file = new File(filepath);
+                userCenterRealize.startClip(this, file);
+            }
+            //剪裁
+        } else if (AppUtil.CLIP_IMAGE_REQUEST == requestCode) {
+            Log.d("剪裁得到图片", AppUtil.mOutFile.toString());
+            Bitmap bitmap = BitmapUtils.getFileBitmap(AppUtil.mOutFile);
+//            personal_camera.setImageBitmap(bitmap);
+            BitmapUtils.deleteFile(AppUtil.mImageFile);
+        }
+    }
 }

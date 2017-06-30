@@ -2,7 +2,6 @@ package com.jsy.jsydemo.activity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.view.Gravity;
@@ -19,21 +18,15 @@ import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.HelpCenterActivity;
 import com.jsy.jsydemo.activity.personaldata.PersonalDataActivity;
 import com.jsy.jsydemo.base.BaseFragment;
 import com.jsy.jsydemo.utils.AppUtil;
-import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.view.BottomDialog;
-import com.jsy.jsydemo.view.PublicDialog;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by vvguoliang on 2017/6/23.
  * <p>
  * 个人中心
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "ConstantConditions", "ResultOfMethodCallIgnored"})
 @SuppressLint({"ValidFragment", "InflateParams"})
 public class PersonalCenterFragment extends BaseFragment implements View.OnClickListener {
 
@@ -45,7 +38,11 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 
     public PersonalCenterFragment(Activity activity) {
         super(activity);
-        this.mActivity = activity;
+        if (activity == null) {
+            this.mActivity = getActivity();
+        } else {
+            this.mActivity = activity;
+        }
     }
 
     @Override
@@ -55,6 +52,8 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 
     private ImageView personal_camera;
     private TextView personal_logo;
+
+    private UserCenterRealize userCenterRealize = new UserCenterRealize();
 
     @Override
     protected void initView() {
@@ -106,45 +105,43 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 //                mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
                 break;
             case R.id.personal_camera://照片
-                getDialog();
+                showDialog(mActivity.getString(R.string.name_loan_personal_camera), mActivity.getString(R.string.name_loan_personal_album));
                 break;
         }
     }
 
-    private void getDialog() {
-        List<Map<String, Object>> list = new ArrayList<>();
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", "adadad");
-        map.put("boolean", "1");
-        list.add(map);
-        Map<String, Object> map1 = new HashMap<>();
-        map1.put("name", "adadad");
-        map1.put("boolean", "1");
-        list.add(map1);
-        Map<String, Object> map2 = new HashMap<>();
-        map2.put("name", "adadad");
-        map2.put("boolean", "1");
-        list.add(map2);
-        Map<String, Object> map3 = new HashMap<>();
-        map3.put("name", "adadad");
-        map3.put("boolean", "1");
-        list.add(map3);
-
-
-        PublicDialog.Builder builder = new PublicDialog.Builder(mActivity);
-        String stringa = SharedPreferencesUtils.get(mActivity, "111111", "").toString();
-        List<Map<String, Object>> listViewEntities = SharedPreferencesUtils.getInfo(mActivity, stringa);
-        if (null != listViewEntities && listViewEntities.size() > 0) {
-            list.clear();
-            list = listViewEntities;
-        }
-        builder.setItems(list, "111111", new DialogInterface.OnClickListener() {
+    // 提示对话框方法
+    public void showDialog(String btn_take, String btn_pick) {
+        final BottomDialog sxsDialog = new BottomDialog(mActivity, R.layout.buttom_dialog);
+        sxsDialog.getWindow().setWindowAnimations(R.style.AnimBottom);
+        sxsDialog.setWidthHeight(AppUtil.Dispay(mActivity)[0], 0);
+        sxsDialog.getWindow().setGravity(Gravity.BOTTOM);
+        Button button1 = (Button) sxsDialog.findViewById(R.id.btn_take_photo);
+        button1.setText(btn_take);
+        Button button = (Button) sxsDialog.findViewById(R.id.btn_pick_photo);
+        button.setText(btn_pick);
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+            public void onClick(View v) {
+                userCenterRealize.getFileByPhotoAlbum(mActivity);//拍照外部调用
+                sxsDialog.dismiss();
             }
         });
-        builder.create().show();
+        button.setOnClickListener(new View.OnClickListener() {//有
+            @Override
+            public void onClick(View v) {
+                userCenterRealize.getFileByPhotograph(mActivity);//相册外部调用
+                sxsDialog.dismiss();
+            }
+        });
+        sxsDialog.setOnClick(R.id.btn_cancel, new View.OnClickListener() {//取消
+            @Override
+            public void onClick(View v) {
+                sxsDialog.dismiss();
+            }
+        });
+        if (!mActivity.isFinishing()) {
+            sxsDialog.show();
+        }
     }
-
 }

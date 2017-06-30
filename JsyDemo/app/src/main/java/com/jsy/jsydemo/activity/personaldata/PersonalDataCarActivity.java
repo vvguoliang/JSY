@@ -65,7 +65,8 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                     return;
                 } else {
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(this, "car_mortgage");
+                    ShowDialog.getInstance().showDialog(this, "car_mortgage", this.getString(R.string.name_loan_wu),
+                            this.getString(R.string.name_loan_you), 1);
                 }
                 break;
             case R.id.car_no_mortgage:
@@ -73,7 +74,8 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                     return;
                 } else {
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(this, "car_no_mortgage");
+                    ShowDialog.getInstance().showDialog(this, "car_no_mortgage", this.getString(R.string.name_loan_wu),
+                            this.getString(R.string.name_loan_you), 1);
                 }
                 break;
             case R.id.title_image:

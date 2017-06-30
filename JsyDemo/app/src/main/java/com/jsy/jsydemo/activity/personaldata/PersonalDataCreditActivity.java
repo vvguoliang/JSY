@@ -107,7 +107,8 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                 } else {
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this,
-                            "no_cards");
+                            "no_cards", this.getString(R.string.name_loan_wu),
+                            this.getString(R.string.name_loan_you), 1);
                 }
                 break;
             case R.id.personal_no_cards_record://两年内应用记录
@@ -124,8 +125,8 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                     return;
                 } else {
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this,
-                            "credit_liabilities");
+                    ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_liabilities",
+                            this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), 1);
                 }
                 break;
             case R.id.personal_credit_no_loan://有无成功贷款情况
@@ -133,7 +134,8 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                     return;
                 } else {
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_no_loa");
+                    ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_no_loa",
+                            this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), 1);
                 }
                 break;
             case R.id.personal_credit_no_taobao://是否实名淘宝
@@ -141,7 +143,8 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                     return;
                 } else {
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_no_taoba");
+                    ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_no_taoba",
+                            this.getString(R.string.name_loan_wu),this.getString(R.string.name_loan_you), 1);
                 }
                 break;
             case R.id.personal_credit_purpose://贷款用途
