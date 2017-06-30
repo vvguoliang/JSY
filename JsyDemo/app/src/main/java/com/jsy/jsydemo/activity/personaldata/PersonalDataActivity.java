@@ -26,6 +26,8 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             personal_data_complete4, personal_data_complete5, personal_data_complete6, //personal_data_complete7,
             personal_data_complete8, personal_data_complete9;
 
+    private Intent intent = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,35 +83,77 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             case R.id.title_complete://完成
                 break;
             case R.id.personal_data_credit://个人资信
-                startActivity(new Intent(PersonalDataActivity.this, PersonalDataCreditActivity.class));
+                intent = new Intent(PersonalDataActivity.this, PersonalDataCreditActivity.class);
+                startActivityForResult(intent, 100);
                 break;
             case R.id.personal_data_enterprise://企业经营情况
-                startActivity(new Intent(PersonalDataActivity.this, PersonalDataEnterpriseActivity.class));
+                intent = new Intent(PersonalDataActivity.this, PersonalDataEnterpriseActivity.class);
+                startActivityForResult(intent, 101);
                 break;
             case R.id.personal_data_family://家庭情况
-                startActivity(new Intent(PersonalDataActivity.this, PersonalDataFamilyActivity.class));
+                intent = new Intent(PersonalDataActivity.this, PersonalDataFamilyActivity.class);
+                startActivityForResult(intent, 102);
                 break;
             case R.id.personal_data_other://其他情况
-                startActivity(new Intent(PersonalDataActivity.this, PersonalDataOtherActivity.class));
+                intent = new Intent(PersonalDataActivity.this, PersonalDataOtherActivity.class);
+                startActivityForResult(intent, 103);
                 break;
             case R.id.personal_data_hose_property://房产
-                startActivity(new Intent(PersonalDataActivity.this, PersonalDataHosePropertyActivity.class));
+                intent = new Intent(PersonalDataActivity.this, PersonalDataHosePropertyActivity.class);
+                startActivityForResult(intent, 104);
                 break;
             case R.id.personal_data_car_production://车产
-                startActivity(new Intent(PersonalDataActivity.this, PersonalDataCarActivity.class));
+                intent = new Intent(PersonalDataActivity.this, PersonalDataCarActivity.class);
+                startActivityForResult(intent, 105);
                 break;
             case R.id.personal_data_operator://运营商验证
-                startActivity(new Intent(PersonalDataActivity.this, PersonalDataOperatorActivity.class));
+                intent = new Intent(PersonalDataActivity.this, PersonalDataOperatorActivity.class);
+                startActivityForResult(intent, 106);
                 break;
 //            case R.id.personal_data_online_shopping://网购信用
 //                break;
             case R.id.personal_data_certificates://证件上传
-                startActivity(new Intent(PersonalDataActivity.this, PersonalDataCertificatesActivity.class));
+                intent = new Intent(PersonalDataActivity.this, PersonalDataUploadActivity.class);
+                startActivityForResult(intent, 107);
                 break;
             case R.id.personal_data_bank_card://我的银行卡
-                startActivity(new Intent(PersonalDataActivity.this, PersonalDataBankCardActivity.class));
+                intent = new Intent(PersonalDataActivity.this, PersonalDataBankCardActivity.class);
+                startActivityForResult(intent, 108);
                 break;
         }
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 100:
+                personal_data_complete0.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                break;
+            case 101:
+                personal_data_complete1.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                break;
+            case 102:
+                personal_data_complete2.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                break;
+            case 103:
+                personal_data_complete3.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                break;
+            case 104:
+                personal_data_complete4.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                break;
+            case 105:
+                personal_data_complete5.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                break;
+            case 106:
+                personal_data_complete6.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                break;
+            case 107:
+                personal_data_complete8.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                break;
+            case 108:
+                personal_data_complete9.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                break;
+        }
     }
 }

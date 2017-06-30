@@ -1,11 +1,21 @@
 package com.jsy.jsydemo.activity.personaldata;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
+import com.jsy.jsydemo.utils.TimeUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -21,6 +31,9 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
     private TextView car_mortgage;
     private TextView car_no_mortgage;
 
+    private String[] car_life_String = new String[]{"0-6个月", "1年", "2年", "3年", "3-5年", "5年以上"};
+    private String[] list_car_estate_String = new String[]{"无车产", "有车产有抵押", "有车产无抵押"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +45,42 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.car_estate:
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    ShowDialog.getInstance().getDialog(this, getcar_estate(), "car_estate", mHandler, 1001);
+                }
                 break;
             case R.id.car_new_car:
                 break;
             case R.id.car_life:
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    ShowDialog.getInstance().getDialog(this, getcar_life(), "car_life", mHandler, 1000);
+                }
                 break;
             case R.id.car_mortgage:
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    //弹出Toast或者Dialog
+                    ShowDialog.getInstance().showDialog(this, "car_mortgage");
+                }
                 break;
             case R.id.car_no_mortgage:
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    //弹出Toast或者Dialog
+                    ShowDialog.getInstance().showDialog(this, "car_no_mortgage");
+                }
                 break;
             case R.id.title_image:
                 finish();
                 break;
             case R.id.title_complete:
+                finish();
                 break;
         }
 
@@ -78,4 +114,59 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
     protected void initView() {
 
     }
+
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1000:
+                    car_life.setText(msg.obj.toString());
+                    break;
+                case 1001:
+                    car_estate.setText(msg.obj.toString());
+                    break;
+                case 1002:
+//                    personal_credit_degree_education.setText(msg.obj.toString());
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 使用车年限
+     *
+     * @return
+     */
+    private List<Map<String, Object>> getcar_life() {
+        List<Map<String, Object>> list_car_life = new ArrayList<>();
+        for (String aPurpose : car_life_String) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", aPurpose);
+            map.put("boolean", "1");
+            list_car_life.add(map);
+        }
+        return list_car_life;
+    }
+
+    /**
+     * 名下车产
+     *
+     * @return
+     */
+    private List<Map<String, Object>> getcar_estate() {
+        List<Map<String, Object>> list_car_estate = new ArrayList<>();
+        for (String aPurpose : list_car_estate_String) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", aPurpose);
+            map.put("boolean", "1");
+            list_car_estate.add(map);
+        }
+        return list_car_estate;
+    }
+
+
 }

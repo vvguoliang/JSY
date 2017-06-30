@@ -1,6 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/common_light_grey"
+    android:orientation="vertical">
 
+    <include
+        layout="@layout/tab_activity_fra"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_48dp" />
+
+    <com.jsy.jsydemo.control.MyTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/common_reminder_bg"
+        android:gravity="center"
+        android:padding="@dimen/common_10dp"
+        android:text="@string/name_loan_personal_data_certifcates_reminder"
+        android:textColor="@color/common_reminder"
+        android:textSize="@dimen/common_14dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:padding="@dimen/common_10dp"
+                    android:text="@string/name_loan_personal_data_certifcates_positive"
+                    android:textColor="@color/common_reminder"
+                    android:textSize="@dimen/common_14dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_1dp"
+                    android:background="@color/common_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/personal_data_certificates_positive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/positive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/common_10dp"
+                        android:src="@mipmap/ic_personal_data_certifcates_positive" />
+
+                    <ImageView
+                        android:id="@+id/positive_camera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/positive"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="-20dp"
+                        android:layout_marginTop="-20dp"
+                        android:src="@mipmap/ic_personal_data_certifcates_camera" />
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/positive_camera"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/common_20dp"
+                        android:padding="@dimen/common_10dp"
+                        android:text="@string/name_loan_personal_data_certifcates_camera_text"
+                        android:textColor="@color/common_reminder"
+                        android:textSize="@dimen/common_10dp" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/common_10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:padding="@dimen/common_10dp"
+                    android:text="@string/name_loan_personal_data_certifcates_other_side"
+                    android:textColor="@color/common_reminder"
+                    android:textSize="@dimen/common_14dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_1dp"
+                    android:background="@color/common_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/personal_data_certificates_other_sid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/other_sid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/common_10dp"
+                        android:src="@mipmap/ic_personal_data_certifactes_ther_sid" />
+
+                    <ImageView
+                        android:id="@+id/other_sid_camera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/other_sid"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="-20dp"
+                        android:layout_marginTop="-20dp"
+                        android:src="@mipmap/ic_personal_data_certifcates_camera" />
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/other_sid_camera"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/common_20dp"
+                        android:padding="@dimen/common_10dp"
+                        android:text="@string/name_loan_personal_data_certifcates_camera_text"
+                        android:textColor="@color/common_reminder"
+                        android:textSize="@dimen/common_10dp" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/common_10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:padding="@dimen/common_10dp"
+                    android:text="@string/name_loan_personal_data_certifcates_other_side"
+                    android:textColor="@color/common_reminder"
+                    android:textSize="@dimen/common_14dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_1dp"
+                    android:background="@color/common_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/personal_data_certificates_face_recognition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/face_recognition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/common_10dp"
+                        android:src="@mipmap/ic_personal_data_certifactes_face_recognition" />
+
+                    <ImageView
+                        android:id="@+id/face_recognition_camera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/face_recognition"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="-20dp"
+                        android:layout_marginTop="-20dp"
+                        android:src="@mipmap/ic_personal_data_face_recognition_correct"
+                        android:visibility="gone" />
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:id="@+id/face_recognition_correct_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/face_recognition_camera"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/common_20dp"
+                        android:padding="@dimen/common_10dp"
+                        android:text="@string/name_loan_personal_data_certifcates_face_verification"
+                        android:textColor="@color/common_reminder_face"
+                        android:textSize="@dimen/common_10dp" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

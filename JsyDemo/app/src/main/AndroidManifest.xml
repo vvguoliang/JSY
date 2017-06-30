@@ -65,6 +65,9 @@
             android:name=".activity.personaldata.PersonalDataBankCardActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.personaldata.PersonalDataUploadActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.SetUp.SetUPActivity"
             android:screenOrientation="portrait" />
         <activity

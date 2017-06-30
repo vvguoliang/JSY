@@ -19,5 +19,8 @@
     <color name="common_loan_personal_line">#e7e7e7</color>
     <color name="common_loan_personal_data_other">#6a8def</color>
     <color name="common_press">#EBE9E9</color>
+    <color name="common_reminder">#3f4257</color>
     <color name="common_pop_blue">#177FFE</color>
+    <color name="common_reminder_bg">#eaeaea</color>
+    <color name="common_reminder_face">#004eb7</color>
 </resources>

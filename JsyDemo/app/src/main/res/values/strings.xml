@@ -95,4 +95,15 @@
     <string name="name_loan_you">有</string>
     <string name="name_loan_wu">无</string>
     <string name="name_loan_cancel">取消</string>
+    <string name="name_loan_personal_data_certifcates_reminder">* 温馨提示：请填写真实有效信息以便通过认证</string>
+    <string name="name_loan_personal_data_certifcates_positive">第一步：请拍摄身份证正面照</string>
+    <string name="name_loan_personal_data_certifcates_camera_text">身份证完整,身份证号清晰</string>
+    <string name="name_loan_personal_data_certifcates_other_side">第二步：请拍摄身份证反面照</string>
+    <string name="name_loan_personal_data_certifcates_face_verification">点击开始验证</string>
+    <string name="name_loan_personal_data_certifcates_face_v_success">验证成功</string>
+    <string name="name_loan_personal_data_preservation">保存</string>
+    <string name="name_loan_personal_data_upload_front_id">身份证正面照</string>
+    <string name="name_loan_personal_data_upload_front_hold_id">手持身份证照片</string>
+    <string name="name_loan_personal_data_upload_house">房产证</string>
+    <string name="name_loan_personal_data_upload_vehicle">机动车驾驶证</string>
 </resources>

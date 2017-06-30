@@ -1,13 +1,16 @@
 package com.jsy.jsydemo.activity.personaldata;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.TimeUtils;
@@ -40,6 +43,10 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
     private TextView personal_credit_purpose;
 
     private String[] purpose = new String[]{"购车贷款", "购房贷款", "网购贷款", "过桥短期资金", "装修贷款", "教育培训贷款", "旅游贷款", "三农贷款", "其他"};
+
+    private String[] cards_record = new String[]{"无信用记录", "应用记录良好", "少量逾期", "征信较差"};
+
+    private String[] degree_education = new String[]{"大专以下", "大专", "本科", "研究生及以上"};
 
     private int purpose_int = 0;
 
@@ -86,58 +93,100 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.personal_credit_degree_education://文化程度
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    //弹出Toast或者Dialog
+                    ShowDialog.getInstance().getDialog(this, getList_degree_education(),
+                            "degree_education", mHandler, 1002);
+                }
                 break;
             case R.id.personal_no_cards://有无信用卡
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    //弹出Toast或者Dialog
+                    ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this,
+                            "no_cards");
+                }
                 break;
             case R.id.personal_no_cards_record://两年内应用记录
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    //弹出Toast或者Dialog
+                    ShowDialog.getInstance().getDialog(this, getList_cards_record(),
+                            "credit_purpose", mHandler, 1001);
+                }
                 break;
             case R.id.personal_credit_liabilities://负债情况
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    //弹出Toast或者Dialog
+                    ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this,
+                            "credit_liabilities");
+                }
                 break;
             case R.id.personal_credit_no_loan://有无成功贷款情况
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    //弹出Toast或者Dialog
+                    ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_no_loa");
+                }
                 break;
             case R.id.personal_credit_no_taobao://是否实名淘宝
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    //弹出Toast或者Dialog
+                    ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_no_taoba");
+                }
                 break;
             case R.id.personal_credit_purpose://贷款用途
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
                 } else {
                     //弹出Toast或者Dialog
-                    getDialog(getList_purpose(), "credit_purpose");
+                    ShowDialog.getInstance().getDialog(this, getList_purpose(),
+                            "credit_purpose", mHandler, 1000);
                 }
                 break;
             case R.id.title_image:
                 finish();
                 break;
             case R.id.title_complete://完成
+                finish();
                 break;
         }
     }
 
-    private void getDialog(List<Map<String, Object>> list, String name) {
-        PublicDialog.Builder builder = new PublicDialog.Builder(this);
-        String stringa = SharedPreferencesUtils.get(this, name, "").toString();
-        if (!StringUtil.isNullOrEmpty(stringa)) {
-            List<Map<String, Object>> listViewEntities = SharedPreferencesUtils.getInfo(this, stringa);
-            if (null != listViewEntities && listViewEntities.size() > 0) {
-                list.clear();
-                list = listViewEntities;
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1000:
+                    personal_credit_purpose.setText(msg.obj.toString());
+                    break;
+                case 1001:
+                    personal_no_cards_record.setText(msg.obj.toString());
+                    break;
+                case 1002:
+                    personal_credit_degree_education.setText(msg.obj.toString());
+                    break;
             }
         }
-        final List<Map<String, Object>> finalList = list;
-        builder.setItems(list, name, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                for (int i = 0; finalList.size() > i; i++) {
-                    if (finalList.get(i).get("boolean").equals("2")) {
-                        personal_credit_purpose.setText(finalList.get(i).get("name").toString());
-                    }
-                }
-                dialog.dismiss();
-            }
-        });
-        builder.create().show();
-    }
+    };
 
+    /**
+     * 贷款用途
+     *
+     * @return
+     */
     private List<Map<String, Object>> getList_purpose() {
         List<Map<String, Object>> list_purpose = new ArrayList<>();
         for (String aPurpose : purpose) {
@@ -147,6 +196,38 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
             list_purpose.add(map);
         }
         return list_purpose;
+    }
+
+    /**
+     * 两年内信用程度
+     *
+     * @return
+     */
+    private List<Map<String, Object>> getList_cards_record() {
+        List<Map<String, Object>> list_cards_record = new ArrayList<>();
+        for (String aPurpose : cards_record) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", aPurpose);
+            map.put("boolean", "1");
+            list_cards_record.add(map);
+        }
+        return list_cards_record;
+    }
+
+    /**
+     * 文化程度
+     *
+     * @return
+     */
+    private List<Map<String, Object>> getList_degree_education() {
+        List<Map<String, Object>> list_degree_education = new ArrayList<>();
+        for (String aPurpose : degree_education) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", aPurpose);
+            map.put("boolean", "1");
+            list_degree_education.add(map);
+        }
+        return list_degree_education;
     }
 
 }

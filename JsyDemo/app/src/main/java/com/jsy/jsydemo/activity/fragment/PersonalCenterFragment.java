@@ -103,7 +103,6 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 //            case R.id.personal_loan_my_package://我的卡包
 //                break;
             case R.id.personal_logo://登录
-                showDialog();
 //                mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
                 break;
             case R.id.personal_camera://照片
@@ -148,32 +147,4 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
         builder.create().show();
     }
 
-    // 提示对话框方法
-    private void showDialog() {
-        final BottomDialog sxsDialog = new BottomDialog(mActivity, R.layout.buttom_dialog);
-        sxsDialog.getWindow().setWindowAnimations(R.style.AnimBottom);
-        sxsDialog.setWidthHeight(AppUtil.Dispay(mActivity)[0], 0);
-        sxsDialog.getWindow().setGravity(Gravity.BOTTOM);
-        sxsDialog.setOnClick(R.id.btn_take_photo, new View.OnClickListener() {//拍照
-            @Override
-            public void onClick(View v) {
-                sxsDialog.dismiss();
-            }
-        });
-        Button button = (Button) sxsDialog.findViewById(R.id.btn_pick_photo);//从相册中选择
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-        sxsDialog.setOnClick(R.id.btn_cancel, new View.OnClickListener() {//取消
-            @Override
-            public void onClick(View v) {
-                sxsDialog.dismiss();
-            }
-        });
-        if (!mActivity.isFinishing()) {
-            sxsDialog.show();
-        }
-    }
 }
