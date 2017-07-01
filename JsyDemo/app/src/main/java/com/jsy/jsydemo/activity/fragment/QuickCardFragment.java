@@ -78,7 +78,7 @@ public class QuickCardFragment extends BaseFragment {
         //添加Header
         View mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_quickcardfragment, null);
         mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                AppUtil.Dispay(mActivity)[1] / 3 + DisplayUtils.dip2px(mActivity, 48)));
+                AppUtil.getInstance().Dispay(mActivity)[1] / 3 + DisplayUtils.dip2px(mActivity, 48)));
         getHeader(mHeader);
         mAdapter.setHeader(mHeader);
         //添加footer

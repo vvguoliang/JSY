@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/tab_activity_lin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_48dp"
         android:background="@color/common_navy_blue"

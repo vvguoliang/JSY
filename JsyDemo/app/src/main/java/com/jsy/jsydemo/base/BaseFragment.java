@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.http.http.i.httpbase.HttpEntity;
 import com.jsy.jsydemo.utils.NetWorkUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
 
@@ -155,44 +154,6 @@ public abstract class BaseFragment extends Fragment {//implements OnClickRefresh
 //            ToatUtils.showLong(mContext, msg);
     }
 
-    //是否强制退出
-    private int isShow = 0;
-
-    public boolean baseSuccess(HttpEntity httpEntity, boolean isExit) {
-        if (httpEntity != null) {
-            if ("104".equals(httpEntity.getSxsCode())) {
-//                SharedPreferencesUtils.put(getActivity(), "isRemind", "1");
-//                SharedPreferencesUtils.logoutSuccess(getActivity());
-                remind(httpEntity.getSxsMsg(), isExit);
-                return true;
-            } else if ("999".equals(httpEntity.getSxsCode())) {
-                if (isShow == 0) {
-                    String title = "";
-                    String content = "";
-                    if (!httpEntity.getSxsMsg().contains("title") && !httpEntity.getSxsMsg().contains("content")) {
-//                        exitRoutine("hide", "", httpEntity.getSxsMsg());
-                        isShow++;
-                    } else {
-                        try {
-                            JSONObject objMsg = new JSONObject(httpEntity.getSxsMsg());
-                            if (objMsg.has("title")) {
-                                title = objMsg.optString("title");
-                            }
-                            if (objMsg.has("content")) {
-                                content = objMsg.optString("content");
-                            }
-//                            exitRoutine("hide", title, content);
-                            isShow++;
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                return true;
-            }
-        }
-        return false;
-    }
 
 //    private void exitRoutine(String flag, String title, String msg) {
 //        if (StringUtil.isNullOrEmpty(msg))
@@ -284,38 +245,4 @@ public abstract class BaseFragment extends Fragment {//implements OnClickRefresh
         }
         super.startActivity(intent, options);
     }
-
-
-    //解析JSONObject
-    protected List<JSONObject> getJSONObjects(HttpEntity httpEntity, boolean isExit) {
-        if (baseSuccess(httpEntity, isExit)) {
-            return new ArrayList<JSONObject>();
-        }
-        return getJSONObjects(httpEntity);
-    }
-
-    //通过HttpEntity获取JsonObject
-    protected List<JSONObject> getJSONObjects(HttpEntity httpEntity) {
-        if (httpEntity.isRemindCustomer()) {
-            return new ArrayList<JSONObject>();
-        }
-        if (httpEntity.getDecodingKey() != null) {
-            try {
-                JSONObject jsonObject = new JSONObject(httpEntity.getDecodingKey());
-                JSONArray jsonArray = jsonObject.optJSONArray("data");
-                if (jsonArray != null) {
-                    int size = jsonArray.length();
-                    List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
-                    for (int i = 0; i < size; i++) {
-                        jsonObjects.add(jsonArray.optJSONObject(i));
-                    }
-                    return jsonObjects;
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return new ArrayList<JSONObject>();
-    }
-
 }

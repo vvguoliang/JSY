@@ -9,8 +9,6 @@ import android.os.Build;
 import android.os.Looper;
 import android.util.Log;
 
-import com.jsy.jsydemo.http.http.i.OkHttpCallBack;
-import com.jsy.jsydemo.http.http.i.httpbase.HttpEntity;
 import com.jsy.jsydemo.utils.TimeUtils;
 
 import java.io.PrintWriter;
@@ -22,45 +20,45 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UnCeHandler implements UncaughtExceptionHandler, OkHttpCallBack {
+public class UnCeHandler implements UncaughtExceptionHandler {
 
-	private UncaughtExceptionHandler mDefaultHandler;
-	public static final String TAG = "CatchExcep";
-	private Application application;
-	private long time = 0;
+    private UncaughtExceptionHandler mDefaultHandler;
+    public static final String TAG = "CatchExcep";
+    private Application application;
+    private long time = 0;
 
-	public UnCeHandler(Application application) {
-		// 获取系统默认的UncaughtException处理器
-		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-		this.application = application;
-	}
+    public UnCeHandler(Application application) {
+        // 获取系统默认的UncaughtException处理器
+        mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+        this.application = application;
+    }
 
-	@Override
-	public void uncaughtException(Thread thread, Throwable ex) {
-		if (!handleException(ex) && mDefaultHandler != null) {
-			// 如果用户没有处理则让系统默认的异常处理器来处理
-			mDefaultHandler.uncaughtException(thread, ex);
-		} else {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			if (System.currentTimeMillis() - time < 1000) {//阻止app同一时间启动多次
-				return;
-			}
-			time = System.currentTimeMillis();
-			restart(application);
-		}
-	}
+    @Override
+    public void uncaughtException(Thread thread, Throwable ex) {
+        if (!handleException(ex) && mDefaultHandler != null) {
+            // 如果用户没有处理则让系统默认的异常处理器来处理
+            mDefaultHandler.uncaughtException(thread, ex);
+        } else {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (System.currentTimeMillis() - time < 1000) {//阻止app同一时间启动多次
+                return;
+            }
+            time = System.currentTimeMillis();
+            restart(application);
+        }
+    }
 
-	/**
-	 * 重启应用程序
-	 * 
-	 * @param context
-	 */
-	@SuppressWarnings("WrongConstant")
-	public static void restart(Context context) {
+    /**
+     * 重启应用程序
+     *
+     * @param context
+     */
+    @SuppressWarnings("WrongConstant")
+    public static void restart(Context context) {
 //		Intent intent = new Intent(context, GuidepageActivity.class);
 //		PendingIntent restartIntent = PendingIntent.getActivity(context, -1, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
 //		 //退出程序
@@ -69,134 +67,122 @@ public class UnCeHandler implements UncaughtExceptionHandler, OkHttpCallBack {
 //		BaseActivityManager.getActivityManager().exitApp();
 //		// 杀死该应用进程
 //		android.os.Process.killProcess(android.os.Process.myPid());
-	}
+    }
 
-	public static boolean checkPermission(Context context, String permission) {
-		boolean result = false;
-		if (Build.VERSION.SDK_INT >= 23) {
-			try {
-				Class<?> clazz = Class.forName("android.content.Context");
-				Method method = clazz.getMethod("checkSelfPermission", String.class);
-				int rest = (Integer) method.invoke(context, permission);
-				if (rest == PackageManager.PERMISSION_GRANTED) {
-					result = true;
-				} else {
-					result = false;
-				}
-			} catch (Exception e) {
-				result = false;
-			}
-		} else {
-			PackageManager pm = context.getPackageManager();
-			if (pm.checkPermission(permission, context.getPackageName()) == PackageManager.PERMISSION_GRANTED) {
-				result = true;
-			}
-		}
-		return result;
-	}
+    public static boolean checkPermission(Context context, String permission) {
+        boolean result = false;
+        if (Build.VERSION.SDK_INT >= 23) {
+            try {
+                Class<?> clazz = Class.forName("android.content.Context");
+                Method method = clazz.getMethod("checkSelfPermission", String.class);
+                int rest = (Integer) method.invoke(context, permission);
+                if (rest == PackageManager.PERMISSION_GRANTED) {
+                    result = true;
+                } else {
+                    result = false;
+                }
+            } catch (Exception e) {
+                result = false;
+            }
+        } else {
+            PackageManager pm = context.getPackageManager();
+            if (pm.checkPermission(permission, context.getPackageName()) == PackageManager.PERMISSION_GRANTED) {
+                result = true;
+            }
+        }
+        return result;
+    }
 
-	/**
-	 * 自定义错误处理,收集错误信息 发送错误报告等操作均在此完成.
-	 * 
-	 * @param ex
-	 * @return true:如果处理了该异常信息;否则返回false.
-	 */
-	private boolean handleException(Throwable ex) {
-		if (ex == null) {
-			return false;
-		}
-		// 使用Toast来显示异常信息
-		new Thread() {
-			@Override
-			public void run() {
-				Looper.prepare();
-				Looper.loop();
-			}
-		}.start();
-		collectDeviceInfo(application.getApplicationContext());
-		String str = formatCrashInfo(ex);
-		Log.e("","========="+str);
+    /**
+     * 自定义错误处理,收集错误信息 发送错误报告等操作均在此完成.
+     *
+     * @param ex
+     * @return true:如果处理了该异常信息;否则返回false.
+     */
+    private boolean handleException(Throwable ex) {
+        if (ex == null) {
+            return false;
+        }
+        // 使用Toast来显示异常信息
+        new Thread() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                Looper.loop();
+            }
+        }.start();
+        collectDeviceInfo(application.getApplicationContext());
+        String str = formatCrashInfo(ex);
+        Log.e("", "=========" + str);
 //		String str1 = com.sxsfinance.Utils.Base64.encode(str.getBytes()).toString();
-		try {
+        try {
 //			Getintent.getInstance().httpEntityPost(application, "errorlog", 0, "", this,
 //					HttpUtils_Distribution.url_uploadfinle, null, new String[]{"user_id","errorlog"},
 //					SharedPreferencesUtils.get(application, "id", "") + "",str1 + "============auth_id=" +
 //							SharedPreferencesUtils.get(application, "Mid", ""));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return true;
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 
-	// 用来存储设备信息和异常信息
-	private Map<String, String> deviceInfos = new HashMap<String, String>();
+    // 用来存储设备信息和异常信息
+    private Map<String, String> deviceInfos = new HashMap<String, String>();
 
-	/**
-	 * 格式化日志信息
-	 * 
-	 * @param context
-	 */
-	public void collectDeviceInfo(Context context) {
-		try {
-			PackageManager pm = context.getPackageManager();
-			PackageInfo pi = pm.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
-			if (pi != null) {
-				String versionName = pi.versionName == null ? "null" : pi.versionName;
-				String versionCode = pi.versionCode + "";
-				deviceInfos.put("versionName", versionName);
-				deviceInfos.put("versionCode", versionCode);
-			}
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-		}
-		Field[] fields = Build.class.getDeclaredFields();
-		for (Field field : fields) {
-			try {
-				field.setAccessible(true);
-				deviceInfos.put(field.getName(), field.get(null).toString());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+    /**
+     * 格式化日志信息
+     *
+     * @param context
+     */
+    public void collectDeviceInfo(Context context) {
+        try {
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
+            if (pi != null) {
+                String versionName = pi.versionName == null ? "null" : pi.versionName;
+                String versionCode = pi.versionCode + "";
+                deviceInfos.put("versionName", versionName);
+                deviceInfos.put("versionCode", versionCode);
+            }
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        Field[] fields = Build.class.getDeclaredFields();
+        for (Field field : fields) {
+            try {
+                field.setAccessible(true);
+                deviceInfos.put(field.getName(), field.get(null).toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-	/**
-	 * 获取导致崩溃的错误信息
-	 * 
-	 * @param ex
-	 * @return 异常内容
-	 */
-	private String formatCrashInfo(Throwable ex) {
-		StringBuffer exception = new StringBuffer();
-		for (Map.Entry<String, String> entry : deviceInfos.entrySet()) {
-			String key = entry.getKey();
-			String value = entry.getValue();
-			if (key.equals("FINGERPRINT") || key.equals("TIME") || key.equals("versionCode")
-					|| key.equals("versionName") || key.equals("USER") || key.equals("MODEL") || key.equals("SERIAL")) {
-				if (key.equals("TIME")) {
-					value = TimeUtils.getCurrentTimeInString();
-				}
-				exception.append(key + "=" + value + "\n");
-			}
-		}
-		Writer writer = new StringWriter();
-		PrintWriter printWriter = new PrintWriter(writer);
-		ex.printStackTrace(printWriter);
-		printWriter.close();
-		String result = writer.toString();
-		exception.append(result);
-		return exception.toString();
-	}
-
-	@Override
-	public void success(String taskName, String responseDate, HttpEntity httpEntity) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onFailure(String taskName, String failure, HttpEntity httpEntity) {
-		// TODO Auto-generated method stub
-
-	}
+    /**
+     * 获取导致崩溃的错误信息
+     *
+     * @param ex
+     * @return 异常内容
+     */
+    private String formatCrashInfo(Throwable ex) {
+        StringBuffer exception = new StringBuffer();
+        for (Map.Entry<String, String> entry : deviceInfos.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (key.equals("FINGERPRINT") || key.equals("TIME") || key.equals("versionCode")
+                    || key.equals("versionName") || key.equals("USER") || key.equals("MODEL") || key.equals("SERIAL")) {
+                if (key.equals("TIME")) {
+                    value = TimeUtils.getCurrentTimeInString();
+                }
+                exception.append(key + "=" + value + "\n");
+            }
+        }
+        Writer writer = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(writer);
+        ex.printStackTrace(printWriter);
+        printWriter.close();
+        String result = writer.toString();
+        exception.append(result);
+        return exception.toString();
+    }
 }

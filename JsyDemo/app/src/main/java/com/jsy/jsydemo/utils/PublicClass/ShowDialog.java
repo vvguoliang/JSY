@@ -55,7 +55,7 @@ public class ShowDialog implements Serializable {
     public void showDialog(final Activity context, final String name, String btn_take, String btn_pick, int species) {
         final BottomDialog sxsDialog = new BottomDialog(context, R.layout.buttom_dialog);
         sxsDialog.getWindow().setWindowAnimations(R.style.AnimBottom);
-        sxsDialog.setWidthHeight(AppUtil.Dispay(context)[0], 0);
+        sxsDialog.setWidthHeight(AppUtil.getInstance().Dispay(context)[0], 0);
         sxsDialog.getWindow().setGravity(Gravity.BOTTOM);
         Button button1 = (Button) sxsDialog.findViewById(R.id.btn_take_photo);
         button1.setText(btn_take);

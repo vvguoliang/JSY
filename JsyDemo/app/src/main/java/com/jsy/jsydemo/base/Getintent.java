@@ -3,13 +3,6 @@ package com.jsy.jsydemo.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-
-import com.jsy.jsydemo.http.http.i.OkHttpCallBack;
-import com.jsy.jsydemo.http.http.i.httpbase.HttpEntity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -71,8 +64,9 @@ public class Getintent {
      * @param str      拼接的key
      * @param string   拼接的String类型数据
      */
-    public void httpEntityPost(Context context, String name, int Level, String setCach, OkHttpCallBack callback, String url, Class c, String[] str,
-                               String... string) {
+//    public void httpEntityPost(Context context, String name, int Level, String setCach, OkHttpCallBack callback, String url, Class c, String[] str,
+//    String...string)
+//    {
 //        if (context != null) {
 //            HttpEntity httpEntity;
 //            String mobile = SharedPreferencesUtils.get(context, "moblie", "") + "";
@@ -127,5 +121,5 @@ public class Getintent {
 //                httpEntity.setInterfaceLevel(Level, true);
 //            httpEntity.build(context, callback, name);
 //        }
-}
-}
+//}
+    }

@@ -82,7 +82,8 @@ public class LoanFragment extends BaseFragment {
 
         //添加Header
         View mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_loan_top, null);
-        mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, AppUtil.Dispay(mActivity)[1] / 2 + 48));
+        mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                AppUtil.getInstance().Dispay(mActivity)[1] / 2 + 48));
         getHeader(mHeader);
         mAdapter.setHeader(mHeader);
         //添加footer

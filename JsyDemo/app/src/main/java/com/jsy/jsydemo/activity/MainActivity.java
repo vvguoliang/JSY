@@ -235,31 +235,31 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == AppUtil.MY_PERMISSIONS_REQUEST_CAMERA) {
+        if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_CAMERA) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getFileByPhotograph(this);
             } else {
                 Toast.makeText(this, "请授予相机权限", Toast.LENGTH_SHORT).show();
             }
-        } else if (requestCode == AppUtil.MY_PERMISSIONS_REQUEST_READ_SD) {
+        } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_READ_SD) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getFileByPhotograph(this);
             } else {
                 Toast.makeText(this, "请授予读SD卡权限", Toast.LENGTH_SHORT).show();
             }
-        } else if (requestCode == AppUtil.MY_PERMISSIONS_REQUEST_WRITE_SK) {
+        } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getFileByPhotograph(this);
             } else {
                 Toast.makeText(this, "请授予写SD卡权限", Toast.LENGTH_SHORT).show();
             }
-        } else if (requestCode == AppUtil.MY_PERMISSIONS_REQUEST_READ_SD_PHOTOALBUM) {
+        } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_READ_SD_PHOTOALBUM) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.startPhotoAlbum(this);
             } else {
                 Toast.makeText(this, "请授予读SD卡权限", Toast.LENGTH_SHORT).show();
             }
-        } else if (requestCode == AppUtil.MY_PERMISSIONS_REQUEST_WRITE_SK_PHOTOALBUM) {
+        } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK_PHOTOALBUM) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.startPhotoAlbum(this);
             } else {
@@ -272,17 +272,17 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // 拍照
-        if (AppUtil.CAPTURE_IMAGE_REQUEST == requestCode) {
+        if (AppUtil.getInstance().CAPTURE_IMAGE_REQUEST == requestCode) {
             if (RESULT_OK == resultCode) {
-                Log.d("拍照得到图片", AppUtil.mImageFile.toString());
-                int mDegree = BitmapUtils.getBitmapDegree(AppUtil.mImageFile.getAbsolutePath());
+                Log.d("拍照得到图片", AppUtil.getInstance().mImageFile.toString());
+                int mDegree = BitmapUtils.getBitmapDegree(AppUtil.getInstance().mImageFile.getAbsolutePath());
                 Log.d("拍照得到图片的角度：", String.valueOf(mDegree));
                 if (mDegree == 90 || mDegree == 180 || mDegree == 270) {
                     try {
-                        Bitmap mBitmap = BitmapUtils.getFileBitmap(AppUtil.mImageFile);
+                        Bitmap mBitmap = BitmapUtils.getFileBitmap(AppUtil.getInstance().mImageFile);
                         Bitmap bitmap = BitmapUtils.rotateBitmapByDegree(mBitmap, mDegree);
-                        if (BitmapUtils.saveBitmapFile(bitmap, AppUtil.mImageFile)) {
-                            userCenterRealize.startClip(this, AppUtil.mImageFile);
+                        if (BitmapUtils.saveBitmapFile(bitmap, AppUtil.getInstance().mImageFile)) {
+                            userCenterRealize.startClip(this, AppUtil.getInstance().mImageFile);
                         } else {
                             Toast.makeText(this, "保存图片失败", Toast.LENGTH_SHORT).show();
                         }
@@ -291,11 +291,11 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
                         Toast.makeText(this, "读取图片失败", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    userCenterRealize.startClip(this, AppUtil.mImageFile);
+                    userCenterRealize.startClip(this, AppUtil.getInstance().mImageFile);
                 }
             }
             //相册
-        } else if (AppUtil.LOAD_IMAGE_REQUEST == requestCode) {
+        } else if (AppUtil.getInstance().LOAD_IMAGE_REQUEST == requestCode) {
             if (data != null) {
                 Uri uri = data.getData();
                 String filepath = BitmapUtils.FileUtils.getImageAbsolutePath(this, uri);
@@ -304,11 +304,11 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
                 userCenterRealize.startClip(this, file);
             }
             //剪裁
-        } else if (AppUtil.CLIP_IMAGE_REQUEST == requestCode) {
-            Log.d("剪裁得到图片", AppUtil.mOutFile.toString());
-            Bitmap bitmap = BitmapUtils.getFileBitmap(AppUtil.mOutFile);
+        } else if (AppUtil.getInstance().CLIP_IMAGE_REQUEST == requestCode) {
+            Log.d("剪裁得到图片", AppUtil.getInstance().mOutFile.toString());
+            Bitmap bitmap = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
 //            personal_camera.setImageBitmap(bitmap);
-            BitmapUtils.deleteFile(AppUtil.mImageFile);
+            BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
         }
     }
 }

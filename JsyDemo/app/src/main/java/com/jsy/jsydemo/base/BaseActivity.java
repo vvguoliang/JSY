@@ -20,7 +20,6 @@ import android.view.WindowManager;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.CommissioningActivity;
 import com.jsy.jsydemo.activity.VectoringActivity;
-import com.jsy.jsydemo.http.http.i.httpbase.HttpEntity;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.NetWorkUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
@@ -202,7 +201,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        isDestroyed = true;
 //        if (mRemindDialog != null) {
 //            mRemindDialog.dismiss();
 //        }
@@ -479,51 +477,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
 //        dialog.setCancelable(false);
 //        dialog.show();
 //    }
-
-
-    /**
-     * 通过HttpEntity获取JsonObject @Title: getJSONObjects @author:
-     */
-    protected List<JSONObject> getJSONObjects(HttpEntity httpEntity) {
-        waitDismiss();
-        if (httpEntity.isRemindCustomer()) {
-            return new ArrayList<>();
-        }
-        if (httpEntity.getDecodingKey() != null) {
-            try {
-                JSONObject jsonObject = new JSONObject(httpEntity.getDecodingKey());
-                JSONArray jsonArray = jsonObject.optJSONArray("data");
-                if (jsonArray != null && jsonArray.length() > 0) {
-                    int size = jsonArray.length();
-                    List<JSONObject> jsonObjects = new ArrayList<>();
-                    for (int i = 0; i < size; i++) {
-                        jsonObjects.add(jsonArray.optJSONObject(i));
-                    }
-                    return jsonObjects;
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return new ArrayList<>();
-    }
-
-    /**
-     * 公共的处理返回结果的方法 @Title: getJSONObjects @author: xusonghui @Description:
-     */
-    protected List<JSONObject> getJSONObjects(HttpEntity httpEntity, boolean isExit) {
-        waitDismiss();
-//        if (baseSuccess(httpEntity, isExit)) {
-//            return new ArrayList<JSONObject>();
-//        }
-        return getJSONObjects(httpEntity);
-    }
-
-//    private SXSDialog mRemindDialog;
-
-    private boolean isDestroyed = false;
-
-//    private SXSProgressBar mSxsProgressBar;
 
     /**
      * 网络请求耗时操作，弹出等等框 @Title: loadDataWait @author: xusonghui @Description:

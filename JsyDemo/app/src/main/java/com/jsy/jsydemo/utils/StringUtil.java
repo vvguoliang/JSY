@@ -30,7 +30,7 @@ public class StringUtil {
     // Create the list of separators
     String sepArray[] = new String[sep.length()];
     for (int i = 0; i < sep.length(); ++i) {
-      sepArray[i] = new String("" + sep.charAt(i));
+      sepArray[i] = "" + sep.charAt(i);
     }
     return split(s, sepArray);
   }
@@ -516,7 +516,7 @@ public class StringUtil {
    * 大陆手机号码11位数，匹配格式：前三位固定格式+后8位任意数
    */
   public static boolean isMobileNO(String mobiles) throws PatternSyntaxException {
-    String telRegex = "[1][34578]\\d{9}";
+    String telRegex = "[1][23456789]\\d{9}";
     return mobiles.matches(telRegex);
   }
 

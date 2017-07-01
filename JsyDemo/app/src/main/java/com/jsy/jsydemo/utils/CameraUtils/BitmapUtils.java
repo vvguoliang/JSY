@@ -173,7 +173,7 @@ public class BitmapUtils {
         try {
             if (file != null) {
                 if (FileUtils.deleteFile(file.getAbsolutePath())) {
-                    AppUtil.mImageFile = null;
+                    AppUtil.getInstance().mImageFile = null;
                     Log.d("删除文件", "true");
                     return true;
                 } else {

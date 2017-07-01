@@ -23,4 +23,5 @@
     <color name="common_pop_blue">#177FFE</color>
     <color name="common_reminder_bg">#eaeaea</color>
     <color name="common_reminder_face">#004eb7</color>
+    <color name="transparent">#00000000</color>
 </resources>

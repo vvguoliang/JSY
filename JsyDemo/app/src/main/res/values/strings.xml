@@ -110,4 +110,13 @@
     <string name="name_loan_personal_album">相册中选择</string>
     <string name="read_photo_error">获取图片失败</string>
     <string name="parse_photo_error">解析图片失败</string>
+    <string name="name_loan_logo_register">注册</string>
+    <string name="name_loan_logo_phone">输入手机号</string>
+    <string name="name_loan_logo_code">输入验证码</string>
+    <string name="name_loan_logo_logo">立即登录</string>
+    <string name="name_loan_logo_account_number">账号密码登录</string>
+    <string name="name_loan_logo_password">请输入密码</string>
+    <string name="name_loan_logo_code_logo">验证码快捷登录</string>
+    <string name="name_loan_logo_no_password">忘记密码</string>
+    <string name="name_loan_logo_agreement">注册即表示同意《及时雨注册协议》</string>
 </resources>

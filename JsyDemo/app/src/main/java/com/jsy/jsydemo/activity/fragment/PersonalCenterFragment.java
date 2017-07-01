@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.activity.SetUp.SetUPActivity;
 import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.FeedbackActivity;
 import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.FriendsActivity;
@@ -102,7 +103,7 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 //            case R.id.personal_loan_my_package://我的卡包
 //                break;
             case R.id.personal_logo://登录
-//                mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
                 break;
             case R.id.personal_camera://照片
                 showDialog(mActivity.getString(R.string.name_loan_personal_camera), mActivity.getString(R.string.name_loan_personal_album));
@@ -114,7 +115,7 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
     public void showDialog(String btn_take, String btn_pick) {
         final BottomDialog sxsDialog = new BottomDialog(mActivity, R.layout.buttom_dialog);
         sxsDialog.getWindow().setWindowAnimations(R.style.AnimBottom);
-        sxsDialog.setWidthHeight(AppUtil.Dispay(mActivity)[0], 0);
+        sxsDialog.setWidthHeight(AppUtil.getInstance().Dispay(mActivity)[0], 0);
         sxsDialog.getWindow().setGravity(Gravity.BOTTOM);
         Button button1 = (Button) sxsDialog.findViewById(R.id.btn_take_photo);
         button1.setText(btn_take);
