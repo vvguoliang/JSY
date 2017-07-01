@@ -13,6 +13,7 @@ import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.CountDownTimerUtils;
 import com.jsy.jsydemo.utils.StringUtil;
@@ -101,8 +102,8 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     map.put("password", password_edittext_pass_confirm.getText());
                     map.put("code", (int) Double.parseDouble(password_edittext_code.getText().toString()));
                     if (name.equals("1")) {
-                        map.put("no", "");
-                        OkHttpManager.postAsync(HttpURL.getInstance().REGISTER, "password", map, this);
+                        map.put("no", AppUtil.getInstance().getChannel(SetUpPasswordActivity.this, 2));
+                        OkHttpManager.postAsync(HttpURL.getInstance().REGISTER, "register", map, this);
                     } else
                         OkHttpManager.postAsync(HttpURL.getInstance().PASSWORD, "password", map, this);
                 }
@@ -150,6 +151,8 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                 break;
             case "password":
                 break;
+            case "register":
+                break;
         }
     }
 
@@ -165,6 +168,9 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                 }
                 break;
             case "password":
+                Log.e("", "====" + result);
+                break;
+            case "register":
                 Log.e("", "====" + result);
                 break;
         }
