@@ -164,7 +164,9 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                 if (registerSignCodeModify.getStatus() == 0) {
                     ToatUtils.showShort1(this, registerSignCodeModify.getInfo());
                 } else {
-                    Log.e("", "====" + result);
+                    if (registerSignCodeModify.getStatus() == 1 && registerSignCodeModify.getState().equals("success")) {
+                        ToatUtils.showShort1(this, registerSignCodeModify.getInfo());
+                    }
                 }
                 break;
             case "password":

@@ -144,13 +144,13 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                 }
                 OkHttpManager.postAsync(HttpURL.getInstance().LOGO, "logo_code", map, this);
                 break;
-            case R.id.title_complete://返回键
-
-                break;
-            case R.id.title_image://注册
+            case R.id.title_complete://注册
                 intent = new Intent(LogoActivity.this, SetUpPasswordActivity.class);
                 intent.putExtra("name", "1");
                 startActivity(intent);
+                break;
+            case R.id.title_image://返回键
+
                 break;
             case R.id.loan_logo_no_password://忘记密码
                 intent = new Intent(LogoActivity.this, SetUpPasswordActivity.class);
@@ -244,7 +244,9 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                 if (registerSignCodeModify.getStatus() == 0) {
                     ToatUtils.showShort1(this, registerSignCodeModify.getInfo());
                 } else {
-                    Log.e("", "====" + result);
+                    if (registerSignCodeModify.getStatus() == 1 && registerSignCodeModify.getState().equals("success")) {
+                        ToatUtils.showShort1(this, registerSignCodeModify.getInfo());
+                    }
                 }
                 break;
             case "logo_code":
