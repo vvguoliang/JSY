@@ -4,11 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/tab_activity_fra"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/common_48dp" />
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

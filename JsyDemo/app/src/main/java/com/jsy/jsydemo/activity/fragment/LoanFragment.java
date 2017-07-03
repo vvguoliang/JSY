@@ -100,9 +100,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
 
     @Override
     protected void initView() {
-        title_view = (TextView) findViewById(R.id.title_view);
-        title_view.setText(mActivity.getString(R.string.app_name));
-
         getHttp();
         OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
         mHandler = new Handler();
@@ -168,6 +165,8 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
     }
 
     private void getHeader(View mHeader) {
+        title_view = (TextView) mHeader.findViewById(R.id.title_view);
+        title_view.setText(mActivity.getString(R.string.app_name));
         loan_viewpage = (ViewPager) mHeader.findViewById(R.id.loan_viewpage);
         final ViewGroup.LayoutParams lp = loan_viewpage.getLayoutParams();
         lp.height = DisplayUtils.dip2px(mActivity, 150);

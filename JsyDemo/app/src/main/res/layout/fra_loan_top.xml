@@ -7,6 +7,11 @@
     android:orientation="vertical">
 
     <include
+        layout="@layout/tab_activity_fra"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_48dp" />
+
+    <include
         layout="@layout/view_viewpage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

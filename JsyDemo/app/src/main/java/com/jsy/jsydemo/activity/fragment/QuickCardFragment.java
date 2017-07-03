@@ -93,7 +93,7 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
     @Override
     protected void initView() {
         OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
-//        getBank();
+        getBank();
         mHandler = new Handler();
         mAdapter = new QuickCardAdapter(mActivity);
         //添加Header
@@ -202,10 +202,6 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
             mBannerDots.add(view);
             loan_frame.addView(view);
         }
-
-        loan_viewpage.setAdapter(new BannerLoopAdapter(mActivity, mBannerImageViews, mImageUrl));
-
-
         // 如果这样设置会一页一页的滑动过去 直接就ANR了!!!
         //banner.setCurrentItem(Integer.MAX_VALUE/2);
 
@@ -223,6 +219,7 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
             e.printStackTrace();
         }
         currentItem = Integer.MAX_VALUE / 2;
+        loan_viewpage.setAdapter(new BannerLoopAdapter(mActivity, mBannerImageViews, mImageUrl));
         pollBanner();
     }
 
