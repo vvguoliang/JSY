@@ -1,5 +1,6 @@
 package com.jsy.jsydemo.view;
 
+import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,8 +19,8 @@ public class BaseViewHolder<T> extends RecyclerView.ViewHolder{
         super(itemView);
     }
 
-    public BaseViewHolder(ViewGroup parent, int layoutId) {
-        super(LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false));
+    public BaseViewHolder(Context context,ViewGroup parent, int layoutId) {
+        super(LayoutInflater.from(context).inflate(layoutId, parent, false));
         onInitializeView();
     }
 

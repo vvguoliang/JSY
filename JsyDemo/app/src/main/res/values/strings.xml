@@ -119,4 +119,6 @@
     <string name="name_loan_logo_code_logo">验证码快捷登录</string>
     <string name="name_loan_logo_no_password">忘记密码</string>
     <string name="name_loan_logo_agreement">注册即表示同意《及时雨注册协议》</string>
+
+    <string name="name_loan_product_interest_rat">日利率</string>
 </resources>

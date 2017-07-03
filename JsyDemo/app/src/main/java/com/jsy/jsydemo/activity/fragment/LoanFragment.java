@@ -6,29 +6,43 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
+import com.jsy.jsydemo.EntityClass.HomeProduct;
+import com.jsy.jsydemo.EntityClass.HomeProductList;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.adapter.BannerLoopAdapter;
 import com.jsy.jsydemo.adapter.CardRecordAdapter;
-import com.jsy.jsydemo.view.Base1.Consumption;
 import com.jsy.jsydemo.base.BaseFragment;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.interfaces.Action;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
+import com.jsy.jsydemo.utils.JsonData;
+import com.jsy.jsydemo.view.Base1.Consumption;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import okhttp3.Request;
 
 
 /**
@@ -36,9 +50,9 @@ import java.util.TimerTask;
  * <p>
  * 借款
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "StatementWithEmptyBody"})
 @SuppressLint({"ValidFragment", "InflateParams"})
-public class LoanFragment extends BaseFragment {
+public class LoanFragment extends BaseFragment implements DataCallBack {
 
     private Activity mActivity;
 
@@ -62,12 +76,22 @@ public class LoanFragment extends BaseFragment {
 
     private ViewPager loan_viewpage;
 
+    private View mHeader;
+
+    private TextView title_view;
+
     //图片地址集合( 项目中一般是对于的HTTP地址 )
-    List<Integer> mImageUrl = new ArrayList<>();
+    List<Map<String, String>> mImageUrl = new ArrayList<>();
     //banner中图片的集合
     List<ImageView> mBannerImageViews = new ArrayList<>();
     //banner上点点的集合
     List<ImageView> mBannerDots = new ArrayList<>();
+
+    private HomeLoanBannerList homeLoanBannerList;
+
+    private HomeProductList homeProductList;
+
+    private HomeProduct[] VirtualData;
 
     @Override
     protected int getLayout() {
@@ -76,12 +100,16 @@ public class LoanFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        title_view = (TextView) findViewById(R.id.title_view);
+        title_view.setText(mActivity.getString(R.string.app_name));
 
+        getHttp();
+        OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
         mHandler = new Handler();
         mAdapter = new CardRecordAdapter(mActivity);
 
         //添加Header
-        View mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_loan_top, null);
+        mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_loan_top, null);
         mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 AppUtil.getInstance().Dispay(mActivity)[1] / 2 + 48));
         getHeader(mHeader);
@@ -129,40 +157,14 @@ public class LoanFragment extends BaseFragment {
                 if (isRefresh) {
                     page = 1;
                     mAdapter.clear();
-                    mAdapter.addAll(getVirtualData());
+                    mAdapter.addAll(VirtualData);
                     mRecyclerView.dismissSwipeRefresh();
                     mRecyclerView.getRecyclerView().scrollToPosition(0);
                 } else {
-                    mAdapter.addAll(getVirtualData());
-                    if (page >= 3) {
-                        mRecyclerView.showNoMore();
-                    }
+                    getHttp();
                 }
             }
         }, 1500);
-    }
-
-    public Consumption[] getVirtualData() {
-        return new Consumption[]{
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-        };
     }
 
     private void getHeader(View mHeader) {
@@ -172,19 +174,13 @@ public class LoanFragment extends BaseFragment {
         loan_viewpage.setLayoutParams(lp);
         loan_viewpage.setOnPageChangeListener(new NavigationPageChangeListener());
         loan_frame = (LinearLayout) mHeader.findViewById(R.id.loan_frame);
+    }
 
-        //随便加几个图片地址进入集合
-        for (int i = 0; i < 4; i++) {
-            if (i % 2 == 0) {
-                mImageUrl.add(R.mipmap.ic_loan_brightness);
-            } else {
-                mImageUrl.add(R.mipmap.ic_loan_dark);
-            }
-        }
-
-
-        //设置ViewPage的页面内容
-        refreshBanner();
+    private void getHttp() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("page", page);
+        map.put("os", "android");
+        OkHttpManager.postAsync(HttpURL.getInstance().HOMEPRODUCT, "home_product", map, this);
     }
 
     // -------------------------------------------------------------------------
@@ -195,27 +191,17 @@ public class LoanFragment extends BaseFragment {
         mBannerImageViews.clear();
         mBannerDots.clear();
         loan_frame.removeAllViews();
-        for (final int url : mImageUrl) {
+        for (int i = 0; mImageUrl.size() > i; i++) {
             ImageView iv = new ImageView(mActivity);
 
-            iv.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT));
-
-            iv.setBackgroundResource(url);
+            iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            iv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
             mBannerImageViews.add(iv);
         }
 
         //循环添加 点
-        for (int i = 0; i < mBannerImageViews.size(); i++) {
+        for (int i = 0; i < mImageUrl.size(); i++) {
             ImageView view = new ImageView(mActivity);
             int w = DisplayUtils.dip2px(mActivity, 10);
             int margin = DisplayUtils.dip2px(mActivity, 8);
@@ -230,9 +216,6 @@ public class LoanFragment extends BaseFragment {
             mBannerDots.add(view);
             loan_frame.addView(view);
         }
-
-        loan_viewpage.setAdapter(new BannerLoopAdapter(mBannerImageViews));
-
 
         // 如果这样设置会一页一页的滑动过去 直接就ANR了!!!
         //banner.setCurrentItem(Integer.MAX_VALUE/2);
@@ -250,10 +233,8 @@ public class LoanFragment extends BaseFragment {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
-
-        //
-
         currentItem = Integer.MAX_VALUE / 2;
+        loan_viewpage.setAdapter(new BannerLoopAdapter(mActivity, mBannerImageViews, mImageUrl));
         pollBanner();
     }
 
@@ -289,6 +270,75 @@ public class LoanFragment extends BaseFragment {
             loan_viewpage.setCurrentItem(currentItem);
         }
     };
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+        switch (name) {
+            case "banner":
+                Log.e("", "=====" + request);
+                break;
+            case "home_product":
+                Log.e("", "=====" + request);
+                break;
+        }
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+        switch (name) {
+            case "banner":
+                homeLoanBannerList = new HomeLoanBannerList();
+                homeLoanBannerList = JsonData.getInstance().getJsonLaonHome(result);
+                for (int i = 0; homeLoanBannerList.getLoanBanners().size() > i; i++) {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("path", HttpURL.getInstance().HTTP_URL_PATH + homeLoanBannerList.getLoanBanners().get(i).getImg().
+                            replace("\\", ""));
+                    map.put("url", homeLoanBannerList.getLoanBanners().get(i).getImg_url());
+                    mImageUrl.add(map);
+                }
+                //设置ViewPage的页面内容
+                refreshBanner();
+                break;
+            case "home_product":
+                homeProductList = new HomeProductList();
+                homeProductList = JsonData.getInstance().getJsonLoanProduct(result);
+                if (homeProductList.getHomeProductList().size() == 0) {
+                    mRecyclerView.showNoMore();
+                } else {
+                    VirtualData = new HomeProduct[homeProductList.getHomeProductList().size() + 1];
+                    for (int i = 0; homeProductList.getHomeProductList().size() > i; i++) {
+                        VirtualData[i] = new HomeProduct(homeProductList.getHomeProductList().get(i).getId(),
+                                homeProductList.getHomeProductList().get(i).getPro_name(),
+                                homeProductList.getHomeProductList().get(i).getPro_describe(),
+                                homeProductList.getHomeProductList().get(i).getPro_link(),
+                                homeProductList.getHomeProductList().get(i).getPro_hits(),
+                                HttpURL.getInstance().HTTP_URL_PATH +
+                                        homeProductList.getHomeProductList().get(i).getImg().replace("\\", ""),
+                                homeProductList.getHomeProductList().get(i).getOrder(),
+                                homeProductList.getHomeProductList().get(i).getEdufanwei(),
+                                homeProductList.getHomeProductList().get(i).getFeilv(),
+                                homeProductList.getHomeProductList().get(i).getApi_type(),
+                                homeProductList.getHomeProductList().get(i).getZuikuaifangkuan(),
+                                homeProductList.getHomeProductList().get(i).getQixianfanwei(),
+                                homeProductList.getHomeProductList().get(i).getQx_unit(),
+                                homeProductList.getHomeProductList().get(i).getType(),
+                                homeProductList.getHomeProductList().get(i).getData_id(),
+                                homeProductList.getHomeProductList().get(i).getOther_id(),
+                                homeProductList.getHomeProductList().get(i).getStatus(),
+                                homeProductList.getHomeProductList().get(i).getCreated_at(),
+                                homeProductList.getHomeProductList().get(i).getUpdated_at(),
+                                homeProductList.getHomeProductList().get(i).getTiaojian(),
+                                homeProductList.getHomeProductList().get(i).getApi_type());
+                    }
+                    if (page != 1) {
+                        mAdapter.addAll(VirtualData);
+                    }
+                }
+                break;
+        }
+
+    }
 
     class NavigationPageChangeListener implements
             ViewPager.OnPageChangeListener {

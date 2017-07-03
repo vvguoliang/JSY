@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,28 +15,40 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
+import com.jsy.jsydemo.EntityClass.QuickBank;
+import com.jsy.jsydemo.EntityClass.QuickBankList;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.adapter.BannerLoopAdapter;
-import com.jsy.jsydemo.adapter.CardRecordAdapter;
+import com.jsy.jsydemo.adapter.QuickCardAdapter;
 import com.jsy.jsydemo.base.BaseFragment;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.interfaces.Action;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
-import com.jsy.jsydemo.view.Base1.Consumption;
+import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/6/23.
  * 快速办卡
  */
-@SuppressLint({"ValidFragment","InflateParams"})
-public class QuickCardFragment extends BaseFragment {
+@SuppressWarnings("deprecation")
+@SuppressLint({"ValidFragment", "InflateParams"})
+public class QuickCardFragment extends BaseFragment implements DataCallBack {
     private Activity mActivity;
 
     public QuickCardFragment() {
@@ -54,7 +67,7 @@ public class QuickCardFragment extends BaseFragment {
 
     private RefreshRecyclerView mRecyclerView;
 
-    private CardRecordAdapter mAdapter;
+    private QuickCardAdapter mAdapter;
 
     private Handler mHandler;
     private int page = 1;
@@ -63,18 +76,26 @@ public class QuickCardFragment extends BaseFragment {
 
     private ViewPager loan_viewpage;
 
+    private HomeLoanBannerList homeLoanBannerList;
+
+    private QuickBankList quickBankList;
+
+    private QuickBank[] VirtualData;
+
     //图片地址集合( 项目中一般是对于的HTTP地址 )
-    List<Integer> mImageUrl = new ArrayList<>();
+    List<Map<String, String>> mImageUrl = new ArrayList<>();
     //banner中图片的集合
     List<ImageView> mBannerImageViews = new ArrayList<>();
     //banner上点点的集合
     List<ImageView> mBannerDots = new ArrayList<>();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initView() {
+        OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
+//        getBank();
         mHandler = new Handler();
-        mAdapter = new CardRecordAdapter(mActivity);
-
+        mAdapter = new QuickCardAdapter(mActivity);
         //添加Header
         View mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_quickcardfragment, null);
         mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -83,7 +104,8 @@ public class QuickCardFragment extends BaseFragment {
         mAdapter.setHeader(mHeader);
         //添加footer
         final TextView footer = new TextView(mActivity);
-        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtils.dip2px(mActivity, 48)));
+        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                DisplayUtils.dip2px(mActivity, 48)));
         footer.setTextSize(16);
         footer.setGravity(Gravity.CENTER);
         footer.setText("-- Footer --");
@@ -124,40 +146,18 @@ public class QuickCardFragment extends BaseFragment {
                 if (isRefresh) {
                     page = 1;
                     mAdapter.clear();
-                    mAdapter.addAll(getVirtualData());
+                    mAdapter.addAll(VirtualData);
                     mRecyclerView.dismissSwipeRefresh();
                     mRecyclerView.getRecyclerView().scrollToPosition(0);
                 } else {
-                    mAdapter.addAll(getVirtualData());
-                    if (page >= 3) {
-                        mRecyclerView.showNoMore();
-                    }
+                    getBank();
                 }
             }
         }, 1500);
     }
 
-    public Consumption[] getVirtualData() {
-        return new Consumption[]{
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-                new Consumption("Demo", "2015-12-18 12:09", "消费", 9.7f, 24.19f, "兴业源三楼", "", "",
-                        "", "", ""),
-        };
+    private void getBank() {
+        OkHttpManager.postAsync(HttpURL.getInstance().BANK, "bank", null, this);
     }
 
     private void getHeader(View mHeader) {
@@ -169,45 +169,20 @@ public class QuickCardFragment extends BaseFragment {
         loan_viewpage.setLayoutParams(lp);
         loan_viewpage.setOnPageChangeListener(new NavigationPageChangeListener());
         loan_frame = (LinearLayout) mHeader.findViewById(R.id.loan_frame);
-
-        //随便加几个图片地址进入集合
-        for (int i = 0; i < 4; i++) {
-            if (i % 2 == 0) {
-                mImageUrl.add(R.mipmap.ic_loan_brightness);
-            } else {
-                mImageUrl.add(R.mipmap.ic_loan_dark);
-            }
-        }
-
-
-        //设置ViewPage的页面内容
-        refreshBanner();
     }
 
     // -------------------------------------------------------------------------
     // Banner相关
     // -------------------------------------------------------------------------
     private void refreshBanner() {
-
         mBannerImageViews.clear();
         mBannerDots.clear();
         loan_frame.removeAllViews();
-        for (final int url : mImageUrl) {
+        for (int i = 0; mImageUrl.size() > i; i++) {
             ImageView iv = new ImageView(mActivity);
 
-            iv.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT));
-
-            iv.setBackgroundResource(url);
-
+            iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            iv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
             mBannerImageViews.add(iv);
         }
 
@@ -228,7 +203,7 @@ public class QuickCardFragment extends BaseFragment {
             loan_frame.addView(view);
         }
 
-        loan_viewpage.setAdapter(new BannerLoopAdapter(mBannerImageViews));
+        loan_viewpage.setAdapter(new BannerLoopAdapter(mActivity, mBannerImageViews, mImageUrl));
 
 
         // 如果这样设置会一页一页的滑动过去 直接就ANR了!!!
@@ -247,9 +222,6 @@ public class QuickCardFragment extends BaseFragment {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
-
-        //
-
         currentItem = Integer.MAX_VALUE / 2;
         pollBanner();
     }
@@ -286,6 +258,56 @@ public class QuickCardFragment extends BaseFragment {
             loan_viewpage.setCurrentItem(currentItem);
         }
     };
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+        switch (name) {
+            case "banner":
+                Log.e("", "=====" + request);
+                break;
+            case "bank":
+                Log.e("", "=====" + request);
+                break;
+        }
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+        switch (name) {
+            case "banner":
+                homeLoanBannerList = new HomeLoanBannerList();
+                homeLoanBannerList = JsonData.getInstance().getJsonLaonHome(result);
+                for (int i = 0; homeLoanBannerList.getLoanBanners().size() > i; i++) {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("path", HttpURL.getInstance().HTTP_URL_PATH + homeLoanBannerList.getLoanBanners().get(i).getImg().
+                            replace("\\", ""));
+                    map.put("url", homeLoanBannerList.getLoanBanners().get(i).getImg_url());
+                    mImageUrl.add(map);
+                }
+                //设置ViewPage的页面内容
+                refreshBanner();
+                break;
+            case "bank":
+                quickBankList = JsonData.getInstance().getJsonQuickBank(result);
+                if (quickBankList.getQuickBankList().size() == 0) {
+                    mRecyclerView.showNoMore();
+                } else {
+                    VirtualData = new QuickBank[quickBankList.getQuickBankList().size() + 1];
+                    for (int i = 0; quickBankList.getQuickBankList().size() > i; i++) {
+                        VirtualData[i] = new QuickBank(quickBankList.getQuickBankList().get(i).getId(),
+                                quickBankList.getQuickBankList().get(i).getName(), quickBankList.getQuickBankList().get(i).getDescribe(),
+                                quickBankList.getQuickBankList().get(i).getLink(), HttpURL.getInstance().HTTP_URL_PATH +
+                                quickBankList.getQuickBankList().get(i).getIcon().replace("\\", ""),
+                                quickBankList.getQuickBankList().get(i).getCreated_at(), quickBankList.getQuickBankList().get(i).getUpdated_at());
+
+                    }
+                    if (page != 1) {
+                        mAdapter.addAll(VirtualData);
+                    }
+                }
+                break;
+        }
+    }
 
     class NavigationPageChangeListener implements
             ViewPager.OnPageChangeListener {

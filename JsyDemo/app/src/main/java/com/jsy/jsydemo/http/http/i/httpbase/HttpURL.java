@@ -39,7 +39,10 @@ public class HttpURL implements Serializable {
     }
 
     private String HTTP_URL_KEY = "httpUrlKey";
-    public String HTTP_URL = "http://app.jishiyu11.cn/index.php?g=app";
+    private String HTTP_URL = "http://app.jishiyu11.cn/index.php?g=app";
+
+    public String HTTP_URL_PATH = "http://app.jishiyu11.cn/data/upload";
+
 
     public void initUrl(Context context) {
         if (SharedPreferencesUtils.contains(context, HTTP_URL_KEY)) {
@@ -69,5 +72,11 @@ public class HttpURL implements Serializable {
     public String REGISTER_CODE = HTTP_URL + "&m=register&a=send_code";
 
     public String REGISTER = HTTP_URL + "&m=register&a=doregiste";
+
+    public String BANNER = HTTP_URL + "&m=banner&a=postList";
+
+    public String HOMEPRODUCT = HTTP_URL + "&m=product&a=change_list";
+
+    public String BANK = HTTP_URL + "&m=bank&a=postList";
 
 }

@@ -1,9 +1,19 @@
 package com.jsy.jsydemo.utils;
 
+import com.jsy.jsydemo.EntityClass.HomeLoanBanner;
+import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
+import com.jsy.jsydemo.EntityClass.HomeProduct;
+import com.jsy.jsydemo.EntityClass.HomeProductList;
+import com.jsy.jsydemo.EntityClass.QuickBank;
+import com.jsy.jsydemo.EntityClass.QuickBankList;
 import com.jsy.jsydemo.EntityClass.RegisterSignCodeModify;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by vvguoliang on 2017/7/1.
@@ -37,7 +47,12 @@ public class JsonData {
         return getInstance();
     }
 
-
+    /**
+     * 登入 注册 修改密码
+     *
+     * @param string
+     * @return
+     */
     public RegisterSignCodeModify getJsonLogoCode(String string) {
         RegisterSignCodeModify registerSignCodeModify = new RegisterSignCodeModify();
         try {
@@ -51,6 +66,120 @@ public class JsonData {
             e.printStackTrace();
         }
         return registerSignCodeModify;
+    }
+
+
+    /**
+     * Banner 返回数据
+     *
+     * @param data
+     * @return
+     */
+    public HomeLoanBannerList getJsonLaonHome(String data) {
+        JSONObject object;
+        HomeLoanBannerList homeLoanBannerList = new HomeLoanBannerList();
+        List<HomeLoanBanner> loanBanners = new ArrayList<>();
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            JSONArray array = new JSONArray(object.optString("data"));
+            for (int i = 0; array.length() > i; i++) {
+                HomeLoanBanner homeLoanBanner = new HomeLoanBanner();
+                JSONObject jsonObject = array.getJSONObject(i);
+                homeLoanBanner.setId(jsonObject.optString("id"));
+                homeLoanBanner.setCreated_at(jsonObject.optString("created_at"));
+                homeLoanBanner.setImg(jsonObject.optString("img"));
+                homeLoanBanner.setImg_url(jsonObject.optString("img_url"));
+                homeLoanBanner.setOrder(jsonObject.optString("order"));
+                loanBanners.add(homeLoanBanner);
+            }
+            homeLoanBannerList.setLoanBanners(loanBanners);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return homeLoanBannerList;
+    }
+
+    /**
+     * 首页底部数据
+     *
+     * @param data
+     * @return
+     */
+    public HomeProductList getJsonLoanProduct(String data) {
+        JSONObject object;
+        HomeProductList homeProductList = new HomeProductList();
+        List<HomeProduct> productList = new ArrayList<>();
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            JSONArray array = new JSONArray(object.optString("list"));
+            for (int i = 0; array.length() > i; i++) {
+                HomeProduct homeProduct = new HomeProduct();
+                JSONObject jsonObject = array.getJSONObject(i);
+                homeProduct.setApi_type(jsonObject.optString("api_type"));
+                homeProduct.setCreated_at(jsonObject.optString("created_at"));
+                homeProduct.setData_id(jsonObject.optString("data_id"));
+                homeProduct.setEdufanwei(jsonObject.optString("edufanwei"));
+                homeProduct.setFeilv(jsonObject.optString("feilv"));
+                homeProduct.setFv_unit(jsonObject.optString("fv_unit"));
+                homeProduct.setId(jsonObject.optString("id"));
+                homeProduct.setImg(jsonObject.optString("img"));
+                homeProduct.setOrder(jsonObject.optString("order"));
+                homeProduct.setOther_id(jsonObject.optString("other_id"));
+                homeProduct.setPro_describe(jsonObject.optString("pro_describe"));
+                homeProduct.setPro_hits(jsonObject.optString("pro_hits"));
+                homeProduct.setPro_link(jsonObject.optString("pro_link"));
+                homeProduct.setPro_name(jsonObject.optString("pro_name"));
+                homeProduct.setQixianfanwei(jsonObject.optString("qixianfanfanwei"));
+                homeProduct.setQx_unit(jsonObject.optString("qx_unit"));
+                homeProduct.setStatus(jsonObject.optString("status"));
+                homeProduct.setTiaojian(jsonObject.optString("tiaojin"));
+                homeProduct.setType(jsonObject.optString("type"));
+                homeProduct.setUpdated_at(jsonObject.optString("updated_at"));
+                homeProduct.setZuikuaifangkuan(jsonObject.optString("zuikuaifangkuan"));
+                productList.add(homeProduct);
+            }
+            homeProductList.setHomeProductList(productList);
+            homeProductList.setPage_count(object.optString("page_count"));
+            homeProductList.setReview(object.optString("review"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return homeProductList;
+    }
+
+    /**
+     * 办卡过程
+     *
+     * @param data
+     * @return
+     */
+    public QuickBankList getJsonQuickBank(String data) {
+        JSONObject object;
+        QuickBankList quickBankList = new QuickBankList();
+        List<QuickBank> list = new ArrayList<>();
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            JSONArray array = new JSONArray(object.optString("data"));
+            for (int i = 0; array.length() > i; i++) {
+                QuickBank quickBank = new QuickBank();
+                JSONObject jsonObject = array.optJSONObject(i);
+                quickBank.setCreated_at(jsonObject.optString("created_at"));
+                quickBank.setDescribe(jsonObject.optString("describe"));
+                quickBank.setIcon(jsonObject.optString("icon"));
+                quickBank.setId(jsonObject.optString("id"));
+                quickBank.setLink(jsonObject.optString("link"));
+                quickBank.setName(jsonObject.optString("name"));
+                quickBank.setUpdated_at(jsonObject.optString("updated_ac"));
+                list.add(quickBank);
+            }
+            quickBankList.setQuickBankList(list);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return quickBankList;
     }
 
 }

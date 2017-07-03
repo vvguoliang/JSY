@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.interfaces.Action;
 
@@ -22,7 +23,7 @@ import java.util.List;
 
 /**
  * vvguolaing 2017-6-23
- *
+ * <p>
  * RecyclerAdapter 适配器
  */
 public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
@@ -90,10 +91,10 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         } else if (viewType == STATUS_TYPE) {
             return new BaseViewHolder<>(mStatusView);
         } else
-            return onCreateBaseViewHolder(parent, viewType);
+            return onCreateBaseViewHolder(mContext, parent, viewType);
     }
 
-    public abstract BaseViewHolder<T> onCreateBaseViewHolder(ViewGroup parent, int viewType);
+    public abstract BaseViewHolder<T> onCreateBaseViewHolder(Context context, ViewGroup parent, int viewType);
 
     /* ViewHolder 绑定数据，这里的 position 和 getItemViewType() 方法的 position 不一样
         这里的 position 指当前可见的 item 的 position 的位置。
@@ -203,9 +204,9 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     public void insert(T object, int itemPosition) {
         if (mData != null && itemPosition < mViewCount) {
             int dataPosition;
-            if(hasHeader){
+            if (hasHeader) {
                 dataPosition = itemPosition - 1;
-            }else {
+            } else {
                 dataPosition = itemPosition;
             }
             mData.add(dataPosition, object);
@@ -235,14 +236,14 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     }
 
     public void replace(T object, int itemPosition) {
-        if(mData != null){
+        if (mData != null) {
             int dataPosition;
-            if(hasHeader){
+            if (hasHeader) {
                 dataPosition = itemPosition - 1;
-            }else {
+            } else {
                 dataPosition = itemPosition;
             }
-            if(dataPosition < mData.size()){
+            if (dataPosition < mData.size()) {
                 mData.set(dataPosition, object);
                 mViewCount++;
                 notifyItemChanged(itemPosition);
@@ -253,15 +254,15 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     //position start with 0
     public void remove(T object) {
         if (!mData.contains(object)) {
-            Toast.makeText(getContext(),"删除失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "删除失败", Toast.LENGTH_SHORT).show();
             log("remove()  without the object : " + object.getClass().getName());
             return;
         }
         int dataPosition = mData.indexOf(object);
         int itemPosition;
-        if(hasHeader){
+        if (hasHeader) {
             itemPosition = dataPosition + 1;
-        }else {
+        } else {
             itemPosition = dataPosition;
         }
         remove(itemPosition);
@@ -278,7 +279,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
                 notifyItemRemoved(itemPosition);
                 mViewCount--;
             } else if (dataPosition >= dataSize) {
-                Toast.makeText(getContext(),"删除失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "删除失败", Toast.LENGTH_SHORT).show();
             } else {
                 throw new IndexOutOfBoundsException("RecyclerView has header,position is should more than 0 ." +
                         "if you want remove header , pleasure user removeHeader()");
@@ -286,7 +287,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         } else {
             dataPosition = itemPosition;
             if (dataPosition >= dataSize) {
-                Toast.makeText(getContext(),"删除失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "删除失败", Toast.LENGTH_SHORT).show();
             } else {
                 mData.remove(dataPosition);
                 notifyItemRemoved(itemPosition);
@@ -370,4 +371,5 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
             Log.d(TAG, content);
         }
     }
+
 }

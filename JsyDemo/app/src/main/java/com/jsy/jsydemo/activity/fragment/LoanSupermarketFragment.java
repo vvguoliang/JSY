@@ -189,7 +189,7 @@ public class LoanSupermarketFragment extends BaseFragment {
             loan_frame.addView(view);
         }
 
-        loan_viewpage.setAdapter(new BannerLoopAdapter(mBannerImageViews));
+//        loan_viewpage.setAdapter(new BannerLoopAdapter(mBannerImageViews));
 
 
         // 如果这样设置会一页一页的滑动过去 直接就ANR了!!!

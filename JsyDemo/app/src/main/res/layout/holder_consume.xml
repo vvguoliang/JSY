@@ -3,90 +3,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="8dp"
     android:clickable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/ic_loan_brightness"
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_10dp">
+
+        <ImageView
+            android:id="@+id/home_loan_product_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/common_10dp"
+            android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="4dp"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/common_10dp"
+            tools:ignore="RtlHardcoded">
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/accent"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:text="林龙鑫" />
-
-            <TextView
-                android:id="@+id/type"
+            <com.jsy.jsydemo.control.MyTextView
+                android:id="@+id/home_loan_product_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary"
-                android:textSize="16sp"
-                tools:text="消费" />
+                android:text="@string/name_loan_credit_no_taobao"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_14dp" />
+
+            <com.jsy.jsydemo.control.MyTextView
+                android:id="@+id/home_loan_product_quota"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_loan"
+                android:textColor="@color/common_brown_text"
+                android:textSize="@dimen/common_12dp" />
+
+            <com.jsy.jsydemo.control.MyTextView
+                android:id="@+id/home_loan_product_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_5dp"
+                android:text="@string/name_loan"
+                android:textColor="@color/common_brown_text"
+                android:textSize="@dimen/common_12dp" />
+
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/consume_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="4dp"
-            android:textSize="14sp"
-            tools:text="消费金额：6.7" />
-
-        <TextView
-            android:id="@+id/remain_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="4dp"
-            android:textSize="14sp"
-            tools:text="卡里余额：99.5" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.3"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/consume_address"
+            <com.jsy.jsydemo.control.MyTextView
+                android:id="@+id/home_loan_product_interest_rate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:layout_marginBottom="@dimen/common_5dp"
                 android:layout_weight="1"
-                tools:text="兴业苑/小燕子超市" />
+                android:text="@string/name_loan"
+                android:textColor="@color/common_brown_text"
+                android:textSize="@dimen/common_12dp"
+                tools:ignore="NestedWeights,RtlHardcoded" />
 
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="2015-12-01 09:56" />
+            <ImageView
+                android:layout_width="@dimen/common_20dp"
+                android:layout_height="@dimen/common_20dp"
+                android:gravity="right|center"
+                android:src="@drawable/bg_personal_right_selector"
+                tools:ignore="RtlHardcoded" />
+
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/primaryDark" />
+
     </LinearLayout>
 </android.support.v7.widget.CardView>
