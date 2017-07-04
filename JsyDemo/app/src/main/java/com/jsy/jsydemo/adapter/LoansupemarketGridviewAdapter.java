@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jsy.jsydemo.EntityClass.ProductSu;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 
 import java.util.List;
 import java.util.Map;
@@ -23,19 +25,19 @@ import java.util.Map;
 @SuppressLint("InflateParams")
 public class LoansupemarketGridviewAdapter extends BaseAdapter {
 
-    private List<Map<String, String>> list;
-
     private Context context;
 
-    public LoansupemarketGridviewAdapter(Context mContext, List<Map<String, String>> list) {
+    private List<ProductSu> productSuList;
+
+    public LoansupemarketGridviewAdapter(Context mContext, List<ProductSu> productSuList) {
         this.context = mContext;
-        this.list = list;
+        this.productSuList = productSuList;
     }
 
     @Override
     public int getCount() {
-        if (list != null && list.size() > 0) {
-            return list.size();
+        if (productSuList != null && productSuList.size() > 0) {
+            return productSuList.size();
         } else {
             return 0;
         }
@@ -43,8 +45,8 @@ public class LoansupemarketGridviewAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        if (list != null && list.size() > 0) {
-            return list.get(position);
+        if (productSuList != null && productSuList.size() > 0) {
+            return productSuList.get(position);
         } else {
             return position;
         }
@@ -57,7 +59,7 @@ public class LoansupemarketGridviewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (list == null && list.size() <= 0) {
+        if (productSuList == null && productSuList.size() <= 0) {
             return null;
         }
         ViewHolder viewHolder;
@@ -73,14 +75,14 @@ public class LoansupemarketGridviewAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Glide.with(context)
-                .load(list.get(position).get("url"))
+                .load(HttpURL.getInstance().HTTP_URL_PATH + productSuList.get(position).getImg())
                 .fitCenter()
                 .placeholder(R.mipmap.ic_launcher)
                 .crossFade()
                 .into(viewHolder.supemarket_image);
-        viewHolder.supemarket_text.setText(list.get(position).get("title"));
-        viewHolder.supemarket_text_qinyin.setText(list.get(position).get("pinyin"));
-        viewHolder.supemarket_text_textview.setText(list.get(position).get("string"));
+        viewHolder.supemarket_text.setText(productSuList.get(position).getPro_name());
+        viewHolder.supemarket_text_qinyin.setText(productSuList.get(position).getPro_name());
+        viewHolder.supemarket_text_textview.setText(productSuList.get(position).getPro_describe());
         return convertView;
     }
 

@@ -7,11 +7,6 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/tab_activity_fra"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/common_48dp" />
-
-    <include
         layout="@layout/view_viewpage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -146,7 +141,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/common_14dp">
+        android:padding="@dimen/common_10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -154,7 +149,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="@dimen/common_10dp">
+            android:padding="@dimen/common_5dp">
 
             <ImageView
                 android:layout_width="@dimen/common_20dp"
@@ -191,6 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/common_10dp"
             android:gravity="center"
             android:orientation="horizontal">
 

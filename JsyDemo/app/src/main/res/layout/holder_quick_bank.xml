@@ -1,47 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/common_5dp"
+    android:background="@drawable/bg_shape_corner"
+    android:cropToPadding="false"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/common_10dp">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/quick_bank_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/bg_shape_corner"
-        android:orientation="vertical"
-        android:padding="@dimen/common_10dp">
+        android:padding="@dimen/common_10dp" />
 
-        <ImageView
-            android:id="@+id/quick_bank_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@mipmap/ic_launcher"
-            android:padding="@dimen/common_10dp" />
+    <com.jsy.jsydemo.control.MyTextView
+        android:id="@+id/quick_bank_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/common_10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/common_10dp" />
 
-        <com.jsy.jsydemo.control.MyTextView
-            android:id="@+id/quick_bank_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/common_10dp"
-            android:text="@string/name_loan"
-            android:textColor="@color/black"
-            android:textSize="@dimen/common_10dp" />
-
-        <com.jsy.jsydemo.control.MyTextView
-            android:id="@+id/quick_bank_name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/common_2dp"
-            android:text="@string/name_loan"
-            android:textColor="@color/common_brown_text"
-            android:textSize="@dimen/common_8dp" />
-
-    </LinearLayout>
-
+    <com.jsy.jsydemo.control.MyTextView
+        android:id="@+id/quick_bank_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/common_2dp"
+        android:textColor="@color/common_brown_text"
+        android:textSize="@dimen/common_8dp" />
 
 </LinearLayout>

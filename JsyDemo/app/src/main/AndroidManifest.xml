@@ -91,6 +91,9 @@
         <activity
             android:name=".activity.LoanWebViewActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoanDetailsActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

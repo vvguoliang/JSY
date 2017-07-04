@@ -4,6 +4,8 @@ import com.jsy.jsydemo.EntityClass.HomeLoanBanner;
 import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.HomeProductList;
+import com.jsy.jsydemo.EntityClass.ProductSu;
+import com.jsy.jsydemo.EntityClass.ProductSuList;
 import com.jsy.jsydemo.EntityClass.QuickBank;
 import com.jsy.jsydemo.EntityClass.QuickBankList;
 import com.jsy.jsydemo.EntityClass.RegisterSignCodeModify;
@@ -13,7 +15,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by vvguoliang on 2017/7/1.
@@ -180,6 +184,65 @@ public class JsonData {
             e.printStackTrace();
         }
         return quickBankList;
+    }
+
+    public ProductSuList getJsonProduct(String data) {
+        JSONObject object;
+        ProductSuList productSuList = new ProductSuList();
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            if (object.has("recommend")) {
+                productSuList.setProductSus(getJsonProductlist(object.optString("recommend")));
+            }
+            if (object.has("quick")) {
+                productSuList.setProductSuList(getJsonProductlist(object.optString("quick")));
+            }
+            List<String> list1 = new ArrayList<>();
+            list1.add("好评推荐");
+            list1.add("极速贷款");
+            productSuList.setProduct(list1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return productSuList;
+    }
+
+    private List<ProductSu> getJsonProductlist(String recommend) {
+        List<ProductSu> productSuslist = new ArrayList<>();
+        try {
+            JSONArray array = new JSONArray(recommend);
+            for (int i = 0; array.length() > i; i++) {
+                ProductSu productSu = new ProductSu();
+                JSONObject jsonObject = array.optJSONObject(i);
+                productSu.setApi_type(jsonObject.optString("api_type"));
+                productSu.setCreated_at(jsonObject.optString("created_at"));
+                productSu.setData_id(jsonObject.optString("data_id"));
+                productSu.setData_name(jsonObject.optString("data_name"));
+                productSu.setEdufanwei(jsonObject.optString("edufanwei"));
+                productSu.setFeilv(jsonObject.optString("feilv"));
+                productSu.setFv_unit(jsonObject.optString("fv_unit"));
+                productSu.setId(jsonObject.optString("id"));
+                productSu.setOrder(jsonObject.optString("order"));
+                productSu.setOther_id(jsonObject.optString("other_id"));
+                productSu.setPro_describe(jsonObject.optString("pro_describe"));
+                productSu.setPro_hits(jsonObject.optString("pro_hits"));
+                productSu.setPro_link(jsonObject.optString("pro_link"));
+                productSu.setPro_name(jsonObject.optString("pro_name"));
+                productSu.setQixianfanwei(jsonObject.optString("qixianfanwei"));
+                productSu.setQx_unit(jsonObject.optString("qx_unit"));
+                productSu.setStatus(jsonObject.optString("status"));
+                productSu.setTiaojian(jsonObject.optString("tiaojian"));
+                productSu.setType(jsonObject.optString("type"));
+                productSu.setUpdated_at(jsonObject.optString("updated_at"));
+                productSu.setZuikuaifangkuan(jsonObject.optString("zuikuaifangkuan"));
+                productSu.setImg(jsonObject.optString("img"));
+                productSuslist.add(productSu);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return productSuslist;
     }
 
 }

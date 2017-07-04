@@ -24,4 +24,6 @@
     <color name="common_reminder_bg">#eaeaea</color>
     <color name="common_reminder_face">#004eb7</color>
     <color name="transparent">#00000000</color>
+    <color name="common_blue">#007CCB</color>
+    <color name="common_blue_details">#176FDB</color>
 </resources>

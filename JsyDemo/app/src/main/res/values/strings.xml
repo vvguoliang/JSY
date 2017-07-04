@@ -121,4 +121,16 @@
     <string name="name_loan_logo_agreement">注册即表示同意《及时雨注册协议》</string>
 
     <string name="name_loan_product_interest_rat">日利率</string>
+    <string name="name_loan_details_yuan">元</string>
+    <string name="name_loan_details_resources_rat">参考日利率</string>
+    <string name="name_loan_details_repayment">每日还款(元)</string>
+    <string name="name_loan_details_loan_time">放款最快时间</string>
+    <string name="name_loan_details_borrow_possible">按日计息,随借随还</string>
+    <string name="name_loan_details_basic_information">基础信息认证</string>
+    <string name="name_loan_details_information">认证材料</string>
+    <string name="name_loan_details_phone_operator">手机运营商</string>
+    <string name="name_loan_details_id">身份证</string>
+    <string name="name_loan_details_other">其他认证信息</string>
+    <string name="name_loan_details">贷款详情</string>
+    <string name="name_loan_details_supplement">补充资料</string>
 </resources>

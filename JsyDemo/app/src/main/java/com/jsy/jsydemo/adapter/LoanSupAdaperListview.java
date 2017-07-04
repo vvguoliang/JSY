@@ -1,6 +1,7 @@
 package com.jsy.jsydemo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jsy.jsydemo.EntityClass.ProductSuList;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.LoanWebViewActivity;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.MyGridView;
 
@@ -26,28 +29,25 @@ import java.util.Map;
 
 public class LoanSupAdaperListview extends BaseAdapter {
 
-
-    private List<Map<String, String>> list;
-    private List<Map<String, String>> listdata;
+    private ProductSuList productSuList;
     private LayoutInflater mInflater;
 
     private Context context;
 
-    public LoanSupAdaperListview(Context context, List<Map<String, String>> list, List<Map<String, String>> listdata) {
-        this.list = list;
+    public LoanSupAdaperListview(Context context, ProductSuList productSuList) {
         this.context = context;
-        this.listdata = listdata;
+        this.productSuList = productSuList;
         mInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return productSuList.getProduct().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return list.get(position);
+        return productSuList.getProduct().get(position);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class LoanSupAdaperListview extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.view_loan_bvh, null);
@@ -65,27 +65,30 @@ public class LoanSupAdaperListview extends BaseAdapter {
             viewHolder.loan_praise = (ImageView) convertView.findViewById(R.id.loan_praise);
             viewHolder.loan_recommend = (TextView) convertView.findViewById(R.id.loan_recommend);
             viewHolder.loan_gridView = (MyGridView) convertView.findViewById(R.id.loan_gridView);
-        }else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Glide.with(context)
-                .load(list.get(position).get("url"))
-                .fitCenter()
-                .placeholder(R.mipmap.ic_launcher)
-                .crossFade()
-                .into(viewHolder.loan_praise);
-        viewHolder.loan_praise.setTag(R.id.loan_praise, position);
-        viewHolder.loan_recommend.setText(list.get(position).get("title"));
-
-        viewHolder.loan_gridView.setAdapter(new LoansupemarketGridviewAdapter(context, listdata));
+//        Glide.with(context)
+//                .load(list.get(position).get("url"))
+//                .fitCenter()
+//                .placeholder(R.mipmap.ic_launcher)
+//                .crossFade()
+//                .into(viewHolder.loan_praise);
+//        viewHolder.loan_praise.setTag(R.id.loan_praise, position);
+        viewHolder.loan_recommend.setText(productSuList.getProduct().get(position));
+        if (position == 0) {
+            viewHolder.loan_gridView.setAdapter(new LoansupemarketGridviewAdapter(context, productSuList.getProductSuList()));
+        } else if (position == 1) {
+            viewHolder.loan_gridView.setAdapter(new LoansupemarketGridviewAdapter(context, productSuList.getProductSus()));
+        }
         viewHolder.loan_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ToatUtils.showShort1(context, "当年度" + position);
+                Intent intent = new Intent(context, LoanWebViewActivity.class);
+                intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
+                context.startActivity(intent);
             }
         });
-
-
         return convertView;
     }
 

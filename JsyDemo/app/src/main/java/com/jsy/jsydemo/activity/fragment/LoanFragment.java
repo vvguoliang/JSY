@@ -78,8 +78,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
 
     private View mHeader;
 
-    private TextView title_view;
-
     //图片地址集合( 项目中一般是对于的HTTP地址 )
     List<Map<String, String>> mImageUrl = new ArrayList<>();
     //banner中图片的集合
@@ -105,15 +103,19 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
         mHandler = new Handler();
         mAdapter = new CardRecordAdapter(mActivity);
 
+        TextView title_view = (TextView) findViewById(R.id.title_view);
+        title_view.setText(mActivity.getString(R.string.app_name));
+
         //添加Header
         mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_loan_top, null);
         mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                AppUtil.getInstance().Dispay(mActivity)[1] / 2 + 48));
+                AppUtil.getInstance().Dispay(mActivity)[1] / 2 + DisplayUtils.dip2px(mActivity, 50)));
         getHeader(mHeader);
         mAdapter.setHeader(mHeader);
         //添加footer
         final TextView footer = new TextView(mActivity);
-        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtils.dip2px(mActivity, 48)));
+        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                DisplayUtils.dip2px(mActivity, 48)));
         footer.setTextSize(16);
         footer.setGravity(Gravity.CENTER);
         footer.setText("-- Footer --");
@@ -165,8 +167,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
     }
 
     private void getHeader(View mHeader) {
-        title_view = (TextView) mHeader.findViewById(R.id.title_view);
-        title_view.setText(mActivity.getString(R.string.app_name));
         loan_viewpage = (ViewPager) mHeader.findViewById(R.id.loan_viewpage);
         final ViewGroup.LayoutParams lp = loan_viewpage.getLayoutParams();
         lp.height = DisplayUtils.dip2px(mActivity, 150);
@@ -305,7 +305,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
                 if (homeProductList.getHomeProductList().size() == 0) {
                     mRecyclerView.showNoMore();
                 } else {
-                    VirtualData = new HomeProduct[homeProductList.getHomeProductList().size() + 1];
+                    VirtualData = new HomeProduct[homeProductList.getHomeProductList().size()];
                     for (int i = 0; homeProductList.getHomeProductList().size() > i; i++) {
                         VirtualData[i] = new HomeProduct(homeProductList.getHomeProductList().get(i).getId(),
                                 homeProductList.getHomeProductList().get(i).getPro_name(),

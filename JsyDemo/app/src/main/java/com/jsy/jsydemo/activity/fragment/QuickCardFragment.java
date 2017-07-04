@@ -96,6 +96,10 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
         getBank();
         mHandler = new Handler();
         mAdapter = new QuickCardAdapter(mActivity);
+
+        TextView title_view = (TextView) findViewById(R.id.title_view);
+        title_view.setText(mActivity.getString(R.string.name_quick_card));
+
         //添加Header
         View mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_quickcardfragment, null);
         mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -161,8 +165,6 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
     }
 
     private void getHeader(View mHeader) {
-        TextView title_view = (TextView) mHeader.findViewById(R.id.title_view);
-        title_view.setText(mActivity.getString(R.string.name_quick_card));
         loan_viewpage = (ViewPager) mHeader.findViewById(R.id.loan_viewpage);
         final ViewGroup.LayoutParams lp = loan_viewpage.getLayoutParams();
         lp.height = DisplayUtils.dip2px(mActivity, 150);
@@ -289,7 +291,7 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
                 if (quickBankList.getQuickBankList().size() == 0) {
                     mRecyclerView.showNoMore();
                 } else {
-                    VirtualData = new QuickBank[quickBankList.getQuickBankList().size() + 1];
+                    VirtualData = new QuickBank[quickBankList.getQuickBankList().size()];
                     for (int i = 0; quickBankList.getQuickBankList().size() > i; i++) {
                         VirtualData[i] = new QuickBank(quickBankList.getQuickBankList().get(i).getId(),
                                 quickBankList.getQuickBankList().get(i).getName(), quickBankList.getQuickBankList().get(i).getDescribe(),
