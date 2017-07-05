@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -76,6 +77,17 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
             case R.id.personal_data_certificates_face_recognition:
                 break;
         }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -155,5 +156,17 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 personal_data_complete9.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

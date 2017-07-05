@@ -74,7 +74,10 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     mCountDownTimerUtils = new CountDownTimerUtils(password_button_code, 60 * 1000, 1000);
                     mCountDownTimerUtils.start();
                     Map<String, Object> map = new HashMap<>();
-                    map.put("mobile", (int) Double.parseDouble(password_phone.getText().toString()));
+                    Long lg = Long.parseLong(password_phone.getText().toString().trim());
+                    map.put("mobile", lg);
+                    map.put("password", "");
+                    map.put("code", 0);
                     OkHttpManager.postAsync(HttpURL.getInstance().REGISTER_CODE, "code", map, this);
                 }
                 break;
@@ -90,15 +93,15 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     ToatUtils.showShort1(this, "您输入的新密码为空");
                 } else if (StringUtil.isNullOrEmpty(password_edittext_pass_confirm.getText().toString())) {
                     ToatUtils.showShort1(this, "您输入的确认密码为空");
-                } else if (!password_edittext_pass.getText().toString().equals(password_edittext_pass_confirm.getText())) {
+                } else if (!password_edittext_pass.getText().toString().trim().equals(password_edittext_pass_confirm.getText().toString().trim())) {
                     ToatUtils.showShort1(this, "您输入的新密码和确认密码不一致");
                     password_edittext_pass.setText("");
                     password_edittext_pass_confirm.setText("");
                 } else {
                     Map<String, Object> map = new HashMap<>();
-                    map.put("mobile", (int) Double.parseDouble(password_phone.getText().toString()));
+                    map.put("mobile", Long.parseLong(password_phone.getText().toString()));
                     map.put("password", password_edittext_pass_confirm.getText());
-                    map.put("code", (int) Double.parseDouble(password_edittext_code.getText().toString()));
+                    map.put("code", Long.parseLong(password_edittext_code.getText().toString()));
                     if (name.equals("1")) {
                         map.put("no", AppUtil.getInstance().getChannel(SetUpPasswordActivity.this, 2));
                         OkHttpManager.postAsync(HttpURL.getInstance().REGISTER, "register", map, this);

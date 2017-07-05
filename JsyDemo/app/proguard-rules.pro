@@ -58,8 +58,16 @@
 -keep class com.google.gson.stream.** { *; }
 
 #友盟
--dontwarn com.umeng.**
-
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+-keep public class com.jsy.jsydemo.R$*{
+public static final int *;
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
 #这个是警告，警告路过
 -dontwarn okio.**
 

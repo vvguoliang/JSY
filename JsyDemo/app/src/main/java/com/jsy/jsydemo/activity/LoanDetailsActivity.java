@@ -11,6 +11,7 @@ import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -119,5 +120,17 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void requestSuccess(String result, String name) throws Exception {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

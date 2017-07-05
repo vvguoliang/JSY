@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -136,6 +137,18 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
             list_cards_record.add(map);
         }
         return list_cards_record;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

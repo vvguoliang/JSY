@@ -15,6 +15,7 @@ import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.TimeUtils;
 import com.jsy.jsydemo.view.PublicDialog;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -231,6 +232,18 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
             list_degree_education.add(map);
         }
         return list_degree_education;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

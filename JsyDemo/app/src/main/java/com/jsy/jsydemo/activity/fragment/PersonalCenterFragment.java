@@ -21,6 +21,7 @@ import com.jsy.jsydemo.base.BaseFragment;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.view.BottomDialog;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by vvguoliang on 2017/6/23.
@@ -144,5 +145,17 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
         if (!mActivity.isFinishing()) {
             sxsDialog.show();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("PersonalCenterFragment"); //统计页面，"MainScreen"为页面名称，可自定义
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("PersonalCenterFragment");
     }
 }

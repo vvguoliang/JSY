@@ -24,6 +24,7 @@ import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.CountDownTimerUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -106,7 +107,7 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                     mCountDownTimerUtils = new CountDownTimerUtils(loan_logo_button_code, 60 * 1000, 1000);
                     mCountDownTimerUtils.start();
                     Map<String, Object> map = new HashMap<>();
-                    map.put("mobile", (int) Double.parseDouble(phone));
+                    map.put("mobile", Long.parseLong(phone));
                     map.put("password", "");
                     map.put("code", 0);
                     OkHttpManager.postAsync(HttpURL.getInstance().CODE, "code", map, this);
@@ -122,8 +123,8 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                     return;
                 }
                 Map<String, Object> map = new HashMap<>();
-                map.put("mobile", (int) Double.parseDouble(phone));
-                if (loan_logo_account_number.getText().toString().equals(LogoActivity.this.getString(logoAccountNumber))) {
+                map.put("mobile", Long.parseLong(phone));
+                if (loan_logo_account_number.getText().toString().equals(LogoActivity.this.getString(logoCodeLogo))) {
                     logintype = 1;
                     if (StringUtil.isNullOrEmpty(loan_logo_edittext_password_code.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入密码");
@@ -138,7 +139,7 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                         ToatUtils.showShort1(this, "请输入验证码");
                         return;
                     }
-                    map.put("code", (int) Double.parseDouble(loan_logo_edittext_code.getText().toString()));
+                    map.put("code", Long.parseLong(loan_logo_edittext_code.getText().toString()));
                     map.put("password", "");
                     map.put("logintype", logintype);
                 }
@@ -251,7 +252,16 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                 break;
             case "logo_code":
                 if (logintype == 1) {
-
+                    RegisterSignCodeModify registerSignCodeModify1 = JsonData.getInstance().getJsonLogoCode(result);
+                    if (registerSignCodeModify1.getStatus() == 0) {
+                        ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());
+                    } else {
+                        if (registerSignCodeModify1.getStatus() == 1 && registerSignCodeModify1.getState().equals("success")) {
+                            ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());
+                        } else {
+                            ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());
+                        }
+                    }
                 } else {
 
                 }
@@ -259,5 +269,17 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                 break;
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

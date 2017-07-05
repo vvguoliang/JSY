@@ -11,6 +11,7 @@ import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.TimeUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -292,5 +293,17 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
             list_enterprise_time.add(map);
         }
         return list_enterprise_time;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

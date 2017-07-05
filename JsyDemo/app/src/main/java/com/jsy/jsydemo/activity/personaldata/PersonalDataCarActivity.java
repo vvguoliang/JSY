@@ -11,6 +11,7 @@ import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.TimeUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -168,6 +169,18 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
             list_car_estate.add(map);
         }
         return list_car_estate;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 

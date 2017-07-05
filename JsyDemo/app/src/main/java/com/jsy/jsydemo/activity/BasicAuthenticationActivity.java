@@ -15,6 +15,7 @@ import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.TimeUtils;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by vvguoliang on 2017/7/4.
@@ -220,4 +221,16 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
             }
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 }

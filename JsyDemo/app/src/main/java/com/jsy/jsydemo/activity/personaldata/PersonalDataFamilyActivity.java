@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -73,5 +74,17 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
     @Override
     protected void initView() {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

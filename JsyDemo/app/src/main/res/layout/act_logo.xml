@@ -128,8 +128,9 @@
                     android:layout_height="wrap_content"
                     android:background="@mipmap/ic_loan_logo_phone_logo"
                     android:hint="@string/name_loan_logo_password"
+                    android:inputType="textPassword"
                     android:paddingLeft="@dimen/common_50dp"
-                    android:textColor="@color/common_light_grey"
+                    android:textColor="@color/common_brown_text"
                     android:textColorHint="@color/common_gray"
                     android:textSize="@dimen/common_14dp" />
 

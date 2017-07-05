@@ -3,6 +3,7 @@ package com.jsy.jsydemo.base;
 import android.app.Application;
 
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by vvguoliang on 2017/6/23.
@@ -19,5 +20,7 @@ public class JSYApplication extends Application {
 
         //初始化链接地址
         HttpURL.getInstance().initUrl(this);
+
+        MobclickAgent.setDebugMode(true);
     }
 }

@@ -31,6 +31,7 @@ import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.MainActivityView;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -310,5 +311,17 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
 //            personal_camera.setImageBitmap(bitmap);
             BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

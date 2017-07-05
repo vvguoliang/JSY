@@ -15,8 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.HomeProductList;
@@ -32,6 +30,7 @@ import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -415,5 +414,17 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
             bannerTask.cancel();
             bannerTask = null;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("LoanFragment"); //统计页面，"MainScreen"为页面名称，可自定义
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("LoanFragment");
     }
 }

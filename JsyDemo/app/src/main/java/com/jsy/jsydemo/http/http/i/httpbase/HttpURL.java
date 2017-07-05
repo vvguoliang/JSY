@@ -71,7 +71,7 @@ public class HttpURL implements Serializable {
 
     public String REGISTER_CODE = HTTP_URL + "&m=register&a=send_code";
 
-    public String REGISTER = HTTP_URL + "&m=register&a=doregiste";
+    public String REGISTER = HTTP_URL + "&m=register&a=doregister";
 
     public String BANNER = HTTP_URL + "&m=banner&a=postList";
 

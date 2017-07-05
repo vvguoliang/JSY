@@ -105,7 +105,19 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!-- 友盟-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="590ac4f507fe650138000091" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="QD0026" />
+        <meta-data
+            android:name="channel"
+            android:value="100000" />
+
     </application>
+    <uses-sdk android:minSdkVersion="8"></uses-sdk>
 
     <uses-permission
         android:name="android.permission.BIND_JOB_SERVICE"
