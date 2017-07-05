@@ -102,7 +102,6 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
      */
     @Override
     public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
-        log("onBindViewHolder()  viewCount : " + mViewCount + " position : " + position);
         if (position == 0) {
             // 最先加载 mStatusView 时不需要绑定数据
             if (mViewCount == 1 || hasHeader) {
@@ -255,7 +254,6 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     public void remove(T object) {
         if (!mData.contains(object)) {
             Toast.makeText(getContext(), "删除失败", Toast.LENGTH_SHORT).show();
-            log("remove()  without the object : " + object.getClass().getName());
             return;
         }
         int dataPosition = mData.indexOf(object);
@@ -298,7 +296,6 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     public void clear() {
         if (mData == null) {
-            log("clear() mData is null");
             return;
         }
         mData.clear();

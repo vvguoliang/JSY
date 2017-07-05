@@ -133,4 +133,23 @@
     <string name="name_loan_details_other">其他认证信息</string>
     <string name="name_loan_details">贷款详情</string>
     <string name="name_loan_details_supplement">补充资料</string>
+    <string name="name_loan_details_basic_txt">该信息将作为您的真实凭证,请确保真实</string>
+    <string name="name_loan_details_basic_my_name">本人姓名</string>
+    <string name="name_loan_details_basic_please_in">请填写姓名</string>
+    <string name="name_loan_details_basic_id">本人身份证号</string>
+    <string name="name_loan_details_basic_number">请输入身份证号码</string>
+    <string name="name_loan_details_basic_application">申请金额</string>
+    <string name="name_loan_details_basic_loan_application">贷款申请期限</string>
+    <string name="name_loan_details_basic_loan_highest">可接受最高月还款额度(元)</string>
+    <string name="name_loan_details_basic_content">请输入内容</string>
+    <string name="name_loan_details_basic_education_level">教育程度</string>
+    <string name="name_loan_details_basic_security">现单位是否缴纳社保</string>
+    <string name="name_loan_details_basic_cat">车辆情况</string>
+    <string name="name_loan_details_basic_typ">职业类型</string>
+    <string name="name_loan_details_basic_income">月工资收入(元)</string>
+    <string name="name_loan_details_basic_agree">我已阅读并同意</string>
+    <string name="name_loan_details_basic_loan">贷款知情书</string>
+    <string name="name_loan_details_basic_life">现单位工作年限</string>
+
+
 </resources>

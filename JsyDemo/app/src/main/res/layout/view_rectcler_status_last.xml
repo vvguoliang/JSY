@@ -6,10 +6,10 @@
     <LinearLayout
         android:id="@+id/load_more_view"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/common_30dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="8dp"
+        android:padding="@dimen/common_8dp"
         android:visibility="gone">
 
         <ProgressBar
@@ -19,19 +19,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/common_16dp"
             android:text="正在加载..."
-            android:textSize="14sp" />
+            android:textSize="@dimen/common_14dp" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/no_more_view"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/common_30dp"
         android:gravity="center"
-        android:text="没有更多了O(∩_∩)O~"
-        android:textSize="14sp"
+        android:text="没有更多了"
+        android:textSize="@dimen/common_14dp"
         android:visibility="gone" />
 
 </FrameLayout>

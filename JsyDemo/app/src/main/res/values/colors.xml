@@ -26,4 +26,8 @@
     <color name="transparent">#00000000</color>
     <color name="common_blue">#007CCB</color>
     <color name="common_blue_details">#176FDB</color>
+    <color name="common_basic_authentication_text">#303030</color>
+    <color name="common_basic_authentication_chocolate">#C06620</color>
+    <color name="common_basic_red">#EA3B53</color>
+    <color name="common_wathet">#B9D0F6</color>
 </resources>

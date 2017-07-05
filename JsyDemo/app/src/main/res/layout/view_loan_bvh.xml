@@ -32,8 +32,10 @@
 
     <com.jsy.jsydemo.view.MyGridView
         android:id="@+id/loan_gridView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/common_10dp"
+        android:layout_marginRight="@dimen/common_10dp"
         android:columnWidth="@dimen/common_50dp"
         android:gravity="center"
         android:horizontalSpacing="@dimen/common_10dp"

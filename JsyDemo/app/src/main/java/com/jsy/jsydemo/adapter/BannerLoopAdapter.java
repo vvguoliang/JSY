@@ -3,6 +3,8 @@ package com.jsy.jsydemo.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,11 @@ import android.view.ViewParent;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanWebViewActivity;
 
@@ -51,7 +58,7 @@ public class BannerLoopAdapter extends PagerAdapter implements View.OnClickListe
         if (position < 0) {
             position = list.size() + position;
         }
-        ImageView view = list.get(position);
+        final ImageView view = list.get(position);
         //如果View已经在之前添加到了一个父组件，则必须先remove，否则会抛出IllegalStateException。
         ViewParent vp = view.getParent();
         if (vp != null) {
@@ -60,11 +67,24 @@ public class BannerLoopAdapter extends PagerAdapter implements View.OnClickListe
         }
         Glide.with(context)
                 .load(mapList.get(position).get("path"))
-                .error(R.mipmap.ic_launcher).into(view);
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                        view.setImageResource(R.mipmap.ic_launcher);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                        return false;
+                    }
+                })
+                .into(view);
         view.setOnClickListener(this);
         container.addView(view);
         return view;
     }
+
 
     @Override
     public int getCount() {

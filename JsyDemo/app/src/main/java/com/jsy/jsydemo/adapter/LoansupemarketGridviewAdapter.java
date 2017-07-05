@@ -2,6 +2,8 @@ package com.jsy.jsydemo.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.ProductSu;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
@@ -62,7 +68,7 @@ public class LoansupemarketGridviewAdapter extends BaseAdapter {
         if (productSuList == null && productSuList.size() <= 0) {
             return null;
         }
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.adapter_loan_supemarket_gridview, null);
             viewHolder = new ViewHolder();
@@ -76,9 +82,18 @@ public class LoansupemarketGridviewAdapter extends BaseAdapter {
         }
         Glide.with(context)
                 .load(HttpURL.getInstance().HTTP_URL_PATH + productSuList.get(position).getImg())
-                .fitCenter()
-                .placeholder(R.mipmap.ic_launcher)
-                .crossFade()
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                        viewHolder.supemarket_image.setImageResource(R.mipmap.ic_launcher);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                        return false;
+                    }
+                })
                 .into(viewHolder.supemarket_image);
         viewHolder.supemarket_text.setText(productSuList.get(position).getPro_name());
         viewHolder.supemarket_text_qinyin.setText(productSuList.get(position).getPro_name());

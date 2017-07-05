@@ -23,7 +23,6 @@ import com.jsy.jsydemo.interfaces.Action;
  */
 public class RefreshRecyclerView extends FrameLayout {
 
-    private final String TAG = "RefreshRecyclerView";
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private RecyclerAdapter mAdapter;
@@ -85,7 +84,6 @@ public class RefreshRecyclerView extends FrameLayout {
     }
 
     public void setLoadMoreAction(final Action action) {
-        Log.d(TAG, "setLoadMoreAction");
         if (mAdapter.isShowNoMore || !loadMoreAble) {
             return;
         }

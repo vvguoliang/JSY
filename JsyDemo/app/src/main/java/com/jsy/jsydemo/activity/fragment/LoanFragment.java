@@ -11,11 +11,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.HomeProductList;
@@ -30,7 +31,6 @@ import com.jsy.jsydemo.interfaces.Action;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.JsonData;
-import com.jsy.jsydemo.view.Base1.Consumption;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
 
 import java.io.IOException;
@@ -52,7 +52,7 @@ import okhttp3.Request;
  */
 @SuppressWarnings({"deprecation", "StatementWithEmptyBody"})
 @SuppressLint({"ValidFragment", "InflateParams"})
-public class LoanFragment extends BaseFragment implements DataCallBack {
+public class LoanFragment extends BaseFragment implements DataCallBack, View.OnClickListener {
 
     private Activity mActivity;
 
@@ -70,7 +70,10 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
     private CardRecordAdapter mAdapter;
 
     private Handler mHandler;
+
     private int page = 1;
+
+    private int getPage = 0;
 
     private LinearLayout loan_frame;
 
@@ -109,16 +112,15 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
         //添加Header
         mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_loan_top, null);
         mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                AppUtil.getInstance().Dispay(mActivity)[1] / 2 + DisplayUtils.dip2px(mActivity, 50)));
+                AppUtil.getInstance().Dispay(mActivity)[1] / 2 + DisplayUtils.dip2px(mActivity, 12)));
         getHeader(mHeader);
         mAdapter.setHeader(mHeader);
         //添加footer
         final TextView footer = new TextView(mActivity);
-        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                DisplayUtils.dip2px(mActivity, 48)));
+        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtils.dip2px(mActivity, 24)));
         footer.setTextSize(16);
         footer.setGravity(Gravity.CENTER);
-        footer.setText("-- Footer --");
+        footer.setText("");
         mAdapter.setFooter(footer);
 
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.loan_recycler_view);
@@ -159,14 +161,21 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
                     mAdapter.addAll(VirtualData);
                     mRecyclerView.dismissSwipeRefresh();
                     mRecyclerView.getRecyclerView().scrollToPosition(0);
-                } else {
-                    getHttp();
                 }
             }
         }, 1500);
     }
 
     private void getHeader(View mHeader) {
+        mHeader.findViewById(R.id.loan_speed_linear).setOnClickListener(this);
+        ImageView loan_speed = (ImageView) mHeader.findViewById(R.id.loan_speed);
+        mHeader.findViewById(R.id.loan_speed1_linear).setOnClickListener(this);
+        ImageView loan_speed1 = (ImageView) mHeader.findViewById(R.id.loan_speed1);
+        mHeader.findViewById(R.id.loan_speed2_linear).setOnClickListener(this);
+        ImageView loan_speed2 = (ImageView) mHeader.findViewById(R.id.loan_speed2);
+
+        mHeader.findViewById(R.id.loan_tab_linear).setOnClickListener(this);
+
         loan_viewpage = (ViewPager) mHeader.findViewById(R.id.loan_viewpage);
         final ViewGroup.LayoutParams lp = loan_viewpage.getLayoutParams();
         lp.height = DisplayUtils.dip2px(mActivity, 150);
@@ -174,6 +183,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
         loan_viewpage.setOnPageChangeListener(new NavigationPageChangeListener());
         loan_frame = (LinearLayout) mHeader.findViewById(R.id.loan_frame);
     }
+
 
     private void getHttp() {
         Map<String, Object> map = new HashMap<>();
@@ -192,9 +202,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
         loan_frame.removeAllViews();
         for (int i = 0; mImageUrl.size() > i; i++) {
             ImageView iv = new ImageView(mActivity);
-
             iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             mBannerImageViews.add(iv);
         }
@@ -334,6 +342,23 @@ public class LoanFragment extends BaseFragment implements DataCallBack {
                         mAdapter.addAll(VirtualData);
                     }
                 }
+                break;
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.loan_speed_linear:
+                break;
+            case R.id.loan_speed1_linear:
+                break;
+            case R.id.loan_speed2_linear:
+                break;
+            case R.id.loan_tab_linear:
+                page++;
+                getHttp();
                 break;
         }
 

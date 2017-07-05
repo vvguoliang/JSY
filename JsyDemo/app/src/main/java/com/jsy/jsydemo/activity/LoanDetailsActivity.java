@@ -8,13 +8,22 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/7/4.
  * 贷款详情
  */
 
-public class LoanDetailsActivity extends BaseActivity implements View.OnClickListener {
+public class LoanDetailsActivity extends BaseActivity implements View.OnClickListener ,DataCallBack{
 
     private EditText loan_details_editText_range;
     private TextView loan_details_textView_rang;
@@ -92,6 +101,23 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initView() {
+
+    }
+
+    private void getHttp() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", "");
+        map.put("id", "");
+        OkHttpManager.postAsync(HttpURL.getInstance().PRODUCT_DETAIL,"product_detail", map, this);
+    }
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
 
     }
 }

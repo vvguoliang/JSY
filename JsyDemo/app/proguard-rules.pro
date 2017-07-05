@@ -1,25 +1,159 @@
-# Add project specific ProGuard rules here.
-# By default, the flags in this file are appended to flags specified
-# in /Users/vvguoliang/Android/sdk/tools/proguard/proguard-android.txt
-# You can edit the include path and order by changing the proguardFiles
-# directive in build.gradle.
+#在运行状态中出现报错现象
+-keepattributes EnclosingMethod
+#极光推送 
+-dontoptimize
+-dontpreverify
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
+
+#注解代码混淆
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
+#指定代码的压缩级别
+-optimizationpasses 5
+
+#是否使用大小写混合
+-dontusemixedcaseclassnames
+
+#不去忽略非公共的库类
+-dontskipnonpubliclibraryclasses
+
+#不优化输入的类文件
+-dontoptimize
+
+#混淆时是否记录日志
+-verbose
+
+#混淆时所采用的算法
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+#微信分享
+-keep class com.tencent.mm.**{*;}
+-keep public class com.tencent.** {*;}
+
+#jni动态库
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+#资源文件
+-keep public class com.sxsfinance.SXS.R$*{
+   public static final int *;
+}
+
+#gson混淆配置
+-keepattributes *Annotation*
+-keep class sun.misc.Unsafe { *; }
+-keep class com.idea.fifaalarmclock.entity.***
+-keep class com.google.gson.stream.** { *; }
+
+#友盟
+-dontwarn com.umeng.**
+
+#这个是警告，警告路过
+-dontwarn okio.**
+
+-keep public abstract interface com.asqw.android.Listener{
+public protected <methods>;
+}
+
+-keep public class com.asqw.android{
+public void Start(java.lang.String);
+}
+
+-keepclasseswithmembernames class * { native <methods>;
+}
+
+-keepclasseswithmembers class * { public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers class * extends android.app.Activity {public void *(android.view.View);
+}
+
+-keepclassmembers enum * {
+public static **[] values();
+public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {
+public static final android.os.Parcelable$Creator *;
+}
+
+-keepclassmembers public class * extends android.view.View {
+   void set*(***);
+   *** get*();
+}
+
+-keep class com.tencent.mm.sdk.** {
+   *;
+}
+
+-keep class com.sxsfinance.SXS.actvity.pay.**{
+	*;
+}
+
+-keepattributes *Annotation*
+#js交互
+-keepattributes *JavascriptInterface*
+
+-keep class com.sxsfinace.httplib.decode.**{
+	*;
+}
+
+-keep class com.sxsfinace.httplib.entity.**{
+	*;
+}
+
+-keep class com.sxsfinace.httplib.entity.base.**{
+	*;
+}
+
+-keep class com.sxsfinace.httplib.entity.bean.**{
+	*;
+}
 #
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+-keep class com.unionpay.mobile.android.**{
+   *;
+}
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.AppGlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
 
-# Add any project specific keep options here:
+# for DexGuard only
+-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+-keepattributes Signature
+-ignorewarnings
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+#Support library
+-dontwarn android.support.design.**
+-keep class android.support.design.** { *; }
+-keep interface android.support.design.** { *; }
+-keep public class android.support.design.R$* { *; }
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+#Support v7
+-dontwarn android.support.v7.**
+-keep class android.support.v7.** { *; }
+-keep interface android.support.v7.** { *; }
+
+#Support v4
+-dontwarn android.support.v4.**
+-keep class android.support.v4.** { *; }
+-keep interface android.support.v4.** { *; }

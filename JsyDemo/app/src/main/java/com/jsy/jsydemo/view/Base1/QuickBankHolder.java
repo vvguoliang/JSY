@@ -2,11 +2,17 @@ package com.jsy.jsydemo.view.Base1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.QuickBank;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanWebViewActivity;
@@ -38,7 +44,18 @@ public class QuickBankHolder extends BaseViewHolder<QuickBank> {
         if (data != null) {
             Glide.with(context)
                     .load(data.getIcon())
-                    .error(R.mipmap.ic_launcher)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                            quick_bank_image.setImageResource(R.mipmap.ic_launcher);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                            return false;
+                        }
+                    })
                     .into(quick_bank_image);
             quick_bank_name.setText(data.getName());
             quick_bank_name_text.setText(data.getDescribe());

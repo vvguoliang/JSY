@@ -20,6 +20,7 @@
         tools:ignore="DisableBaselineAlignment">
 
         <LinearLayout
+            android:id="@+id/loan_speed_linear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -31,6 +32,7 @@
 
             <ImageView
                 android:id="@+id/loan_speed"
+                android:adjustViewBounds="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_loan_sky"
@@ -61,6 +63,7 @@
             android:src="@color/common_light_grey" />
 
         <LinearLayout
+            android:id="@+id/loan_speed1_linear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -102,6 +105,7 @@
             android:src="@color/common_light_grey" />
 
         <LinearLayout
+            android:id="@+id/loan_speed2_linear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -182,13 +186,15 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/loan_tab_linear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/common_10dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="RtlHardcoded">
 
             <com.jsy.jsydemo.control.MyTextView
                 android:id="@+id/Loan_hot"

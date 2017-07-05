@@ -117,9 +117,9 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
         sxsDialog.getWindow().setWindowAnimations(R.style.AnimBottom);
         sxsDialog.setWidthHeight(AppUtil.getInstance().Dispay(mActivity)[0], 0);
         sxsDialog.getWindow().setGravity(Gravity.BOTTOM);
-        Button button1 = (Button) sxsDialog.findViewById(R.id.btn_take_photo);
+        Button button1 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo1);
         button1.setText(btn_take);
-        Button button = (Button) sxsDialog.findViewById(R.id.btn_pick_photo);
+        Button button = (Button) sxsDialog.findViewById(R.id.btn_pick_photo2);
         button.setText(btn_pick);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -75,8 +75,6 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     mCountDownTimerUtils.start();
                     Map<String, Object> map = new HashMap<>();
                     map.put("mobile", (int) Double.parseDouble(password_phone.getText().toString()));
-                    map.put("password", "");
-                    map.put("code", 0);
                     OkHttpManager.postAsync(HttpURL.getInstance().REGISTER_CODE, "code", map, this);
                 }
                 break;

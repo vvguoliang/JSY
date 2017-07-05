@@ -103,16 +103,15 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
         //添加Header
         View mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_quickcardfragment, null);
         mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                AppUtil.getInstance().Dispay(mActivity)[1] / 3 + DisplayUtils.dip2px(mActivity, 48)));
+                AppUtil.getInstance().Dispay(mActivity)[1] / 3 + DisplayUtils.dip2px(mActivity, 6)));
         getHeader(mHeader);
         mAdapter.setHeader(mHeader);
         //添加footer
         final TextView footer = new TextView(mActivity);
-        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                DisplayUtils.dip2px(mActivity, 48)));
+        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtils.dip2px(mActivity, 24)));
         footer.setTextSize(16);
         footer.setGravity(Gravity.CENTER);
-        footer.setText("-- Footer --");
+        footer.setText("");
         mAdapter.setFooter(footer);
 
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.loan_recycler_view);
@@ -129,8 +128,8 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
         mRecyclerView.setLoadMoreAction(new Action() {
             @Override
             public void onAction() {
-                getData(false);
-                page++;
+                mRecyclerView.showNoMore();
+//                getData(false);
             }
         });
 
@@ -153,8 +152,6 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
                     mAdapter.addAll(VirtualData);
                     mRecyclerView.dismissSwipeRefresh();
                     mRecyclerView.getRecyclerView().scrollToPosition(0);
-                } else {
-                    getBank();
                 }
             }
         }, 1500);

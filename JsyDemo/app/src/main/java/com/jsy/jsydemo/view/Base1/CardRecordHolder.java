@@ -3,23 +3,25 @@ package com.jsy.jsydemo.view.Base1;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanWebViewActivity;
 import com.jsy.jsydemo.view.BaseViewHolder;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
 
@@ -47,31 +49,31 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
         if (object != null) {
             Glide.with(context)
                     .load(object.getImg())
-                    .error(R.mipmap.ic_launcher)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                            home_loan_product_image.setImageResource(R.mipmap.ic_launcher);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                            return false;
+                        }
+                    })
                     .into(home_loan_product_image);
             home_loan_product_title.setText(object.getPro_name());
             home_loan_product_quota.setText(object.getPro_describe());
             home_loan_product_interest_rate.setText(parent.getContext().getString(R.string.name_loan_product_interest_rat) + object.getFeilv());
+            SpannableStringBuilder builder = new SpannableStringBuilder(home_loan_product_interest_rate.getText().toString());
+            //ForegroundColorSpan 为文字前景色，BackgroundColorSpan为文字背景色
+            ForegroundColorSpan redSpan = new ForegroundColorSpan(Color.RED);
+            builder.setSpan(redSpan, 3, home_loan_product_interest_rate.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            home_loan_product_interest_rate.setText(builder);
 
 
         }
     }
-
-    RequestListener<String, GlideDrawable> listener = new RequestListener<String, GlideDrawable>() {
-        @Override
-        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-            Log.d("", "onException: " + e.toString() + "  model:" + model + " isFirstResource: " + isFirstResource);
-            home_loan_product_image.setImageResource(R.mipmap.ic_launcher);
-            return false;
-        }
-
-        @Override
-        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache,
-                                       boolean isFirstResource) {
-            Log.e("", "isFromMemoryCache:" + isFromMemoryCache + "  model:" + model + " isFirstResource: " + isFirstResource);
-            return false;
-        }
-    };
 
     @Override
     public void onInitializeView() {

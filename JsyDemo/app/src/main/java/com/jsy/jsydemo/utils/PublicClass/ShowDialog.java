@@ -57,9 +57,9 @@ public class ShowDialog implements Serializable {
         sxsDialog.getWindow().setWindowAnimations(R.style.AnimBottom);
         sxsDialog.setWidthHeight(AppUtil.getInstance().Dispay(context)[0], 0);
         sxsDialog.getWindow().setGravity(Gravity.BOTTOM);
-        Button button1 = (Button) sxsDialog.findViewById(R.id.btn_take_photo);
+        Button button1 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo1);
         button1.setText(btn_take);
-        Button button = (Button) sxsDialog.findViewById(R.id.btn_pick_photo);
+        Button button = (Button) sxsDialog.findViewById(R.id.btn_pick_photo2);
         button.setText(btn_pick);
         switch (species) {
             case 1:
@@ -79,6 +79,101 @@ public class ShowDialog implements Serializable {
                 });
                 break;
         }
+        sxsDialog.setOnClick(R.id.btn_cancel, new View.OnClickListener() {//取消
+            @Override
+            public void onClick(View v) {
+                sxsDialog.dismiss();
+            }
+        });
+        if (!context.isFinishing()) {
+            sxsDialog.show();
+        }
+    }
+
+    // 提示对话框方法
+    public void showDialog(final Activity context, final String name, final String[] strings, final Handler mHandler, final int type) {
+        final BottomDialog sxsDialog = new BottomDialog(context, R.layout.buttom_dialog);
+        sxsDialog.getWindow().setWindowAnimations(R.style.AnimBottom);
+        sxsDialog.setWidthHeight(AppUtil.getInstance().Dispay(context)[0], 0);
+        sxsDialog.getWindow().setGravity(Gravity.BOTTOM);
+        Button button1 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo1);
+        Button button2 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo2);
+        Button button3 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo3);
+        Button button4 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo4);
+        Button button5 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo5);
+        if (!StringUtil.isNullOrEmpty(strings[0])) {
+            button1.setText(strings[0]);
+        }
+        if (!StringUtil.isNullOrEmpty(strings[1])) {
+            button2.setText(strings[1]);
+        }
+        if (!StringUtil.isNullOrEmpty(strings[2])) {
+            button3.setText(strings[2]);
+            button3.setVisibility(View.VISIBLE);
+        }
+        if (!StringUtil.isNullOrEmpty(strings[3])) {
+            button4.setText(strings[3]);
+            button4.setVisibility(View.VISIBLE);
+        }
+        if (!StringUtil.isNullOrEmpty(strings[4])) {
+            button5.setText(strings[4]);
+            button5.setVisibility(View.VISIBLE);
+        }
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.put(context, name, strings[0]);
+                Message message = new Message();
+                message.what = type;
+                message.obj = strings[0];
+                mHandler.dispatchMessage(message);
+                sxsDialog.dismiss();
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {//有
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.put(context, name, strings[1]);
+                Message message = new Message();
+                message.what = type;
+                message.obj = strings[1];
+                mHandler.dispatchMessage(message);
+                sxsDialog.dismiss();
+            }
+        });
+        button3.setOnClickListener(new View.OnClickListener() {//有
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.put(context, name, strings[2]);
+                Message message = new Message();
+                message.what = type;
+                message.obj = strings[2];
+                mHandler.dispatchMessage(message);
+                sxsDialog.dismiss();
+            }
+        });
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.put(context, name, strings[3]);
+                Message message = new Message();
+                message.what = type;
+                message.obj = strings[3];
+                mHandler.dispatchMessage(message);
+                sxsDialog.dismiss();
+            }
+        });
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.put(context, name, strings[4]);
+                Message message = new Message();
+                message.what = type;
+                message.obj = strings[4];
+                mHandler.dispatchMessage(message);
+                sxsDialog.dismiss();
+            }
+        });
         sxsDialog.setOnClick(R.id.btn_cancel, new View.OnClickListener() {//取消
             @Override
             public void onClick(View v) {
