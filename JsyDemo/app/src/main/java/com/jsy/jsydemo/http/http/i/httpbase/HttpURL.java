@@ -81,8 +81,10 @@ public class HttpURL implements Serializable {
 
     public String PRODUCT = HTTP_URL + "&m=product&a=postList";
 
-    public String  PRODUCT_DETAIL= HTTP_URL + "&m=product&a=postDetail";
+    public String PRODUCT_DETAIL = HTTP_URL + "&m=product&a=postDetail";
 
-    public String  PRODUCT_FILTER= HTTP_URL + "&m=product&a=filter";
+    public String PRODUCT_FILTER = HTTP_URL + "&m=product&a=filter";
+
+    public String SESAMECREDIT = HTTP_URL + "&m=alipay&a=signEncrypt";
 
 }

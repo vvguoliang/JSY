@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/common_10dp"
+    android:background="@color/common_light_grey"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/loan_personal_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/common_10dp">
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:layout_weight="1"
+                    android:text="@string/name_loan_other_relatives"
+                    android:textColor="@color/common_loan_personal"
+                    android:textSize="@dimen/common_14dp" />
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:id="@+id/other_relatives_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:layout_marginRight="@dimen/common_10dp"
+                    android:text="a北京车"
+                    android:textColor="@color/common_loan_personal"
+                    android:textSize="@dimen/common_14dp" />
+
+
+                <com.jsy.jsydemo.control.MyButton
+                    android:id="@+id/other_relatives_wathet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_10dp"
+                    android:background="@drawable/bg_fillet_shadow_wathet_selector"
+                    android:padding="@dimen/common_2dp"
+                    android:text="@string/name_loan_other_import"
+                    android:textColor="@color/common_loan_personal_data_other"
+                    android:textSize="@dimen/common_16dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_1dp"
+                android:layout_marginLeft="@dimen/common_20dp"
+                android:layout_marginRight="@dimen/common_20dp"
+                android:background="@color/common_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/common_15dp">
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:text="@string/name_loan_personal_data_id"
+                    android:textColor="@color/common_loan_personal"
+                    android:textSize="@dimen/common_14dp" />
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:id="@+id/other_relatives_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:text="13717578792"
+                    android:textColor="@color/common_loan_personal"
+                    android:textSize="@dimen/common_14dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/other_contacts_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/common_10dp">
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:layout_weight="1"
+                    android:text="@string/name_loan_other_contacts"
+                    android:textColor="@color/common_loan_personal"
+                    android:textSize="@dimen/common_14dp" />
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:id="@+id/other_contacts_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:layout_marginRight="@dimen/common_10dp"
+                    android:text="a北京车"
+                    android:textColor="@color/common_loan_personal"
+                    android:textSize="@dimen/common_14dp" />
+
+
+                <com.jsy.jsydemo.control.MyButton
+                    android:id="@+id/other_contacts_wathet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_10dp"
+                    android:background="@drawable/bg_fillet_shadow_wathet_selector"
+                    android:padding="@dimen/common_3dp"
+                    android:text="@string/name_loan_other_import"
+                    android:textColor="@color/common_loan_personal_data_other"
+                    android:textSize="@dimen/common_16dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_1dp"
+                android:layout_marginLeft="@dimen/common_20dp"
+                android:layout_marginRight="@dimen/common_20dp"
+                android:background="@color/common_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/common_18dp">
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:text="@string/name_loan_personal_data_id"
+                    android:textColor="@color/common_loan_personal"
+                    android:textSize="@dimen/common_14dp" />
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:id="@+id/other_contacts_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:text="13717578792"
+                    android:textColor="@color/common_loan_personal"
+                    android:textSize="@dimen/common_14dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

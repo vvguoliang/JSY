@@ -1,9 +1,13 @@
 package com.jsy.jsydemo.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -14,7 +18,14 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.utils.StringUtil;
 import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by vvguoliang on 2017/7/3.
@@ -69,7 +80,7 @@ public class LoanWebViewActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     private void getSettings() {
         webview.loadUrl(url);
         webview.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //渲染加速器
@@ -100,6 +111,7 @@ public class LoanWebViewActivity extends BaseActivity implements View.OnClickLis
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
+//        webview.addJavascriptInterface(new LoanWebViewActivity.JsOperation(this), "body");
         webview.getSettings().setBlockNetworkImage(false);
     }
 
@@ -112,8 +124,19 @@ public class LoanWebViewActivity extends BaseActivity implements View.OnClickLis
         }
 
         @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+//            if (url.contains("anyAuthorize")) {
+//                webview.setVisibility(View.INVISIBLE);
+//            }
+        }
+
+        @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+//            if (url.contains("anyAuthorize")) {
+//                webview.loadUrl("javascript:window.body.show(document.body.innerHTML)");
+//            } else
             if (view.getTitle().contains("404") || view.getTitle().contains("找不到")) {
                 banner_progressBar.setVisibility(View.GONE);
                 webview.setVisibility(View.GONE);
@@ -123,6 +146,41 @@ public class LoanWebViewActivity extends BaseActivity implements View.OnClickLis
             }
         }
     };
+
+    @SuppressWarnings("MalformedRegex")
+    class JsOperation {
+
+        Activity mActivity;
+
+        public JsOperation(Activity activity) {
+            mActivity = activity;
+        }
+
+        @JavascriptInterface
+        public void show(String value) {
+            if (!StringUtil.isNullOrEmpty(value) && value.contains("{")) {
+                JSONObject object = null;
+                try {
+                    Pattern pattern = Pattern.compile("\\{(.*)\\}");
+                    Matcher matcher = pattern.matcher(value);
+                    String ResponseDates = "";
+                    while (matcher.find()) {
+                        ResponseDates = matcher.group(1);
+                    }
+                    value = "{" + ResponseDates + "}";
+                    object = new JSONObject(value);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent();
+                intent.putExtra("msg", object.optString("msg"));
+                intent.putExtra("data", object.optString("data"));
+                setResult(1000, intent);
+            }
+            finish();
+        }
+    }
 
     private WebChromeClient webChromeClient = new WebChromeClient() {
         @Override

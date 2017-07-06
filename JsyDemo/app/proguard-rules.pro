@@ -68,6 +68,11 @@ public static final int *;
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
+#芝麻信用
+-keep class com.alipayzhima.**{*;}
+-keep class com.android.moblie.zmxy.antgroup.creditsdk.**{*;}
+-keep class com.antgroup.zmxy.mobile.android.container.**{*;}
+-keep class org.json.alipayzhima.**{*;}
 #这个是警告，警告路过
 -dontwarn okio.**
 

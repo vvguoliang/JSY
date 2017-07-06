@@ -157,6 +157,20 @@
     <string name="name_loan_basic_information">基本信息认证</string>
     <string name="name_loan_basic_identity">身份认证</string>
     <string name="name_loan_basic_submit">提交</string>
+    <string name="channel_name">10000</string>
+    <string name="name_other_information_text">恭喜,您已经满足贷款需求.您必须完成补充信息,才能最终放款</string>
+    <string name="name_other_information_personal_mailbox">个人邮箱</string>
+    <string name="name_other_information_mailbox">请填写邮箱</string>
+    <string name="name_other_information_spouse">配偶</string>
+    <string name="name_other_information_live">居住地址</string>
+    <string name="name_other_information_detailed_address">请填写详情地址</string>
+    <string name="name_other_information_mode">居住方式</string>
+    <string name="name_other_information_corporate">公司名称</string>
+    <string name="name_other_information_please_corporate">请输入公司名称</string>
+    <string name="name_other_information_corporate_address">公司地址</string>
+    <string name="name_other_information_corporate_phone">公司电话</string>
+    <string name="name_other_information_please_corporate_phone">请输入公司电话</string>
+    <string name="name_other_information_please_button">完成申请</string>
 
 
 </resources>

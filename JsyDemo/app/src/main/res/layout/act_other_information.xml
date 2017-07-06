@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_light_grey"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/tab_activity_fra"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_48dp" />
+
+
+    <com.jsy.jsydemo.control.MyTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/common_light_grey"
+        android:gravity="center"
+        android:padding="@dimen/common_15dp"
+        android:text="@string/name_other_information_text"
+        android:textColor="@color/common_pink"
+        android:textSize="@dimen/common_10dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/common_30dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/information_mailbox_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/common_5dp">
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:text="@string/name_other_information_personal_mailbox"
+                        android:textColor="@color/common_brown_text"
+                        android:textSize="@dimen/common_14dp" />
+
+                    <com.jsy.jsydemo.control.MyEdittextView
+                        android:id="@+id/information_mailbox_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_marginRight="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center|right"
+                        android:hint="@string/name_other_information_mailbox"
+                        android:lines="1"
+                        android:padding="@dimen/common_10dp"
+                        android:textColor="@color/common_brown_text"
+                        android:textColorHint="@color/common_gray"
+                        android:textSize="@dimen/common_14dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
+                    android:background="@color/common_gray" />
+
+                <LinearLayout
+                    android:id="@+id/information_spouse_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/common_5dp">
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:text="@string/name_other_information_spouse"
+                        android:textColor="@color/common_brown_text"
+                        android:textSize="@dimen/common_14dp" />
+
+                    <com.jsy.jsydemo.control.MyEdittextView
+                        android:id="@+id/information_spouse_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_marginRight="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center|right"
+                        android:hint="@string/name_loan_details_basic_content"
+                        android:lines="1"
+                        android:padding="@dimen/common_10dp"
+                        android:textColor="@color/common_brown_text"
+                        android:textColorHint="@color/common_gray"
+                        android:textSize="@dimen/common_14dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
+                    android:background="@color/common_gray" />
+
+                <LinearLayout
+                    android:id="@+id/information_live_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/common_5dp">
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:text="@string/name_other_information_live"
+                        android:textColor="@color/common_brown_text"
+                        android:textSize="@dimen/common_14dp" />
+
+                    <com.jsy.jsydemo.control.MyEdittextView
+                        android:id="@+id/information_live_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_marginRight="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center|right"
+                        android:hint="@string/name_other_information_detailed_address"
+                        android:lines="1"
+                        android:padding="@dimen/common_10dp"
+                        android:textColor="@color/common_brown_text"
+                        android:textColorHint="@color/common_gray"
+                        android:textSize="@dimen/common_14dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
+                    android:background="@color/common_gray" />
+
+                <LinearLayout
+                    android:id="@+id/information_mode_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/common_5dp">
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:text="@string/name_other_information_mode"
+                        android:textColor="@color/common_brown_text"
+                        android:textSize="@dimen/common_14dp" />
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:id="@+id/information_mode_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/common_5dp"
+                        android:text="@string/name_loan_credit_please_select"
+                        android:textColor="@color/common_loan_personal"
+                        android:textSize="@dimen/common_14dp" />
+
+                    <ImageView
+                        android:layout_width="@dimen/common_20dp"
+                        android:layout_height="@dimen/common_20dp"
+                        android:layout_marginRight="@dimen/common_15dp"
+                        android:paddingLeft="@dimen/common_10dp"
+                        android:src="@drawable/bg_personal_right_selector" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
+                    android:background="@color/common_gray" />
+
+                <LinearLayout
+                    android:id="@+id/information_corporate_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/common_5dp">
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:text="@string/name_other_information_corporate"
+                        android:textColor="@color/common_brown_text"
+                        android:textSize="@dimen/common_14dp" />
+
+                    <com.jsy.jsydemo.control.MyEdittextView
+                        android:id="@+id/information_corporate_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_marginRight="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center|right"
+                        android:hint="@string/name_other_information_please_corporate"
+                        android:lines="1"
+                        android:padding="@dimen/common_10dp"
+                        android:textColor="@color/common_brown_text"
+                        android:textColorHint="@color/common_gray"
+                        android:textSize="@dimen/common_14dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
+                    android:background="@color/common_gray" />
+
+                <LinearLayout
+                    android:id="@+id/information_corporate_address_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/common_5dp">
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:text="@string/name_other_information_corporate_address"
+                        android:textColor="@color/common_brown_text"
+                        android:textSize="@dimen/common_14dp" />
+
+                    <com.jsy.jsydemo.control.MyEdittextView
+                        android:id="@+id/information_corporate_address_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_marginRight="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center|right"
+                        android:hint="@string/name_other_information_detailed_address"
+                        android:lines="1"
+                        android:padding="@dimen/common_10dp"
+                        android:textColor="@color/common_brown_text"
+                        android:textColorHint="@color/common_gray"
+                        android:textSize="@dimen/common_14dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
+                    android:background="@color/common_gray" />
+
+                <LinearLayout
+                    android:id="@+id/information_corporate_phone_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/common_5dp">
+
+                    <com.jsy.jsydemo.control.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:text="@string/name_other_information_corporate_phone"
+                        android:textColor="@color/common_brown_text"
+                        android:textSize="@dimen/common_14dp" />
+
+                    <com.jsy.jsydemo.control.MyEdittextView
+                        android:id="@+id/information_corporate_phone_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_10dp"
+                        android:layout_marginRight="@dimen/common_10dp"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center|right"
+                        android:hint="@string/name_other_information_please_corporate_phone"
+                        android:lines="1"
+                        android:padding="@dimen/common_10dp"
+                        android:textColor="@color/common_brown_text"
+                        android:textColorHint="@color/common_gray"
+                        android:textSize="@dimen/common_14dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
+                    android:background="@color/common_gray" />
+
+                <include
+                    layout="@layout/other"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <com.jsy.jsydemo.control.MyButton
+            android:id="@+id/information_please_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/common_blue"
+            android:padding="@dimen/common_10dp"
+            android:text="@string/name_other_information_please_button"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_14dp"
+
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

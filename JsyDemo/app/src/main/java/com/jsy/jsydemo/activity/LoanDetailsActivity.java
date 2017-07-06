@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +12,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.moblie.zmxy.antgroup.creditsdk.app.CreditApp;
+import com.android.moblie.zmxy.antgroup.creditsdk.app.ICreditListener;
 import com.jsy.jsydemo.EntityClass.LoanDatailsData;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.personaldata.PersonalDataCertificatesActivity;
@@ -26,9 +27,15 @@ import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.Request;
 
@@ -37,7 +44,7 @@ import okhttp3.Request;
  * 贷款详情
  */
 @SuppressLint("SetTextI18n")
-public class LoanDetailsActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
+public class LoanDetailsActivity extends BaseActivity implements View.OnClickListener, DataCallBack, ICreditListener {
 
     private EditText loan_details_editText_range;
     private TextView loan_details_textView_rang;
@@ -86,10 +93,16 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
 
     private Intent intent = null;
 
+    private CreditApp creditApp;
+
+    private String username = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_loandetails);
+        creditApp = CreditApp.getOrCreateInstance(this.getApplicationContext());
+        username = SharedPreferencesUtils.get(this, "username", "").toString();
         id = getIntent().getExtras().getString("id");
         findViewById();
         initView();
@@ -110,15 +123,14 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 startActivity(new Intent(LoanDetailsActivity.this, PersonalDataCertificatesActivity.class));
                 break;
             case R.id.loan_details_other://其他
-
+                startActivity(new Intent(LoanDetailsActivity.this, OtherInformationActivity.class));
                 break;
             case R.id.loan_details_button://补齐
 
                 break;
             case R.id.oan_details_esame_credit://芝麻信用
-
+                getSesameCredit();
                 break;
-
         }
 
     }
@@ -179,10 +191,27 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         OkHttpManager.postAsync(HttpURL.getInstance().PRODUCT_DETAIL, "product_detail", map, this);
     }
 
+    private void getSesameCredit() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("identity_type", "1");
+        JSONObject id = new JSONObject();
+        try {
+            id.put("mobileNo", username);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put("identity_param", id.toString());
+        OkHttpManager.postAsync(HttpURL.getInstance().SESAMECREDIT, "SesameCredit", map, this);
+    }
+
     @Override
     public void requestFailure(Request request, String name, IOException e) {
-        if (name.equals("product_detail")) {
-            Log.e("", "====" + request + "====" + e);
+        switch (name) {
+            case "product_detail":
+                Log.e("", "====" + request + "====" + e);
+                break;
+            case "SesameCredit":
+                break;
         }
 
     }
@@ -190,52 +219,84 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     @SuppressLint("SetTextI18n")
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-        if (name.equals("product_detail")) {
-            loanDatailsData = JsonData.getInstance().getJsonLoanDailsData(result);
-            if (loanDatailsData.getFv_unit().equals("1")) {//天
-                details_repayment_text.setText(this.getString(R.string.name_loan_details_repayment_yue));
-                details_editText_day_text.setText(this.getString(R.string.name_loan_details_month));
-            } else {
-                details_repayment_text.setText(this.getString(R.string.name_loan_details_repayment));
-                details_editText_day_text.setText(this.getString(R.string.name_loan_details_day));
+        switch (name) {
+            case "product_detail":
+                loanDatailsData = JsonData.getInstance().getJsonLoanDailsData(result);
+                if (loanDatailsData.getFv_unit().equals("1")) {//天
+                    details_repayment_text.setText(this.getString(R.string.name_loan_details_repayment_yue));
+                    details_editText_day_text.setText(this.getString(R.string.name_loan_details_month));
+                } else {
+                    details_repayment_text.setText(this.getString(R.string.name_loan_details_repayment));
+                    details_editText_day_text.setText(this.getString(R.string.name_loan_details_day));
 
-            }
-            loan_details_resource_rat.setText(loanDatailsData.getFeilv());
-            loan_details_textView_rang.setText("额度范围" + loanDatailsData.getEdufanwei());
+                }
+                loan_details_resource_rat.setText(loanDatailsData.getFeilv());
+                loan_details_textView_rang.setText("额度范围" + loanDatailsData.getEdufanwei());
 
-            String[] edufan = loanDatailsData.getEdufanwei().split("-");
-            loanMax = Double.parseDouble(edufan[1]);
-            loanMin = Double.parseDouble(edufan[0]);
-            loan_details_editText_range.setText(edufan[1]);
+                String[] edufan = loanDatailsData.getEdufanwei().split("-");
+                loanMax = Double.parseDouble(edufan[1]);
+                loanMin = Double.parseDouble(edufan[0]);
+                loan_details_editText_range.setText(edufan[1]);
 
-            loan_details_textView_day.setText("期限范围" + loanDatailsData.getQixianfanwei());
-            String[] edufan1 = loanDatailsData.getQixianfanwei().split("-");
-            day_monthMax = Double.parseDouble(edufan1[1]);
-            day_monthMin = Double.parseDouble(edufan1[0]);
-            loan_details_editText_day.setText(edufan1[1]);
-            loan_details_loan_time.setText("24小时");
+                loan_details_textView_day.setText("期限范围" + loanDatailsData.getQixianfanwei());
+                String[] edufan1 = loanDatailsData.getQixianfanwei().split("-");
+                day_monthMax = Double.parseDouble(edufan1[1]);
+                day_monthMin = Double.parseDouble(edufan1[0]);
+                loan_details_editText_day.setText(edufan1[1]);
+                loan_details_loan_time.setText("24小时");
 
-            String edufan2 = loanDatailsData.getFeilv().substring(0, loanDatailsData.getFeilv().length() - 1);
-            profit = Double.parseDouble(edufan2);
-            loan_details_repayment.setText(getAlgorithm(loanMax, day_monthMax, profit));
+                String edufan2 = loanDatailsData.getFeilv().substring(0, loanDatailsData.getFeilv().length() - 1);
+                profit = Double.parseDouble(edufan2);
+                loan_details_repayment.setText(getAlgorithm(loanMax, day_monthMax, profit));
 
-            anInt++;
-            if (StringUtil.isNullOrEmpty(loanDatailsData.getUser_auth()) || loanDatailsData.getUser_auth().equals("null")) {
+                anInt++;
+                if (StringUtil.isNullOrEmpty(loanDatailsData.getUser_auth()) || loanDatailsData.getUser_auth().equals("null")) {
+                    loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                    loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                    loan_details_id.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                    loan_details_other.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                    oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                } else {
+
+                }
+                String data_id = loanDatailsData.getData_id();
+                Pattern pattern = Pattern.compile("\\[(.*)\\]");
+                Matcher matcher = pattern.matcher(data_id);
+                String ResponseDates = "";
+                while (matcher.find()) {
+                    ResponseDates = matcher.group(1);
+                }
+                String[] data_ids = ResponseDates.split(",");
+//                for (String data_id1 : data_ids) {
+//                    if (data_id1.contains("1")) {
                 basic_information_linear.setVisibility(View.VISIBLE);
+//                    } else if (data_id1.contains("2")) {
                 phone_operator_linear.setVisibility(View.VISIBLE);
+//                    } else if (data_id1.contains("3")) {
                 esame_credit_linear.setVisibility(View.VISIBLE);
+//                    } else if (data_id1.contains("4")) {
                 etails_id_linear.setVisibility(View.VISIBLE);
+//                    } else if (data_id1.contains("5")) {
                 details_other_linear.setVisibility(View.VISIBLE);
-                loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
-                loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
-                loan_details_id.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
-                loan_details_other.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
-                oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
-            } else {
-
-            }
+//                    }
+//        }
+        break;
+        case "SesameCredit":
+        JSONObject object = new JSONObject(result);
+        JSONObject jsonObject = new JSONObject(object.optString("data"));
+        String params = "";
+        String sign = "";
+        if (jsonObject.has("params")) {
+            params = jsonObject.optString("params");
         }
+        if (jsonObject.has("sign")) {
+            sign = jsonObject.optString("sign");
+        }
+        creditApp.authenticate(this, "1002755", "text", params, sign, null, this);
+        break;
     }
+
+}
 
     private String getAlgorithm(double loan, double day_month, double profit) {
         int run = (int) (loan / day_month + loan * (profit / 1000));
@@ -313,5 +374,33 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             }
         };
         return textWatcher;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e("", "====" + requestCode + "======" + resultCode + "===" + data);
+    }
+
+    @Override
+    public void onComplete(Bundle bundle) {
+        Set<String> keys = bundle.keySet();
+        for (String key : keys) {
+            Log.d("", key + " = " + bundle.getString(key));
+        }
+    }
+
+    @Override
+    public void onError(Bundle bundle) {
+        Set<String> keys = bundle.keySet();
+        for (String key : keys) {
+            Log.d("", key + " = " + bundle.getString(key));
+        }
+
+    }
+
+    @Override
+    public void onCancel() {
+        Log.e("", "");
     }
 }
