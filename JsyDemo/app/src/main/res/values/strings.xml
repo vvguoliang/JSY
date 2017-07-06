@@ -171,6 +171,10 @@
     <string name="name_other_information_corporate_phone">公司电话</string>
     <string name="name_other_information_please_corporate_phone">请输入公司电话</string>
     <string name="name_other_information_please_button">完成申请</string>
+    <string name="name_loan_feedback_path">上传图片</string>
+    <string name="name_loan_feedback_editText">&#160;&#160;&#160;&#160;请详细描述您的问题或者建议,我们将即时跟进解决,(可以添加相关问题的截图)</string>
+    <string name="name_loan_feedback_edit">请填写手机号/邮箱(选项,方便我们联系)</string>
+
 
 
 </resources>

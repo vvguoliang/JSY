@@ -2,6 +2,9 @@ package com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
@@ -14,6 +17,11 @@ import com.umeng.analytics.MobclickAgent;
  */
 
 public class FeedbackActivity extends BaseActivity implements View.OnClickListener {
+
+    private EditText information_corporate_editText;
+    private ImageView feedback_image;
+    private TextView feedback_path;
+    private EditText feedback_path_editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,12 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
             case R.id.title_image:
                 finish();
                 break;
+            case R.id.feedback_path_button:
+                finish();
+                break;
+            case R.id.feedback_image:
+                finish();
+                break;
         }
     }
 
@@ -37,6 +51,13 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.title_image).setOnClickListener(this);
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_feedback));
+
+        information_corporate_editText = (EditText) findViewById(R.id.information_corporate_editText);
+        feedback_image = (ImageView) findViewById(R.id.feedback_image);
+        feedback_path = (TextView) findViewById(R.id.feedback_path);
+        feedback_path_editText = (EditText) findViewById(R.id.feedback_path_editText);
+        findViewById(R.id.feedback_path_button).setOnClickListener(this);
+        feedback_image.setOnClickListener(this);
     }
 
     @Override
