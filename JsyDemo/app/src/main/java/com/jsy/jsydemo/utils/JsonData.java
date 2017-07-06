@@ -4,6 +4,7 @@ import com.jsy.jsydemo.EntityClass.HomeLoanBanner;
 import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.HomeProductList;
+import com.jsy.jsydemo.EntityClass.LoanDatailsData;
 import com.jsy.jsydemo.EntityClass.ProductSu;
 import com.jsy.jsydemo.EntityClass.ProductSuList;
 import com.jsy.jsydemo.EntityClass.QuickBank;
@@ -66,6 +67,9 @@ public class JsonData {
             registerSignCodeModify.setState(jsonObject.optString("state"));
             registerSignCodeModify.setStatus(jsonObject.optInt("status"));
             registerSignCodeModify.setUrl(jsonObject.optString("url"));
+            registerSignCodeModify.setToken(jsonObject.optString("token"));
+            registerSignCodeModify.setUid(jsonObject.optString("uid"));
+            registerSignCodeModify.setUsername(jsonObject.optString("username"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -243,6 +247,43 @@ public class JsonData {
             e.printStackTrace();
         }
         return productSuslist;
+    }
+
+    public LoanDatailsData getJsonLoanDailsData(String data) {
+        LoanDatailsData loanDatailsData = new LoanDatailsData();
+        JSONObject object;
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            loanDatailsData.setApi_type(object.optString("api_type"));
+            loanDatailsData.setCreated_at(object.optString("created_at"));
+            loanDatailsData.setData_id(object.optString("data_id"));
+            loanDatailsData.setEdufanwei(object.optString("edufanwei"));
+            loanDatailsData.setFeilv(object.optString("feilv"));
+            loanDatailsData.setFv_unit(object.optString("fv_unit"));
+            loanDatailsData.setId(object.optString("id"));
+            loanDatailsData.setImg(object.optString("img"));
+            loanDatailsData.setOrder(object.optString("order"));
+            loanDatailsData.setOther_auth(object.optString("other_auth"));
+            loanDatailsData.setOther_id(object.optString("other_id"));
+            loanDatailsData.setPro_describe(object.optString("pro_describe"));
+            loanDatailsData.setPro_hits(object.optString("pro_hits"));
+            loanDatailsData.setPro_link(object.optString("pro_link"));
+            loanDatailsData.setPro_name(object.optString("pro_name"));
+            loanDatailsData.setQixianfanwei(object.optString("qixianfanwei"));
+            loanDatailsData.setQx_unit(object.optString("qx_unit"));
+            loanDatailsData.setStatus(object.optString("status"));
+            loanDatailsData.setTiaojian(object.optString("tiaojian"));
+            loanDatailsData.setType(object.optString("type"));
+            loanDatailsData.setUpdated_at(object.optString("updated_at"));
+            loanDatailsData.setUser_auth(object.optString("user_auth"));
+            loanDatailsData.setZuikuaifangkuan(object.optString("zuikuaifangkuan"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return loanDatailsData;
     }
 
 }

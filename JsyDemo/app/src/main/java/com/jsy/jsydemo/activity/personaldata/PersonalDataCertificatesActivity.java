@@ -45,7 +45,7 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
         title_complete.setOnClickListener(this);
         title_complete.setText(this.getString(R.string.name_loan_personal_data_preservation));
         TextView title_view = (TextView) findViewById(R.id.title_view);
-        title_view.setText(this.getString(R.string.name_loan_personal_data));
+        title_view.setText(this.getString(R.string.name_loan_basic_identity));
 
         face_recognition_correct_text = (TextView) findViewById(R.id.face_recognition_correct_text);
 

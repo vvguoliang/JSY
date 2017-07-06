@@ -18,7 +18,7 @@
             android:layout_marginLeft="@dimen/common_10dp"
             android:padding="@dimen/common_10dp"
             android:src="@mipmap/ic_personal_left"
-            android:visibility="gone" />
+            android:visibility="invisible" />
 
         <com.jsy.jsydemo.control.MyTextView
             android:id="@+id/title_view"
@@ -40,7 +40,7 @@
             android:text="@string/name_loan_personal_data_complete"
             android:textColor="@color/white"
             android:textSize="@dimen/common_14dp"
-            android:visibility="gone" />
+            android:visibility="invisible" />
 
 
     </LinearLayout>

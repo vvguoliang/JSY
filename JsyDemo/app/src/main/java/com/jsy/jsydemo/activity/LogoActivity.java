@@ -22,6 +22,7 @@ import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.CountDownTimerUtils;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
@@ -123,7 +124,7 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                     return;
                 }
                 Map<String, Object> map = new HashMap<>();
-                map.put("mobile", Long.parseLong(phone));
+                map.put("username", Long.parseLong(phone));
                 if (loan_logo_account_number.getText().toString().equals(LogoActivity.this.getString(logoCodeLogo))) {
                     logintype = 1;
                     if (StringUtil.isNullOrEmpty(loan_logo_edittext_password_code.getText().toString())) {
@@ -151,7 +152,7 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                 startActivity(intent);
                 break;
             case R.id.title_image://返回键
-
+                finish();
                 break;
             case R.id.loan_logo_no_password://忘记密码
                 intent = new Intent(LogoActivity.this, SetUpPasswordActivity.class);
@@ -257,7 +258,9 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                         ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());
                     } else {
                         if (registerSignCodeModify1.getStatus() == 1 && registerSignCodeModify1.getState().equals("success")) {
-                            ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());
+                            SharedPreferencesUtils.put(this, "username", registerSignCodeModify1.getUsername());
+                            SharedPreferencesUtils.put(this, "uid", registerSignCodeModify1.getUid());
+                            finish();
                         } else {
                             ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());
                         }

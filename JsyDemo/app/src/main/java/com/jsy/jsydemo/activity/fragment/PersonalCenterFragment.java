@@ -20,6 +20,8 @@ import com.jsy.jsydemo.activity.personaldata.PersonalDataActivity;
 import com.jsy.jsydemo.base.BaseFragment;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.view.BottomDialog;
 import com.umeng.analytics.MobclickAgent;
 
@@ -150,6 +152,11 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
     @Override
     public void onResume() {
         super.onResume();
+        if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
+            personal_logo.setVisibility(View.VISIBLE);
+        } else {
+            personal_logo.setVisibility(View.GONE);
+        }
         MobclickAgent.onPageStart("PersonalCenterFragment"); //统计页面，"MainScreen"为页面名称，可自定义
     }
 

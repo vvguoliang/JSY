@@ -122,13 +122,17 @@
 
     <string name="name_loan_product_interest_rat">日利率</string>
     <string name="name_loan_details_yuan">元</string>
+    <string name="name_loan_details_month">月</string>
+    <string name="name_loan_details_day">天</string>
     <string name="name_loan_details_resources_rat">参考日利率</string>
     <string name="name_loan_details_repayment">每日还款(元)</string>
+    <string name="name_loan_details_repayment_yue">每月还款(元)</string>
     <string name="name_loan_details_loan_time">放款最快时间</string>
     <string name="name_loan_details_borrow_possible">按日计息,随借随还</string>
     <string name="name_loan_details_basic_information">基础信息认证</string>
     <string name="name_loan_details_information">认证材料</string>
     <string name="name_loan_details_phone_operator">手机运营商</string>
+    <string name="name_loan_details_esame_credit">芝麻信用</string>
     <string name="name_loan_details_id">身份证</string>
     <string name="name_loan_details_other">其他认证信息</string>
     <string name="name_loan_details">贷款详情</string>
@@ -150,6 +154,9 @@
     <string name="name_loan_details_basic_agree">我已阅读并同意</string>
     <string name="name_loan_details_basic_loan">贷款知情书</string>
     <string name="name_loan_details_basic_life">现单位工作年限</string>
+    <string name="name_loan_basic_information">基本信息认证</string>
+    <string name="name_loan_basic_identity">身份认证</string>
+    <string name="name_loan_basic_submit">提交</string>
 
 
 </resources>

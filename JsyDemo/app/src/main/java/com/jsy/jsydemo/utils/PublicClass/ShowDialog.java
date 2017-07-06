@@ -16,6 +16,7 @@ import com.jsy.jsydemo.view.BottomDialog;
 import com.jsy.jsydemo.view.PublicDialog;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -101,79 +102,44 @@ public class ShowDialog implements Serializable {
         Button button3 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo3);
         Button button4 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo4);
         Button button5 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo5);
-        if (!StringUtil.isNullOrEmpty(strings[0])) {
-            button1.setText(strings[0]);
-        }
-        if (!StringUtil.isNullOrEmpty(strings[1])) {
-            button2.setText(strings[1]);
-        }
-        if (!StringUtil.isNullOrEmpty(strings[2])) {
-            button3.setText(strings[2]);
-            button3.setVisibility(View.VISIBLE);
-        }
-        if (!StringUtil.isNullOrEmpty(strings[3])) {
-            button4.setText(strings[3]);
-            button4.setVisibility(View.VISIBLE);
-        }
-        if (!StringUtil.isNullOrEmpty(strings[4])) {
-            button5.setText(strings[4]);
-            button5.setVisibility(View.VISIBLE);
-        }
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferencesUtils.put(context, name, strings[0]);
-                Message message = new Message();
-                message.what = type;
-                message.obj = strings[0];
-                mHandler.dispatchMessage(message);
-                sxsDialog.dismiss();
+        Button button6 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo6);
+        Button button7 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo7);
+        Button button8 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo8);
+        Button button9 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo9);
+        Button button10 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo10);
+
+        List<Button> buttonList = new ArrayList<>();
+        buttonList.add(button1);
+        buttonList.add(button2);
+        buttonList.add(button3);
+        buttonList.add(button4);
+        buttonList.add(button5);
+        buttonList.add(button6);
+        buttonList.add(button7);
+        buttonList.add(button8);
+        buttonList.add(button9);
+        buttonList.add(button10);
+
+        for (int i = 0; strings.length > i; i++) {
+            for (int j = 0; buttonList.size() > j; j++) {
+                if (i == j) {
+                    buttonList.get(j).setText(strings[i]);
+                    buttonList.get(j).setVisibility(View.VISIBLE);
+                    final int finalJ = j;
+                    buttonList.get(j).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferencesUtils.put(context, name, strings[finalJ]);
+                            Message message = new Message();
+                            message.what = type;
+                            message.obj = strings[finalJ];
+                            mHandler.dispatchMessage(message);
+                            sxsDialog.dismiss();
+                        }
+                    });
+                }
             }
-        });
-        button2.setOnClickListener(new View.OnClickListener() {//有
-            @Override
-            public void onClick(View v) {
-                SharedPreferencesUtils.put(context, name, strings[1]);
-                Message message = new Message();
-                message.what = type;
-                message.obj = strings[1];
-                mHandler.dispatchMessage(message);
-                sxsDialog.dismiss();
-            }
-        });
-        button3.setOnClickListener(new View.OnClickListener() {//有
-            @Override
-            public void onClick(View v) {
-                SharedPreferencesUtils.put(context, name, strings[2]);
-                Message message = new Message();
-                message.what = type;
-                message.obj = strings[2];
-                mHandler.dispatchMessage(message);
-                sxsDialog.dismiss();
-            }
-        });
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferencesUtils.put(context, name, strings[3]);
-                Message message = new Message();
-                message.what = type;
-                message.obj = strings[3];
-                mHandler.dispatchMessage(message);
-                sxsDialog.dismiss();
-            }
-        });
-        button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferencesUtils.put(context, name, strings[4]);
-                Message message = new Message();
-                message.what = type;
-                message.obj = strings[4];
-                mHandler.dispatchMessage(message);
-                sxsDialog.dismiss();
-            }
-        });
+        }
         sxsDialog.setOnClick(R.id.btn_cancel, new View.OnClickListener() {//取消
             @Override
             public void onClick(View v) {
@@ -184,7 +150,6 @@ public class ShowDialog implements Serializable {
             sxsDialog.show();
         }
     }
-
 
     public void getDialog(Activity mActivity, List<Map<String, Object>> list, String name, final Handler mHandler, final int what) {
         PublicDialog.Builder builder = new PublicDialog.Builder(mActivity);

@@ -98,7 +98,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
                 } else {
-                    String[] strings = new String[]{"无车", "本人名下有车,无贷款","本人名下有车,有按揭贷款","本人名下有车,但已被抵押","其他(请备注)"};
+                    String[] strings = new String[]{"无车", "本人名下有车,无贷款", "本人名下有车,有按揭贷款", "本人名下有车,但已被抵押", "其他(请备注)"};
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(this, "basic_cat", strings, mHandler,
                             3);
@@ -109,7 +109,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
                 } else {
-                    String[] strings = new String[]{"企业主", "个体工商户","上班人群","学生","无固定职业"};
+                    String[] strings = new String[]{"企业主", "个体工商户", "上班人群", "学生", "无固定职业"};
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(this, "basic_typ", strings, mHandler,
                             4);
@@ -120,7 +120,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
                 } else {
-                    String[] strings = new String[]{"0-5个月", "6-12个月","1-3年","3-7年","7年以上"};
+                    String[] strings = new String[]{"0-5个月", "6-12个月", "1-3年", "3-7年", "7年以上"};
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(this, "basic_life", strings, mHandler,
                             5);
@@ -131,6 +131,9 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
             case R.id.loan_basic_button:
                 break;
             case R.id.loan_details_basic_loan_text:
+                break;
+            case R.id.title_complete:
+                finish();
                 break;
         }
 
@@ -143,7 +146,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
         findViewById(R.id.title_complete).setVisibility(View.VISIBLE);
         findViewById(R.id.title_complete).setOnClickListener(this);
         TextView title_view = (TextView) findViewById(R.id.title_view);
-        title_view.setText(this.getString(R.string.name_loan_personal_data_car_production));
+        title_view.setText(this.getString(R.string.name_loan_basic_information));
 
         loan_basic_please_in_text = (TextView) findViewById(R.id.loan_basic_please_in_text);
         loan_basic_number_text = (TextView) findViewById(R.id.loan_basic_number_text);

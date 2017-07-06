@@ -95,6 +95,13 @@
             android:name=".activity.LoanDetailsActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".activity.SpeedLoanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BasicAuthenticationActivity"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"

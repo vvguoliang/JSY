@@ -29,7 +29,8 @@
                 android:background="@mipmap/ic_loan_details_tab"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="@dimen/common_5dp">
+                android:paddingBottom="@dimen/common_10dp"
+                android:paddingTop="@dimen/common_10dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -47,12 +48,13 @@
                             android:id="@+id/loan_details_editText_range"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/common_20dp"
+                            android:layout_marginLeft="@dimen/common_30dp"
                             android:layout_marginRight="@dimen/common_30dp"
                             android:background="@drawable/bg_shape_corner"
+                            android:inputType="phone|number"
                             android:padding="@dimen/common_5dp"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/common_12dp"
+                            android:textSize="@dimen/common_14dp"
                             tools:ignore="RtlHardcoded" />
 
                         <com.jsy.jsydemo.control.MyTextView
@@ -95,18 +97,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/common_30dp"
-                            android:layout_marginRight="@dimen/common_20dp"
+                            android:layout_marginRight="@dimen/common_30dp"
                             android:background="@drawable/bg_shape_corner"
+                            android:inputType="number|phone"
                             android:padding="@dimen/common_5dp"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/common_12dp" />
+                            android:textSize="@dimen/common_14dp" />
 
                         <com.jsy.jsydemo.control.MyTextView
+                            android:id="@+id/details_editText_day_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/common_25dp"
+                            android:layout_marginRight="@dimen/common_35dp"
                             android:text="@string/name_loan_details_yuan"
                             android:textColor="@color/common_brown_text"
                             android:textSize="@dimen/common_14dp"
@@ -180,6 +184,7 @@
                         android:textSize="@dimen/common_18dp" />
 
                     <com.jsy.jsydemo.control.MyTextView
+                        android:id="@+id/details_repayment_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -223,8 +228,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/common_1dp"
-                android:layout_marginTop="@dimen/common_10dp"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/common_15dp"
                 android:background="@color/common_gray" />
 
             <com.jsy.jsydemo.control.MyTextView
@@ -257,20 +262,21 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/common_1dp"
+                android:layout_height="0.5dp"
                 android:background="@color/common_gray" />
 
             <LinearLayout
+                android:id="@+id/basic_information_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="@dimen/common_10dp">
+                android:padding="@dimen/common_8dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:layout_marginLeft="@dimen/common_15dp"
                     android:src="@mipmap/ic_loan_details_basic_information" />
 
 
@@ -295,18 +301,19 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/phone_operator_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_16dp"
+            android:layout_marginTop="@dimen/common_10dp"
             android:background="@color/white"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="@dimen/common_10dp">
+            android:padding="@dimen/common_8dp">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_10dp"
+                android:layout_marginLeft="@dimen/common_15dp"
                 android:src="@mipmap/ic_loan_details_phone_operator" />
 
 
@@ -329,23 +336,59 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/esame_credit_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_10dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_15dp"
+                android:src="@mipmap/ic_loan_details_esame_credit" />
+
+
+            <com.jsy.jsydemo.control.MyTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_10dp"
+                android:layout_weight="1"
+                android:text="@string/name_loan_details_esame_credit"
+                android:textColor="@color/common_brown_text"
+                android:textSize="@dimen/common_14dp" />
+
+            <com.jsy.jsydemo.control.MyButton
+                android:id="@+id/oan_details_esame_credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/common_10dp"
+                android:background="@mipmap/ic_loan_details_authentication" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/etails_id_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_16dp"
+                android:layout_marginTop="@dimen/common_10dp"
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="@dimen/common_10dp">
+                android:padding="@dimen/common_8dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:layout_marginLeft="@dimen/common_15dp"
                     android:src="@mipmap/ic_loan_details_id" />
 
 
@@ -369,21 +412,22 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/common_1dp"
+                android:layout_height="0.5dp"
                 android:background="@color/common_gray" />
 
             <LinearLayout
+                android:id="@+id/details_other_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="@dimen/common_10dp">
+                android:padding="@dimen/common_8dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:layout_marginLeft="@dimen/common_15dp"
                     android:src="@mipmap/ic_loan_details_other"
                     tools:ignore="RtlHardcoded" />
 

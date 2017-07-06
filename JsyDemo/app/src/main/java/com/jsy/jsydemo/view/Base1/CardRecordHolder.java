@@ -20,7 +20,11 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.LoanDetailsActivity;
 import com.jsy.jsydemo.activity.LoanWebViewActivity;
+import com.jsy.jsydemo.activity.LogoActivity;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.view.BaseViewHolder;
 
 public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
@@ -35,6 +39,8 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
     private ViewGroup parent;
 
     private Context context;
+
+    private Intent intent;
 
     public CardRecordHolder(Context context, ViewGroup parent) {
         super(context, parent, R.layout.holder_consume);
@@ -88,9 +94,12 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
     @Override
     public void onItemViewClick(HomeProduct object) {
         super.onItemViewClick(object);
-        //点击事件
-        Intent intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
-        intent.putExtra("url", object.getPro_link());
-        parent.getContext().startActivity(intent);
+        if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(parent.getContext(), "uid", "").toString())) {
+            parent.getContext().startActivity(new Intent(parent.getContext(), LogoActivity.class));
+        } else {
+            intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+            intent.putExtra("id", object.getId());
+            parent.getContext().startActivity(intent);
+        }
     }
 }

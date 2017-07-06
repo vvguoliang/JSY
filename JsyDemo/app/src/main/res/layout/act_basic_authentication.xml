@@ -45,7 +45,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -59,6 +59,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/common_5dp"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -79,7 +80,7 @@
 
                     <View
                         android:layout_width="@dimen/common_2dp"
-                        android:layout_height="@dimen/common_25dp"
+                        android:layout_height="@dimen/common_20dp"
                         android:background="@color/common_wathet" />
 
                     <RelativeLayout
@@ -733,7 +734,7 @@
             android:layout_alignParentBottom="true"
             android:background="@color/common_basic_red"
             android:padding="@dimen/common_10dp"
-            android:text="@string/name_loan_credit_no_taobao"
+            android:text="@string/name_loan_basic_submit"
             android:textColor="@color/white"
             android:textSize="@dimen/common_14dp" />
 
@@ -759,7 +760,7 @@
                 android:layout_marginLeft="@dimen/common_10dp"
                 android:text="@string/name_loan_details_basic_agree"
                 android:textColor="@color/black"
-                android:textSize="@dimen/common_10dp" />
+                android:textSize="@dimen/common_12dp" />
 
             <com.jsy.jsydemo.control.MyTextView
                 android:id="@+id/loan_details_basic_loan_text"
@@ -768,7 +769,7 @@
                 android:layout_marginLeft="@dimen/common_10dp"
                 android:text="@string/name_loan_details_basic_loan"
                 android:textColor="@color/common_blue_details"
-                android:textSize="@dimen/common_10dp" />
+                android:textSize="@dimen/common_12dp" />
 
         </LinearLayout>
 

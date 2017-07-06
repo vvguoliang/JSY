@@ -2,6 +2,7 @@ package com.jsy.jsydemo.activity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -19,6 +20,8 @@ import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.HomeProductList;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.LoanWebViewActivity;
+import com.jsy.jsydemo.activity.SpeedLoanActivity;
 import com.jsy.jsydemo.adapter.BannerLoopAdapter;
 import com.jsy.jsydemo.adapter.CardRecordAdapter;
 import com.jsy.jsydemo.base.BaseFragment;
@@ -92,6 +95,8 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     private HomeProductList homeProductList;
 
     private HomeProduct[] VirtualData;
+
+    private Intent intent = null;
 
     @Override
     protected int getLayout() {
@@ -350,17 +355,20 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loan_speed_linear:
+                mActivity.startActivity(new Intent(mActivity, SpeedLoanActivity.class));
                 break;
             case R.id.loan_speed1_linear:
                 break;
             case R.id.loan_speed2_linear:
+                intent = new Intent(mActivity, LoanWebViewActivity.class);
+                intent.putExtra("url", "http://www.kuaicha.info/mobile/credit/credit.html");
+                mActivity.startActivity(intent);
                 break;
             case R.id.loan_tab_linear:
                 page++;
                 getHttp();
                 break;
         }
-
     }
 
     class NavigationPageChangeListener implements

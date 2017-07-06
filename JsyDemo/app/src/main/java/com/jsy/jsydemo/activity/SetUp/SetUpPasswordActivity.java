@@ -172,9 +172,10 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                 break;
             case "password":
                 Log.e("", "====" + result);
+                finish();
                 break;
             case "register":
-                Log.e("", "====" + result);
+                finish();
                 break;
         }
     }
