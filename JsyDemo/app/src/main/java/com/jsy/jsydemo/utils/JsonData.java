@@ -10,15 +10,17 @@ import com.jsy.jsydemo.EntityClass.ProductSuList;
 import com.jsy.jsydemo.EntityClass.QuickBank;
 import com.jsy.jsydemo.EntityClass.QuickBankList;
 import com.jsy.jsydemo.EntityClass.RegisterSignCodeModify;
+import com.jsy.jsydemo.EntityClass.SpeedLoanData;
+import com.jsy.jsydemo.EntityClass.SpeedLoanDataList;
+import com.jsy.jsydemo.EntityClass.SpeedLoanDetailsListData;
+import com.jsy.jsydemo.EntityClass.SpeedLoanDetailsListDataList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by vvguoliang on 2017/7/1.
@@ -249,6 +251,11 @@ public class JsonData {
         return productSuslist;
     }
 
+    /**
+     * 页面数据
+     * @param data
+     * @return
+     */
     public LoanDatailsData getJsonLoanDailsData(String data) {
         LoanDatailsData loanDatailsData = new LoanDatailsData();
         JSONObject object;
@@ -284,6 +291,84 @@ public class JsonData {
         }
 
         return loanDatailsData;
+    }
+
+    /**
+     * 二级页面详情数据列表
+     * @param data
+     * @return
+     */
+    public SpeedLoanDataList getJsonSpeedLoanData(String data) {
+        SpeedLoanDataList speedLoanDataList = new SpeedLoanDataList();
+        List<SpeedLoanData> loanData = new ArrayList<>();
+        JSONObject object;
+        try {
+            object = new JSONObject(data);
+            JSONArray array = new JSONArray(object.optString("data"));
+            for (int i = 0; array.length() > i; i++) {
+                SpeedLoanData speedLoanData = new SpeedLoanData();
+                JSONObject jsonObject = array.optJSONObject(i);
+                speedLoanData.setDescription(jsonObject.optString("description"));
+                speedLoanData.setIcon(jsonObject.optString("icon"));
+                speedLoanData.setMoney(jsonObject.optString("money"));
+                speedLoanData.setProperty_id(jsonObject.optString("property_id"));
+                speedLoanData.setProperty_name(jsonObject.optString("property_name"));
+                speedLoanData.setProperty_type(jsonObject.optString("property_type"));
+                loanData.add(speedLoanData);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        speedLoanDataList.setLoanDataList(loanData);
+        return speedLoanDataList;
+    }
+
+
+    /**
+     * 三级页面详情数据列表
+     * @param data
+     * @return
+     */
+    public SpeedLoanDetailsListDataList getJsonSpeedLoanDetailsList(String data) {
+        SpeedLoanDetailsListDataList loanDetailsListDataList = new SpeedLoanDetailsListDataList();
+
+        List<SpeedLoanDetailsListData> loanDetailsListData = new ArrayList<>();
+        JSONObject object;
+        try {
+            object = new JSONObject(data);
+            JSONArray array = new JSONArray(object.optString(data));
+            for (int i = 0; array.length() > i; i++) {
+                JSONObject jsonObject = array.optJSONObject(i);
+                SpeedLoanDetailsListData speedLoanDetailsListData = new SpeedLoanDetailsListData();
+                speedLoanDetailsListData.setApi_type(jsonObject.optString("api_type"));
+                speedLoanDetailsListData.setCreated_at(jsonObject.optString("created_at"));
+                speedLoanDetailsListData.setData_id(jsonObject.optString("data_id"));
+                speedLoanDetailsListData.setEdufanwei(jsonObject.optString("edufanwei"));
+                speedLoanDetailsListData.setFeilv(jsonObject.optString("feilv"));
+                speedLoanDetailsListData.setFv_unit(jsonObject.optString("fv_unit"));
+                speedLoanDetailsListData.setId(jsonObject.optString("id"));
+                speedLoanDetailsListData.setImg(jsonObject.optString("img"));
+                speedLoanDetailsListData.setOrder(jsonObject.optString("order"));
+                speedLoanDetailsListData.setOther_id(jsonObject.optString("other_id"));
+                speedLoanDetailsListData.setPro_describe(jsonObject.optString("pro_describe"));
+                speedLoanDetailsListData.setPro_hits(jsonObject.optString("pro_hits"));
+                speedLoanDetailsListData.setPro_link(jsonObject.optString("pro_link"));
+                speedLoanDetailsListData.setPro_name(jsonObject.optString("pro_name"));
+                speedLoanDetailsListData.setQixianfanwei(jsonObject.optString("qixianfanwei"));
+                speedLoanDetailsListData.setQx_unit(jsonObject.optString("qx_unit"));
+                speedLoanDetailsListData.setStatus(jsonObject.optString("status"));
+                speedLoanDetailsListData.setTags(jsonObject.optString("tags"));
+                speedLoanDetailsListData.setTiaojian(jsonObject.optString("tiaojian"));
+                speedLoanDetailsListData.setType(jsonObject.optString("type"));
+                speedLoanDetailsListData.setUpdated_at(jsonObject.optString("updated_at"));
+                speedLoanDetailsListData.setZuikuaifangkuan(jsonObject.optString("zuikuaifangkuan"));
+                loanDetailsListData.add(speedLoanDetailsListData);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        loanDetailsListDataList.setLoanDetailsListData(loanDetailsListData);
+        return loanDetailsListDataList;
     }
 
 }

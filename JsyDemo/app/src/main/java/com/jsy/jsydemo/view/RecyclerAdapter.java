@@ -107,7 +107,9 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
             if (mViewCount == 1 || hasHeader) {
                 return;
             } else {
-                holder.setData(mData.get(0));
+                if (mData != null && mData.size() > 0) {
+                    holder.setData(mData.get(0));
+                }
             }
         } else if (!hasHeader && !hasFooter && position < mData.size()) { //没有Header和Footer
             holder.setData(mData.get(position));

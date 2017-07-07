@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,33 +14,36 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.jsy.jsydemo.EntityClass.QuickBank;
+import com.jsy.jsydemo.EntityClass.SpeedLoanData;
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.webview.LoanWebViewActivity;
+import com.jsy.jsydemo.activity.SpeedLoanDetailsListActivity;
 import com.jsy.jsydemo.view.BaseViewHolder;
 
 /**
- * Created by vvguoliang on 2017/7/3.
- * 快读办卡 类
+ * Created by vvguoliang on 2017/7/7.
+ * <p>
+ * 适配器数据
  */
 
-public class QuickBankHolder extends BaseViewHolder<QuickBank> {
+public class SpeedLoanHolder extends BaseViewHolder<SpeedLoanData> {
 
-    private ImageView quick_bank_image;
+    private ImageView speed_loan_image;
 
-    private TextView quick_bank_name;
+    private TextView speed_loan_text;
 
-    private TextView quick_bank_name_text;
+    private TextView speed_loan_loan_text;
+
+    private TextView speedloan_name;
 
     private Context context;
 
-    public QuickBankHolder(Context context, ViewGroup parent) {
-        super(context, parent, R.layout.holder_quick_bank);
+    public SpeedLoanHolder(Context context, ViewGroup parent) {
+        super(context, parent, R.layout.act_speedloan);
         this.context = context;
     }
 
     @Override
-    public void setData(QuickBank data) {
+    public void setData(SpeedLoanData data) {
         super.setData(data);
         if (data != null) {
             Glide.with(context)
@@ -47,7 +51,7 @@ public class QuickBankHolder extends BaseViewHolder<QuickBank> {
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
-                            quick_bank_image.setImageResource(R.mipmap.ic_launcher);
+                            speed_loan_image.setImageResource(R.mipmap.ic_launcher);
                             return false;
                         }
 
@@ -56,26 +60,30 @@ public class QuickBankHolder extends BaseViewHolder<QuickBank> {
                             return false;
                         }
                     })
-                    .into(quick_bank_image);
-            quick_bank_name.setText(data.getName());
-            quick_bank_name_text.setText(data.getDescribe());
+                    .into(speed_loan_image);
+            speed_loan_text.setText(data.getProperty_name());
+            speed_loan_loan_text.setText(data.getMoney());
+            speedloan_name.setText(data.getDescription());
         }
     }
 
     @Override
     public void onInitializeView() {
         super.onInitializeView();
-        quick_bank_image = findViewById(R.id.quick_bank_image);
-        quick_bank_name = findViewById(R.id.quick_bank_name);
-        quick_bank_name_text = findViewById(R.id.quick_bank_name_text);
+        speed_loan_image = findViewById(R.id.speed_loan_image);
+
+        speed_loan_text = findViewById(R.id.speed_loan_text);
+        speed_loan_loan_text = findViewById(R.id.speed_loan_loan_text);
+        speedloan_name = findViewById(R.id.speedloan_name);
     }
 
     @Override
-    public void onItemViewClick(QuickBank data) {
+    public void onItemViewClick(SpeedLoanData data) {
         super.onItemViewClick(data);
-//点击事件
-        Intent intent = new Intent(context, LoanWebViewActivity.class);
-        intent.putExtra("url", data.getLink());
+        Intent intent = new Intent(context, SpeedLoanDetailsListActivity.class);
+        intent.putExtra("type", Long.parseLong(data.getProperty_type()));
         context.startActivity(intent);
+
     }
 }
+

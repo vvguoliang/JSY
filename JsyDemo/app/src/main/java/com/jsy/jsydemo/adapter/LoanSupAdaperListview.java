@@ -7,19 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jsy.jsydemo.EntityClass.ProductSuList;
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.activity.LoanWebViewActivity;
-import com.jsy.jsydemo.utils.ToatUtils;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.view.MyGridView;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by vvguoliang on 2017/6/26.

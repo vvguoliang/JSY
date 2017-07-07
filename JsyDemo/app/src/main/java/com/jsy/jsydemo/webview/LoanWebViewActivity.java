@@ -1,4 +1,4 @@
-package com.jsy.jsydemo.activity;
+package com.jsy.jsydemo.webview;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

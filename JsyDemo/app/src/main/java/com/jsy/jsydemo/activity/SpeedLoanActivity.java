@@ -11,15 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jsy.jsydemo.EntityClass.SpeedLoanData;
+import com.jsy.jsydemo.EntityClass.SpeedLoanDataList;
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.adapter.CardRecordAdapter;
+import com.jsy.jsydemo.adapter.SpeedLoanAdapter;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.interfaces.Action;
 import com.jsy.jsydemo.utils.DisplayUtils;
+import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
@@ -38,18 +42,22 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
 
     private RefreshRecyclerView mRecyclerView;
 
-    private CardRecordAdapter mAdapter;
+    private SpeedLoanAdapter mAdapter;
 
     private Handler mHandler;
 
     private int page = 1;
 
-    private Intent intent = null;
+    private SpeedLoanData[] speedLoanData;
+
+    private SpeedLoanDataList speedLoanDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fra_loan);
+        findViewById();
+        initView();
     }
 
     @Override
@@ -62,7 +70,16 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void requestSuccess(String result, String name) throws Exception {
         if (name.equals("product_filter")) {
-            Log.e("", "==" + result);
+            speedLoanDataList = JsonData.getInstance().getJsonSpeedLoanData(result);
+            speedLoanData = new SpeedLoanData[speedLoanDataList.getLoanDataList().size()];
+            for (int i = 0; speedLoanDataList.getLoanDataList().size() > i; i++) {
+                speedLoanData[i] = new SpeedLoanData(speedLoanDataList.getLoanDataList().get(i).getProperty_id(),
+                        speedLoanDataList.getLoanDataList().get(i).getProperty_type(),
+                        speedLoanDataList.getLoanDataList().get(i).getProperty_name(),
+                        speedLoanDataList.getLoanDataList().get(i).getMoney(),
+                        HttpURL.getInstance().HTTP_URL_PATH + speedLoanDataList.getLoanDataList().get(i).getIcon(),
+                        speedLoanDataList.getLoanDataList().get(i).getDescription());
+            }
         }
     }
 
@@ -70,11 +87,12 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
     protected void findViewById() {
         getHttp();
         mHandler = new Handler();
-        mAdapter = new CardRecordAdapter(this);
+        mAdapter = new SpeedLoanAdapter(this);
 
         TextView title_view = (TextView) findViewById(R.id.title_view);
-        title_view.setText(this.getString(R.string.app_name));
+        title_view.setText(this.getString(R.string.name_sky_loan));
 
+        mAdapter.removeHeader();
         //添加footer
         final TextView footer = new TextView(this);
         footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtils.dip2px(this, 24)));
@@ -87,6 +105,7 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
         mRecyclerView.setSwipeRefreshColors(0xFF437845, 0xFFE44F98, 0xFF2FAC21);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setBackgroundResource(R.color.common_loan_personal);
         mRecyclerView.setRefreshAction(new Action() {
             @Override
             public void onAction() {
@@ -124,9 +143,12 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
                 if (isRefresh) {
                     page = 1;
                     mAdapter.clear();
-//                    mAdapter.addAll(VirtualData);
+                    mAdapter.addAll(speedLoanData);
                     mRecyclerView.dismissSwipeRefresh();
                     mRecyclerView.getRecyclerView().scrollToPosition(0);
+                } else {
+                    page++;
+                    getHttp();
                 }
             }
         }, 1500);
@@ -136,27 +158,11 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
         Map<String, Object> map = new HashMap<>();
         map.put("page", page);
         map.put("os", "android");
-        OkHttpManager.postAsync(HttpURL.getInstance().PRODUCT_FILTER, "product_filter", map, this);
+        OkHttpManager.postAsync(HttpURL.getInstance().PRODUCTTYPE, "product_filter", map, this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.loan_speed_linear:
-
-                break;
-            case R.id.loan_speed1_linear:
-                break;
-            case R.id.loan_speed2_linear:
-                intent = new Intent(this, LoanWebViewActivity.class);
-                intent.putExtra("url", "http://www.kuaicha.info/mobile/credit/credit.html");
-                startActivity(intent);
-                break;
-            case R.id.loan_tab_linear:
-                page++;
-                getHttp();
-                break;
-        }
 
     }
 

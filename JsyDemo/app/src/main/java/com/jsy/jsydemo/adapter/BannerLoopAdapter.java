@@ -12,13 +12,12 @@ import android.view.ViewParent;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.activity.LoanWebViewActivity;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
 
 import java.util.List;
 import java.util.Map;

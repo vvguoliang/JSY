@@ -20,7 +20,7 @@ import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.HomeProductList;
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.activity.LoanWebViewActivity;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.activity.SpeedLoanActivity;
 import com.jsy.jsydemo.adapter.BannerLoopAdapter;
 import com.jsy.jsydemo.adapter.CardRecordAdapter;

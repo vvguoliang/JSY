@@ -89,7 +89,7 @@
             android:name=".activity.SetUp.SetUpPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.LoanWebViewActivity"
+            android:name=".webview.LoanWebViewActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoanDetailsActivity"
@@ -103,6 +103,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.OtherInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SpeedLoanDetailsListActivity"
             android:screenOrientation="portrait" />
 
         <provider

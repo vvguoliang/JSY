@@ -21,7 +21,6 @@ import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
-import com.jsy.jsydemo.activity.LoanWebViewActivity;
 import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
