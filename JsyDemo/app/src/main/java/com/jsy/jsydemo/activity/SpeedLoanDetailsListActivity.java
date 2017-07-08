@@ -70,7 +70,7 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
         mAdapter = new SpeedLoanDetailsListAdapter(this);
 
         TextView title_view = (TextView) findViewById(R.id.title_view);
-        title_view.setText(this.getString(R.string.app_name));
+        title_view.setText(this.getString(R.string.name_loan_speed_loan_x));
 
         mAdapter.removeHeader();
         //添加footer
@@ -84,7 +84,7 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.loan_recycler_view);
         mRecyclerView.setSwipeRefreshColors(0xFF437845, 0xFFE44F98, 0xFF2FAC21);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setBackgroundResource(R.color.common_loan_personal);
+        mRecyclerView.setBackgroundResource(R.color.common_light_grey);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setRefreshAction(new Action() {
             @Override
@@ -159,7 +159,7 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
                         loanDetailsListData.getLoanDetailsListData().get(i).getPro_describe(),
                         loanDetailsListData.getLoanDetailsListData().get(i).getPro_link(),
                         loanDetailsListData.getLoanDetailsListData().get(i).getPro_hits(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getImg(),
+                        HttpURL.getInstance().HTTP_URL_PATH + loanDetailsListData.getLoanDetailsListData().get(i).getImg(),
                         loanDetailsListData.getLoanDetailsListData().get(i).getOrder(),
                         loanDetailsListData.getLoanDetailsListData().get(i).getEdufanwei(),
                         loanDetailsListData.getLoanDetailsListData().get(i).getFeilv(),

@@ -2,6 +2,8 @@ package com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
@@ -15,10 +17,14 @@ import com.umeng.analytics.MobclickAgent;
 
 public class FriendsActivity extends BaseActivity implements View.OnClickListener {
 
+    private ImageView friends_image;
+    private Button friends_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_friends);
+        findViewById();
     }
 
     @Override
@@ -27,6 +33,10 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
             case R.id.title_image:
                 finish();
                 break;
+            case R.id.friends_button:
+
+                break;
+
         }
 
     }
@@ -38,6 +48,8 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_inviting_friends));
 
+        friends_image = (ImageView) findViewById(R.id.friends_image);
+        findViewById(R.id.friends_button).setOnClickListener(this);
     }
 
     @Override

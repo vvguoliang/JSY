@@ -336,7 +336,7 @@ public class JsonData {
         JSONObject object;
         try {
             object = new JSONObject(data);
-            JSONArray array = new JSONArray(object.optString(data));
+            JSONArray array = new JSONArray(object.optString("data"));
             for (int i = 0; array.length() > i; i++) {
                 JSONObject jsonObject = array.optJSONObject(i);
                 SpeedLoanDetailsListData speedLoanDetailsListData = new SpeedLoanDetailsListData();

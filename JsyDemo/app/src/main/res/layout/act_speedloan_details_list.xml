@@ -59,8 +59,12 @@
             android:textColor="@color/common_basic_red"
             android:textSize="@dimen/common_12dp" />
 
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_8dp"
+        android:background="@color/common_light_grey" />
 
 
 </LinearLayout>

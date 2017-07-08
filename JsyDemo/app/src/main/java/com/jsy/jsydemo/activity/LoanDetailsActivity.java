@@ -267,36 +267,36 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                     ResponseDates = matcher.group(1);
                 }
                 String[] data_ids = ResponseDates.split(",");
-//                for (String data_id1 : data_ids) {
-//                    if (data_id1.contains("1")) {
-                basic_information_linear.setVisibility(View.VISIBLE);
-//                    } else if (data_id1.contains("2")) {
-                phone_operator_linear.setVisibility(View.VISIBLE);
-//                    } else if (data_id1.contains("3")) {
-                esame_credit_linear.setVisibility(View.VISIBLE);
-//                    } else if (data_id1.contains("4")) {
-                etails_id_linear.setVisibility(View.VISIBLE);
-//                    } else if (data_id1.contains("5")) {
-                details_other_linear.setVisibility(View.VISIBLE);
-//                    }
-//        }
-        break;
-        case "SesameCredit":
-        JSONObject object = new JSONObject(result);
-        JSONObject jsonObject = new JSONObject(object.optString("data"));
-        String params = "";
-        String sign = "";
-        if (jsonObject.has("params")) {
-            params = jsonObject.optString("params");
+                for (String data_id1 : data_ids) {
+                    if (data_id1.contains("1")) {
+                        basic_information_linear.setVisibility(View.VISIBLE);
+                    } else if (data_id1.contains("2")) {
+                        phone_operator_linear.setVisibility(View.VISIBLE);
+                    } else if (data_id1.contains("3")) {
+                        esame_credit_linear.setVisibility(View.VISIBLE);
+                    } else if (data_id1.contains("4")) {
+                        etails_id_linear.setVisibility(View.VISIBLE);
+                    } else if (data_id1.contains("5")) {
+                        details_other_linear.setVisibility(View.VISIBLE);
+                    }
+                }
+                break;
+            case "SesameCredit":
+                JSONObject object = new JSONObject(result);
+                JSONObject jsonObject = new JSONObject(object.optString("data"));
+                String params = "";
+                String sign = "";
+                if (jsonObject.has("params")) {
+                    params = jsonObject.optString("params");
+                }
+                if (jsonObject.has("sign")) {
+                    sign = jsonObject.optString("sign");
+                }
+                creditApp.authenticate(this, "1002755", "text", params, sign, null, this);
+                break;
         }
-        if (jsonObject.has("sign")) {
-            sign = jsonObject.optString("sign");
-        }
-        creditApp.authenticate(this, "1002755", "text", params, sign, null, this);
-        break;
-    }
 
-}
+    }
 
     private String getAlgorithm(double loan, double day_month, double profit) {
         int run = (int) (loan / day_month + loan * (profit / 1000));

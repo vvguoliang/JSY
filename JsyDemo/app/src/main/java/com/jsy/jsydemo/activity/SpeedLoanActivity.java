@@ -1,6 +1,5 @@
 package com.jsy.jsydemo.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -23,7 +22,6 @@ import com.jsy.jsydemo.interfaces.Action;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
-import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
@@ -105,7 +103,7 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
         mRecyclerView.setSwipeRefreshColors(0xFF437845, 0xFFE44F98, 0xFF2FAC21);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setBackgroundResource(R.color.common_loan_personal);
+        mRecyclerView.setBackgroundResource(R.color.common_light_grey);
         mRecyclerView.setRefreshAction(new Action() {
             @Override
             public void onAction() {

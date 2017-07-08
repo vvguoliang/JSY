@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
-                        android:text="13717578792"
+                        android:background="@color/white"
                         android:textColor="@color/common_loan_personal"
                         android:textSize="@dimen/common_14dp"
                         tools:ignore="RtlHardcoded" />
@@ -78,14 +78,17 @@
                         android:textSize="@dimen/common_14dp"
                         tools:ignore="RtlHardcoded" />
 
-                    <com.jsy.jsydemo.control.MyTextView
+                    <com.jsy.jsydemo.control.MyEdittextView
                         android:id="@+id/personal_data_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
-                        android:text="13717578792"
+                        android:background="@color/white"
+                        android:hint="@string/name_loan_personal_loan_name"
+                        android:padding="@dimen/common_2dp"
                         android:textColor="@color/common_loan_personal"
+                        android:textColorHint="@color/common_gray"
                         android:textSize="@dimen/common_14dp"
                         tools:ignore="RtlHardcoded" />
 
@@ -111,14 +114,17 @@
                         android:textSize="@dimen/common_14dp"
                         tools:ignore="RtlHardcoded" />
 
-                    <com.jsy.jsydemo.control.MyTextView
+                    <com.jsy.jsydemo.control.MyEdittextView
                         android:id="@+id/personal_data_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
-                        android:text="13717578792"
+                        android:background="@color/white"
+                        android:hint="@string/name_loan_personal_loan_id"
+                        android:padding="@dimen/common_2dp"
                         android:textColor="@color/common_loan_personal"
+                        android:textColorHint="@color/common_gray"
                         android:textSize="@dimen/common_14dp"
                         tools:ignore="RtlHardcoded" />
 
@@ -562,63 +568,63 @@
                 </LinearLayout>
                 <!-- 网购信用 -->
                 <!--<LinearLayout-->
-                    <!--android:id="@+id/personal_data_online_shopping"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="horizontal"-->
-                    <!--android:padding="@dimen/common_10dp">-->
+                <!--android:id="@+id/personal_data_online_shopping"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:padding="@dimen/common_10dp">-->
 
-                    <!--<ImageView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_marginLeft="@dimen/common_10dp"-->
-                        <!--android:src="@mipmap/ic_personal_data_online_shopping" />-->
+                <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginLeft="@dimen/common_10dp"-->
+                <!--android:src="@mipmap/ic_personal_data_online_shopping" />-->
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="@dimen/common_15dp"-->
-                        <!--android:orientation="vertical">-->
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/common_15dp"-->
+                <!--android:orientation="vertical">-->
 
-                        <!--<LinearLayout-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:gravity="center"-->
-                            <!--android:orientation="horizontal"-->
-                            <!--android:padding="@dimen/common_2dp">-->
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:padding="@dimen/common_2dp">-->
 
-                            <!--<com.jsy.jsydemo.control.MyTextView-->
-                                <!--android:layout_width="0dp"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:text="@string/name_loan_personal_data_online_shopping"-->
-                                <!--android:textColor="@color/common_loan_personal"-->
-                                <!--android:textSize="@dimen/common_14dp"-->
-                                <!--tools:ignore="RtlHardcoded" />-->
+                <!--<com.jsy.jsydemo.control.MyTextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="@string/name_loan_personal_data_online_shopping"-->
+                <!--android:textColor="@color/common_loan_personal"-->
+                <!--android:textSize="@dimen/common_14dp"-->
+                <!--tools:ignore="RtlHardcoded" />-->
 
-                            <!--<com.jsy.jsydemo.control.MyTextView-->
-                                <!--android:id="@+id/personal_data_complete7"-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="@string/name_loan_personal_data_no_complete"-->
-                                <!--android:textColor="@color/common_loan_personal"-->
-                                <!--android:textSize="@dimen/common_14dp"-->
-                                <!--tools:ignore="RtlHardcoded" />-->
+                <!--<com.jsy.jsydemo.control.MyTextView-->
+                <!--android:id="@+id/personal_data_complete7"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/name_loan_personal_data_no_complete"-->
+                <!--android:textColor="@color/common_loan_personal"-->
+                <!--android:textSize="@dimen/common_14dp"-->
+                <!--tools:ignore="RtlHardcoded" />-->
 
-                            <!--<ImageView-->
-                                <!--android:layout_width="@dimen/common_20dp"-->
-                                <!--android:layout_height="@dimen/common_20dp"-->
-                                <!--android:paddingLeft="@dimen/common_10dp"-->
-                                <!--android:src="@drawable/bg_personal_right_selector"-->
-                                <!--tools:ignore="RtlHardcoded,RtlSymmetry" />-->
-                        <!--</LinearLayout>-->
+                <!--<ImageView-->
+                <!--android:layout_width="@dimen/common_20dp"-->
+                <!--android:layout_height="@dimen/common_20dp"-->
+                <!--android:paddingLeft="@dimen/common_10dp"-->
+                <!--android:src="@drawable/bg_personal_right_selector"-->
+                <!--tools:ignore="RtlHardcoded,RtlSymmetry" />-->
+                <!--</LinearLayout>-->
 
-                        <!--<View-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="0.5dp"-->
-                            <!--android:background="@color/common_gray" />-->
-                    <!--</LinearLayout>-->
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0.5dp"-->
+                <!--android:background="@color/common_gray" />-->
+                <!--</LinearLayout>-->
 
                 <!--</LinearLayout>-->
 

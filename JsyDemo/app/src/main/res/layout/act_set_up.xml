@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_light_grey"
@@ -16,16 +17,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_10dp"
         android:background="@drawable/bg_fillet_shadow_selector"
-        android:padding="@dimen/common_18dp">
+        android:padding="@dimen/common_10dp">
 
         <com.jsy.jsydemo.control.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/common_10dp"
             android:text="@string/name_loan_set_up_about"
             android:textColor="@color/common_loan_personal"
-            android:textSize="@dimen/common_20dp" />
+            android:textSize="@dimen/common_16dp"
+            tools:ignore="RelativeOverlap" />
 
 
         <ImageView
@@ -44,16 +47,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_10dp"
         android:background="@drawable/bg_fillet_shadow_selector"
-        android:padding="@dimen/common_18dp">
+        android:padding="@dimen/common_10dp">
 
         <com.jsy.jsydemo.control.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/common_10dp"
             android:text="@string/name_loan_set_up_password"
             android:textColor="@color/common_loan_personal"
-            android:textSize="@dimen/common_20dp" />
+            android:textSize="@dimen/common_16dp"
+            tools:ignore="RelativeOverlap" />
 
 
         <ImageView
@@ -72,16 +77,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_10dp"
         android:background="@drawable/bg_fillet_shadow_selector"
-        android:padding="@dimen/common_18dp">
+        android:padding="@dimen/common_10dp">
 
         <com.jsy.jsydemo.control.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/common_10dp"
             android:text="@string/name_loan_set_up_sign_out"
             android:textColor="@color/common_loan_personal"
-            android:textSize="@dimen/common_20dp" />
+            android:textSize="@dimen/common_16dp"
+            tools:ignore="RelativeOverlap" />
 
 
         <ImageView

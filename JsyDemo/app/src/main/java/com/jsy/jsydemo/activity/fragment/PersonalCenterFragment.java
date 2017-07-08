@@ -106,7 +106,11 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 //            case R.id.personal_loan_my_package://我的卡包
 //                break;
             case R.id.personal_logo://登录
-                mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
+                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                } else {
+                    personal_logo.setClickable(false);
+                }
                 break;
             case R.id.personal_camera://照片
                 showDialog(mActivity.getString(R.string.name_loan_personal_camera), mActivity.getString(R.string.name_loan_personal_album));
@@ -127,14 +131,14 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userCenterRealize.getFileByPhotoAlbum(mActivity);//拍照外部调用
+                userCenterRealize.getFileByPhotograph(mActivity);//拍照外部调用
                 sxsDialog.dismiss();
             }
         });
         button.setOnClickListener(new View.OnClickListener() {//有
             @Override
             public void onClick(View v) {
-                userCenterRealize.getFileByPhotograph(mActivity);//相册外部调用
+                userCenterRealize.getFileByPhotoAlbum(mActivity);//相册外部调用
                 sxsDialog.dismiss();
             }
         });
@@ -152,10 +156,14 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
     @Override
     public void onResume() {
         super.onResume();
-        if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
-            personal_logo.setVisibility(View.VISIBLE);
+        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
+            if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "username", "").toString())) {
+                personal_logo.setText(SharedPreferencesUtils.get(mActivity, "username", "").toString());
+            } else {
+                personal_logo.setText(SharedPreferencesUtils.get(mActivity, "uid", "").toString());
+            }
         } else {
-            personal_logo.setVisibility(View.GONE);
+            personal_logo.setText(mActivity.getString(R.string.name_loan_personal_logn));
         }
         MobclickAgent.onPageStart("PersonalCenterFragment"); //统计页面，"MainScreen"为页面名称，可自定义
     }

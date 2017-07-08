@@ -71,7 +71,6 @@ public class SpeedLoanHolder extends BaseViewHolder<SpeedLoanData> {
     public void onInitializeView() {
         super.onInitializeView();
         speed_loan_image = findViewById(R.id.speed_loan_image);
-
         speed_loan_text = findViewById(R.id.speed_loan_text);
         speed_loan_loan_text = findViewById(R.id.speed_loan_loan_text);
         speedloan_name = findViewById(R.id.speedloan_name);
@@ -83,7 +82,6 @@ public class SpeedLoanHolder extends BaseViewHolder<SpeedLoanData> {
         Intent intent = new Intent(context, SpeedLoanDetailsListActivity.class);
         intent.putExtra("type", Long.parseLong(data.getProperty_type()));
         context.startActivity(intent);
-
     }
 }
 

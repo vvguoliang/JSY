@@ -2,12 +2,26 @@ package com.jsy.jsydemo.activity.personaldata;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.StringUtil;
 import com.umeng.analytics.MobclickAgent;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -15,13 +29,13 @@ import com.umeng.analytics.MobclickAgent;
  * 个人资料
  */
 
-public class PersonalDataActivity extends BaseActivity implements View.OnClickListener {
+public class PersonalDataActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private TextView personal_data_phone;//手机号
 
-    private TextView personal_data_name;//姓名
+    private EditText personal_data_name;//姓名
 
-    private TextView personal_data_id;//身份证
+    private EditText personal_data_id;//身份证
 
     private TextView personal_data_complete0, personal_data_complete1, personal_data_complete2, personal_data_complete3,
             personal_data_complete4, personal_data_complete5, personal_data_complete6, //personal_data_complete7,
@@ -33,6 +47,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_personal_data);
+        initView();
         findViewById();
     }
 
@@ -54,9 +69,24 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
 //        findViewById(R.id.personal_data_online_shopping).setOnClickListener(this);
         findViewById(R.id.personal_data_certificates).setOnClickListener(this);
         findViewById(R.id.personal_data_bank_card).setOnClickListener(this);
+
         personal_data_phone = (TextView) findViewById(R.id.personal_data_phone);
-        personal_data_name = (TextView) findViewById(R.id.personal_data_name);
-        personal_data_id = (TextView) findViewById(R.id.personal_data_id);
+        personal_data_name = (EditText) findViewById(R.id.personal_data_name);
+        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
+            personal_data_phone.setText(SharedPreferencesUtils.get(this, "username", "").toString());
+        }
+        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "realname", "").toString())) {
+            personal_data_name.setText(SharedPreferencesUtils.get(this, "realname", "").toString());
+        } else {
+            personal_data_name.setText("");
+        }
+        personal_data_id = (EditText) findViewById(R.id.personal_data_id);
+        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "idcard", "").toString())) {
+            personal_data_id.setText(SharedPreferencesUtils.get(this, "idcard", "").toString());
+        } else {
+            personal_data_id.setText("");
+        }
+
         personal_data_complete0 = (TextView) findViewById(R.id.personal_data_complete0);
         personal_data_complete1 = (TextView) findViewById(R.id.personal_data_complete1);
         personal_data_complete2 = (TextView) findViewById(R.id.personal_data_complete2);
@@ -72,7 +102,14 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initView() {
-
+        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+            OkHttpManager.postAsync(HttpURL.getInstance().USERINFO, "username", map, this);
+        } else {
+            intent = new Intent(this, LogoActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -168,5 +205,25 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+        switch (name) {
+            case "username":
+                Log.e("", "===" + request + "==" + e);
+                break;
+        }
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+        switch (name) {
+            case "username":
+                Log.e("", "====" + result);
+                break;
+        }
+
     }
 }

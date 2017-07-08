@@ -11,4 +11,26 @@
         android:layout_height="@dimen/common_48dp" />
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/friends_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.jsy.jsydemo.control.MyButton
+            android:id="@+id/friends_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/common_30dp"
+            android:background="@mipmap/ic_set_up_confirm_button"
+            android:padding="@dimen/common_10dp"
+            android:text="@string/name_loan_basic_submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_14dp" />
+    </RelativeLayout>
 </LinearLayout>

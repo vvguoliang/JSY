@@ -175,6 +175,18 @@
     <string name="name_loan_feedback_editText">&#160;&#160;&#160;&#160;请详细描述您的问题或者建议,我们将即时跟进解决,(可以添加相关问题的截图)</string>
     <string name="name_loan_feedback_edit">请填写手机号/邮箱(选项,方便我们联系)</string>
     <string name="name_loan_speed_loan">申请贷款</string>
+    <string name="name_loan_speed_loan_x">极速微额贷款</string>
+    <string name="name_loan_personal_loan_name">请输入姓名</string>
+    <string name="name_loan_personal_loan_id">请输入身份证号码</string>
+    <string name="name_loan_help_problem">猜你想问</string>
+    <string name="name_loan_help_application">从申请、审核到最终放款,大约需要一个月时间.</string>
+    <string name="name_loan_help_application_txt">申请一笔贷款需要多少时间?</string>
+    <string name="name_loan_help_application_loan">如何申请贷款?</string>
+    <string name="name_loan_help_application_loan_success">如何提高贷款成功率?</string>
+    <string name="name_loan_help_application_loan_repayment">贷款后如何还款?</string>
+    <string name="name_loan_help_application_loan_order">订单提提交后可以修改吗?怎么取消订单?</string>
+    <string name="name_loan_help_application_loan_fail">为什么审核失败?</string>
+    <string name="name_loan_help_application_loan_text">您可以通过搜索贷款产品,我们建议您先完善个人信息,完善个人信息有利于我们精准推荐贷款产品,您可以按需选择,并根据此贷款产品的需求填完资料并提交申请</string>
 
 
 

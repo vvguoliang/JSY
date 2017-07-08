@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.EntityClass.ProductSuList;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.LoanDetailsActivity;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.view.MyGridView;
 
@@ -51,7 +52,7 @@ public class LoanSupAdaperListview extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.view_loan_bvh, null);
@@ -71,16 +72,26 @@ public class LoanSupAdaperListview extends BaseAdapter {
 //        viewHolder.loan_praise.setTag(R.id.loan_praise, position);
         viewHolder.loan_recommend.setText(productSuList.getProduct().get(position));
         if (position == 0) {
+            viewHolder.loan_gridView.setTag("0");
             viewHolder.loan_gridView.setAdapter(new LoansupemarketGridviewAdapter(context, productSuList.getProductSuList()));
         } else if (position == 1) {
+            viewHolder.loan_gridView.setTag("1");
             viewHolder.loan_gridView.setAdapter(new LoansupemarketGridviewAdapter(context, productSuList.getProductSus()));
         }
+
         viewHolder.loan_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(context, LoanWebViewActivity.class);
-                intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
-                context.startActivity(intent);
+                if ("0".equals(viewHolder.loan_gridView.getTag().toString())) {
+                    Intent intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                    intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
+                    context.startActivity(intent);
+                } else if ("1".equals(viewHolder.loan_gridView.getTag().toString())) {
+                    Intent intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                    intent.putExtra("id", productSuList.getProductSus().get(position).getId());
+                    context.startActivity(intent);
+                }
             }
         });
         return convertView;

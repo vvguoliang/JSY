@@ -2,6 +2,8 @@ package com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
@@ -15,11 +17,32 @@ import com.umeng.analytics.MobclickAgent;
 
 public class HelpCenterActivity extends BaseActivity implements View.OnClickListener {
 
+    private ImageView help_application_image;
+    private LinearLayout help_application_linear;
+    private ImageView help_application_loan_image;
+    private LinearLayout help_application_loan_linear;
+    private ImageView help_application_loan_success_image;
+    private LinearLayout help_application_loan_success_linear;
+    private ImageView help_application_loan_repayment_image;
+    private LinearLayout help_application_loan_repayment_linear;
+    private ImageView help_application_loan_order_image;
+    private LinearLayout help_application_loan_order_linear;
+    private ImageView help_application_loan_fail_image;
+    private LinearLayout help_application_loan_fail_linear;
+
+    private boolean application_image = false;
+    private boolean application_loan_image = false;
+    private boolean application_loan_success_image = false;
+    private boolean application_loan_repayment_image = false;
+    private boolean application_loan_order_image = false;
+    private boolean application_loan_fail_image = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_help_center);
         findViewById();
+        initView();
     }
 
     @Override
@@ -27,6 +50,72 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.title_image:
                 finish();
+                break;
+            case R.id.help_application_image:
+                if (application_image) {
+                    application_image = false;
+                    help_application_image.setImageResource(R.mipmap.ic_loan_help_up);
+                    help_application_linear.setVisibility(View.GONE);
+                } else {
+                    application_image = true;
+                    help_application_image.setImageResource(R.mipmap.ic_loan_help_down);
+                    help_application_linear.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.help_application_loan_image:
+                if (application_loan_image) {
+                    application_loan_image = false;
+                    help_application_loan_image.setImageResource(R.mipmap.ic_loan_help_up);
+                    help_application_loan_linear.setVisibility(View.GONE);
+                } else {
+                    application_loan_image = true;
+                    help_application_loan_image.setImageResource(R.mipmap.ic_loan_help_down);
+                    help_application_loan_linear.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.help_application_loan_success_image:
+                if (application_loan_success_image) {
+                    application_loan_success_image = false;
+                    help_application_loan_success_image.setImageResource(R.mipmap.ic_loan_help_up);
+                    help_application_loan_success_linear.setVisibility(View.GONE);
+                } else {
+                    application_loan_success_image = true;
+                    help_application_loan_success_image.setImageResource(R.mipmap.ic_loan_help_down);
+                    help_application_loan_success_linear.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.help_application_loan_repayment_image:
+                if (application_loan_repayment_image) {
+                    application_loan_repayment_image = false;
+                    help_application_loan_repayment_image.setImageResource(R.mipmap.ic_loan_help_up);
+                    help_application_loan_repayment_linear.setVisibility(View.GONE);
+                } else {
+                    application_loan_repayment_image = true;
+                    help_application_loan_repayment_image.setImageResource(R.mipmap.ic_loan_help_down);
+                    help_application_loan_repayment_linear.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.help_application_loan_order_image:
+                if (application_loan_order_image) {
+                    application_loan_order_image = false;
+                    help_application_loan_order_image.setImageResource(R.mipmap.ic_loan_help_up);
+                    help_application_loan_order_linear.setVisibility(View.GONE);
+                } else {
+                    application_loan_order_image = true;
+                    help_application_loan_order_image.setImageResource(R.mipmap.ic_loan_help_down);
+                    help_application_loan_order_linear.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.help_application_loan_fail_image:
+                if (application_loan_fail_image) {
+                    application_loan_fail_image = false;
+                    help_application_loan_fail_image.setImageResource(R.mipmap.ic_loan_help_up);
+                    help_application_loan_fail_linear.setVisibility(View.GONE);
+                } else {
+                    application_loan_fail_image = true;
+                    help_application_loan_fail_image.setImageResource(R.mipmap.ic_loan_help_down);
+                    help_application_loan_fail_linear.setVisibility(View.VISIBLE);
+                }
                 break;
         }
 
@@ -39,11 +128,44 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_help_center));
 
+        help_application_image = (ImageView) findViewById(R.id.help_application_image);
+        help_application_linear = (LinearLayout) findViewById(R.id.help_application_linear);
+
+        help_application_loan_image = (ImageView) findViewById(R.id.help_application_loan_image);
+        help_application_loan_linear = (LinearLayout) findViewById(R.id.help_application_loan_linear);
+
+        help_application_loan_success_image = (ImageView) findViewById(R.id.help_application_loan_success_image);
+        help_application_loan_success_linear = (LinearLayout) findViewById(R.id.help_application_loan_success_linear);
+
+        help_application_loan_repayment_image = (ImageView) findViewById(R.id.help_application_loan_repayment_image);
+        help_application_loan_repayment_linear = (LinearLayout) findViewById(R.id.help_application_loan_repayment_linear);
+
+        help_application_loan_order_image = (ImageView) findViewById(R.id.help_application_loan_order_image);
+        help_application_loan_order_linear = (LinearLayout) findViewById(R.id.help_application_loan_order_linear);
+
+        help_application_loan_fail_image = (ImageView) findViewById(R.id.help_application_loan_fail_image);
+        help_application_loan_fail_linear = (LinearLayout) findViewById(R.id.help_application_loan_fail_linear);
     }
 
     @Override
     protected void initView() {
+        help_application_image.setOnClickListener(this);
+        help_application_image.setImageResource(R.mipmap.ic_loan_help_up);
 
+        help_application_loan_image.setOnClickListener(this);
+        help_application_loan_image.setImageResource(R.mipmap.ic_loan_help_up);
+
+        help_application_loan_success_image.setOnClickListener(this);
+        help_application_loan_success_image.setImageResource(R.mipmap.ic_loan_help_up);
+
+        help_application_loan_repayment_image.setOnClickListener(this);
+        help_application_loan_repayment_image.setImageResource(R.mipmap.ic_loan_help_up);
+
+        help_application_loan_order_image.setOnClickListener(this);
+        help_application_loan_order_image.setImageResource(R.mipmap.ic_loan_help_up);
+
+        help_application_loan_fail_image.setOnClickListener(this);
+        help_application_loan_fail_image.setImageResource(R.mipmap.ic_loan_help_up);
     }
 
     @Override
