@@ -197,7 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/common_10dp"
                         android:background="@color/common_gray"
-                        android:text="@string/name_loan_help_application"
+                        android:text="@string/name_loan_help_application_loan_success_text"
                         android:textColor="@color/common_brown_text"
                         android:textSize="@dimen/common_14dp" />
                 </LinearLayout>
@@ -248,7 +248,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/common_10dp"
                         android:background="@color/common_gray"
-                        android:text="@string/name_loan_help_application"
+                        android:text="@string/name_loan_help_application_loan_repayment_text"
                         android:textColor="@color/common_brown_text"
                         android:textSize="@dimen/common_14dp" />
                 </LinearLayout>
@@ -299,7 +299,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/common_10dp"
                         android:background="@color/common_gray"
-                        android:text="@string/name_loan_help_application"
+                        android:text="@string/name_loan_help_application_loan_order_text"
                         android:textColor="@color/common_brown_text"
                         android:textSize="@dimen/common_14dp" />
                 </LinearLayout>
@@ -350,7 +350,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/common_10dp"
                         android:background="@color/common_gray"
-                        android:text="@string/name_loan_help_application"
+                        android:text="@string/name_loan_help_application_loan_fail_text"
                         android:textColor="@color/common_brown_text"
                         android:textSize="@dimen/common_14dp" />
                 </LinearLayout>

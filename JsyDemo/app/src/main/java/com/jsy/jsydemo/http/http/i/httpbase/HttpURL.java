@@ -99,4 +99,32 @@ public class HttpURL implements Serializable {
 
     public String PERSONALDATACREDITADD = HTTP_URL + "&m=userdetail&a=credit_add";
 
+    public String COMPANYSTATUSADD = HTTP_URL + "&m=userdetail&a=company_status_add";
+
+    public String COMPANYSTATUSLLIST = HTTP_URL + "&m=userdetail&a=company_status_list";
+
+    public String FAMILYADD = HTTP_URL + "&m=userdetail&a=family_add";
+
+    public String FAMILYLIST = HTTP_URL + "&m=userdetail&a=family_list";
+
+    public String OTHERADD = HTTP_URL + "&m=userdetail&a=other_add";
+
+    public String OTHERLIST = HTTP_URL + "&m=userdetail&a=other_list";
+
+    public String HOUSEADD = HTTP_URL + "&m=userdetail&a=house_add";
+
+    public String HOUSELIST = HTTP_URL + "&m=userdetail&a=house_list";
+
+    public String CARADD = HTTP_URL + "&m=userdetail&a=car_add";
+
+    public String CARLIST = HTTP_URL + "&m=userdetail&a=car_list";
+
+    public String PARPERSADD = HTTP_URL + "&m=userdetail&a=parpers_add";
+
+    public String PARPERSLIST = HTTP_URL + "&m=userdetail&a=parpers_list";
+
+    public String STATUS = HTTP_URL + "&&m=userinfo&a=status";
+
+
+
 }

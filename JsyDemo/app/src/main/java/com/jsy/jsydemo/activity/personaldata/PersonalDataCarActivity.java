@@ -9,14 +9,22 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
 import com.umeng.analytics.MobclickAgent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -24,7 +32,7 @@ import java.util.Map;
  * 车产
  */
 
-public class PersonalDataCarActivity extends BaseActivity implements View.OnClickListener {
+public class PersonalDataCarActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private TextView car_estate;
     private TextView car_new_car;
@@ -67,7 +75,7 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                 } else {
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(this, "car_mortgage", this.getString(R.string.name_loan_wu),
-                            this.getString(R.string.name_loan_you), 1);
+                            this.getString(R.string.name_loan_you), mHandler,1002);
                 }
                 break;
             case R.id.car_no_mortgage:
@@ -76,14 +84,14 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                 } else {
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(this, "car_no_mortgage", this.getString(R.string.name_loan_wu),
-                            this.getString(R.string.name_loan_you), 1);
+                            this.getString(R.string.name_loan_you), mHandler,1003);
                 }
                 break;
             case R.id.title_image:
                 finish();
                 break;
             case R.id.title_complete:
-                finish();
+                getHttpCredit();
                 break;
         }
 
@@ -105,6 +113,7 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
         car_mortgage = (TextView) findViewById(R.id.car_mortgage);
         car_no_mortgage = (TextView) findViewById(R.id.car_no_mortgage);
 
+        getHttp();
         car_estate.setOnClickListener(this);
         car_new_car.setOnClickListener(this);
         car_life.setOnClickListener(this);
@@ -118,6 +127,22 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
 
     }
 
+    private void getHttp() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        OkHttpManager.postAsync(HttpURL.getInstance().CARLIST, "car_list", map, this);
+    }
+
+    private void getHttpCredit() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        map.put("car", car_life.getText().toString());
+        map.put("car_price", car_new_car.getText().toString());
+        map.put("use_time", car_estate.getText().toString());
+        map.put("installment", car_mortgage.getText().toString());
+        map.put("mortgage", car_no_mortgage.getText().toString());
+        OkHttpManager.postAsync(HttpURL.getInstance().CARADD, "car_add", map, this);
+    }
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -133,7 +158,10 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                     car_estate.setText(msg.obj.toString());
                     break;
                 case 1002:
-//                    personal_credit_degree_education.setText(msg.obj.toString());
+                    car_mortgage.setText(msg.obj.toString());
+                    break;
+                case 1003:
+                    car_no_mortgage.setText(msg.obj.toString());
                     break;
             }
         }
@@ -184,4 +212,32 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
     }
 
 
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+        switch (name) {
+            case "car_add":
+                break;
+            case "car_list":
+                break;
+        }
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+        switch (name) {
+            case "car_add":
+                finish();
+                break;
+            case "car_list":
+                List<Map<String ,String>> maps = JsonData.getInstance().getJsonPersonalDataCar(result);
+                car_life.setText(maps.get(0).get("car"));
+                car_new_car.setText(maps.get(0).get("car_price"));
+                car_estate.setText(maps.get(0).get("use_time"));
+                car_mortgage.setText(maps.get(0).get("installment"));
+                car_no_mortgage.setText(maps.get(0).get("mortgage"));
+                break;
+        }
+
+    }
 }

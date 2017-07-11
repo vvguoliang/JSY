@@ -53,7 +53,8 @@ public class ShowDialog implements Serializable {
     }
 
     // 提示对话框方法
-    public void showDialog(final Activity context, final String name, String btn_take, String btn_pick, int species) {
+    public void showDialog(final Activity context, final String name, final String btn_take, final String btn_pick,
+                           final Handler mHanler, final int species) {
         final BottomDialog sxsDialog = new BottomDialog(context, R.layout.buttom_dialog);
         sxsDialog.getWindow().setWindowAnimations(R.style.AnimBottom);
         sxsDialog.setWidthHeight(AppUtil.getInstance().Dispay(context)[0], 0);
@@ -62,24 +63,28 @@ public class ShowDialog implements Serializable {
         button1.setText(btn_take);
         Button button = (Button) sxsDialog.findViewById(R.id.btn_pick_photo2);
         button.setText(btn_pick);
-        switch (species) {
-            case 1:
-                button1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        SharedPreferencesUtils.put(context, name, "1");
-                        sxsDialog.dismiss();
-                    }
-                });
-                button.setOnClickListener(new View.OnClickListener() {//有
-                    @Override
-                    public void onClick(View v) {
-                        SharedPreferencesUtils.put(context, name, "2");
-                        sxsDialog.dismiss();
-                    }
-                });
-                break;
-        }
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.put(context, name, btn_take);
+                Message message = new Message();
+                message.what = species;
+                message.obj = btn_take;
+                mHanler.dispatchMessage(message);
+                sxsDialog.dismiss();
+            }
+        });
+        button.setOnClickListener(new View.OnClickListener() {//有
+            @Override
+            public void onClick(View v) {
+                SharedPreferencesUtils.put(context, name, btn_pick);
+                Message message = new Message();
+                message.what = species;
+                message.obj = btn_pick;
+                mHanler.dispatchMessage(message);
+                sxsDialog.dismiss();
+            }
+        });
         sxsDialog.setOnClick(R.id.btn_cancel, new View.OnClickListener() {//取消
             @Override
             public void onClick(View v) {

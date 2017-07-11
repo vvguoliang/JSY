@@ -12,6 +12,7 @@ import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
@@ -134,7 +135,7 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
                 finish();
                 break;
             case R.id.title_complete:
-                finish();
+                getHttpCredit();
                 break;
         }
 
@@ -151,6 +152,8 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
         personal_enterprise_life = (TextView) findViewById(R.id.personal_enterprise_life);
         personal_enterprise_private_water = (TextView) findViewById(R.id.personal_enterprise_private_water);
         personal_enterprise_public_water = (TextView) findViewById(R.id.personal_enterprise_public_water);
+
+        getHttp();
 
         personal_enterprise_identity.setOnClickListener(this);
         personal_enterprise_shares.setOnClickListener(this);
@@ -180,20 +183,22 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
     private void getHttp() {
         Map<String, Object> map = new HashMap<>();
         map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        OkHttpManager.postAsync(HttpURL.getInstance().PERSONALDATACREDIT, "user_enterprise", map, this);
+        OkHttpManager.postAsync(HttpURL.getInstance().COMPANYSTATUSLLIST, "company_status_list", map, this);
     }
 
     private void getHttpCredit() {
         Map<String, Object> map = new HashMap<>();
         map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        map.put("edu", "");
-        map.put("creditcard", "");
-        map.put("credit_record", "");
-        map.put("liabilities_status", "");
-        map.put("loan_record", "");
-        map.put("taobao_id", "");
-        map.put("loan_use", "");
-        OkHttpManager.postAsync(HttpURL.getInstance().PERSONALDATACREDITADD, "user_enterprise_add", map, this);
+        map.put("company_identity", personal_enterprise_identity.getText().toString());
+        map.put("company_share", personal_enterprise_shares.getText().toString());
+        map.put("address", personal_enterprise_location.getText().toString());
+        map.put("type", personal_enterprise_type.getText().toString());
+        map.put("industry", personal_enterprise_industry.getText().toString());
+        map.put("charter_date", personal_enterprise_time.getText().toString());
+        map.put("operation_year", personal_enterprise_life.getText().toString());
+        map.put("private", personal_enterprise_private_water.getText().toString());
+        map.put("public", personal_enterprise_public_water.getText().toString());
+        OkHttpManager.postAsync(HttpURL.getInstance().COMPANYSTATUSADD, "company_status_add", map, this);
     }
 
     @SuppressLint("HandlerLeak")
@@ -336,9 +341,9 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
     @Override
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
-            case "user_enterprise":
+            case "company_status_list":
                 break;
-            case "user_enterprise_add":
+            case "company_status_add":
                 break;
         }
 
@@ -347,9 +352,20 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
     @Override
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
-            case "user_enterprise":
+            case "company_status_list":
+                List<Map<String, String>> maps = JsonData.getInstance().getJsonPersonalDataenterprise(result);
+                personal_enterprise_identity.setText(maps.get(0).get("company_identity"));
+                personal_enterprise_shares.setText(maps.get(0).get("company_share"));
+                personal_enterprise_location.setText(maps.get(0).get("address"));
+                personal_enterprise_type.setText(maps.get(0).get("type"));
+                personal_enterprise_industry.setText(maps.get(0).get("industry"));
+                personal_enterprise_time.setText(maps.get(0).get("charter_date"));
+                personal_enterprise_life.setText(maps.get(0).get("operation_year"));
+                personal_enterprise_private_water.setText(maps.get(0).get("private"));
+                personal_enterprise_public_water.setText(maps.get(0).get("public"));
                 break;
-            case "user_enterprise_add":
+            case "company_status_add":
+                finish();
                 break;
         }
     }

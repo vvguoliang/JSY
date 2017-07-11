@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.Share.ShareWxapTencent;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.umeng.analytics.MobclickAgent;
 
@@ -19,6 +20,17 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
 
     private ImageView friends_image;
     private Button friends_button;
+    private ShareWxapTencent shareWxapTencent;
+
+    private String mQqTitle = "[沙小僧理财]送你600元启动资金,跟小沙一起取金吧!";
+
+    private String mQqSummary = "预期15%年化收益，会理财更赚钱！沙小僧，靠谱儿！";
+
+    private String mWxwebtitle = "【沙小僧理财】送你600元启动资金,跟小沙一起取金吧!";
+
+    private String mWxwebdescription = "我在沙小僧理财，安全可靠福利又多，新手注册即送600元，最高15%年化收益，快来一起赚~";
+
+    private String url = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +46,7 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.friends_button:
-
+                shareWxapTencent = new ShareWxapTencent(this,url,mQqTitle,mQqSummary,mWxwebtitle,mWxwebdescription);
                 break;
 
         }

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 /**
  * Created by vvguoliang on 2017/2/13.
+ * 邀请好友
  */
 
 public class ShareWxapTencent implements View.OnClickListener {
@@ -78,7 +79,7 @@ public class ShareWxapTencent implements View.OnClickListener {
 
     private BottomDialog mSXSDialog;
 
-//    private int sxs_icon = R.drawable.sxs_icon_share;
+    private int sxs_icon = R.mipmap.ic_launcher;
 
     private Bitmap thumb = null;
 
@@ -88,8 +89,8 @@ public class ShareWxapTencent implements View.OnClickListener {
 
         mTencent = Tencent.createInstance("1106281166", mActivity);
         StatConfig.setAppKey(mActivity, "Ghf9Q7U7IuQbOWDm");
-//        thumb = BitmapFactory.decodeResource(mActivity.getResources(), sxs_icon);
-//        BitmapUtils.saveBitmap(thumb);
+        thumb = BitmapFactory.decodeResource(mActivity.getResources(), sxs_icon);
+        BitmapUtils.saveBitmap(thumb);
 
         if (url == null || url.equals("")) {
             ToatUtils.showShort1(mActivity, "操作失败，请重试");

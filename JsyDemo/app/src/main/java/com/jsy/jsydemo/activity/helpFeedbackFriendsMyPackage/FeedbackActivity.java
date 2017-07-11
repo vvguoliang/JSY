@@ -54,6 +54,8 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
 
     private int num = 270;
 
+    private Bitmap bitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +108,9 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
         map.put("problem", information_corporate_editText.getText().toString());
+        if(!StringUtil.isNullOrEmpty(bitmap.toString())){
+            map.put("photo", bitmap);
+        }
         if (StringUtil.isMobileNO(feedback_path_editText.getText().toString())) {
             map.put("mobile", feedback_path_editText.getText().toString());
         } else {
@@ -237,6 +242,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
             Log.d("剪裁得到图片", AppUtil.getInstance().mOutFile.toString());
             Bitmap bitmap = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
             feedback_image.setImageBitmap(bitmap);
+            this.bitmap = bitmap;
             feedback_path.setVisibility(View.GONE);
             BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
         }

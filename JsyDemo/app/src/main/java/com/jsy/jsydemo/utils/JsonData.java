@@ -20,7 +20,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by vvguoliang on 2017/7/1.
@@ -253,6 +255,7 @@ public class JsonData {
 
     /**
      * 页面数据
+     *
      * @param data
      * @return
      */
@@ -295,6 +298,7 @@ public class JsonData {
 
     /**
      * 二级页面详情数据列表
+     *
      * @param data
      * @return
      */
@@ -326,6 +330,7 @@ public class JsonData {
 
     /**
      * 三级页面详情数据列表
+     *
      * @param data
      * @return
      */
@@ -369,6 +374,172 @@ public class JsonData {
         }
         loanDetailsListDataList.setLoanDetailsListData(loanDetailsListData);
         return loanDetailsListDataList;
+    }
+
+
+    public List<Map<String, String>> getJsonPersonalDataCredit(String data) {
+        List<Map<String, String>> list = new ArrayList<>();
+        JSONObject object;
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            JSONArray array = new JSONArray(object.optString("data"));
+            for (int i = 0; array.length() > i; i++) {
+                JSONObject jsonObject = array.optJSONObject(i);
+                Map<String, String> map = new HashMap<>();
+                map.put("id", jsonObject.optString("id"));
+                map.put("uid", jsonObject.optString("uid"));
+                map.put("edu", jsonObject.optString("edu"));
+                map.put("creditcard", jsonObject.optString("creditcard"));
+                map.put("credit_record", jsonObject.optString("credit_record"));
+                map.put("liabilities_status", jsonObject.optString("liabilities_status"));
+                map.put("taobao_id", jsonObject.optString("taobao_id"));
+                map.put("loan_use", jsonObject.optString("loan_use"));
+                map.put("created_at", jsonObject.optString("created_at"));
+                map.put("updated_at", jsonObject.optString("updated_at"));
+                list.add(map);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Map<String, String>> getJsonPersonalDataenterprise(String data) {
+        List<Map<String, String>> list = new ArrayList<>();
+        JSONObject object;
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            JSONArray array = new JSONArray(object.optString("data"));
+            for (int i = 0; array.length() > i; i++) {
+                JSONObject jsonObject = array.optJSONObject(i);
+                Map<String, String> map = new HashMap<>();
+                map.put("id", jsonObject.optString("id"));
+                map.put("uid", jsonObject.optString("uid"));
+                map.put("company_identity", jsonObject.optString("company_identity"));
+                map.put("company_share", jsonObject.optString("company_share"));
+                map.put("address", jsonObject.optString("address"));
+                map.put("type", jsonObject.optString("type"));
+                map.put("industry", jsonObject.optString("industry"));
+                map.put("operation_year", jsonObject.optString("operation_year"));
+                map.put("private", jsonObject.optString("private"));
+                map.put("public", jsonObject.optString("public"));
+                map.put("created_at", jsonObject.optString("created_at"));
+                map.put("updated_at", jsonObject.optString("updated_at"));
+                list.add(map);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Map<String, String>> getJsonPersonalDataFamily(String data) {
+        List<Map<String, String>> list = new ArrayList<>();
+        JSONObject object;
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            JSONArray array = new JSONArray(object.optString("data"));
+            for (int i = 0; array.length() > i; i++) {
+                JSONObject jsonObject = array.optJSONObject(i);
+                Map<String, String> map = new HashMap<>();
+                map.put("id", jsonObject.optString("id"));
+                map.put("uid", jsonObject.optString("uid"));
+                map.put("marriage_status", jsonObject.optString("marriage_status"));
+                map.put("city", jsonObject.optString("city"));
+                map.put("address", jsonObject.optString("address"));
+                map.put("hj_address", jsonObject.optString("hj_address"));
+                map.put("created_at", jsonObject.optString("created_at"));
+                map.put("updated_at", jsonObject.optString("updated_at"));
+                list.add(map);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Map<String, String>> getJsonPersonalDataOther(String data) {
+        List<Map<String, String>> list = new ArrayList<>();
+        JSONObject object;
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            JSONArray array = new JSONArray(object.optString("data"));
+            for (int i = 0; array.length() > i; i++) {
+                JSONObject jsonObject = array.optJSONObject(i);
+                Map<String, String> map = new HashMap<>();
+                map.put("id", jsonObject.optString("id"));
+                map.put("uid", jsonObject.optString("uid"));
+                map.put("kinsfolk_name", jsonObject.optString("kinsfolk_name"));
+                map.put("kinsfolk_mobile", jsonObject.optString("kinsfolk_mobile"));
+                map.put("urgency_name", jsonObject.optString("urgency_name"));
+                map.put("urgency_mobile", jsonObject.optString("urgency_mobile"));
+                map.put("created_at", jsonObject.optString("created_at"));
+                map.put("updated_at", jsonObject.optString("updated_at"));
+                list.add(map);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Map<String, String>> getJsonPersonalDataHose(String data) {
+        List<Map<String, String>> list = new ArrayList<>();
+        JSONObject object;
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            JSONArray array = new JSONArray(object.optString("data"));
+            for (int i = 0; array.length() > i; i++) {
+                JSONObject jsonObject = array.optJSONObject(i);
+                Map<String, String> map = new HashMap<>();
+                map.put("id", jsonObject.optString("id"));
+                map.put("uid", jsonObject.optString("uid"));
+                map.put("house", jsonObject.optString("house"));
+                map.put("house_address", jsonObject.optString("house_address"));
+                map.put("house_type", jsonObject.optString("house_type"));
+                map.put("house_price", jsonObject.optString("house_price"));
+                map.put("installment", jsonObject.optString("installment"));
+                map.put("mortgage", jsonObject.optString("mortgage"));
+                map.put("created_at", jsonObject.optString("created_at"));
+                map.put("updated_at", jsonObject.optString("updated_at"));
+                list.add(map);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Map<String, String>> getJsonPersonalDataCar(String data) {
+        List<Map<String, String>> list = new ArrayList<>();
+        JSONObject object;
+        try {
+            object = new JSONObject(data);
+            object = new JSONObject(object.optString("data"));
+            JSONArray array = new JSONArray(object.optString("data"));
+            for (int i = 0; array.length() > i; i++) {
+                JSONObject jsonObject = array.optJSONObject(i);
+                Map<String, String> map = new HashMap<>();
+                map.put("id", jsonObject.optString("id"));
+                map.put("uid", jsonObject.optString("uid"));
+                map.put("car", jsonObject.optString("car"));
+                map.put("car_price", jsonObject.optString("car_price"));
+                map.put("use_time", jsonObject.optString("use_time"));
+                map.put("installment", jsonObject.optString("installment"));
+                map.put("mortgage", jsonObject.optString("mortgage"));
+                map.put("created_at", jsonObject.optString("created_at"));
+                map.put("updated_at", jsonObject.optString("updated_at"));
+                list.add(map);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
 }

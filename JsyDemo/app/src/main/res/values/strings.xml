@@ -185,7 +185,13 @@
     <string name="name_loan_help_application_loan_success">如何提高贷款成功率?</string>
     <string name="name_loan_help_application_loan_repayment">贷款后如何还款?</string>
     <string name="name_loan_help_application_loan_order">订单提提交后可以修改吗?怎么取消订单?</string>
+    <string name="name_loan_help_application_loan_order_text">申请金额、分期期数等订单信息一经提交无法修改,请您确认订单并核实无误后进行下单.
+</string>
     <string name="name_loan_help_application_loan_fail">为什么审核失败?</string>
+    <string name="name_loan_help_application_loan_fail_text">若您填写的个人资料不完整不真实、上传的照片模糊、有遮挡物等均会导致审核失败.
+</string>
+    <string name="name_loan_help_application_loan_repayment_text">根据贷款产品所属机构不同,还款方式也可能不同。有些机构会从您申请放款银行卡中按期扣收 ,有些机构会要求您在该机构的注册账号中按期储值进行还款.机构放款前会与您确认,请关注确认信息</string>
+    <string name="name_loan_help_application_loan_success_text">(1) 您可以选择为您推介的产品,然后申请可有效提高成功率.(2) 数据表明:申请多个产品,可大幅提高贷款成功率.</string>
     <string name="name_loan_help_application_loan_text">您可以通过搜索贷款产品,我们建议您先完善个人信息,完善个人信息有利于我们精准推荐贷款产品,您可以按需选择,并根据此贷款产品的需求填完资料并提交申请</string>
 
 

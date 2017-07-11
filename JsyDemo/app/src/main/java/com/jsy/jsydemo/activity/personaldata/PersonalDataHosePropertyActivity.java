@@ -9,13 +9,21 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.umeng.analytics.MobclickAgent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -23,7 +31,7 @@ import java.util.Map;
  * 房产
  */
 
-public class PersonalDataHosePropertyActivity extends BaseActivity implements View.OnClickListener {
+public class PersonalDataHosePropertyActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
 
     private TextView house_estate;
@@ -52,6 +60,7 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
                 finish();
                 break;
             case R.id.title_complete:
+                getHttpCredit();
                 break;
             case R.id.house_estate:
                 ShowDialog.getInstance().getDialog(this, getHouse_type(), "house_type",
@@ -64,14 +73,15 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
                         mHandler, 1000);
                 break;
             case R.id.house_market_price:
+
                 break;
             case R.id.house_mortgage:
                 ShowDialog.getInstance().showDialog(this, "house_mortgage", this.getString(R.string.name_loan_wu),
-                        this.getString(R.string.name_loan_you), 1);
+                        this.getString(R.string.name_loan_you), mHandler, 1002);
                 break;
             case R.id.house_no_mortgage:
                 ShowDialog.getInstance().showDialog(this, "house_no_mortgage", this.getString(R.string.name_loan_wu),
-                        this.getString(R.string.name_loan_you), 1);
+                        this.getString(R.string.name_loan_you), mHandler, 1003);
                 break;
         }
 
@@ -93,6 +103,8 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
         house_mortgage = (TextView) findViewById(R.id.house_mortgage);
         house_no_mortgage = (TextView) findViewById(R.id.house_no_mortgage);
 
+        getHttp();
+
         house_estate.setOnClickListener(this);
         house_location.setOnClickListener(this);
         house_type.setOnClickListener(this);
@@ -106,6 +118,25 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
 
     }
 
+    private void getHttp() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        OkHttpManager.postAsync(HttpURL.getInstance().HOUSELIST, "hose_list", map, this);
+    }
+
+    private void getHttpCredit() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        map.put("house", house_estate.getText().toString());
+        map.put("house_address", house_location.getText().toString());
+        map.put("house_type", house_type.getText().toString());
+        map.put("house_price", house_market_price.getText().toString());
+        map.put("installment", house_mortgage.getText().toString());
+        map.put("mortgage", house_no_mortgage.getText().toString());
+        OkHttpManager.postAsync(HttpURL.getInstance().HOUSEADD, "hose_add", map, this);
+    }
+
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
 
@@ -117,6 +148,12 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
                     house_type.setText(msg.obj.toString());
                     break;
                 case 1001:
+                    house_estate.setText(msg.obj.toString());
+                    break;
+                case 1002:
+                    house_estate.setText(msg.obj.toString());
+                    break;
+                case 1003:
                     house_estate.setText(msg.obj.toString());
                     break;
             }
@@ -151,4 +188,32 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
         MobclickAgent.onPause(this);
     }
 
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+        switch (name) {
+            case "hose_add":
+                break;
+            case "hose_list":
+                break;
+        }
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+        switch (name) {
+            case "hose_add":
+                finish();
+                break;
+            case "hose_list":
+                List<Map<String, String>> list = JsonData.getInstance().getJsonPersonalDataHose(result);
+                house_estate.setText(list.get(0).get("house"));
+                house_location.setText(list.get(0).get("house_address"));
+                house_type.setText(list.get(0).get("house_type"));
+                house_market_price.setText(list.get(0).get("house_price"));
+                house_mortgage.setText(list.get(0).get("installment"));
+                house_no_mortgage.setText(list.get(0).get("mortgage"));
+                break;
+        }
+    }
 }

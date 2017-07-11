@@ -128,6 +128,17 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
+    private void getHttpstater() {
+        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+            OkHttpManager.postAsync(HttpURL.getInstance().STATUS, "username_list", map, this);
+        } else {
+            intent = new Intent(this, LogoActivity.class);
+            startActivity(intent);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -232,6 +243,9 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 break;
             case "username_add":
                 break;
+            case "username_list":
+
+                break;
         }
 
     }
@@ -245,6 +259,10 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             case "username_add":
                 SharedPreferencesUtils.put(this, "realname", personal_data_name.getText().toString());
                 SharedPreferencesUtils.put(this, "idcard", personal_data_id.getText().toString());
+                break;
+            case "username_list":
+                personal_data_complete0.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+
                 break;
         }
     }

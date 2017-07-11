@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
@@ -89,6 +91,8 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
         findViewById(R.id.title_complete).setVisibility(View.VISIBLE);
         findViewById(R.id.title_complete).setOnClickListener(this);
 
+        getHttp();
+
     }
 
     @Override
@@ -102,16 +106,16 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
         OkHttpManager.postAsync(HttpURL.getInstance().PERSONALDATACREDIT, "user_credit", map, this);
     }
 
-    private void getHttpCredit(){
+    private void getHttpCredit() {
         Map<String, Object> map = new HashMap<>();
         map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        map.put("edu", "");
-        map.put("creditcard", "");
-        map.put("credit_record", "");
-        map.put("liabilities_status", "");
-        map.put("loan_record","");
-        map.put("taobao_id", "");
-        map.put("loan_use", "");
+        map.put("edu", personal_credit_degree_education.getText().toString());
+        map.put("creditcard", personal_no_cards.getText().toString());
+        map.put("credit_record", personal_no_cards_record.getText().toString());
+        map.put("liabilities_status", personal_credit_liabilities.getText().toString());
+        map.put("loan_record",personal_credit_no_loan.getText().toString());
+        map.put("taobao_id", personal_credit_no_taobao.getText().toString());
+        map.put("loan_use", personal_credit_purpose.getText().toString());
         OkHttpManager.postAsync(HttpURL.getInstance().PERSONALDATACREDITADD, "user_credit_add", map, this);
     }
 
@@ -135,7 +139,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this,
                             "no_cards", this.getString(R.string.name_loan_wu),
-                            this.getString(R.string.name_loan_you), 1);
+                            this.getString(R.string.name_loan_you), mHandler, 1006);
                 }
                 break;
             case R.id.personal_no_cards_record://两年内应用记录
@@ -153,7 +157,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                 } else {
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_liabilities",
-                            this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), 1);
+                            this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), mHandler, 1003);
                 }
                 break;
             case R.id.personal_credit_no_loan://有无成功贷款情况
@@ -162,7 +166,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                 } else {
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_no_loa",
-                            this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), 1);
+                            this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), mHandler, 1004);
                 }
                 break;
             case R.id.personal_credit_no_taobao://是否实名淘宝
@@ -171,7 +175,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                 } else {
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_no_taoba",
-                            this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), 1);
+                            this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), mHandler, 1005);
                 }
                 break;
             case R.id.personal_credit_purpose://贷款用途
@@ -207,6 +211,18 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                     break;
                 case 1002:
                     personal_credit_degree_education.setText(msg.obj.toString());
+                    break;
+                case 1003:
+                    personal_credit_liabilities.setText(msg.obj.toString());
+                    break;
+                case 1004:
+                    personal_credit_no_loan.setText(msg.obj.toString());
+                    break;
+                case 1005:
+                    personal_credit_no_taobao.setText(msg.obj.toString());
+                    break;
+                case 1006:
+                    personal_no_cards.setText(msg.obj.toString());
                     break;
             }
         }
@@ -274,8 +290,12 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
-        switch (name){
+        switch (name) {
             case "user_credit":
+                Log.e("", "+++++" + request + "===" + e);
+                break;
+            case "user_credit_add":
+                Log.e("", "+++++" + request + "===" + e);
                 break;
         }
     }
@@ -283,8 +303,20 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
     @Override
     public void requestSuccess(String result, String name) throws Exception {
 
-        switch (name){
+        switch (name) {
             case "user_credit":
+                List<Map<String, String>> list = JsonData.getInstance().getJsonPersonalDataCredit(result);
+                personal_credit_degree_education.setText(list.get(0).get("edu"));
+                personal_no_cards.setText(list.get(0).get("creditcard"));
+                personal_no_cards_record.setText(list.get(0).get("credit_record"));
+                personal_credit_liabilities.setText(list.get(0).get("liabilities_status"));
+                personal_credit_no_loan.setText(list.get(0).get("loan_record"));
+                personal_credit_no_taobao.setText(list.get(0).get("taobao_id"));
+                personal_credit_purpose.setText(list.get(0).get("loan_use"));
+                break;
+            case "user_credit_add":
+                Log.e("", "+++++" + result);
+                finish();
                 break;
         }
     }

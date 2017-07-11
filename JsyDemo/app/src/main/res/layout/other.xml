@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerInParent="true"
-                    android:text="@string/name_loan_personal_data_id"
+                    android:text="@string/name_loan_personal_data_phone"
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp" />
 
@@ -164,7 +164,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerInParent="true"
-                    android:text="@string/name_loan_personal_data_id"
+                    android:text="@string/name_loan_personal_data_phone"
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp" />
 
