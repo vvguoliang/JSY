@@ -29,5 +29,17 @@
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
 
+    <!-- 分享字体颜色 -->
+    <style name="share_rb_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@drawable/share_selector_tv_color</item>
+        <item name="android:textSize">@dimen/common_12dp</item>
+        <item name="android:gravity">center_horizontal|bottom</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
 
 </resources>

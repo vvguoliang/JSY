@@ -93,4 +93,10 @@ public class HttpURL implements Serializable {
 
     public String FEEDBACK = HTTP_URL + "&m=feedback&a=postAdd";
 
+    public String USERINFOADD = HTTP_URL + "&m=userinfo&a=postAdd";
+
+    public String PERSONALDATACREDIT = HTTP_URL + "&m=userdetail&a=credit_list";
+
+    public String PERSONALDATACREDITADD = HTTP_URL + "&m=userdetail&a=credit_add";
+
 }

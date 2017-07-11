@@ -9,14 +9,21 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
 import com.umeng.analytics.MobclickAgent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -24,7 +31,7 @@ import java.util.Map;
  * 企业经营情况
  */
 
-public class PersonalDataEnterpriseActivity extends BaseActivity implements View.OnClickListener {
+public class PersonalDataEnterpriseActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private TextView personal_enterprise_identity;
     private TextView personal_enterprise_shares;
@@ -170,6 +177,25 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
 
     }
 
+    private void getHttp() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        OkHttpManager.postAsync(HttpURL.getInstance().PERSONALDATACREDIT, "user_enterprise", map, this);
+    }
+
+    private void getHttpCredit() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        map.put("edu", "");
+        map.put("creditcard", "");
+        map.put("credit_record", "");
+        map.put("liabilities_status", "");
+        map.put("loan_record", "");
+        map.put("taobao_id", "");
+        map.put("loan_use", "");
+        OkHttpManager.postAsync(HttpURL.getInstance().PERSONALDATACREDITADD, "user_enterprise_add", map, this);
+    }
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
 
@@ -305,5 +331,26 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+        switch (name) {
+            case "user_enterprise":
+                break;
+            case "user_enterprise_add":
+                break;
+        }
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+        switch (name) {
+            case "user_enterprise":
+                break;
+            case "user_enterprise_add":
+                break;
+        }
     }
 }

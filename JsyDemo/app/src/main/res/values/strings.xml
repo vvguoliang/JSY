@@ -189,5 +189,11 @@
     <string name="name_loan_help_application_loan_text">您可以通过搜索贷款产品,我们建议您先完善个人信息,完善个人信息有利于我们精准推荐贷款产品,您可以按需选择,并根据此贷款产品的需求填完资料并提交申请</string>
 
 
+    <string name="share_weichat">微信</string>
+    <string name="share_weichatfriend">朋友圈</string>
+    <string name="share_qqroom">QQ空间</string>
+    <string name="share_qq">QQ</string>
+
+
 
 </resources>

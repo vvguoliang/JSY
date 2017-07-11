@@ -47,7 +47,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_personal_data);
-        initView();
+        getHpptuserInfo();
         findViewById();
     }
 
@@ -102,10 +102,26 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initView() {
+    }
+
+    private void getHpptuserInfo() {
         if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
             Map<String, Object> map = new HashMap<>();
             map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
             OkHttpManager.postAsync(HttpURL.getInstance().USERINFO, "username", map, this);
+        } else {
+            intent = new Intent(this, LogoActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void getHttp() {
+        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+            map.put("realname", personal_data_name.getText().toString());
+            map.put("idcard", personal_data_id.getText().toString());
+            OkHttpManager.postAsync(HttpURL.getInstance().USERINFOADD, "username_add", map, this);
         } else {
             intent = new Intent(this, LogoActivity.class);
             startActivity(intent);
@@ -119,6 +135,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.title_complete://完成
+                getHttp();
                 break;
             case R.id.personal_data_credit://个人资信
                 intent = new Intent(PersonalDataActivity.this, PersonalDataCreditActivity.class);
@@ -213,6 +230,8 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             case "username":
                 Log.e("", "===" + request + "==" + e);
                 break;
+            case "username_add":
+                break;
         }
 
     }
@@ -223,7 +242,10 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             case "username":
                 Log.e("", "====" + result);
                 break;
+            case "username_add":
+                SharedPreferencesUtils.put(this, "realname", personal_data_name.getText().toString());
+                SharedPreferencesUtils.put(this, "idcard", personal_data_id.getText().toString());
+                break;
         }
-
     }
 }

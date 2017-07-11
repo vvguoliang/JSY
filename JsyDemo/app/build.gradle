@@ -220,5 +220,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
     // 友盟
     compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     compile files('libs/zmxySDKALCmini_V1.01450366738902_release.jar')
+    compile files('libs/open_sdk_r5793_lite.jar')
 }

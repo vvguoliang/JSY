@@ -25,7 +25,7 @@ import java.util.Map;
  * 公共类 Diaog
  */
 
-@SuppressWarnings("ResultOfMethodCallIgnored")
+@SuppressWarnings({"ResultOfMethodCallIgnored", "ConstantConditions"})
 public class ShowDialog implements Serializable {
 
     /**

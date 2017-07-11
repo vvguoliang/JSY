@@ -32,4 +32,6 @@
     <color name="common_wathet">#B9D0F6</color>
     <color name="common_pink">#EF3C50</color>
     <color name="common_Blue">#E6F2FF</color>
+    <color name="common_grey_disabled">#aabbc4</color>
+    <color name="common_grey_color">#e1e1e1</color>
 </resources>

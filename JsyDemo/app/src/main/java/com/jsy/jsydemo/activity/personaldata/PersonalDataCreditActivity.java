@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
@@ -17,17 +20,20 @@ import com.jsy.jsydemo.utils.TimeUtils;
 import com.jsy.jsydemo.view.PublicDialog;
 import com.umeng.analytics.MobclickAgent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/6/27.
  * 个人资信
  */
 
-public class PersonalDataCreditActivity extends BaseActivity implements View.OnClickListener {
+public class PersonalDataCreditActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private TextView personal_credit_degree_education;
 
@@ -90,6 +96,26 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
 
     }
 
+    private void getHttp() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        OkHttpManager.postAsync(HttpURL.getInstance().PERSONALDATACREDIT, "user_credit", map, this);
+    }
+
+    private void getHttpCredit(){
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        map.put("edu", "");
+        map.put("creditcard", "");
+        map.put("credit_record", "");
+        map.put("liabilities_status", "");
+        map.put("loan_record","");
+        map.put("taobao_id", "");
+        map.put("loan_use", "");
+        OkHttpManager.postAsync(HttpURL.getInstance().PERSONALDATACREDITADD, "user_credit_add", map, this);
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -145,7 +171,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                 } else {
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(PersonalDataCreditActivity.this, "credit_no_taoba",
-                            this.getString(R.string.name_loan_wu),this.getString(R.string.name_loan_you), 1);
+                            this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), 1);
                 }
                 break;
             case R.id.personal_credit_purpose://贷款用途
@@ -161,7 +187,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                 finish();
                 break;
             case R.id.title_complete://完成
-                finish();
+                getHttpCredit();
                 break;
         }
     }
@@ -246,4 +272,20 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
         MobclickAgent.onPause(this);
     }
 
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+        switch (name){
+            case "user_credit":
+                break;
+        }
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+
+        switch (name){
+            case "user_credit":
+                break;
+        }
+    }
 }
