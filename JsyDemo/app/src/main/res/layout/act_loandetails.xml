@@ -346,7 +346,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="@dimen/common_10dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:layout_width="wrap_content"

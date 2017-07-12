@@ -1,22 +1,45 @@
 package com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.Share.ShareWxapTencent;
+import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.StringUtil;
 import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/6/28.
  * 邀请好友
  */
 
-public class FriendsActivity extends BaseActivity implements View.OnClickListener {
+public class FriendsActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private ImageView friends_image;
     private Button friends_button;
@@ -32,10 +55,15 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
 
     private String url = "";
 
+    private  String share_title = "";
+
+    private String share_content = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_friends);
+        getHttp();
         findViewById();
     }
 
@@ -46,7 +74,7 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.friends_button:
-                shareWxapTencent = new ShareWxapTencent(this,url,mQqTitle,mQqSummary,mWxwebtitle,mWxwebdescription);
+                shareWxapTencent = new ShareWxapTencent(this, url, share_title, share_content, share_title, share_content);
                 break;
 
         }
@@ -69,6 +97,10 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
 
     }
 
+    private void getHttp() {
+            OkHttpManager.postAsync(HttpURL.getInstance().SHARE, "share", null, this);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -79,5 +111,40 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+        if(name.equals("share")){
+            JSONObject jsonObject = new JSONObject(result);
+            JSONObject object = new JSONObject(jsonObject.optString("data"));
+            String id = object.optString("id");
+            share_title = object.optString("share_title");
+            share_content = object.optString("share_content");
+            String bg_img = object.optString("bg_img");
+            url = object.optString("share_ur");
+
+            Glide.with(this)
+                    .load(HttpURL.getInstance().HTTP_URL_PATH + bg_img)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                            friends_image.setImageResource(R.mipmap.ic_launcher);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                            return false;
+                        }
+                    })
+                    .into(friends_image);
+        }
+
     }
 }

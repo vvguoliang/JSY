@@ -260,6 +260,7 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
                         if (registerSignCodeModify1.getStatus() == 1 && registerSignCodeModify1.getState().equals("success")) {
                             SharedPreferencesUtils.put(this, "username", registerSignCodeModify1.getUsername());
                             SharedPreferencesUtils.put(this, "uid", registerSignCodeModify1.getUid());
+                            SharedPreferencesUtils.put(this, "password", loan_logo_edittext_password_code.getText().toString());
                             finish();
                         } else {
                             ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());

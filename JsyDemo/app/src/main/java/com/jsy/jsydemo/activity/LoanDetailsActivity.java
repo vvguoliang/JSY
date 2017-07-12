@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +45,7 @@ import okhttp3.Request;
  * 贷款详情
  */
 @SuppressLint("SetTextI18n")
-public class LoanDetailsActivity extends BaseActivity implements View.OnClickListener, DataCallBack, ICreditListener {
+public class LoanDetailsActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private EditText loan_details_editText_range;
     private TextView loan_details_textView_rang;
@@ -115,6 +116,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.loan_details_phone_operator://运营商
+                getSIGNPhone();
                 break;
             case R.id.loan_details_basic_information://基础信息认证
                 startActivity(new Intent(LoanDetailsActivity.this, BasicAuthenticationActivity.class));
@@ -123,7 +125,9 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 startActivity(new Intent(LoanDetailsActivity.this, PersonalDataCertificatesActivity.class));
                 break;
             case R.id.loan_details_other://其他
-                startActivity(new Intent(LoanDetailsActivity.this, OtherInformationActivity.class));
+                intent = new Intent(LoanDetailsActivity.this, OtherInformationActivity.class);
+                intent.putExtra("other", loanDatailsData.getOther_id());
+                startActivity(intent);
                 break;
             case R.id.loan_details_button://补齐
 
@@ -191,6 +195,29 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         OkHttpManager.postAsync(HttpURL.getInstance().PRODUCT_DETAIL, "product_detail", map, this);
     }
 
+    private void getSIGNPhone() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("apiKey", "0618854278903691");
+        map.put("version", "1.0.0");
+        map.put("method", "api.mobile.get");
+        map.put("mobileNo", SharedPreferencesUtils.get(this, "username", "").toString());
+        OkHttpManager.postAsync(HttpURL.getInstance().SIGN, "product_phone", map, this);
+    }
+
+    private void getSIGN() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("apiKey", "0618854278903691");
+        map.put("version", "1.0.0");
+        map.put("method", "api.mobile.get");
+        map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
+        map.put("identityName", SharedPreferencesUtils.get(this, "realname", "").toString());
+        map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
+        map.put("password", Base64.encodeToString(
+                SharedPreferencesUtils.get(this, "password", "").toString().getBytes(), Base64.DEFAULT));
+        map.put("contentType", "alls");
+        OkHttpManager.postAsync(HttpURL.getInstance().SIGN, "product_sign", map, this);
+    }
+
     private void getSesameCredit() {
         Map<String, Object> map = new HashMap<>();
         map.put("identity_type", "1");
@@ -212,6 +239,14 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 break;
             case "SesameCredit":
                 break;
+            case "authorize":
+                break;
+            case "product_sign":
+
+                break;
+            case "product_http":
+                Log.e("", "=====" + request);
+                break;
         }
 
     }
@@ -219,6 +254,8 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     @SuppressLint("SetTextI18n")
     @Override
     public void requestSuccess(String result, String name) throws Exception {
+        Map<String, Object> map = null;
+        String sgin = "";
         switch (name) {
             case "product_detail":
                 loanDatailsData = JsonData.getInstance().getJsonLoanDailsData(result);
@@ -250,7 +287,8 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 loan_details_repayment.setText(getAlgorithm(loanMax, day_monthMax, profit));
 
                 anInt++;
-                if (StringUtil.isNullOrEmpty(loanDatailsData.getUser_auth()) || loanDatailsData.getUser_auth().equals("null")) {
+                if (StringUtil.isNullOrEmpty(loanDatailsData.getUser_auth()) || loanDatailsData.getUser_auth().equals("null")
+                        || loanDatailsData.getUser_auth().equals("0")) {
                     loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                     loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                     loan_details_id.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
@@ -266,20 +304,20 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 while (matcher.find()) {
                     ResponseDates = matcher.group(1);
                 }
-                String[] data_ids = ResponseDates.split(",");
-                for (String data_id1 : data_ids) {
-                    if (data_id1.contains("1")) {
-                        basic_information_linear.setVisibility(View.VISIBLE);
-                    } else if (data_id1.contains("2")) {
-                        phone_operator_linear.setVisibility(View.VISIBLE);
-                    } else if (data_id1.contains("3")) {
-                        esame_credit_linear.setVisibility(View.VISIBLE);
-                    } else if (data_id1.contains("4")) {
-                        etails_id_linear.setVisibility(View.VISIBLE);
-                    } else if (data_id1.contains("5")) {
-                        details_other_linear.setVisibility(View.VISIBLE);
-                    }
-                }
+//                String[] data_ids = ResponseDates.split(",");
+//                for (String data_id1 : data_ids) {
+//                    if (data_id1.contains("1")) {
+                basic_information_linear.setVisibility(View.VISIBLE);
+//                    } else if (data_id1.contains("2")) {
+                phone_operator_linear.setVisibility(View.VISIBLE);
+//                    } else if (data_id1.contains("3")) {
+                esame_credit_linear.setVisibility(View.VISIBLE);
+//                    } else if (data_id1.contains("4")) {
+                etails_id_linear.setVisibility(View.VISIBLE);
+//                    } else if (data_id1.contains("5")) {
+                details_other_linear.setVisibility(View.VISIBLE);
+//                    }
+//                }
                 break;
             case "SesameCredit":
                 JSONObject object = new JSONObject(result);
@@ -292,7 +330,48 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 if (jsonObject.has("sign")) {
                     sign = jsonObject.optString("sign");
                 }
-                creditApp.authenticate(this, "1002755", "text", params, sign, null, this);
+                Map extParams = new HashMap<>();
+                creditApp.authenticate(this, "1002755", "", params, sign, extParams, iCreditListener);
+                break;
+            case "authorize":
+                if (result.contains("成功")) {
+                    oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
+                } else {
+                    oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                }
+                break;
+            case "product_sign":
+                JSONObject object1 = new JSONObject(result);
+                object1 = new JSONObject(object1.optString("data"));
+                sgin = object1.optString("sign");
+                map = new HashMap<>();
+                map.put("apiKey", "0618854278903691");
+                map.put("version", "1.0.0");
+                map.put("sgin", sgin);
+                map.put("method", "api.mobile.get");
+                map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
+                map.put("identityName", SharedPreferencesUtils.get(this, "realname", "").toString());
+                map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
+                map.put("password", Base64.encodeToString(
+                        SharedPreferencesUtils.get(this, "password", "").toString().getBytes(), Base64.DEFAULT));
+                map.put("contentType", "alls");
+                OkHttpManager.postAsync("http://api.tanzhishuju.com/api/gateway", "product_http", map, this);
+                break;
+            case "product_http":
+                Log.e("", "=====" + result);
+                break;
+            case "product_phone":
+                JSONObject object2 = new JSONObject(result);
+                object1 = new JSONObject(object2.optString("data"));
+                sgin = object1.optString("sign");
+                map = new HashMap<>();
+                map.put("apiKey", "0618854278903691");
+                map.put("version", "1.0.0");
+                map.put("method", "api.mobile.get");
+                map.put("sign", sgin);
+                map.put("mobileNo", SharedPreferencesUtils.get(this, "username", "").toString());
+                OkHttpManager.postAsync("http://api.tanzhishuju.com/api/gateway", "product_http", map, this);
+
                 break;
         }
 
@@ -379,28 +458,40 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("", "====" + requestCode + "======" + resultCode + "===" + data);
+        creditApp.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public void onComplete(Bundle bundle) {
-        Set<String> keys = bundle.keySet();
-        for (String key : keys) {
-            Log.d("", key + " = " + bundle.getString(key));
+    ICreditListener iCreditListener = new ICreditListener() {
+        @Override
+        public void onComplete(Bundle result) {
+            Set keys = result.keySet();
+            Map<String, Object> map = null;
+            for (Object key : keys) {
+                map = new HashMap<>();
+                Log.d("", key + " = " + result.getString(key.toString()));
+                map.put(key.toString(), result.getString(key.toString()));
+            }
+            map.put("uid", SharedPreferencesUtils.get(LoanDetailsActivity.this, "uid", "").toString());
+            OkHttpManager.postAsync(HttpURL.getInstance().AUTHORIZE, "authorize", map, LoanDetailsActivity.this);
+
         }
-    }
 
-    @Override
-    public void onError(Bundle bundle) {
-        Set<String> keys = bundle.keySet();
-        for (String key : keys) {
-            Log.d("", key + " = " + bundle.getString(key));
+        @Override
+        public void onError(Bundle error) {
+            Set keys = error.keySet();
+            Map<String, Object> map = null;
+            for (Object key : keys) {
+                map = new HashMap<>();
+                Log.d("", key + " = " + error.getString(key.toString()));
+                map.put(key.toString(), error.getString(key.toString()));
+            }
+            map.put("uid", SharedPreferencesUtils.get(LoanDetailsActivity.this, "uid", "").toString());
+            OkHttpManager.postAsync(HttpURL.getInstance().AUTHORIZE, "authorize", map, LoanDetailsActivity.this);
         }
 
-    }
-
-    @Override
-    public void onCancel() {
-        Log.e("", "");
-    }
+        @Override
+        public void onCancel() {
+            Log.d("", "");
+        }
+    };
 }

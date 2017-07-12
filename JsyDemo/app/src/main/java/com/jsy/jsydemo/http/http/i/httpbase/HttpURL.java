@@ -123,8 +123,17 @@ public class HttpURL implements Serializable {
 
     public String PARPERSLIST = HTTP_URL + "&m=userdetail&a=parpers_list";
 
-    public String STATUS = HTTP_URL + "&&m=userinfo&a=status";
+    public String STATUS = HTTP_URL + "&m=userinfo&a=status";
 
+    public String IDCARDADD = HTTP_URL + "&m=userdetail&a=idcard_add";
+
+    public String SHARE = HTTP_URL + "&m=userinfo&a=share";
+
+    public String AUTHORIZE = HTTP_URL + "&m=alipay&a=anyAuthorize";
+
+    public String SIGN = HTTP_URL + "&m=userdetail&a=mobileSign";
+
+    public String BASEADD = HTTP_URL + "&m=userdetail&a=base_add";
 
 
 }
