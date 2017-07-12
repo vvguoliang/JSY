@@ -2,21 +2,15 @@ package com.jsy.jsydemo.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.preference.PreferenceManager;
+import android.graphics.Bitmap;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
-
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 /**
  * Created by vvguoliang on 2017/6/24.
@@ -143,6 +137,17 @@ public class AppUtil {
         } catch (Exception exception) {
             return null;
         }
+    }
+
+    /**
+     *  转二进制　
+     * @param bm
+     * @return
+     */
+    public byte[] bitmap2Bytes(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
     }
 
     /**

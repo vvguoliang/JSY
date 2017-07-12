@@ -23,11 +23,17 @@ import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.CameraUtils.BitmapUtils;
 import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.StringUtil;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.BottomDialog;
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,10 +54,10 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
 
     private ImageView upload_vehicle;
 
-    private Bitmap bitmap1 = null;
-    private Bitmap bitmap2 = null;
-    private Bitmap bitmap3 = null;
-    private Bitmap bitmap4 = null;
+    private byte[] bitmap1 = null;
+    private byte[] bitmap2 = null;
+    private byte[] bitmap3 = null;
+    private byte[] bitmap4 = null;
 
     private UserCenterRealize userCenterRealize = new UserCenterRealize();
     private String getpath = "0";
@@ -126,10 +132,15 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
     private void getHttp() {
         Map<String, Object> map = new HashMap<>();
         map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        map.put("photo1", bitmap1);
-        map.put("photo2", bitmap2);
-        map.put("photo3", bitmap3);
-        map.put("photo4", bitmap4);
+        if (StringUtil.isNullOrEmpty(Arrays.toString(bitmap1)) && StringUtil.isNullOrEmpty(Arrays.toString(bitmap2)) &&
+                StringUtil.isNullOrEmpty(Arrays.toString(bitmap3)) && StringUtil.isNullOrEmpty(Arrays.toString(bitmap4))) {
+            ToatUtils.showShort1(this, "您还没有上传图片，不能点击完成");
+            return;
+        }
+        map.put("photo1", Arrays.toString(bitmap1));
+        map.put("photo2", Arrays.toString(bitmap2));
+        map.put("photo3", Arrays.toString(bitmap3));
+        map.put("photo4", Arrays.toString(bitmap4));
         OkHttpManager.postAsync(HttpURL.getInstance().PARPERSADD, "parees", map, this);
     }
 
@@ -165,7 +176,40 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
         if (name.equals("parees")) {
             finish();
         } else if (name.equals("parees_list")) {
-            Log.e("", "");
+            String idcard_front = "";
+            String idcard = "";
+            String house_card = "";
+            String driving_card = "";
+            JSONObject jsonObject = new JSONObject(result);
+            jsonObject = new JSONObject(jsonObject.optString("data"));
+            JSONArray array = new JSONArray(jsonObject.optString("data"));
+            for (int i = 0; array.length() > i; i++) {
+                JSONObject jsonObject1 = array.getJSONObject(i);
+                idcard_front = jsonObject1.optString("idcard_front");
+                idcard = jsonObject1.optString("idcard");
+                house_card = jsonObject1.optString("house_card");
+                driving_card = jsonObject1.optString("driving_card");
+            }
+            if (StringUtil.isNullOrEmpty(idcard_front)) {
+                upload_front_id.setImageResource(R.mipmap.ic_personal_data_upload_front_id_no_success);
+            } else {
+                upload_front_id.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
+            }
+            if (StringUtil.isNullOrEmpty(idcard)) {
+                upload_front_hold_id.setImageResource(R.mipmap.ic_personal_data_upload_front_id_no_success);
+            } else {
+                upload_front_hold_id.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
+            }
+            if (StringUtil.isNullOrEmpty(house_card)) {
+                upload_front_hold_id.setImageResource(R.mipmap.ic_personal_data_upload_front_id_no_success);
+            } else {
+                upload_hous.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
+            }
+            if (StringUtil.isNullOrEmpty(driving_card)) {
+                upload_front_hold_id.setImageResource(R.mipmap.ic_personal_data_upload_front_id_no_success);
+            } else {
+                upload_vehicle.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
+            }
         }
 
     }
@@ -281,24 +325,24 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
         } else if (AppUtil.getInstance().CLIP_IMAGE_REQUEST == requestCode) {
             switch (getpath) {
                 case "1":
-                    bitmap1 = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
+                    bitmap1 = AppUtil.getInstance().bitmap2Bytes(BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile));
                     upload_front_id.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
                     break;
                 case "2":
-                    bitmap2 = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
+                    bitmap2 = AppUtil.getInstance().bitmap2Bytes(BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile));
                     upload_front_hold_id.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
                     break;
                 case "3":
-                    bitmap3 = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
+                    bitmap3 = AppUtil.getInstance().bitmap2Bytes(BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile));
                     upload_hous.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
                     break;
                 case "4":
-                    bitmap4 = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
+                    bitmap4 = AppUtil.getInstance().bitmap2Bytes(BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile));
                     upload_vehicle.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
                     break;
             }
 //            personal_camera.setImageBitmap(bitmap);
-            BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
+//            BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
         }
     }
 
