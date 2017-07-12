@@ -145,7 +145,7 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
         }
         map.put("photo1", Arrays.toString(bitmap1));
         map.put("photo2", Arrays.toString(bitmap2));
-        OkHttpManager.postAsync(HttpURL.getInstance().USERINFOADD, "username_add", map, this);
+        OkHttpManager.postAsync(HttpURL.getInstance().IDCARDADD, "username_add", map, this);
     }
 
     @Override
