@@ -200,6 +200,9 @@
     <string name="share_qqroom">QQ空间</string>
     <string name="share_qq">QQ</string>
 
+    <string name="dialog_bottom_urban_area">请选择省市区</string>
+    <string name="dialog_bottom_determine">确定</string>
+
 
 
 </resources>

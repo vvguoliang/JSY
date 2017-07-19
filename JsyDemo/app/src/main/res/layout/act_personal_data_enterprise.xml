@@ -23,6 +23,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/personal_enterprise_identity_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -30,7 +31,7 @@
                 android:padding="@dimen/common_5dp">
 
                 <com.jsy.jsydemo.control.MyTextView
-                    android:layout_width="0dp"
+                    android:layout_width="292dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/common_10dp"
                     android:layout_weight="1"
@@ -50,6 +51,7 @@
                 <ImageView
                     android:layout_width="@dimen/common_20dp"
                     android:layout_height="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
                     android:paddingLeft="@dimen/common_10dp"
                     android:src="@drawable/bg_personal_right_selector" />
             </LinearLayout>
@@ -62,6 +64,7 @@
                 android:background="@color/common_gray" />
 
             <LinearLayout
+                android:id="@+id/personal_enterprise_shares_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -89,6 +92,7 @@
                 <ImageView
                     android:layout_width="@dimen/common_20dp"
                     android:layout_height="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
                     android:paddingLeft="@dimen/common_10dp"
                     android:src="@drawable/bg_personal_right_selector" />
             </LinearLayout>
@@ -101,6 +105,7 @@
                 android:background="@color/common_gray" />
 
             <LinearLayout
+                android:id="@+id/personal_enterprise_location_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -128,6 +133,7 @@
                 <ImageView
                     android:layout_width="@dimen/common_20dp"
                     android:layout_height="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
                     android:paddingLeft="@dimen/common_10dp"
                     android:src="@drawable/bg_personal_right_selector" />
             </LinearLayout>
@@ -140,6 +146,7 @@
                 android:background="@color/common_gray" />
 
             <LinearLayout
+                android:id="@+id/personal_enterprise_type_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -167,6 +174,7 @@
                 <ImageView
                     android:layout_width="@dimen/common_20dp"
                     android:layout_height="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
                     android:paddingLeft="@dimen/common_10dp"
                     android:src="@drawable/bg_personal_right_selector" />
             </LinearLayout>
@@ -179,6 +187,7 @@
                 android:background="@color/common_gray" />
 
             <LinearLayout
+                android:id="@+id/personal_enterprise_industry_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -206,6 +215,7 @@
                 <ImageView
                     android:layout_width="@dimen/common_20dp"
                     android:layout_height="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
                     android:paddingLeft="@dimen/common_10dp"
                     android:src="@drawable/bg_personal_right_selector" />
             </LinearLayout>
@@ -218,6 +228,7 @@
                 android:background="@color/common_gray" />
 
             <LinearLayout
+                android:id="@+id/personal_enterprise_time_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -245,6 +256,7 @@
                 <ImageView
                     android:layout_width="@dimen/common_20dp"
                     android:layout_height="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
                     android:paddingLeft="@dimen/common_10dp"
                     android:src="@drawable/bg_personal_right_selector" />
             </LinearLayout>
@@ -257,6 +269,7 @@
                 android:background="@color/common_gray" />
 
             <LinearLayout
+                android:id="@+id/personal_enterprise_life_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -284,6 +297,7 @@
                 <ImageView
                     android:layout_width="@dimen/common_20dp"
                     android:layout_height="@dimen/common_20dp"
+                    android:layout_marginRight="@dimen/common_20dp"
                     android:paddingLeft="@dimen/common_10dp"
                     android:src="@drawable/bg_personal_right_selector" />
             </LinearLayout>
@@ -311,20 +325,19 @@
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp" />
 
-                <com.jsy.jsydemo.control.MyTextView
+                <com.jsy.jsydemo.control.MyEdittextView
                     android:id="@+id/personal_enterprise_private_water"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_15dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/transparent"
+                    android:gravity="center|right"
+                    android:hint="@string/name_loan_details_basic_content"
                     android:padding="@dimen/common_10dp"
-                    android:text="@string/name_loan_credit_please_select"
                     android:textColor="@color/common_loan_personal"
+                    android:textColorHint="@color/common_gray"
                     android:textSize="@dimen/common_14dp" />
-
-                <ImageView
-                    android:layout_width="@dimen/common_20dp"
-                    android:layout_height="@dimen/common_20dp"
-                    android:paddingLeft="@dimen/common_10dp"
-                    android:src="@drawable/bg_personal_right_selector" />
             </LinearLayout>
 
             <View
@@ -350,20 +363,20 @@
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp" />
 
-                <com.jsy.jsydemo.control.MyTextView
+                <com.jsy.jsydemo.control.MyEdittextView
                     android:id="@+id/personal_enterprise_public_water"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_15dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/transparent"
+                    android:gravity="center|right"
+                    android:hint="@string/name_loan_details_basic_content"
                     android:padding="@dimen/common_10dp"
-                    android:text="@string/name_loan_credit_please_select"
                     android:textColor="@color/common_loan_personal"
+                    android:textColorHint="@color/common_gray"
                     android:textSize="@dimen/common_14dp" />
 
-                <ImageView
-                    android:layout_width="@dimen/common_20dp"
-                    android:layout_height="@dimen/common_20dp"
-                    android:paddingLeft="@dimen/common_10dp"
-                    android:src="@drawable/bg_personal_right_selector" />
             </LinearLayout>
 
             <View

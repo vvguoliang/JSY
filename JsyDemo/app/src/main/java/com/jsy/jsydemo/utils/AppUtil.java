@@ -5,12 +5,16 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.view.Display;
 import android.view.WindowManager;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by vvguoliang on 2017/6/24.
@@ -113,6 +117,29 @@ public class AppUtil {
         return result;
     }
 
+    /**
+     *获取城市数据
+     * @param context
+     * @param fileName
+     * @return
+     */
+    public static String getJson(Context context, String fileName) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            AssetManager assetManager = context.getAssets();
+            InputStream inputStream = assetManager.open(fileName);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = bufferedInputStream.read(buffer)) != -1) {
+                baos.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return baos.toString();
+    }
+
 
     private static final String CHANNEL_KEY = "UMENG_CHANNEL";
     private static String mChannel;
@@ -140,7 +167,8 @@ public class AppUtil {
     }
 
     /**
-     *  转二进制　
+     * 转二进制
+     *
      * @param bm
      * @return
      */

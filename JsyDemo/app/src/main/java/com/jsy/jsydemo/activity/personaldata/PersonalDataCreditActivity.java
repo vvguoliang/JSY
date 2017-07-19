@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
@@ -51,7 +52,8 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
 
     private TextView personal_credit_purpose;
 
-    private String[] purpose = new String[]{"购车贷款", "购房贷款", "网购贷款", "过桥短期资金", "装修贷款", "教育培训贷款", "旅游贷款", "三农贷款", "其他"};
+    private String[] purpose = new String[]{"购车贷款", "购房贷款", "网购贷款", "过桥短期资金", "装修贷款", "教育培训贷款", "旅游贷款",
+            "三农贷款", "其他"};
 
     private String[] cards_record = new String[]{"无信用记录", "应用记录良好", "少量逾期", "征信较差"};
 
@@ -84,6 +86,14 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
         personal_credit_no_taobao.setOnClickListener(this);
         personal_credit_purpose.setOnClickListener(this);
 
+        findViewById(R.id.personal_credit_degree_education_linea).setOnClickListener(this);
+        findViewById(R.id.personal_no_cards_linear).setOnClickListener(this);
+        findViewById(R.id.personal_no_cards_record_linear).setOnClickListener(this);
+        findViewById(R.id.personal_credit_liabilities_linear).setOnClickListener(this);
+        findViewById(R.id.personal_credit_no_loan_linear).setOnClickListener(this);
+        findViewById(R.id.personal_credit_no_taobao_linear).setOnClickListener(this);
+        findViewById(R.id.personal_credit_purpose_linear).setOnClickListener(this);
+
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
         TextView title_view = (TextView) findViewById(R.id.title_view);
@@ -113,7 +123,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
         map.put("creditcard", personal_no_cards.getText().toString());
         map.put("credit_record", personal_no_cards_record.getText().toString());
         map.put("liabilities_status", personal_credit_liabilities.getText().toString());
-        map.put("loan_record",personal_credit_no_loan.getText().toString());
+        map.put("loan_record", personal_credit_no_loan.getText().toString());
         map.put("taobao_id", personal_credit_no_taobao.getText().toString());
         map.put("loan_use", personal_credit_purpose.getText().toString());
         OkHttpManager.postAsync(HttpURL.getInstance().PERSONALDATACREDITADD, "user_credit_add", map, this);
@@ -123,6 +133,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.personal_credit_degree_education_linea:
             case R.id.personal_credit_degree_education://文化程度
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -132,6 +143,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                             "degree_education", mHandler, 1002);
                 }
                 break;
+            case R.id.personal_no_cards_linear:
             case R.id.personal_no_cards://有无信用卡
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -142,6 +154,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                             this.getString(R.string.name_loan_you), mHandler, 1006);
                 }
                 break;
+            case R.id.personal_no_cards_record_linear:
             case R.id.personal_no_cards_record://两年内应用记录
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -151,6 +164,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                             "credit_purpose", mHandler, 1001);
                 }
                 break;
+            case R.id.personal_credit_liabilities_linear:
             case R.id.personal_credit_liabilities://负债情况
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -160,6 +174,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                             this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), mHandler, 1003);
                 }
                 break;
+            case R.id.personal_credit_no_loan_linear:
             case R.id.personal_credit_no_loan://有无成功贷款情况
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -169,6 +184,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                             this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), mHandler, 1004);
                 }
                 break;
+            case R.id.personal_credit_no_taobao_linear:
             case R.id.personal_credit_no_taobao://是否实名淘宝
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -178,6 +194,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                             this.getString(R.string.name_loan_wu), this.getString(R.string.name_loan_you), mHandler, 1005);
                 }
                 break;
+            case R.id.personal_credit_purpose_linear:
             case R.id.personal_credit_purpose://贷款用途
                 if (TimeUtils.isFastDoubleClick()) {
                     return;

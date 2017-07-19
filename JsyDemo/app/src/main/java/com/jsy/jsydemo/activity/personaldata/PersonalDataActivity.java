@@ -86,7 +86,6 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         } else {
             personal_data_id.setText("");
         }
-
         personal_data_complete0 = (TextView) findViewById(R.id.personal_data_complete0);
         personal_data_complete1 = (TextView) findViewById(R.id.personal_data_complete1);
         personal_data_complete2 = (TextView) findViewById(R.id.personal_data_complete2);

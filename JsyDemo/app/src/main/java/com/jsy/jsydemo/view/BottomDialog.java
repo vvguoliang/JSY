@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class BottomDialog extends Dialog implements View.OnClickListener {
 	protected View view;
-	protected Map<Integer, View.OnClickListener> map = new HashMap<Integer, View.OnClickListener>();
+	protected Map<Integer, View.OnClickListener> map = new HashMap<>();
 	protected int width;
 	protected int height;
 

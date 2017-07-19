@@ -223,4 +223,6 @@ dependencies {
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     compile files('libs/zmxySDKALCmini_V1.01450366738902_release.jar')
     compile files('libs/open_sdk_r5793_lite.jar')
+    compile 'com.contrarywind:Android-PickerView:3.2.5'
+    compile 'com.google.code.gson:gson:2.8.1'
 }

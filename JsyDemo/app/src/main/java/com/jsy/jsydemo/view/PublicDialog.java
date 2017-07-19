@@ -31,17 +31,8 @@ import java.util.Map;
 
 public class PublicDialog extends Dialog {
 
-
-    public PublicDialog(@NonNull Context context) {
-        super(context);
-    }
-
     public PublicDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
-    }
-
-    protected PublicDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
-        super(context, cancelable, cancelListener);
     }
 
     public static class Builder {
