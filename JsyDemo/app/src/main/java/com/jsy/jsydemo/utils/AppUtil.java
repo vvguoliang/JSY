@@ -75,6 +75,7 @@ public class AppUtil {
     public final String IMAGE_TYPE = "image/*";
     public File mOutFile;//图片uri路径
     public File mImageFile = null;//图片file路径
+    public final int MY_PERMISSIONS_REQUEST_CONTACTS = 107;
 
 
     public Integer mBuildVersion = android.os.Build.VERSION.SDK_INT;//当前SDK版本

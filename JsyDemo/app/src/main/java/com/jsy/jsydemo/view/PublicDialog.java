@@ -97,16 +97,32 @@ public class PublicDialog extends Dialog {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         for (int i = 0; itemses.size() > i; i++) {
-                            if (i == position) {
-                                Map<String, Object> map = new HashMap<>();
-                                map.put("name", itemses.get(i).get("name"));
-                                map.put("boolean", "2");
-                                itemses.set(i, map);
+                            if (itemses.get(i).toString().contains("number")) {
+                                if (i == position) {
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.put("name", itemses.get(i).get("name"));
+                                    map.put("number", itemses.get(i).get("number"));
+                                    map.put("boolean", "2");
+                                    itemses.set(i, map);
+                                } else {
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.put("name", itemses.get(i).get("name"));
+                                    map.put("number", itemses.get(i).get("number"));
+                                    map.put("boolean", "1");
+                                    itemses.set(i, map);
+                                }
                             } else {
-                                Map<String, Object> map = new HashMap<>();
-                                map.put("name", itemses.get(i).get("name"));
-                                map.put("boolean", "1");
-                                itemses.set(i, map);
+                                if (i == position) {
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.put("name", itemses.get(i).get("name"));
+                                    map.put("boolean", "2");
+                                    itemses.set(i, map);
+                                } else {
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.put("name", itemses.get(i).get("name"));
+                                    map.put("boolean", "1");
+                                    itemses.set(i, map);
+                                }
                             }
                         }
                         String strings = SharedPreferencesUtils.saveInfo(context, itemses);

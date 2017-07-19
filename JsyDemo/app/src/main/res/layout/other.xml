@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/common_10dp"
@@ -15,9 +16,9 @@
         <LinearLayout
             android:id="@+id/loan_personal_linear"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,15 +36,19 @@
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp" />
 
-                <com.jsy.jsydemo.control.MyTextView
+                <com.jsy.jsydemo.control.MyEdittextView
                     android:id="@+id/other_relatives_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/common_10dp"
-                    android:layout_marginRight="@dimen/common_10dp"
-                    android:text="a北京车"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:gravity="center|right"
+                    android:hint="@string/name_loan_personal_loan_name"
+                    android:padding="@dimen/common_10dp"
                     android:textColor="@color/common_loan_personal"
-                    android:textSize="@dimen/common_14dp" />
+                    android:textColorHint="@color/common_gray"
+                    android:textSize="@dimen/common_14dp"
+                    tools:ignore="RtlHardcoded" />
 
 
                 <com.jsy.jsydemo.control.MyButton
@@ -86,7 +91,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:text="13717578792"
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp" />
 
@@ -100,9 +104,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_10dp"
-        android:visibility="gone"
         android:background="@color/white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,15 +129,19 @@
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp" />
 
-                <com.jsy.jsydemo.control.MyTextView
+                <com.jsy.jsydemo.control.MyEdittextView
                     android:id="@+id/other_contacts_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/common_10dp"
-                    android:layout_marginRight="@dimen/common_10dp"
-                    android:text="a北京车"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:gravity="center|right"
+                    android:hint="@string/name_loan_personal_loan_name"
+                    android:padding="@dimen/common_10dp"
                     android:textColor="@color/common_loan_personal"
-                    android:textSize="@dimen/common_14dp" />
+                    android:textColorHint="@color/common_gray"
+                    android:textSize="@dimen/common_14dp"
+                    tools:ignore="RtlHardcoded" />
 
 
                 <com.jsy.jsydemo.control.MyButton
@@ -176,7 +184,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:text="13717578792"
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp" />
 

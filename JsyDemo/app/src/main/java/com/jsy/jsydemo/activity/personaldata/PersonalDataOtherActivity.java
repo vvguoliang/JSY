@@ -3,17 +3,22 @@ package com.jsy.jsydemo.activity.personaldata;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jsy.jsydemo.EntityClass.ContactInfo;
 import com.jsy.jsydemo.R;
@@ -21,6 +26,8 @@ import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
@@ -42,17 +49,19 @@ import okhttp3.Request;
 
 public class PersonalDataOtherActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
-    private TextView other_relatives_name;
+    private EditText other_relatives_name;
 
     private TextView other_relatives_phone;
 
-    private TextView other_contacts_name;
+    private EditText other_contacts_name;
 
     private TextView other_contacts_phone;
 
-    private boolean aBoolean = false;
+    private UserCenterRealize userCenterRealize = new UserCenterRealize();
 
-    private List<ContactInfo> result = null;
+    private int id = 0;
+
+    private String[] get = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +81,12 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
                 getHttpCredit();
                 break;
             case R.id.other_relatives_wathet:
-                aBoolean = true;
-                getContactID();
+                id = 1;
+                userCenterRealize.startPhone(PersonalDataOtherActivity.this, mHandler, id);
                 break;
             case R.id.other_contacts_wathet:
-                aBoolean = false;
-                getContactID();
+                id = 2;
+                userCenterRealize.startPhone(PersonalDataOtherActivity.this, mHandler, id);
                 break;
         }
 
@@ -95,9 +104,9 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
         findViewById(R.id.other_relatives_wathet).setOnClickListener(this);
         findViewById(R.id.other_contacts_wathet).setOnClickListener(this);
 
-        other_relatives_name = (TextView) findViewById(R.id.other_relatives_name);
+        other_relatives_name = (EditText) findViewById(R.id.other_relatives_name);
         other_relatives_phone = (TextView) findViewById(R.id.other_relatives_phone);
-        other_contacts_name = (TextView) findViewById(R.id.other_contacts_name);
+        other_contacts_name = (EditText) findViewById(R.id.other_contacts_name);
         other_contacts_phone = (TextView) findViewById(R.id.other_contacts_phone);
 
         findViewById(R.id.loan_personal_linear).setVisibility(View.VISIBLE);
@@ -142,51 +151,6 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == 0) {
-                Uri uri = data.getData();
-                String[] contacts = getPhoneContacts(uri);
-                if (aBoolean) {
-                    other_relatives_name.setText(contacts[0]);
-                    other_relatives_phone.setText(contacts[1]);
-                } else {
-                    other_contacts_name.setText(contacts[0]);
-                    other_contacts_phone.setText(contacts[1]);
-                }
-            }
-        }
-    }
-
-    private String[] getPhoneContacts(Uri uri) {
-        String[] contact = new String[2];
-        //得到ContentResolver对象
-        ContentResolver cr = getContentResolver();
-        //取得电话本中开始一项的光标
-        Cursor cursor = cr.query(uri, null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-            //取得联系人姓名
-            int nameFieldColumnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-            contact[0] = cursor.getString(nameFieldColumnIndex);
-            //取得电话号码
-            String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-            Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
-            if (phone != null) {
-                phone.moveToFirst();
-                contact[1] = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            }
-            phone.close();
-            cursor.close();
-        } else {
-            return null;
-        }
-        return contact;
-    }
-
-    @Override
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "other_list":
@@ -212,45 +176,6 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
         }
     }
 
-    private void getContactID() {
-        // 获取联系人数据
-        ContentResolver cr = this.getContentResolver();//获取所有电话信息（而不是联系人信息），这样方便展示
-        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
-        String[] projection = {
-                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,// 姓名
-                ContactsContract.CommonDataKinds.Phone.NUMBER,// 电话号码
-        };
-        Cursor cursor = cr.query(uri, projection, null, null, null);
-        if (cursor == null) {
-            return;
-        }//最终要返回的数据
-        result = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            String name = cursor.getString(0);
-            String number = cursor.getString(1);
-            //保存到对象里
-            ContactInfo info = new ContactInfo();
-            info.setName(name);
-            info.setNumber(number);
-            //保存到集合里
-            result.add(info);
-        }//用完记得关闭
-        cursor.close();
-        if (TimeUtils.isFastDoubleClick()) {
-            return;
-        } else {
-            if (aBoolean) {
-                //弹出Toast或者Dialog
-                ShowDialog.getInstance().getDialog(this, getCursor(result),
-                        "cursor", mHandler, 100);
-            } else {
-                //弹出Toast或者Dialog
-                ShowDialog.getInstance().getDialog(this, getCursor(result),
-                        "cursor", mHandler, 101);
-            }
-        }
-    }
-
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
@@ -258,36 +183,28 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
             super.handleMessage(msg);
             switch (msg.what) {
                 case 100:
-                    for (int i = 0; result.size() > i; i++) {
-                        if (result.get(i).getName().equals(msg.obj.toString())) {
-                            other_relatives_phone.setText(result.get(i).getNumber());
-                            other_relatives_name.setText(result.get(i).getName());
-                        }
-                    }
+                    get = msg.obj.toString().split(",");
+                    other_relatives_phone.setText(get[1]);
+                    other_relatives_name.setText(get[0]);
                     break;
                 case 101:
-                    for (int i = 0; result.size() > i; i++) {
-                        if (result.get(i).getName().equals(msg.obj.toString())) {
-                            other_contacts_phone.setText(result.get(i).getNumber());
-                            other_contacts_name.setText(result.get(i).getName());
-                        }
-                    }
+                    get = msg.obj.toString().split(",");
+                    other_relatives_phone.setText(get[1]);
+                    other_relatives_name.setText(get[0]);
                     break;
-
             }
         }
     };
 
-
-    private List<Map<String, Object>> getCursor(List<ContactInfo> contactInfoList) {
-        List<Map<String, Object>> mapList = new ArrayList<>();
-        for (int i = 0; contactInfoList.size() > i; i++) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", contactInfoList.get(i).getName());
-            map.put("number", contactInfoList.get(i).getNumber());
-            map.put("boolean", "1");
-            mapList.add(map);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_CONTACTS) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.getContactID(PersonalDataOtherActivity.this, mHandler, id);
+            } else {
+                Toast.makeText(this, "请授予联系人权限", Toast.LENGTH_SHORT).show();
+            }
         }
-        return mapList;
     }
 }

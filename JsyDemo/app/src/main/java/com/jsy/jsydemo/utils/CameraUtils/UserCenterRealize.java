@@ -3,6 +3,7 @@ package com.jsy.jsydemo.utils.CameraUtils;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -11,22 +12,31 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.jsy.jsydemo.EntityClass.ContactInfo;
 import com.jsy.jsydemo.interfaces.UserCenterModel;
 import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
+import com.jsy.jsydemo.utils.TimeUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by vvguoliang on 2017/7/1.
- *
+ * <p>
  * 授权+拍照和剪切
  */
 
@@ -198,4 +208,74 @@ public class UserCenterRealize implements UserCenterModel {
         return uri;
     }
 
+    @Override
+    public void startPhone(Context context, Handler mHandler, int booint) {
+        Activity activity = (Activity) context;
+        if (AppUtil.getInstance().mBuildVersion >= 23) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                //申请联系人权限  允许程序读取用户联系人数据
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_CONTACTS},
+                        AppUtil.getInstance().MY_PERMISSIONS_REQUEST_CONTACTS);
+            } else {
+                getContactID(activity, mHandler, booint);
+            }
+        } else {
+            getContactID(activity, mHandler, booint);
+        }
+    }
+
+    @Override
+    public void getContactID(Activity activity, Handler mHandler, int booint) {
+        // 获取联系人数据
+        ContentResolver cr = activity.getContentResolver();//获取所有电话信息（而不是联系人信息），这样方便展示
+        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+        String[] projection = {
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,// 姓名
+                ContactsContract.CommonDataKinds.Phone.NUMBER,// 电话号码
+        };
+        Cursor cursor = cr.query(uri, projection, null, null, null);
+        if (cursor == null) {
+            return;
+        }//最终要返回的数据
+        result = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(0);
+            String number = cursor.getString(1);
+            //保存到对象里
+            ContactInfo info = new ContactInfo();
+            info.setName(name);
+            info.setNumber(number);
+            //保存到集合里
+            result.add(info);
+        }//用完记得关闭
+        cursor.close();
+        if (TimeUtils.isFastDoubleClick()) {
+            return;
+        } else {
+            if (booint == 1) {
+                //弹出Toast或者Dialog
+                ShowDialog.getInstance().getDialog(activity, getCursor(result),
+                        "cursor", mHandler, 100);
+            } else {
+                //弹出Toast或者Dialog
+                ShowDialog.getInstance().getDialog(activity, getCursor(result),
+                        "cursor", mHandler, 101);
+            }
+        }
+    }
+
+    private List<ContactInfo> result = null;
+
+    private List<Map<String, Object>> getCursor(List<ContactInfo> contactInfoList) {
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        for (int i = 0; contactInfoList.size() > i; i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", contactInfoList.get(i).getName());
+            map.put("number", contactInfoList.get(i).getNumber());
+            map.put("boolean", "1");
+            mapList.add(map);
+        }
+        return mapList;
+    }
 }

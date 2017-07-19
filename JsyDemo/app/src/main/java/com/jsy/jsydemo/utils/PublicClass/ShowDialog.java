@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -174,7 +175,11 @@ public class ShowDialog implements Serializable {
                     if (finalList.get(i).get("boolean").equals("2")) {
                         Message message = new Message();
                         message.what = what;
-                        message.obj = finalList.get(i).get("name").toString();
+                        if (!finalList.get(i).toString().contains("number")) {
+                            message.obj = finalList.get(i).get("name").toString();
+                        } else {
+                            message.obj = finalList.get(i).get("name").toString() + "," + finalList.get(i).get("number").toString();
+                        }
                         mHandler.dispatchMessage(message);
                     }
                 }
