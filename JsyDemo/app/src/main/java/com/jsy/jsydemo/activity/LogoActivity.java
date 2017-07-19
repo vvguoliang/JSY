@@ -20,6 +20,7 @@ import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.CountDownTimerUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
@@ -78,6 +79,12 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_logo);
+        //沉浸式状态设置
+        if (ImmersiveUtils.BuildVERSION()) {
+            setTranslucentStatus(true);
+        } else {
+
+        }
         findViewById();
         initView();
     }

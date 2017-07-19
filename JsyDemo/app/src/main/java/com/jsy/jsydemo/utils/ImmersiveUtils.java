@@ -47,8 +47,6 @@ public class ImmersiveUtils {
                 decorView.removeView(decorView.findViewById(STATE_BAR_ID));
             }
             decorView.addView(statusView);
-        } else {
-
         }
     }
 
@@ -214,7 +212,7 @@ public class ImmersiveUtils {
      * 小米 魅族 版本 的判断返回 true 或者 false
      */
     public static boolean BuildVERSION() {
-        if (Build.VERSION.SDK_INT >= 23 || Build.BRAND.contains("Meizu") || Build.BRAND.contains("Xiaomi")) {
+        if (Build.VERSION.SDK_INT >= 19 || Build.BRAND.contains("Meizu") || Build.BRAND.contains("Xiaomi")) {
             return true;
         }
         return false;
