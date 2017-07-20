@@ -23,7 +23,6 @@ import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
-import com.jsy.jsydemo.view.BottomDialog;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;

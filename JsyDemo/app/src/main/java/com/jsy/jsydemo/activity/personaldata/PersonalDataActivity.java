@@ -127,6 +127,9 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * 个人资料拉去
+     */
     private void getHttpstater() {
         if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
             Map<String, Object> map = new HashMap<>();
