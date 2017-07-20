@@ -84,7 +84,7 @@ public class ShareWxapTencent implements View.OnClickListener {
     private Bitmap thumb = null;
 
     private void getShare() {
-        api = WXAPIFactory.createWXAPI(mActivity, "wx063dfcc3aee6e094", false);
+        api = WXAPIFactory.createWXAPI(mActivity, "wx43b913bd07fb3715", false);
         api.registerApp("wx063dfcc3aee6e094");
 
         mTencent = Tencent.createInstance("1106281166", mActivity);

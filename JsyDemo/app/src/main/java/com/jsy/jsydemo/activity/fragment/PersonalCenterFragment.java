@@ -159,11 +159,14 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
         if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
             if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "username", "").toString())) {
                 personal_logo.setText(SharedPreferencesUtils.get(mActivity, "username", "").toString());
+                findViewById(R.id.personal_logo_image).setVisibility(View.GONE);
             } else {
                 personal_logo.setText(SharedPreferencesUtils.get(mActivity, "uid", "").toString());
+                findViewById(R.id.personal_logo_image).setVisibility(View.GONE);
             }
         } else {
             personal_logo.setText(mActivity.getString(R.string.name_loan_personal_logn));
+            findViewById(R.id.personal_logo_image).setVisibility(View.VISIBLE);
         }
         MobclickAgent.onPageStart("PersonalCenterFragment"); //统计页面，"MainScreen"为页面名称，可自定义
     }

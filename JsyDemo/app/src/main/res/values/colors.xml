@@ -34,4 +34,7 @@
     <color name="common_Blue">#E6F2FF</color>
     <color name="common_grey_disabled">#aabbc4</color>
     <color name="common_grey_color">#e1e1e1</color>
+    <color name="common_operator_color">#0B0B0B</color>
+    <color name="common_operator_text_color">#4C4C4C</color>
+    <color name="common_operator_clause_color">#2F5493</color>
 </resources>

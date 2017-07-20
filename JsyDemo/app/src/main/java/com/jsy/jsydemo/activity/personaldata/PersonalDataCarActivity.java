@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
@@ -35,7 +36,7 @@ import okhttp3.Request;
 public class PersonalDataCarActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private TextView car_estate;
-    private TextView car_new_car;
+    private EditText car_new_car;
     private TextView car_life;
     private TextView car_mortgage;
     private TextView car_no_mortgage;
@@ -53,6 +54,7 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.car_estate_linear:
             case R.id.car_estate:
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -60,8 +62,7 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                     ShowDialog.getInstance().getDialog(this, getcar_estate(), "car_estate", mHandler, 1001);
                 }
                 break;
-            case R.id.car_new_car:
-                break;
+            case R.id.car_life_linear:
             case R.id.car_life:
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -69,6 +70,7 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                     ShowDialog.getInstance().getDialog(this, getcar_life(), "car_life", mHandler, 1000);
                 }
                 break;
+            case R.id.car_mortgage_linear:
             case R.id.car_mortgage:
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -78,6 +80,7 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                             this.getString(R.string.name_loan_you), mHandler,1002);
                 }
                 break;
+            case R.id.car_no_mortgage_linear:
             case R.id.car_no_mortgage:
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -108,17 +111,21 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
         title_view.setText(this.getString(R.string.name_loan_personal_data_car_production));
 
         car_estate = (TextView) findViewById(R.id.car_estate);
-        car_new_car = (TextView) findViewById(R.id.car_new_car);
+        car_new_car = (EditText) findViewById(R.id.car_new_car);
         car_life = (TextView) findViewById(R.id.car_life);
         car_mortgage = (TextView) findViewById(R.id.car_mortgage);
         car_no_mortgage = (TextView) findViewById(R.id.car_no_mortgage);
 
         getHttp();
         car_estate.setOnClickListener(this);
-        car_new_car.setOnClickListener(this);
         car_life.setOnClickListener(this);
         car_mortgage.setOnClickListener(this);
         car_no_mortgage.setOnClickListener(this);
+
+        findViewById(R.id.car_estate_linear).setOnClickListener(this);
+        findViewById(R.id.car_life_linear).setOnClickListener(this);
+        findViewById(R.id.car_mortgage_linear).setOnClickListener(this);
+        findViewById(R.id.car_no_mortgage_linear).setOnClickListener(this);
 
     }
 

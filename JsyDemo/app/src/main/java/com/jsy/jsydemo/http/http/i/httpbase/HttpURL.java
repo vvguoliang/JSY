@@ -43,6 +43,7 @@ public class HttpURL implements Serializable {
 
     public String HTTP_URL_PATH = "http://app.jishiyu11.cn/data/upload";
 
+    public String HTTP_OPERATOR = "http://api.tanzhishuju.com/api/gateway";
 
     public void initUrl(Context context) {
         if (SharedPreferencesUtils.contains(context, HTTP_URL_KEY)) {
@@ -136,6 +137,10 @@ public class HttpURL implements Serializable {
     public String BASEADD = HTTP_URL + "&m=userdetail&a=base_add";
 
     public String PRODUCTINDEX = HTTP_URL + "&m=product&a=index";
+
+    public String USERDATAIL = HTTP_URL + "&m=userdetail&a=isAuth";
+
+    public String USERDATAILAUTH = HTTP_URL + "&m=userdetail&a=mobile_auth";
 
 
 }

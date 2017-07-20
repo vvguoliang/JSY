@@ -78,6 +78,7 @@
     <string name="name_loan_car_mortgage">目前该车是否存在按揭</string>
     <string name="name_loan_car_no_mortgage">目前该车是否存抵押</string>
     <string name="name_loan_operator_no_authorization">未授权</string>
+    <string name="name_loan_operator_authorization">授权成功</string>
     <string name="name_loan_set_up_about">关于我们</string>
     <string name="name_loan_set_up_password">修改密码</string>
     <string name="name_loan_set_up_sign_out">安全退出</string>
@@ -203,6 +204,15 @@
     <string name="dialog_bottom_urban_area">请选择省市区</string>
     <string name="dialog_bottom_determine">确定</string>
 
-
+    <string name="operator_text_phone">仅支持本人实名认证的手机号</string>
+    <string name="operator_service_password">服务密码</string>
+    <string name="operator_phone_service_password">请输入电话服务密码</string>
+    <string name="operator_password_locking">请谨慎输入,多次输入错误会导致账号锁定</string>
+    <string name="operator_no_password">忘记密码?</string>
+    <string name="operator_clause">《授权服务条款》</string>
+    <string name="operator_agree">同意</string>
+    <string name="operator_grant">运营商授权</string>
+    <string name="operator_text">正在登入....\n完成登入过程大约需要 30s\n登入过程中需要输入短信验证码,请勿关闭页面</string>
+    <string name="operator_text_result">登入完成,正在同步...\n离开页面不会影响授权结果</string>
 
 </resources>

@@ -108,6 +108,10 @@
             android:name=".activity.SpeedLoanDetailsListActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".activity.helpFeedbackFriendsMyPackage.OperatorActivity"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"
@@ -213,7 +217,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 允许相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 添加操作联系人的权限
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     -->

@@ -17,6 +17,7 @@ import com.android.moblie.zmxy.antgroup.creditsdk.app.CreditApp;
 import com.android.moblie.zmxy.antgroup.creditsdk.app.ICreditListener;
 import com.jsy.jsydemo.EntityClass.LoanDatailsData;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.OperatorActivity;
 import com.jsy.jsydemo.activity.personaldata.PersonalDataCertificatesActivity;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
@@ -116,7 +117,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.loan_details_phone_operator://运营商
-                getSIGNPhone();
+                startActivityForResult(new Intent(LoanDetailsActivity.this, OperatorActivity.class), 1000);
                 break;
             case R.id.loan_details_basic_information://基础信息认证
                 startActivity(new Intent(LoanDetailsActivity.this, BasicAuthenticationActivity.class));
@@ -195,29 +196,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         OkHttpManager.postAsync(HttpURL.getInstance().PRODUCT_DETAIL, "product_detail", map, this);
     }
 
-    private void getSIGNPhone() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("apiKey", "0618854278903691");
-        map.put("version", "1.0.0");
-        map.put("method", "api.mobile.get");
-        map.put("mobileNo", SharedPreferencesUtils.get(this, "username", "").toString());
-        OkHttpManager.postAsync(HttpURL.getInstance().SIGN, "product_phone", map, this);
-    }
-
-    private void getSIGN() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("apiKey", "0618854278903691");
-        map.put("version", "1.0.0");
-        map.put("method", "api.mobile.get");
-        map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
-        map.put("identityName", SharedPreferencesUtils.get(this, "realname", "").toString());
-        map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
-        map.put("password", Base64.encodeToString(
-                SharedPreferencesUtils.get(this, "password", "").toString().getBytes(), Base64.DEFAULT));
-        map.put("contentType", "alls");
-        OkHttpManager.postAsync(HttpURL.getInstance().SIGN, "product_sign", map, this);
-    }
-
     private void getSesameCredit() {
         Map<String, Object> map = new HashMap<>();
         map.put("identity_type", "1");
@@ -244,9 +222,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             case "product_sign":
 
                 break;
-            case "product_http":
-                Log.e("", "=====" + request);
-                break;
         }
 
     }
@@ -254,8 +229,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     @SuppressLint("SetTextI18n")
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-        Map<String, Object> map = null;
-        String sgin = "";
         switch (name) {
             case "product_detail":
                 loanDatailsData = JsonData.getInstance().getJsonLoanDailsData(result);
@@ -339,39 +312,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 } else {
                     oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                 }
-                break;
-            case "product_sign":
-                JSONObject object1 = new JSONObject(result);
-                object1 = new JSONObject(object1.optString("data"));
-                sgin = object1.optString("sign");
-                map = new HashMap<>();
-                map.put("apiKey", "0618854278903691");
-                map.put("version", "1.0.0");
-                map.put("sgin", sgin);
-                map.put("method", "api.mobile.get");
-                map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
-                map.put("identityName", SharedPreferencesUtils.get(this, "realname", "").toString());
-                map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
-                map.put("password", Base64.encodeToString(
-                        SharedPreferencesUtils.get(this, "password", "").toString().getBytes(), Base64.DEFAULT));
-                map.put("contentType", "alls");
-                OkHttpManager.postAsync("http://api.tanzhishuju.com/api/gateway", "product_http", map, this);
-                break;
-            case "product_http":
-                Log.e("", "=====" + result);
-                break;
-            case "product_phone":
-                JSONObject object2 = new JSONObject(result);
-                object1 = new JSONObject(object2.optString("data"));
-                sgin = object1.optString("sign");
-                map = new HashMap<>();
-                map.put("apiKey", "0618854278903691");
-                map.put("version", "1.0.0");
-                map.put("method", "api.mobile.get");
-                map.put("sign", sgin);
-                map.put("mobileNo", SharedPreferencesUtils.get(this, "username", "").toString());
-                OkHttpManager.postAsync("http://api.tanzhishuju.com/api/gateway", "product_http", map, this);
-
                 break;
         }
 
@@ -458,6 +398,15 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000) {
+            String datastring = data.getExtras().getString("operator");
+            if (datastring.equals("1")) {
+                loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
+            } else {
+                loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+            }
+            return;
+        }
         creditApp.onActivityResult(requestCode, resultCode, data);
     }
 

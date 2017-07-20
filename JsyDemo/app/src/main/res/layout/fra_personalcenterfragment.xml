@@ -41,6 +41,7 @@
             tools:ignore="RtlHardcoded" />
 
         <ImageView
+            android:id="@+id/personal_logo_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
