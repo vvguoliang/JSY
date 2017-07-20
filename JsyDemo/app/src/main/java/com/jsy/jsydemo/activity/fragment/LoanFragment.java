@@ -20,6 +20,7 @@ import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.HomeProductList;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.SpeedLoanDetailsListActivity;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.activity.SpeedLoanActivity;
 import com.jsy.jsydemo.adapter.BannerLoopAdapter;
@@ -358,6 +359,9 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                 mActivity.startActivity(new Intent(mActivity, SpeedLoanActivity.class));
                 break;
             case R.id.loan_speed1_linear:
+                Intent intent = new Intent(mActivity, SpeedLoanDetailsListActivity.class);
+                intent.putExtra("type", 0);
+                mActivity.startActivity(intent);
                 break;
             case R.id.loan_speed2_linear:
                 intent = new Intent(mActivity, LoanWebViewActivity.class);

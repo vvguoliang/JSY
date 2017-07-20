@@ -60,17 +60,27 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.title_image:
+                finish();
+                break;
+        }
     }
 
     @Override
     protected void findViewById() {
-        getHttp();
+        TextView title_view = (TextView) findViewById(R.id.title_view);
+        if (type == 0) {
+            title_view.setText(this.getString(R.string.name_Loan_recommend));
+            getHttpIndex();
+        } else {
+            title_view.setText(this.getString(R.string.name_loan_speed_loan_x));
+            getHttp();
+        }
+        findViewById(R.id.title_image).setOnClickListener(this);
+        findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         mHandler = new Handler();
         mAdapter = new SpeedLoanDetailsListAdapter(this);
-
-        TextView title_view = (TextView) findViewById(R.id.title_view);
-        title_view.setText(this.getString(R.string.name_loan_speed_loan_x));
 
         mAdapter.removeHeader();
         //添加footer
@@ -135,6 +145,10 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
         OkHttpManager.postAsync(HttpURL.getInstance().PRODUCT_FILTER, "product_filter", map, this);
     }
 
+    private void getHttpIndex() {
+        OkHttpManager.postAsync(HttpURL.getInstance().PRODUCTINDEX, "product_filter", null, this);
+    }
+
     @Override
     protected void initView() {
 
@@ -151,6 +165,7 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
     @Override
     public void requestSuccess(String result, String name) throws Exception {
         if (name.equals("product_filter")) {
+
             SpeedLoanDetailsListDataList loanDetailsListData = JsonData.getInstance().getJsonSpeedLoanDetailsList(result);
             speedLoanDetailsListData = new SpeedLoanDetailsListData[loanDetailsListData.getLoanDetailsListData().size()];
             for (int i = 0; loanDetailsListData.getLoanDetailsListData().size() > i; i++) {
