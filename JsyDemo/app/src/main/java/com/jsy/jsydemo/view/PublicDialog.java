@@ -87,7 +87,8 @@ public class PublicDialog extends Dialog {
             // instantiate the dialog with the custom Theme
             final PublicDialog dialog = new PublicDialog(context, R.style.Dialog);
             @SuppressLint("InflateParams") View layout = inflater.inflate(R.layout.dialog_normal_layout, null);
-            dialog.addContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            dialog.addContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
             // set the dialog title
             ListView select_dialog_listview = (ListView) layout.findViewById(R.id.select_dialog_listview);
             if (itemseButtonClickListener != null) {

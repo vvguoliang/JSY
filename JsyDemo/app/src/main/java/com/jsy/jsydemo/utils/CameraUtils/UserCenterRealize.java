@@ -265,6 +265,29 @@ public class UserCenterRealize implements UserCenterModel {
         }
     }
 
+    @Override
+    public void startPhoneDial(Context context, String phone) {
+        Activity activity = (Activity) context;
+        if (AppUtil.getInstance().mBuildVersion >= 23) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                //申请联系人权限  允许程序读取用户联系人数据
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE},
+                        AppUtil.getInstance().MY_PERMISSIONS_PHONE_DIAL);
+            } else {
+                getPhoneDial(activity, phone);
+            }
+        } else {
+            getPhoneDial(activity, phone);
+        }
+    }
+
+    @Override
+    public void getPhoneDial(Context context, String phone) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
     private List<ContactInfo> result = null;
 
     private List<Map<String, Object>> getCursor(List<ContactInfo> contactInfoList) {

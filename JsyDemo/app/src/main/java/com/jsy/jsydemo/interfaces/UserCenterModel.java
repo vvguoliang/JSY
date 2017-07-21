@@ -77,4 +77,18 @@ public interface UserCenterModel {
      * @param activity
      */
     void getContactID(Activity activity, Handler mHandler,int booint);
+
+    /**
+     *  拨打电话权限
+     * @param context
+     */
+    void startPhoneDial(Context context , String phone);
+
+    /**
+     * 进行拨打电话
+     * @param context
+     * @param phone
+     */
+    void getPhoneDial(Context context , String phone);
+
 }

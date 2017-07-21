@@ -1,6 +1,7 @@
 package com.jsy.jsydemo.utils.PublicClass;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
@@ -10,11 +11,14 @@ import android.view.View;
 import android.widget.Button;
 
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.OperatorActivity;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.view.BottomDialog;
 import com.jsy.jsydemo.view.PublicDialog;
+import com.jsy.jsydemo.view.PublicEditTextDialog;
+import com.jsy.jsydemo.view.PublicPhoneDialog;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -189,5 +193,40 @@ public class ShowDialog implements Serializable {
         builder.create().show();
     }
 
+    /**
+     *   传递参数
+     * @param context
+     * @param title
+     * @param msg
+     * @param type
+     * @param id
+     * @param mHandler
+     */
+    public void getEdiText(final Context context, String title, String msg, final int type, final String id, final Handler mHandler) {
+        PublicEditTextDialog.Builder builder = new PublicEditTextDialog.Builder(context, type, id);
+        builder.setTitle(title);
+        builder.setEditTitle(msg);
+        builder.setContentViewCancel("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Message message = new Message();
+                message.what = type;
+                message.obj = "1";
+                mHandler.sendMessage(message);
+                dialog.dismiss();
+            }
+        });
+        builder.setContentViewDetermine("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Message message = new Message();
+                message.what = type;
+                message.obj = SharedPreferencesUtils.get(context, id, "").toString();
+                mHandler.sendMessage(message);
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
 
 }

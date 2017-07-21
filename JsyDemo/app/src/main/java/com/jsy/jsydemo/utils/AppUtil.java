@@ -76,9 +76,17 @@ public class AppUtil {
     public File mOutFile;//图片uri路径
     public File mImageFile = null;//图片file路径
     public final int MY_PERMISSIONS_REQUEST_CONTACTS = 107;
+    public final int MY_PERMISSIONS_PHONE_DIAL= 108;
 
 
     public Integer mBuildVersion = android.os.Build.VERSION.SDK_INT;//当前SDK版本
+
+
+    public String PHONE_MOVE = "10086";
+
+    public String PHONE_UNICOM = "10010";
+
+    public String PHONE_TELECOM = "10000";
 
 
     /**
