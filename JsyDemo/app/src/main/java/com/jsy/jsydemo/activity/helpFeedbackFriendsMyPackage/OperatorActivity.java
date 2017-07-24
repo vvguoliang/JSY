@@ -38,6 +38,8 @@ import com.jsy.jsydemo.view.PublicPhoneDialog;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -87,6 +89,8 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
     private String isID = "isID";
 
     private boolean booType = false;
+
+    private Handler handler = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,7 +186,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
         });
         operator_submit_button.setOnClickListener(this);
         operator_no_password.setOnClickListener(this);
-        mHandler = new Handler();
+        handler = new Handler();
     }
 
     @Override
@@ -218,28 +222,51 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
         OkHttpManager.postAsync(HttpURL.getInstance().HTTP_OPERATOR, "product_http", map, this);
     }
 
-    /**
-     * 请求探知手机归属地
-     */
-    private void getOperator() {
+    private void getSINGOPerator() {
         if (TextUtils.isEmpty(SharedPreferencesUtils.get(this, "idcard", "").toString())) {
             ShowDialog.getInstance().getEdiText(this, "需要输入身份证号", "身份证号:", 1004, "idcard", mHandler);
         } else if (TextUtils.isEmpty(SharedPreferencesUtils.get(this, "realname", "").toString())) {
             ShowDialog.getInstance().getEdiText(this, "需要输入姓名", "姓名:", 1004, "realname", mHandler);
         }
-
         Map<String, Object> map = new HashMap<>();
         map.put("apiKey", "0618854278903691");
         map.put("version", "1.0.0");
-        map.put("sign", sgin);
-        map.put("method", "api.mobile.get");
+        map.put("method", "api.mobile.area");
         map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
-        map.put("identityName", SharedPreferencesUtils.get(this, "realname", "").toString());
+        try {
+            map.put("identityName", URLEncoder.encode(
+                    SharedPreferencesUtils.get(this, "realname", "").toString(),"utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
         map.put("password", Base64.encodeToString(operator_password.getText().toString().getBytes(), Base64.DEFAULT));
         map.put("contentType", "busi");
         map.put("otherInfo", otherInfo);
-        OkHttpManager.postAsync(HttpURL.getInstance().HTTP_OPERATOR, "product_content", map, this);
+        OkHttpManager.postAsync(HttpURL.getInstance().SIGN, "product_phone_content", map, this);
+    }
+
+    /**
+     * 请求探知手机归属地
+     */
+    private void getOperator() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("apiKey", "0618854278903691");
+        map.put("version", "1.0.0");
+        map.put("method", "api.mobile.area");
+        map.put("sign", sgin);
+        map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
+        try {
+            map.put("identityName", URLEncoder.encode(
+                    SharedPreferencesUtils.get(this, "realname", "").toString(),"utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
+        map.put("password", Base64.encodeToString(operator_password.getText().toString().getBytes(), Base64.DEFAULT));
+        map.put("contentType", "busi");
+        map.put("otherInfo", otherInfo);
+        OkHttpManager.postAsync(HttpURL.getInstance().HTTP_OPERATOR, "product_content_content", map, this);
     }
 
     @Override
@@ -259,20 +286,20 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-        JSONObject object1;
+        JSONObject object;
         switch (name) {
             case "product_phone":
-                JSONObject object2 = new JSONObject(result);
-                object1 = new JSONObject(object2.optString("data"));
-                sgin = object1.optString("sign");
+                object = new JSONObject(result);
+                object = new JSONObject(object.optString("data"));
+                sgin = object.optString("sign");
                 getProductHttp();
                 break;
             case "product_http":
                 if (TextUtils.isEmpty(result)) {
-                    mHandler.postAtTime(runnable, 1000);
+                    handler.postAtTime(runnable, 1000);
                 } else {
-                    mHandler.removeCallbacks(runnable);
-                    JSONObject object = new JSONObject(result);
+                    handler.removeCallbacks(runnable);
+                    object = new JSONObject(result);
                     type = object.optString("type");
                     String province = object.optString("province");
                     if (object.optString("code").equals("0000")) {
@@ -327,8 +354,14 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                     }
                 }
                 break;
-            case "product_content":
+            case "product_content_content":
                 Log.e("", "");
+                break;
+            case "product_phone_content":
+                object = new JSONObject(result);
+                object = new JSONObject(object.optString("data"));
+                sgin = object.optString("sign");
+                getOperator();
                 break;
         }
     }
@@ -351,7 +384,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                         } else {
                             booType = false;
                             otherInfo = msg.obj.toString();
-                            getOperator();
+                            getSINGOPerator();
                         }
                     }
                     break;
