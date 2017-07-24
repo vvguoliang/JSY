@@ -235,7 +235,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
         map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
         try {
             map.put("identityName", URLEncoder.encode(
-                    SharedPreferencesUtils.get(this, "realname", "").toString(),"utf-8"));
+                    SharedPreferencesUtils.get(this, "realname", "").toString(), "utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -258,7 +258,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
         map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
         try {
             map.put("identityName", URLEncoder.encode(
-                    SharedPreferencesUtils.get(this, "realname", "").toString(),"utf-8"));
+                    SharedPreferencesUtils.get(this, "realname", "").toString(), "utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
