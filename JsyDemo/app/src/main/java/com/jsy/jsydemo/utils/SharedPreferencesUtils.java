@@ -252,24 +252,8 @@ public class SharedPreferencesUtils {
      * myLoginData @return: void @throws
      */
     public static void logoutSuccess(Context content) {
-        SharedPreferencesUtils.shareremvo(content, "id");
-        SharedPreferencesUtils.shareremvo(content, "user_name");
-        SharedPreferencesUtils.shareremvo(content, "real_name");
-        SharedPreferencesUtils.shareremvo(content, "moblie");
-        SharedPreferencesUtils.shareremvo(content, "sex");
-        SharedPreferencesUtils.shareremvo(content, "idcard");
-        SharedPreferencesUtils.shareremvo(content, "idcard_true");
-        SharedPreferencesUtils.shareremvo(content, "friend_id");
-        SharedPreferencesUtils.shareremvo(content, "canlogin");
-        SharedPreferencesUtils.shareremvo(content, "cashing");
-        SharedPreferencesUtils.shareremvo(content, "type");
-        SharedPreferencesUtils.shareremvo(content, "micon");
-        SharedPreferencesUtils.shareremvo(content, "singnet_status");//用户存管状态
-        SharedPreferencesUtils.shareremvo(content, "singnet_action");//用户形为
-        SharedPreferencesUtils.shareremvo(content, "depositState");//用户形为
-        SharedPreferencesUtils.shareremvo(content, "timemillis");//用户形为
-
-        //移除Mid
-        SharedPreferencesUtils.shareremvo(content, "Mid");
+        SharedPreferencesUtils.shareremvo(content, "username");
+        SharedPreferencesUtils.shareremvo(content, "uid");
+        SharedPreferencesUtils.shareremvo(content, "password");
     }
 }

@@ -63,13 +63,13 @@ public class UserCenterRealize implements UserCenterModel {
                         ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                 AppUtil.getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK);
                     } else {
-                        startPhotograph(activity);
+                        startPhotograph(context);
                     }
                 }
             }
         } else {
             //拍照
-            startPhotograph(activity);
+            startPhotograph(context);
         }
 
     }

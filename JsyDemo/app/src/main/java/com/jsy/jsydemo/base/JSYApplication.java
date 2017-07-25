@@ -7,6 +7,8 @@ import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by vvguoliang on 2017/6/23.
+ *
+ *
  */
 
 public class JSYApplication extends Application {

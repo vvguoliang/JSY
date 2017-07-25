@@ -50,7 +50,6 @@
 -keep public class com.sxsfinance.SXS.R$*{
    public static final int *;
 }
-
 #gson混淆配置
 -keepattributes *Annotation*
 -keep class sun.misc.Unsafe { *; }

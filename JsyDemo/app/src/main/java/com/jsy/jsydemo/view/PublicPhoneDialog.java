@@ -111,16 +111,20 @@ public class PublicPhoneDialog extends Dialog {
                         onClickListenerPhoneCancel.onClick(dialog, DialogInterface.BUTTON_POSITIVE);
                     }
                 });
+            } else {
+                dialog_phone_button_cancel.setVisibility(View.GONE);
             }
 
-            if(onClickListenerPhoneDetermine != null){
+            if (onClickListenerPhoneDetermine != null) {
                 dialog_phone_button_determine.setText(namedetermine);
                 dialog_phone_button_determine.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        onClickListenerPhoneDetermine.onClick(dialog, DialogInterface.BUTTON_POSITIVE);
+                        onClickListenerPhoneDetermine.onClick(dialog, DialogInterface.BUTTON_NEGATIVE);
                     }
                 });
+            } else {
+                dialog_phone_button_determine.setVisibility(View.GONE);
             }
             dialog.setContentView(layout);
             return dialog;

@@ -1,5 +1,6 @@
 package com.jsy.jsydemo.activity.personaldata;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,7 +15,9 @@ import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.view.PublicPhoneDialog;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
@@ -43,10 +46,13 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
 
     private int aoth = 0;
 
+    private String operator = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_personal_data_operator);
+        operator = getIntent().getExtras().getString("operator");
         findViewById();
         initView();
     }
@@ -56,8 +62,12 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
         switch (v.getId()) {
             case R.id.operator_no_authorization_linear:
             case R.id.operator_no_authorization:
-                startActivityForResult(new Intent(PersonalDataOperatorActivity.this,
-                        OperatorActivity.class), 1000);
+                if(booMsg){
+                    startActivityForResult(new Intent(PersonalDataOperatorActivity.this,
+                            OperatorActivity.class), 1000);
+                }else{
+                    getPhone("提示", "为了您的信息安全,30天内不得重\n复授权.请30天后再来授权哦.");
+                }
                 break;
             case R.id.title_image:
                 finish();
@@ -84,6 +94,11 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
 
         operator_no_authorization = (TextView) findViewById(R.id.operator_no_authorization);
         operator_no_authorization.setOnClickListener(this);
+        if (operator.equals(this.getString(R.string.name_loan_personal_data_complete))) {
+            operator_no_authorization.setText(this.getString(R.string.name_loan_operator_authorization));
+        } else {
+            operator_no_authorization.setText(this.getString(R.string.name_loan_operator_no_authorization));
+        }
 
         findViewById(R.id.operator_no_authorization_linear).setOnClickListener(this);
     }
@@ -130,7 +145,7 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
 
     private void getUserDataAothHttp() {
         Map<String, Object> map = new HashMap<>();
-        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "", "").toString()));
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
         map.put("auth", aoth);
         OkHttpManager.postAsync(HttpURL.getInstance().USERDATAILAUTH, "user_auth", map, this);
     }
@@ -159,7 +174,7 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
                 JSONObject object = new JSONObject(result);
                 code = object.optString("code");
                 msg = object.optString("msg");
-                if (code.equals("0002")) {
+                if (code.equals("0000")) {
                     booMsg = true;
                 } else {
                     booMsg = false;
@@ -168,5 +183,18 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
                 }
                 break;
         }
+    }
+
+    private void getPhone(String title, String msg) {
+        PublicPhoneDialog.Builder builder = new PublicPhoneDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setTiltleMsg(msg);
+        builder.setContentViewDetermine("我知道了", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 }

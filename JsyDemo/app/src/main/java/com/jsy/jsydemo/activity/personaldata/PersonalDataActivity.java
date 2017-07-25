@@ -17,6 +17,8 @@ import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -176,6 +178,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.personal_data_operator://运营商验证
                 intent = new Intent(PersonalDataActivity.this, PersonalDataOperatorActivity.class);
+                intent.putExtra("operator", personal_data_complete6.getText().toString());
                 startActivityForResult(intent, 106);
                 break;
 //            case R.id.personal_data_online_shopping://网购信用
@@ -228,6 +231,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
+        getHttpstater();
         MobclickAgent.onResume(this);
     }
 
@@ -263,8 +267,60 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 SharedPreferencesUtils.put(this, "idcard", personal_data_id.getText().toString());
                 break;
             case "username_list":
-                personal_data_complete0.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                JSONObject object = new JSONObject(result);
+                object = new JSONObject(object.optString("data"));
+                if (object.optString("credit_status").equals("1")) {//人资信完成状态
+                    personal_data_complete0.setText(this.getString(R.string.name_loan_personal_data_complete));
+                } else {
+                    personal_data_complete0.setText(this.getString(R.string.name_loan_personal_data_no_complete));
+                }
+                if (object.optString("company_status").equals("1")) {//企业情况完成状态
+                    personal_data_complete1.setText(this.getString(R.string.name_loan_personal_data_complete));
+                } else {
+                    personal_data_complete1.setText(this.getString(R.string.name_loan_personal_data_no_complete));
+                }
+                if (object.optString("other_status").equals("1")) {//其他联系人完成状态
+                    personal_data_complete3.setText(this.getString(R.string.name_loan_personal_data_complete));
+                } else {
+                    personal_data_complete3.setText(this.getString(R.string.name_loan_personal_data_no_complete));
+                }
+                if (object.optString("house_status").equals("1")) {//房产完成状态
+                    personal_data_complete4.setText(this.getString(R.string.name_loan_personal_data_complete));
+                } else {
+                    personal_data_complete4.setText(this.getString(R.string.name_loan_personal_data_no_complete));
+                }
+                if (object.optString("car_status").equals("1")) {//车产完成状态
+                    personal_data_complete5.setText(this.getString(R.string.name_loan_personal_data_complete));
+                } else {
+                    personal_data_complete5.setText(this.getString(R.string.name_loan_personal_data_no_complete));
+                }
+                if (object.optString("operator_status").equals("1")) {//运营商完成状态
+                    personal_data_complete6.setText(this.getString(R.string.name_loan_personal_data_complete));
+                } else {
+                    personal_data_complete6.setText(this.getString(R.string.name_loan_personal_data_no_complete));
 
+                }
+                if (object.optString("shopping_status").equals("1")) {//网购信用完成状态
+
+                } else {
+
+                }
+                if (object.optString("papers_status").equals("1")) {//证件上传完成状态
+                    personal_data_complete8.setText(this.getString(R.string.name_loan_personal_data_complete));
+                } else {
+                    personal_data_complete8.setText(this.getString(R.string.name_loan_personal_data_no_complete));
+                }
+
+                if (object.optString("bankcard_status").equals("1")) {//我的银行卡完成状态
+                    personal_data_complete9.setText(this.getString(R.string.name_loan_personal_data_complete));
+                } else {
+                    personal_data_complete9.setText(this.getString(R.string.name_loan_personal_data_no_complete));
+                }
+                if (object.optString("family_status").equals("1")) {//家庭情况完成状态
+                    personal_data_complete2.setText(this.getString(R.string.name_loan_personal_data_complete));
+                } else {
+                    personal_data_complete2.setText(this.getString(R.string.name_loan_personal_data_no_complete));
+                }
                 break;
         }
     }

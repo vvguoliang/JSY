@@ -1,5 +1,6 @@
 package com.jsy.jsydemo.activity.SetUp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.view.PublicPhoneDialog;
 
 /**
  * Created by vvguoliang on 2017/6/28.
@@ -40,7 +43,7 @@ public class SetUPActivity extends BaseActivity implements View.OnClickListener 
                 startActivity(intent);
                 break;
             case R.id.set_up_sign_out:
-
+                getPhone("提示", "您是否确认安全退出?");
                 break;
         }
 
@@ -62,5 +65,25 @@ public class SetUPActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initView() {
 
+    }
+
+    private void getPhone(String title, String msg) {
+        PublicPhoneDialog.Builder builder = new PublicPhoneDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setTiltleMsg(msg);
+        builder.setContentViewCancel("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setContentViewDetermine("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferencesUtils.logoutSuccess(SetUPActivity.this);
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 }

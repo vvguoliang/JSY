@@ -44,6 +44,7 @@ import okhttp3.Request;
  * 所有证件上传
  */
 
+@SuppressWarnings("ConstantConditions")
 public class PersonalDataUploadActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private ImageView upload_front_id;
@@ -78,21 +79,25 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
             case R.id.title_complete:
                 getHttp();
                 break;
+            case R.id.upload_front_id_linear:
             case R.id.upload_front_id:
                 getpath = "1";
                 showDialog(PersonalDataUploadActivity.this.getString(R.string.name_loan_personal_camera),
                         PersonalDataUploadActivity.this.getString(R.string.name_loan_personal_album));
                 break;
+            case R.id.upload_front_hold_id_linear:
             case R.id.upload_front_hold_id:
                 getpath = "2";
                 showDialog(PersonalDataUploadActivity.this.getString(R.string.name_loan_personal_camera),
                         PersonalDataUploadActivity.this.getString(R.string.name_loan_personal_album));
                 break;
+            case R.id.upload_hous_linear:
             case R.id.upload_hous:
                 getpath = "3";
                 showDialog(PersonalDataUploadActivity.this.getString(R.string.name_loan_personal_camera),
                         PersonalDataUploadActivity.this.getString(R.string.name_loan_personal_album));
                 break;
+            case R.id.upload_vehicle_linear:
             case R.id.upload_vehicle:
                 getpath = "4";
                 showDialog(PersonalDataUploadActivity.this.getString(R.string.name_loan_personal_camera),
@@ -122,6 +127,11 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
         upload_front_hold_id.setOnClickListener(this);
         upload_hous.setOnClickListener(this);
         upload_vehicle.setOnClickListener(this);
+
+        findViewById(R.id.upload_front_id_linear).setOnClickListener(this);
+        findViewById(R.id.upload_front_hold_id_linear).setOnClickListener(this);
+        findViewById(R.id.upload_hous_linear).setOnClickListener(this);
+        findViewById(R.id.upload_vehicle_linear).setOnClickListener(this);
     }
 
     @Override
@@ -341,8 +351,7 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
                     upload_vehicle.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
                     break;
             }
-//            personal_camera.setImageBitmap(bitmap);
-//            BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
+            BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
         }
     }
 

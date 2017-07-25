@@ -19,6 +19,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/upload_front_id_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -51,6 +52,7 @@
             tools:ignore="RtlHardcoded" />
 
         <LinearLayout
+            android:id="@+id/upload_front_hold_id_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -83,6 +85,7 @@
             tools:ignore="RtlHardcoded" />
 
         <LinearLayout
+            android:id="@+id/upload_hous_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -115,6 +118,7 @@
             tools:ignore="RtlHardcoded" />
 
         <LinearLayout
+            android:id="@+id/upload_vehicle_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
