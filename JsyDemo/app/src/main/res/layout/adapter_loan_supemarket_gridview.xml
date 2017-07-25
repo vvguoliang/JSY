@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/adapter_gtidview_supemarket_linear"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="@dimen/common_10dp"
         android:background="@drawable/bg_fillet_shadow_selector"
@@ -46,7 +46,6 @@
                     android:id="@+id/adapter_gtidview_supemarket_text_qinyin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="huanyipi"
                     android:textColor="@color/common_loan_view_text"
                     android:textSize="@dimen/common_10dp" />
 
@@ -60,7 +59,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/common_10dp"
             android:textColor="@color/common_loan_view_text"
-            android:textSize="@dimen/common_12dp" />
+            android:textSize="@dimen/common_10dp" />
     </LinearLayout>
 
     <LinearLayout

@@ -15,9 +15,11 @@
         android:layout_height="@dimen/common_150dp" />
 
     <ListView
+        android:id="@+id/loan_supermarket_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/loan_supermarket_listview"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:fastScrollEnabled="false"
+        android:scrollbars="none" />
 
 </LinearLayout>

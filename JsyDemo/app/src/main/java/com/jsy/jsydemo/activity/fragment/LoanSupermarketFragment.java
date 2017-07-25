@@ -100,7 +100,6 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
     // Banner相关
     // -------------------------------------------------------------------------
     private void refreshBanner() {
-
         mBannerImageViews.clear();
         mBannerDots.clear();
         loan_frame.removeAllViews();

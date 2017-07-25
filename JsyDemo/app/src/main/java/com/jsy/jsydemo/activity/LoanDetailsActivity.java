@@ -114,6 +114,12 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
 
     private String other = "";
 
+    private boolean phone_operator = false;
+    private boolean basic_information = false;
+    private boolean details_id = false;
+    private boolean details_other = false;
+    private boolean credit_linear = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,16 +157,20 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.loan_details_button://补齐
                 if (loanDatailsData != null) {
-                    switch (loanDatailsData.getApi_type()) {
-                        case "1":
-                        case "2":
-                            intent = new Intent(LoanDetailsActivity.this, LoanWebViewActivity.class);
-                            intent.putExtra("url", loanDatailsData.getPro_link());
-                            startActivity(intent);
-                            break;
-                        case "3":
+                    if (phone_operator && basic_information && details_id && details_other && credit_linear) {
+                        switch (loanDatailsData.getApi_type()) {
+                            case "1":
+                            case "2":
+                                intent = new Intent(LoanDetailsActivity.this, LoanWebViewActivity.class);
+                                intent.putExtra("url", loanDatailsData.getPro_link());
+                                startActivity(intent);
+                                break;
+                            case "3":
 
-                            break;
+                                break;
+                        }
+                    } else {
+                        ToatUtils.showShort1(this, "还有信息没有认证完,请认证完再点击");
                     }
                 }
                 break;
@@ -338,13 +348,17 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 } else {
                     JSONObject object = new JSONObject(loanDatailsData.getUser_auth());
                     if (object.optString("base_auth").equals("1")) {
+                        phone_operator = true;
                         loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
                     } else {
+                        phone_operator = false;
                         loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                     }
                     if (object.optString("mobile_auth").equals("1")) {
+                        basic_information = true;
                         loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
                     } else {
+                        basic_information = false;
                         loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                     }
                     if (object.optString("zhima_auth").equals("1")) {
@@ -353,13 +367,17 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                         oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                     }
                     if (object.optString("idcard_auth").equals("1")) {
+                        details_id = true;
                         loan_details_id.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
                     } else {
+                        details_id = false;
                         loan_details_id.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                     }
                     if (object.optString("base_auth").equals("1")) {
+                        details_other = true;
                         loan_details_other.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
                     } else {
+                        details_other = false;
                         loan_details_other.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                     }
                     other = object.optString("other_auth");
@@ -375,14 +393,29 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 for (String data_id1 : data_ids) {
                     if (data_id1.contains("1")) {
                         basic_information_linear.setVisibility(View.VISIBLE);
-                    } else if (data_id1.contains("2")) {
+                    } else {
+                        phone_operator = true;
+                    }
+                    if (data_id1.contains("2")) {
                         phone_operator_linear.setVisibility(View.VISIBLE);
-                    } else if (data_id1.contains("3")) {
+                    } else {
+                        basic_information = true;
+                    }
+                    if (data_id1.contains("3")) {
                         esame_credit_linear.setVisibility(View.VISIBLE);
-                    } else if (data_id1.contains("4")) {
+                    } else {
+                        credit_linear = true;
+                    }
+                    if (data_id1.contains("4")) {
                         etails_id_linear.setVisibility(View.VISIBLE);
-                    } else if (data_id1.contains("5")) {
+                    } else {
+                        details_id = true;
+                    }
+                    if (data_id1.contains("5")) {
                         details_other_linear.setVisibility(View.VISIBLE);
+                    } else {
+                        details_other = true;
+
                     }
                 }
                 break;
@@ -402,8 +435,10 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 break;
             case "authorize":
                 if (result.contains("成功")) {
+                    credit_linear = true;
                     oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
                 } else {
+                    credit_linear = false;
                     oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                 }
                 break;
@@ -497,32 +532,40 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         if (requestCode == 1000) {
             String datastring = data.getExtras().getString("operator");
             if (datastring != null && datastring.equals("1")) {
+                phone_operator = true;
                 loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
             } else {
+                phone_operator = false;
                 loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
             }
             return;
         } else if (requestCode == 1001) {
             String datastring = data.getExtras().getString("operator");
             if (datastring != null && datastring.equals("1")) {
+                basic_information = true;
                 loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
             } else {
+                basic_information = false;
                 loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
             }
             return;
         } else if (requestCode == 1002) {
             String datastring = data.getExtras().getString("operator");
             if (datastring != null && datastring.equals("1")) {
+                details_id = true;
                 loan_details_id.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
             } else {
+                details_id = false;
                 loan_details_id.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
             }
             return;
         } else if (requestCode == 1003) {
             String datastring = data.getExtras().getString("operator");
             if (datastring != null && datastring.equals("1")) {
+                details_other = true;
                 loan_details_other.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
             } else {
+                details_other = false;
                 loan_details_other.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
             }
             return;

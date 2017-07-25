@@ -37,11 +37,12 @@
         android:layout_marginLeft="@dimen/common_10dp"
         android:layout_marginRight="@dimen/common_10dp"
         android:background="@color/white"
-        android:columnWidth="@dimen/common_50dp"
+        android:columnWidth="@dimen/common_100dp"
+        android:fastScrollEnabled="false"
         android:gravity="center"
-        android:horizontalSpacing="@dimen/common_10dp"
+        android:listSelector="@color/transparent"
         android:numColumns="2"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/common_10dp" />
+        android:scrollbars="none"
+        android:stretchMode="columnWidth" />
 
 </LinearLayout>
