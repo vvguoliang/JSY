@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +22,8 @@ import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.DisplayUtils;
+import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.umeng.analytics.MobclickAgent;
@@ -65,6 +68,14 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.act_friends);
         getHttp();
         findViewById();
+        //沉浸式状态设置
+        if (ImmersiveUtils.BuildVERSION()) {
+            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
+            stateBarTint("#305591", true);
+            statusFragmentBarDarkMode();
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
+            lp.height = DisplayUtils.px2dip(this, 48 * 11);
+        }
     }
 
     @Override

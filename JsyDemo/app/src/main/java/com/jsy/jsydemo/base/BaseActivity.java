@@ -2,6 +2,7 @@ package com.jsy.jsydemo.base;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.BroadcastReceiver;
@@ -19,16 +20,10 @@ import android.view.WindowManager;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.CommissioningActivity;
-import com.jsy.jsydemo.activity.VectoringActivity;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.NetWorkUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -87,6 +82,21 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
+    }
+
+    protected void setWindowStatusBarColor(Activity activity, int colorResId) {
+        try {
+            if (ImmersiveUtils.BuildVERSION()) {
+                Window window = activity.getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(activity.getResources().getColor(colorResId));
+
+                //底部导航栏
+                //window.setNavigationBarColor(activity.getResources().getColor(colorResId));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -201,13 +211,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        if (mRemindDialog != null) {
-//            mRemindDialog.dismiss();
-//        }
-//        if (mPowerKeyObserver != null) {
-//            mPowerKeyObserver.stopListen();
-//            mPowerKeyObserver = null;
-//        }
         if (receiver != null) {
             unregisterReceiver(receiver);
             receiver = null;
@@ -218,9 +221,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
     public void finish() {
         super.finish();
     }
-
-//    Class[] classes = new Class[]{New_ProductdetailsActivity.class, Investmentdetailstwo.class,
-//            WithdRawalsActivityTwo.class, RechargeMoneyActivity.class, MyredenvelopeActivity.class, RecordExitActivity.class, ExitListActivity.class};
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode, Bundle options) {
@@ -237,94 +237,18 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
         super.onPause();
     }
 
-//    private NotWorkDialog notWorkDialog;
-
-//    protected void showNotWorkDialog() {
-//        if (notWorkDialog == null) {
-//            notWorkDialog = new NotWorkDialog(this);
-//            notWorkDialog.setOnClickRefreshListener(this);
-//        }
-//        if (!isFinishing())
-//            notWorkDialog.show();
-//    }
-//
-//    protected void dissNotWorkDialog() {
-//        if (notWorkDialog != null) {
-//            notWorkDialog.dismiss();
-//        }
-//    }
-
-//    /**
-//     * 如果弹出无网络dialog，然后点击刷新按钮后回调该方法
-//     */
-//    @Override
-//    public void onRefresh() {
-//    }
-
     @Override
     protected void onSaveInstanceState(Bundle arg0) {
         super.onSaveInstanceState(arg0);
         ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         String _pkgName = activityManager.getRunningTasks(1).get(0).topActivity.getPackageName();
         if (!_pkgName.equals(getPackageName())) {
-//            SharedPreferencesUtils.put(this, APP_OUT, System.currentTimeMillis());
-//            SharedPreferencesUtils.put(this, "isRemind", "0");
-//            SharedPreferencesUtils.put(this, APP_IS_OUT, true);
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        if (intentFilter == null) {
-//            intentFilter = new IntentFilter();
-//            intentFilter.addAction(NetWorkBroadcastReceiver.NET_CHANGE_STATE_ACTION);
-//            intentFilter.addAction("exitMsg");
-//        }
-//        if (receiver == null) {
-//            receiver = new Receiver();
-//            registerReceiver(receiver, intentFilter);
-//        }
-//        if (mPowerKeyObserver == null) {
-//            mPowerKeyObserver = new PowerKeyObserver(this);
-//            mPowerKeyObserver.setHomeKeyListener(this);
-//            mPowerKeyObserver.startListen();
-//        }
-//        if (this.getClass().getName().equals(HomeLoginActivity.class.getName())) {
-//            return;
-//        }
-        startGestureVerfy();
-    }
-
-    /**
-     * 弹出手势密码 @Title: startGestureVerfy @Description:
-     */
-    private void startGestureVerfy() {
-//        long lastTime = (Long) SharedPreferencesUtils.get(this, APP_OUT, 0l);
-//        boolean isOut = (Boolean) SharedPreferencesUtils.get(this, APP_IS_OUT, false);
-//        if (isOut) {// 一键退出到后台
-//            SharedPreferencesUtils.put(this, APP_IS_OUT, false);
-//            if ((System.currentTimeMillis() - lastTime) < WAIT_EXIT_TIME * 1000) {// 且退出时间小于1分钟，不弹出手势密码，清除退出后台的
-//                return;
-//            } else {
-//                //不做处理
-//            }
-//        } else {
-//            return;
-//        }
-//        UserInfo.getInstance().theNExtStep(this, handler);
-//        if (GestureVerifyActivity.getPasd(this).equals("")// 如果没有手势密码，不跳转页面
-//                || !GestureVerifyActivity.isOpen(this)// 手势密码关闭状态，不跳转页面
-//                || SharedPreferencesUtils.get(this, "id", "").toString().equals("")// 没有登录，不跳转页面
-//                || getClass().getName().equals(GestureVerifyActivity.class.getName())) {
-//            // 符合if判断，直接返回false，不进行页面跳转
-//            return;
-//        }
-//        if (!BaseActivityManager.getActivityManager().currentActivity().toString().contains("GestureVerifyActivity")) {
-//            Intent intent1 = new Intent(this, GestureVerifyActivity.class);
-//            intent1.putExtra(GestureVerifyActivity.USER_OPERATING, GestureVerifyActivity.USER_CHECK);
-//            startActivityForResult(intent1, 10000);
-//        }
     }
 
     @Override
@@ -345,10 +269,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
     @Override
     protected void onStop() {
         super.onStop();
-        if (!isAppOnForeground()) {
-//            SharedPreferencesUtils.put(this, APP_OUT, System.currentTimeMillis());
-//            SharedPreferencesUtils.put(this, APP_IS_OUT, true);
-        }
     }
 
     //退出运行到后台
@@ -400,83 +320,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
         startActivity(intent);
     }
 
-    private void remind(String msg, boolean isExit) {
-        waitDismiss();
-//        Getintent.getInstance().getIntent(this, StartpageActivity.class, 0, new String[]{"sxsmian"}, "11");
-//        if ("0".equals(msg))
-//            ToatUtils.showLong(mContext, "距离上次登录时间过长,请重新登录");
-//        else
-//            ToatUtils.showLong(mContext, msg);
-    }
-
-    //是否强制退出
-    private int isShow = 0;
-
-//    public boolean baseSuccess(HttpEntity httpEntity, boolean isExit) {
-//        if (httpEntity != null) {
-//            if ("104".equals(httpEntity.getSxsCode())) {
-//                SharedPreferencesUtils.put(this, "isRemind", "1");
-//                SharedPreferencesUtils.logoutSuccess(getBaseContext());
-//                remind(httpEntity.getSxsMsg(), isExit);
-//                return true;
-//            } else if ("999".equals(httpEntity.getSxsCode())) {
-//                if (isShow == 0) {
-//                    String title = "";
-//                    String content = "";
-//                    if (!httpEntity.getSxsMsg().contains("title") && !httpEntity.getSxsMsg().contains("content")) {
-//                        exitRoutine("hide", "", httpEntity.getSxsMsg());
-//                        isShow++;
-//                    } else {
-//                        try {
-//                            JSONObject objMsg = new JSONObject(httpEntity.getSxsMsg());
-//                            if (objMsg.has("title")) {
-//                                title = objMsg.optString("title");
-//                            }
-//                            if (objMsg.has("content")) {
-//                                content = objMsg.optString("content");
-//                            }
-//                            exitRoutine("hide", title, content);
-//                            isShow++;
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//    private void exitRoutine(String flag, String title, String msg) {
-//        if (StringUtil.isNullOrEmpty(msg))
-//            msg = getString(R.string.sys_maintenance);
-//        CustomSysSureDialog  builder = new CustomSysSureDialog.Builder(this);
-//        builder.setClose(flag, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int i) {
-//                dialog.dismiss();
-//                BaseActivityManager.getActivityManager().finishAllActivity();
-//                System.exit(0);
-//            }
-//        });
-//        if (!StringUtil.isNullOrEmpty(title)) {
-//            builder.setTitle(title);
-//        } else {
-//            builder.setTitle(getString(R.string.sys_tips));
-//        }
-//        builder.setMessage(msg);
-//        builder.setPositiveButton(getString(R.string.sys_myknow),
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(final DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                        BaseActivityManager.getActivityManager().finishAllActivity();
-//                        System.exit(0);
-//                    }
-//                });
-//        Dialog dialog = builder.create();
-//        dialog.setCancelable(false);
-//        dialog.show();
-//    }
 
     /**
      * 网络请求耗时操作，弹出等等框 @Title: loadDataWait @author: xusonghui @Description:
@@ -516,14 +359,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
 
     public boolean NetWorkshow(Intent intent) {
         if (intent.getComponent() != null) {
-//            for (int i = 0; i < classes.length; i++) {
-//                if (intent.getComponent().getClassName().contains(classes[i].getName())) {
-//
-//                    return true;
-//                } else {
-//
-//                }
-//            }
         }
         return false;
     }

@@ -31,7 +31,9 @@ import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
+import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.IdcardValidator;
+import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
@@ -97,6 +99,14 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
         setContentView(R.layout.act_other_information);
         other = getIntent().getExtras().getString("other");
         pid = getIntent().getExtras().getString("pid");
+        //沉浸式状态设置
+        if (ImmersiveUtils.BuildVERSION()) {
+            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
+            stateBarTint("#305591", true);
+            statusFragmentBarDarkMode();
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
+            lp.height = DisplayUtils.px2dip(this, 48 * 11);
+        }
         findViewById();
         initView();
     }

@@ -2,10 +2,13 @@ package com.jsy.jsydemo.activity.personaldata;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.utils.DisplayUtils;
+import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -21,6 +24,14 @@ public class PersonalDataBankCardActivity extends BaseActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_personal_data_bank_card);
         findViewById();
+        //沉浸式状态设置
+        if (ImmersiveUtils.BuildVERSION()) {
+            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
+            stateBarTint("#305591", true);
+            statusFragmentBarDarkMode();
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
+            lp.height = DisplayUtils.px2dip(this, 48 * 11);
+        }
     }
 
     @Override

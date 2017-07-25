@@ -16,7 +16,7 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayou
+        <LinearLayout
             android:id="@+id/personal_credit_degree_education_linea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:padding="@dimen/common_10dp">
 
             <com.jsy.jsydemo.control.MyTextView
-                android:layout_width="275dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_10dp"
                 android:layout_weight="1"
@@ -47,7 +47,7 @@
                 android:layout_height="@dimen/common_20dp"
                 android:paddingLeft="@dimen/common_10dp"
                 android:src="@drawable/bg_personal_right_selector" />
-        </LinearLayou>
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

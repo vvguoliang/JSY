@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.utils.DisplayUtils;
+import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -42,6 +44,14 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_help_center);
         findViewById();
+        //沉浸式状态设置
+        if (ImmersiveUtils.BuildVERSION()) {
+            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
+            stateBarTint("#305591", true);
+            statusFragmentBarDarkMode();
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
+            lp.height = DisplayUtils.px2dip(this, 48 * 11);
+        }
         initView();
     }
 
@@ -51,6 +61,7 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
             case R.id.title_image:
                 finish();
                 break;
+            case R.id.help_application_lin:
             case R.id.help_application_image:
                 if (application_image) {
                     application_image = false;
@@ -62,6 +73,7 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
                     help_application_linear.setVisibility(View.VISIBLE);
                 }
                 break;
+            case R.id.help_application_loan_lin:
             case R.id.help_application_loan_image:
                 if (application_loan_image) {
                     application_loan_image = false;
@@ -73,6 +85,7 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
                     help_application_loan_linear.setVisibility(View.VISIBLE);
                 }
                 break;
+            case R.id.help_application_loan_success_lin:
             case R.id.help_application_loan_success_image:
                 if (application_loan_success_image) {
                     application_loan_success_image = false;
@@ -84,6 +97,7 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
                     help_application_loan_success_linear.setVisibility(View.VISIBLE);
                 }
                 break;
+            case R.id.help_application_loan_repayment_lin:
             case R.id.help_application_loan_repayment_image:
                 if (application_loan_repayment_image) {
                     application_loan_repayment_image = false;
@@ -95,6 +109,7 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
                     help_application_loan_repayment_linear.setVisibility(View.VISIBLE);
                 }
                 break;
+            case R.id.help_application_loan_order_lin:
             case R.id.help_application_loan_order_image:
                 if (application_loan_order_image) {
                     application_loan_order_image = false;
@@ -106,6 +121,7 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
                     help_application_loan_order_linear.setVisibility(View.VISIBLE);
                 }
                 break;
+            case R.id.help_application_loan_fail_lin:
             case R.id.help_application_loan_fail_image:
                 if (application_loan_fail_image) {
                     application_loan_fail_image = false;
@@ -166,6 +182,13 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
 
         help_application_loan_fail_image.setOnClickListener(this);
         help_application_loan_fail_image.setImageResource(R.mipmap.ic_loan_help_up);
+
+        findViewById(R.id.help_application_lin).setOnClickListener(this);
+        findViewById(R.id.help_application_loan_lin).setOnClickListener(this);
+        findViewById(R.id.help_application_loan_success_lin).setOnClickListener(this);
+        findViewById(R.id.help_application_loan_repayment_lin).setOnClickListener(this);
+        findViewById(R.id.help_application_loan_order_lin).setOnClickListener(this);
+        findViewById(R.id.help_application_loan_fail_lin).setOnClickListener(this);
     }
 
     @Override
