@@ -6,13 +6,15 @@
 
 
     <LinearLayout
+        android:id="@+id/adapter_gtidview_supemarket_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/common_10dp"
         android:background="@drawable/bg_fillet_shadow_selector"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,8 +27,7 @@
                 android:layout_width="@dimen/common_60dp"
                 android:layout_height="@dimen/common_60dp"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/common_10dp"
-                android:src="@mipmap/wangzhu" />
+                android:layout_margin="@dimen/common_10dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -38,7 +39,6 @@
                     android:id="@+id/adapter_gtidview_supemarket_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/name_loan_batch"
                     android:textColor="@color/common_loan_view_text"
                     android:textSize="@dimen/common_14dp" />
 
@@ -59,9 +59,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/common_10dp"
-            android:text="@string/name_loan_batch"
             android:textColor="@color/common_loan_view_text"
             android:textSize="@dimen/common_12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/adapter_gtidview_loan_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_loan_blue_val"
+        android:orientation="vertical"
+        android:padding="@dimen/common_2dp"
+        android:visibility="gone">
+
+        <com.jsy.jsydemo.control.MyTextView
+            android:id="@+id/adapter_gtidview_loan_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/common_reminder_face"
+            android:textSize="@dimen/common_11dp" />
+
     </LinearLayout>
 
 </LinearLayout>

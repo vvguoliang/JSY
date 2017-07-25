@@ -76,6 +76,12 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
             builder.setSpan(redSpan, 3, home_loan_product_interest_rate.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             home_loan_product_interest_rate.setText(builder);
 
+            home_loan_product_number.setText(context.getString(R.string.loan_fragment_applicants) + object.getPro_hits() + "人");
+            builder = new SpannableStringBuilder(home_loan_product_number.getText().toString());
+            //ForegroundColorSpan 为文字前景色，BackgroundColorSpan为文字背景色
+            redSpan = new ForegroundColorSpan(Color.RED);
+            builder.setSpan(redSpan, 4, home_loan_product_number.getText().length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            home_loan_product_number.setText(builder);
 
         }
     }

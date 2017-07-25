@@ -140,7 +140,7 @@ public class JsonData {
                 homeProduct.setOrder(jsonObject.optString("order"));
                 homeProduct.setOther_id(jsonObject.optString("other_id"));
                 homeProduct.setPro_describe(jsonObject.optString("pro_describe"));
-                homeProduct.setPro_hits(jsonObject.optString("pro_hits"));
+                homeProduct.setPro_hits(jsonObject.optString("hits"));
                 homeProduct.setPro_link(jsonObject.optString("pro_link"));
                 homeProduct.setPro_name(jsonObject.optString("pro_name"));
                 homeProduct.setQixianfanwei(jsonObject.optString("qixianfanfanwei"));
@@ -288,6 +288,8 @@ public class JsonData {
             loanDatailsData.setUpdated_at(object.optString("updated_at"));
             loanDatailsData.setUser_auth(object.optString("user_auth"));
             loanDatailsData.setZuikuaifangkuan(object.optString("zuikuaifangkuan"));
+            loanDatailsData.setHits(object.optString("hits"));
+            loanDatailsData.setTags(object.optString("tags"));
 
         } catch (JSONException e) {
             e.printStackTrace();

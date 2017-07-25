@@ -2,23 +2,37 @@ package com.jsy.jsydemo.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.moblie.zmxy.antgroup.creditsdk.app.CreditApp;
 import com.android.moblie.zmxy.antgroup.creditsdk.app.ICreditListener;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.LoanDatailsData;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.OperatorActivity;
 import com.jsy.jsydemo.activity.personaldata.PersonalDataCertificatesActivity;
+import com.jsy.jsydemo.adapter.LoansupemarketGridviewAdapter;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
@@ -29,11 +43,14 @@ import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -54,9 +71,9 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     private EditText loan_details_editText_day;
     private TextView loan_details_textView_day;
 
-    private TextView loan_details_resource_rat;
-    private TextView loan_details_repayment;
-    private TextView loan_details_loan_time;
+//    private TextView loan_details_resource_rat;
+//    private TextView loan_details_repayment;
+//    private TextView loan_details_loan_time;
 
     private Button loan_details_basic_information;
     private Button loan_details_phone_operator;
@@ -67,9 +84,14 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
 
     private Button loan_details_button;
 
-    private TextView details_repayment_text;
+//    private TextView details_repayment_text;
 
     private TextView details_editText_day_text;
+
+    private ImageView loan_details_image;
+    private TextView loan_details_text_name;
+    private GridView loan_details_gridView;
+    private TextView loan_details_text;
 
     private String id = "";
 
@@ -153,9 +175,9 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         loan_details_editText_day = (EditText) findViewById(R.id.loan_details_editText_day);
         loan_details_textView_day = (TextView) findViewById(R.id.loan_details_textView_day);
 
-        loan_details_resource_rat = (TextView) findViewById(R.id.loan_details_resource_rat);
-        loan_details_repayment = (TextView) findViewById(R.id.loan_details_repayment);
-        loan_details_loan_time = (TextView) findViewById(R.id.loan_details_loan_time);
+//        loan_details_resource_rat = (TextView) findViewById(R.id.loan_details_resource_rat);
+//        loan_details_repayment = (TextView) findViewById(R.id.loan_details_repayment);
+//        loan_details_loan_time = (TextView) findViewById(R.id.loan_details_loan_time);
 
         loan_details_basic_information = (Button) findViewById(R.id.loan_details_basic_information);
         loan_details_basic_information.setOnClickListener(this);
@@ -170,8 +192,13 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         loan_details_button = (Button) findViewById(R.id.loan_details_button);
         loan_details_button.setOnClickListener(this);
 
-        details_repayment_text = (TextView) findViewById(R.id.details_repayment_text);
+//        details_repayment_text = (TextView) findViewById(R.id.details_repayment_text);
         details_editText_day_text = (TextView) findViewById(R.id.details_editText_day_text);
+
+        loan_details_image = (ImageView) findViewById(R.id.loan_details_image);
+        loan_details_text_name = (TextView) findViewById(R.id.loan_details_text_name);
+        loan_details_gridView = (GridView) findViewById(R.id.loan_details_gridView);
+        loan_details_text = (TextView) findViewById(R.id.loan_details_text);
 
 
         loan_details_editText_range.addTextChangedListener(textWatcher(1));
@@ -232,15 +259,46 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         switch (name) {
             case "product_detail":
                 loanDatailsData = JsonData.getInstance().getJsonLoanDailsData(result);
+                Glide.with(this)
+                        .load(HttpURL.getInstance().HTTP_URL_PATH + loanDatailsData.getImg())
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                                loan_details_image.setImageResource(R.mipmap.ic_launcher);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                                return false;
+                            }
+                        })
+                        .into(loan_details_image);
+                loan_details_text_name.setText(loanDatailsData.getPro_name());
+                loan_details_text.setText(this.getString(R.string.name_loan_product_interest_rat) + loanDatailsData.getFeilv());
+                SpannableStringBuilder builder = new SpannableStringBuilder(loan_details_text.getText().toString());
+                //ForegroundColorSpan 为文字前景色，BackgroundColorSpan为文字背景色
+                ForegroundColorSpan redSpan = new ForegroundColorSpan(Color.parseColor("#004eb7"));
+                builder.setSpan(redSpan, 3, loan_details_text.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                loan_details_text.setText(builder);
+
+                LoansupemarketGridviewAdapter loansupemarketGridviewAdapter = new LoansupemarketGridviewAdapter(this);
+                List<String> list = new ArrayList<>();
+                JSONArray object1 = new JSONArray(loanDatailsData.getTags());
+                for (int i = 0; object1.length() > i; i++) {
+                    JSONObject jsonObject = object1.optJSONObject(i);
+                    list.add(jsonObject.optString("tag_name"));
+                }
+                loansupemarketGridviewAdapter.GridviewAdapter(list);
+                loan_details_gridView.setAdapter(loansupemarketGridviewAdapter);
+                loansupemarketGridviewAdapter.notifyDataSetChanged();
+
                 if (loanDatailsData.getFv_unit().equals("1")) {//天
-                    details_repayment_text.setText(this.getString(R.string.name_loan_details_repayment_yue));
                     details_editText_day_text.setText(this.getString(R.string.name_loan_details_month));
                 } else {
-                    details_repayment_text.setText(this.getString(R.string.name_loan_details_repayment));
                     details_editText_day_text.setText(this.getString(R.string.name_loan_details_day));
 
                 }
-                loan_details_resource_rat.setText(loanDatailsData.getFeilv());
                 loan_details_textView_rang.setText("额度范围" + loanDatailsData.getEdufanwei());
 
                 String[] edufan = loanDatailsData.getEdufanwei().split("-");
@@ -253,11 +311,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 day_monthMax = Double.parseDouble(edufan1[1]);
                 day_monthMin = Double.parseDouble(edufan1[0]);
                 loan_details_editText_day.setText(edufan1[1]);
-                loan_details_loan_time.setText("24小时");
-
-                String edufan2 = loanDatailsData.getFeilv().substring(0, loanDatailsData.getFeilv().length() - 1);
-                profit = Double.parseDouble(edufan2);
-                loan_details_repayment.setText(getAlgorithm(loanMax, day_monthMax, profit));
 
                 anInt++;
                 if (StringUtil.isNullOrEmpty(loanDatailsData.getUser_auth()) || loanDatailsData.getUser_auth().equals("null")
@@ -358,12 +411,13 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                             if (Double.parseDouble(s.toString()) > loanMax || Double.parseDouble(s.toString()) < loanMin) {
                                 ToatUtils.showShort1(LoanDetailsActivity.this, "您输入的金额已经超出范围");
                                 loan_details_editText_range.setText("" + (int) loanMax);
-                            } else {
-                                if (anInt != 0) {
-                                    double dou = Double.parseDouble(loan_details_editText_day.getText().toString());
-                                    loan_details_repayment.setText(getAlgorithm(Double.parseDouble(s.toString()), dou, profit));
-                                }
                             }
+//                            else {
+//                                if (anInt != 0) {
+//                                    double dou = Double.parseDouble(loan_details_editText_day.getText().toString());
+//                                    loan_details_repayment.setText(getAlgorithm(Double.parseDouble(s.toString()), dou, profit));
+//                                }
+//                            }
                         } else {
                             loan_details_editText_range.setText("0");
                         }
@@ -379,12 +433,13 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                                     ToatUtils.showShort1(LoanDetailsActivity.this, "您输入的天数已经超出范围");
                                     loan_details_editText_day.setText("" + (int) day_monthMax);
                                 }
-                            } else {
-                                if (anInt != 0) {
-                                    double dou = Double.parseDouble(loan_details_editText_range.getText().toString());
-                                    loan_details_repayment.setText(getAlgorithm(dou, Double.parseDouble(s.toString()), profit));
-                                }
                             }
+//                            else {
+//                                if (anInt != 0) {
+//                                    double dou = Double.parseDouble(loan_details_editText_range.getText().toString());
+//                                    loan_details_repayment.setText(getAlgorithm(dou, Double.parseDouble(s.toString()), profit));
+//                                }
+//                            }
                         } else {
                             loan_details_editText_day.setText("0");
                         }
@@ -400,7 +455,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000) {
             String datastring = data.getExtras().getString("operator");
-            if (datastring.equals("1")) {
+            if (datastring != null && datastring.equals("1")) {
                 loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
             } else {
                 loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);

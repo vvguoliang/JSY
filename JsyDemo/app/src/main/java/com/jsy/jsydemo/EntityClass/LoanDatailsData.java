@@ -16,7 +16,7 @@ public class LoanDatailsData {
     private String order = "";
     private String edufanwei = "";
     private String feilv = "";
-    private String  fv_unit = "";
+    private String fv_unit = "";
     private String zuikuaifangkuan = "";
     private String qixianfanwei = "";
     private String qx_unit = "";
@@ -30,6 +30,26 @@ public class LoanDatailsData {
     private String api_type = "";
     private String user_auth = "";
     private String other_auth = "";
+
+    private String hits = "";
+
+    private String tags = "";
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public String getHits() {
+        return hits;
+    }
+
+    public void setHits(String hits) {
+        this.hits = hits;
+    }
 
     public String getId() {
         return id;

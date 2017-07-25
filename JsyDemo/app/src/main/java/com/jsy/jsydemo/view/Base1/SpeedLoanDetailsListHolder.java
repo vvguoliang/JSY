@@ -22,6 +22,7 @@ import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.SpeedLoanDetailsListData;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.view.BaseViewHolder;
 
 /**
