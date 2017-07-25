@@ -42,9 +42,9 @@
                     android:id="@+id/information_mailbox_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:orientation="horizontal"
-                    android:padding="@dimen/common_5dp">
+                    android:padding="@dimen/common_5dp"
+                    android:visibility="gone">
 
                     <com.jsy.jsydemo.control.MyTextView
                         android:layout_width="wrap_content"
@@ -84,9 +84,9 @@
                     android:id="@+id/information_spouse_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:orientation="horizontal"
-                    android:padding="@dimen/common_5dp">
+                    android:padding="@dimen/common_5dp"
+                    android:visibility="gone">
 
                     <com.jsy.jsydemo.control.MyTextView
                         android:layout_width="wrap_content"
@@ -126,8 +126,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:visibility="gone"
-                    android:padding="@dimen/common_5dp">
+                    android:padding="@dimen/common_5dp"
+                    android:visibility="gone">
 
                     <com.jsy.jsydemo.control.MyTextView
                         android:layout_width="wrap_content"
@@ -166,10 +166,10 @@
                     android:id="@+id/information_mode_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:padding="@dimen/common_5dp">
+                    android:padding="@dimen/common_5dp"
+                    android:visibility="gone">
 
                     <com.jsy.jsydemo.control.MyTextView
                         android:layout_width="0dp"
@@ -208,9 +208,9 @@
                     android:id="@+id/information_corporate_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:orientation="horizontal"
-                    android:padding="@dimen/common_5dp">
+                    android:padding="@dimen/common_5dp"
+                    android:visibility="gone">
 
                     <com.jsy.jsydemo.control.MyTextView
                         android:layout_width="wrap_content"
@@ -249,9 +249,9 @@
                     android:id="@+id/information_corporate_address_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:orientation="horizontal"
-                    android:padding="@dimen/common_5dp">
+                    android:padding="@dimen/common_5dp"
+                    android:visibility="gone">
 
                     <com.jsy.jsydemo.control.MyTextView
                         android:layout_width="wrap_content"
@@ -289,10 +289,10 @@
                 <LinearLayout
                     android:id="@+id/information_corporate_phone_linear"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/common_5dp">
+                    android:padding="@dimen/common_5dp"
+                    android:visibility="gone">
 
                     <com.jsy.jsydemo.control.MyTextView
                         android:layout_width="wrap_content"
@@ -311,8 +311,10 @@
                         android:layout_marginRight="@dimen/common_10dp"
                         android:layout_weight="1"
                         android:background="@color/transparent"
+                        android:digits="1234567890"
                         android:gravity="center|right"
                         android:hint="@string/name_other_information_please_corporate_phone"
+                        android:inputType="phone"
                         android:lines="1"
                         android:padding="@dimen/common_10dp"
                         android:textColor="@color/common_brown_text"
@@ -349,6 +351,4 @@
 
             />
     </RelativeLayout>
-
-
 </LinearLayout>

@@ -50,5 +50,9 @@
         <item name="android:button">@drawable/checkbox_selector</item>
     </style>
 
+    <style name="MyCheckBox_basic" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_basic_selector</item>
+    </style>
+
 
 </resources>

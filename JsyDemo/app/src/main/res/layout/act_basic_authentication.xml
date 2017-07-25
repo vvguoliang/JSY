@@ -59,8 +59,8 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_marginTop="@dimen/common_5dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_5dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -297,7 +297,7 @@
                         android:padding="@dimen/common_10dp">
 
                         <com.jsy.jsydemo.control.MyTextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/name_loan_details_basic_my_name"
@@ -306,7 +306,7 @@
 
 
                         <com.jsy.jsydemo.control.MyEdittextView
-                            android:id="@+id/loan__basic_please_in_editText"
+                            android:id="@+id/loan_basic_please_in_editText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/common_5dp"
@@ -373,21 +373,18 @@
                             android:textColor="@color/common_loan_personal"
                             android:textSize="@dimen/common_14dp" />
 
-                        <com.jsy.jsydemo.control.MyTextView
+                        <com.jsy.jsydemo.control.MyEdittextView
                             android:id="@+id/loan_basic_application"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:digits="1234567890."
                             android:layout_marginRight="@dimen/common_10dp"
-                            android:text="@string/name_loan_credit_please_select"
+                            android:hint="@string/name_loan_details_basic_content"
+                            android:inputType="number"
                             android:textColor="@color/common_loan_personal"
+                            android:textColorHint="@color/common_gray"
                             android:textSize="@dimen/common_14dp" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/common_5dp"
-                            android:src="@drawable/bg_personal_right_selector" />
 
                     </LinearLayout>
 
@@ -457,7 +454,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@color/transparent"
+                            android:digits="1234567890."
                             android:hint="@string/name_loan_details_basic_content"
+                            android:inputType="number"
                             android:textColor="@color/common_loan_personal"
                             android:textColorHint="@color/common_gray"
                             android:textSize="@dimen/common_14dp" />
@@ -659,7 +658,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@color/transparent"
+                            android:digits="1234567890."
                             android:hint="@string/name_loan_details_basic_content"
+                            android:inputType="number"
                             android:textColor="@color/common_loan_personal"
                             android:textColorHint="@color/common_gray"
                             android:textSize="@dimen/common_14dp" />
@@ -748,16 +749,12 @@
             android:layout_marginTop="@dimen/common_10dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/loan_basic_image_image"
+                style="@style/MyCheckBox_basic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_basic_image" />
-
-            <com.jsy.jsydemo.control.MyTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_10dp"
+                android:paddingLeft="@dimen/common_10dp"
                 android:text="@string/name_loan_details_basic_agree"
                 android:textColor="@color/black"
                 android:textSize="@dimen/common_12dp" />

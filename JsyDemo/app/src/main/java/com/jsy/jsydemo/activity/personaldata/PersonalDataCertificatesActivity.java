@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -114,6 +115,9 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_image:
+                Intent intent = new Intent();
+                intent.putExtra("operatr", "2");
+                setResult(1002, intent);
                 finish();
                 break;
             case R.id.title_complete:
@@ -162,11 +166,23 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
+        switch (name) {
+            case "username_add":
+                break;
+        }
 
     }
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
+        switch (name) {
+            case "username_add":
+                Intent intent = new Intent();
+                intent.putExtra("operatr", "1");
+                setResult(1002, intent);
+                finish();
+                break;
+        }
 
     }
 
@@ -298,5 +314,18 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
 //            personal_camera.setImageBitmap(bitmap);
 //            BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.putExtra("operator", "2");
+            setResult(1002, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

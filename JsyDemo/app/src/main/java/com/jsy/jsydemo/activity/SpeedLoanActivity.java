@@ -87,6 +87,8 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
         mHandler = new Handler();
         mAdapter = new SpeedLoanAdapter(this);
 
+        findViewById(R.id.title_image).setVisibility(View.VISIBLE);
+        findViewById(R.id.title_image).setOnClickListener(this);
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_sky_loan));
 
@@ -149,7 +151,7 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
                     getHttp();
                 }
             }
-        }, 1500);
+        }, 1000);
     }
 
     private void getHttp() {
@@ -161,6 +163,11 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.title_image:
+                finish();
+                break;
+        }
 
     }
 

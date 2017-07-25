@@ -4,28 +4,38 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jsy.jsydemo.EntityClass.ContactInfo;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.personaldata.PersonalDataOtherActivity;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
+import com.jsy.jsydemo.utils.IdcardValidator;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,6 +52,7 @@ import okhttp3.Request;
  * 其他信息
  */
 
+@SuppressWarnings("StatementWithEmptyBody")
 public class OtherInformationActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private LinearLayout information_mailbox_linear;
@@ -70,15 +81,22 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
 
     private String other = "";
 
-    private List<ContactInfo> result = null;
+    private String[] mode_Strings = new String[]{"有住房,无贷款", "有住房,有贷款", "与父母/配偶同住", "租房同住", "单位宿舍/用房", "学生公寓"};
 
-    private Boolean aBoolean = false;
+    private UserCenterRealize userCenterRealize = new UserCenterRealize();
+
+    private int id = 0;
+
+    private String[] get = null;
+
+    private String pid = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_other_information);
         other = getIntent().getExtras().getString("other");
+        pid = getIntent().getExtras().getString("pid");
         findViewById();
         initView();
     }
@@ -87,21 +105,90 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_image:
+                Intent intent = new Intent();
+                intent.putExtra("operatr", "2");
+                setResult(1003, intent);
                 finish();
                 break;
+            case R.id.information_mode_linear:
             case R.id.information_mode_text:
-
+                if (TimeUtils.isFastDoubleClick()) {
+                    return;
+                } else {
+                    ShowDialog.getInstance().getDialog(this, getmode(), "mode", mHandler, 1000);
+                }
                 break;
             case R.id.information_please_button:
-                getHttp();
+                if (information_mailbox_linear.getVisibility() == View.VISIBLE) {
+                    if (TextUtils.isEmpty(information_mailbox_editText.getText().toString())) {
+                        ToatUtils.showShort1(this, "请输入邮箱");
+                    } else if (IdcardValidator.getInstance().isEmail(information_mailbox_editText.getText().toString())) {
+                        ToatUtils.showShort1(this, "输入邮箱不正确");
+                        information_mailbox_editText.setText("");
+                    }
+                } else if (information_spouse_linear.getVisibility() == View.VISIBLE) {
+                    if (TextUtils.isEmpty(information_spouse_editText.getText().toString())) {
+                        ToatUtils.showShort1(this, "请输入配偶名字");
+                    } else if (information_spouse_editText.getText().toString().length() >= 2) {
+                        ToatUtils.showShort1(this, "输入配偶名字不正确");
+                        information_spouse_editText.setText("");
+                    }
+                } else if (information_live_linear.getVisibility() == View.VISIBLE) {
+                    if (TextUtils.isEmpty(information_live_editText.getText().toString())) {
+                        ToatUtils.showShort1(this, "请输入详细地址");
+                    } else if (information_live_editText.getText().toString().length() >= 5) {
+                        ToatUtils.showShort1(this, "请输入详细地址");
+                        information_live_editText.setText("");
+                    }
+                } else if (information_mode_linear.getVisibility() == View.VISIBLE) {
+                    if (information_mode_text.getText().toString().equals(this.getString(R.string.name_loan_credit_please_select))) {
+                        ToatUtils.showShort1(this, "请选择居住方式");
+                    }
+                } else if (information_corporate_linear.getVisibility() == View.VISIBLE) {
+                    if (TextUtils.isEmpty(information_corporate_editText.getText().toString())) {
+                        ToatUtils.showShort1(this, "请输入公司名字");
+                    }
+                } else if (information_corporate_address_linear.getVisibility() == View.VISIBLE) {
+                    if (TextUtils.isEmpty(information_corporate_address_editText.getText().toString())) {
+                        ToatUtils.showShort1(this, "请输入公司地址");
+                    }
+                } else if (information_corporate_phone_linear.getVisibility() == View.VISIBLE) {
+                    if (TextUtils.isEmpty(information_corporate_phone_editText.getText().toString())) {
+                        ToatUtils.showShort1(this, "请输入公司电话");
+                    }
+                } else if (loan_personal_linear.getVisibility() == View.VISIBLE) {
+                    if (TextUtils.isEmpty(other_relatives_name.getText().toString())) {
+                        ToatUtils.showShort1(this, "请输入联系人姓名");
+                    } else if (other_relatives_name.getText().toString().length() >= 2) {
+                        ToatUtils.showShort1(this, "请输入联系人姓名有误");
+                    } else if (TextUtils.isEmpty(other_relatives_phone.getText().toString())) {
+                        ToatUtils.showShort1(this, "请输入联系人电话");
+                    } else if (IdcardValidator.getInstance().isIdcard(other_relatives_phone.getText().toString().trim())) {
+                        ToatUtils.showShort1(this, "请输入联系人电话有误");
+                        other_relatives_phone.setText("");
+                    }
+                } else if (other_contacts_linear.getVisibility() == View.VISIBLE) {
+                    if (TextUtils.isEmpty(other_contacts_name.getText().toString())) {
+                        ToatUtils.showShort1(this, "请输入联系人姓名");
+                    } else if (other_contacts_name.getText().toString().length() >= 2) {
+                        ToatUtils.showShort1(this, "请输入联系人姓名有误");
+                    } else if (TextUtils.isEmpty(other_contacts_phone.getText().toString())) {
+                        ToatUtils.showShort1(this, "请输入联系人电话");
+                    } else if (IdcardValidator.getInstance().isIdcard(other_contacts_phone.getText().toString().trim())) {
+                        ToatUtils.showShort1(this, "请输入联系人电话有误");
+                        other_contacts_phone.setText("");
+                    }
+                } else {
+                    getHttp();
+                }
                 break;
             case R.id.other_relatives_wathet:
-                aBoolean = true;
-                getContactID();
+                id = 1;
+                userCenterRealize.startPhone(OtherInformationActivity.this, mHandler, id);
                 break;
             case R.id.other_contacts_wathet:
-                aBoolean = false;
-                getContactID();
+                id = 2;
+                userCenterRealize.startPhone(OtherInformationActivity.this, mHandler, id);
                 break;
         }
 
@@ -141,39 +228,54 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
         other_relatives_wathet = (Button) findViewById(R.id.other_relatives_wathet);
         other_contacts_wathet = (Button) findViewById(R.id.other_contacts_wathet);
 
-        Pattern pattern = Pattern.compile("\\[(.*)\\]");
-        Matcher matcher = pattern.matcher(other);
-        String ResponseDates = "";
-        while (matcher.find()) {
-            ResponseDates = matcher.group(1);
-        }
-        String[] data_ids = ResponseDates.split(",");
-        for (String data_id1 : data_ids) {
-            if (data_id1.contains("1")) {
-                information_mailbox_linear.setVisibility(View.VISIBLE);
-            } else if (data_id1.contains("2")) {
-                information_spouse_linear.setVisibility(View.VISIBLE);
-            } else if (data_id1.contains("3")) {
-                information_live_linear.setVisibility(View.VISIBLE);
-            } else if (data_id1.contains("4")) {
-                information_mode_linear.setVisibility(View.VISIBLE);
-            } else if (data_id1.contains("5")) {
-                information_corporate_linear.setVisibility(View.VISIBLE);
-            } else if (data_id1.contains("6")) {
-                information_corporate_address_linear.setVisibility(View.VISIBLE);
-            } else if (data_id1.contains("7")) {
-                information_corporate_phone_linear.setVisibility(View.VISIBLE);
-            } else if (data_id1.contains("8")) {
-                loan_personal_linear.setVisibility(View.VISIBLE);
-            } else if (data_id1.contains("9")) {
-                other_contacts_linear.setVisibility(View.VISIBLE);
+        if (!TextUtils.isEmpty(other)) {
+            Pattern pattern = Pattern.compile("\\[(.*)\\]");
+            Matcher matcher = pattern.matcher(other);
+            String ResponseDates = "";
+            while (matcher.find()) {
+                ResponseDates = matcher.group(1);
             }
+            String[] data_ids = ResponseDates.split(",");
+            for (String data_id1 : data_ids) {
+                if (data_id1.contains("1")) {
+                    information_mailbox_linear.setVisibility(View.VISIBLE);
+                } else if (data_id1.contains("2")) {
+                    information_spouse_linear.setVisibility(View.VISIBLE);
+                } else if (data_id1.contains("3")) {
+                    information_live_linear.setVisibility(View.VISIBLE);
+                } else if (data_id1.contains("4")) {
+                    information_mode_linear.setVisibility(View.VISIBLE);
+                } else if (data_id1.contains("5")) {
+                    information_corporate_linear.setVisibility(View.VISIBLE);
+                } else if (data_id1.contains("6")) {
+                    information_corporate_address_linear.setVisibility(View.VISIBLE);
+                } else if (data_id1.contains("7")) {
+                    information_corporate_phone_linear.setVisibility(View.VISIBLE);
+                } else if (data_id1.contains("8")) {
+                    loan_personal_linear.setVisibility(View.VISIBLE);
+                } else if (data_id1.contains("9")) {
+                    other_contacts_linear.setVisibility(View.VISIBLE);
+                }
+            }
+        } else {
+            information_mailbox_linear.setVisibility(View.VISIBLE);
+            information_spouse_linear.setVisibility(View.VISIBLE);
+            information_live_linear.setVisibility(View.VISIBLE);
+            information_mode_linear.setVisibility(View.VISIBLE);
+            information_corporate_linear.setVisibility(View.VISIBLE);
+            information_corporate_address_linear.setVisibility(View.VISIBLE);
+            information_corporate_phone_linear.setVisibility(View.VISIBLE);
+            loan_personal_linear.setVisibility(View.VISIBLE);
+            other_contacts_linear.setVisibility(View.VISIBLE);
         }
+
+        information_mode_linear.setOnClickListener(this);
     }
 
     private void getHttp() {
         Map<String, Object> map = new HashMap<>();
         map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        map.put("pid", Long.parseLong(pid));
         map.put("email", information_mailbox_editText.getText().toString());
         map.put("mate", information_spouse_editText.getText().toString());
         map.put("dwell_address", information_live_editText.getText().toString());
@@ -187,7 +289,7 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
         map.put("user_b", other_contacts_name.getText().toString());
         map.put("relation_b", "");
         map.put("mobile_b", other_contacts_phone.getText().toString());
-        OkHttpManager.postAsync(HttpURL.getInstance().BASEADD, "other", map, this);
+        OkHttpManager.postAsync(HttpURL.getInstance().OTHER_INFO, "other", map, this);
     }
 
     @Override
@@ -206,48 +308,12 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
+        Intent intent = new Intent();
+        intent.putExtra("operatr", "1");
+        setResult(1003, intent);
         finish();
     }
 
-
-    private void getContactID() {
-        // 获取联系人数据
-        ContentResolver cr = this.getContentResolver();//获取所有电话信息（而不是联系人信息），这样方便展示
-        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
-        String[] projection = {
-                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,// 姓名
-                ContactsContract.CommonDataKinds.Phone.NUMBER,// 电话号码
-        };
-        Cursor cursor = cr.query(uri, projection, null, null, null);
-        if (cursor == null) {
-            return;
-        }//最终要返回的数据
-        result = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            String name = cursor.getString(0);
-            String number = cursor.getString(1);
-            //保存到对象里
-            ContactInfo info = new ContactInfo();
-            info.setName(name);
-            info.setNumber(number);
-            //保存到集合里
-            result.add(info);
-        }//用完记得关闭
-        cursor.close();
-        if (TimeUtils.isFastDoubleClick()) {
-            return;
-        } else {
-            if (aBoolean) {
-                //弹出Toast或者Dialog
-                ShowDialog.getInstance().getDialog(this, getCursor(result),
-                        "cursor", mHandler, 100);
-            } else {
-                //弹出Toast或者Dialog
-                ShowDialog.getInstance().getDialog(this, getCursor(result),
-                        "cursor", mHandler, 101);
-            }
-        }
-    }
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -255,21 +321,18 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case 1000:
+                    information_mode_text.setText(msg.obj.toString());
+                    break;
                 case 100:
-                    for (int i = 0; result.size() > i; i++) {
-                        if (result.get(i).getName().equals(msg.obj.toString())) {
-                            other_relatives_phone.setText(result.get(i).getNumber());
-                            other_relatives_name.setText(result.get(i).getName());
-                        }
-                    }
+                    get = msg.obj.toString().split(",");
+                    other_relatives_phone.setText(get[1]);
+                    other_relatives_name.setText(get[0]);
                     break;
                 case 101:
-                    for (int i = 0; result.size() > i; i++) {
-                        if (result.get(i).getName().equals(msg.obj.toString())) {
-                            other_contacts_phone.setText(result.get(i).getNumber());
-                            other_contacts_name.setText(result.get(i).getName());
-                        }
-                    }
+                    get = msg.obj.toString().split(",");
+                    other_relatives_phone.setText(get[1]);
+                    other_relatives_name.setText(get[0]);
                     break;
 
             }
@@ -277,15 +340,44 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
     };
 
 
-    private List<Map<String, Object>> getCursor(List<ContactInfo> contactInfoList) {
-        List<Map<String, Object>> mapList = new ArrayList<>();
-        for (int i = 0; contactInfoList.size() > i; i++) {
+    /**
+     * 住房
+     *
+     * @return
+     */
+    private List<Map<String, Object>> getmode() {
+        List<Map<String, Object>> list_car_life = new ArrayList<>();
+        for (String aPurpose : mode_Strings) {
             Map<String, Object> map = new HashMap<>();
-            map.put("name", contactInfoList.get(i).getName());
-            map.put("number", contactInfoList.get(i).getNumber());
+            map.put("name", aPurpose);
             map.put("boolean", "1");
-            mapList.add(map);
+            list_car_life.add(map);
         }
-        return mapList;
+        return list_car_life;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_CONTACTS) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.getContactID(OtherInformationActivity.this, mHandler, id);
+            } else {
+                Toast.makeText(this, "请授予联系人权限", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.putExtra("operator", "2");
+            setResult(1003, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

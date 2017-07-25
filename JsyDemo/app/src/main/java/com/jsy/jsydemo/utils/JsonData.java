@@ -358,7 +358,7 @@ public class JsonData {
                 speedLoanDetailsListData.setOrder(jsonObject.optString("order"));
                 speedLoanDetailsListData.setOther_id(jsonObject.optString("other_id"));
                 speedLoanDetailsListData.setPro_describe(jsonObject.optString("pro_describe"));
-                speedLoanDetailsListData.setPro_hits(jsonObject.optString("pro_hits"));
+                speedLoanDetailsListData.setPro_hits(jsonObject.optString("hits"));
                 speedLoanDetailsListData.setPro_link(jsonObject.optString("pro_link"));
                 speedLoanDetailsListData.setPro_name(jsonObject.optString("pro_name"));
                 speedLoanDetailsListData.setQixianfanwei(jsonObject.optString("qixianfanwei"));

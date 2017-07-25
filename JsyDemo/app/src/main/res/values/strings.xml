@@ -215,5 +215,6 @@
     <string name="operator_text">正在登入....\n完成登入过程大约需要 30s\n登入过程中需要输入短信验证码,请勿关闭页面</string>
     <string name="operator_text_result">登入完成,正在同步...\n离开页面不会影响授权结果</string>
     <string name="loan_fragment_applicants">申请人数</string>
+    <string name="loan_fragment_rate">费率</string>
 
 </resources>

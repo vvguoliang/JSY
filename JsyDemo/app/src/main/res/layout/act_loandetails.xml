@@ -50,7 +50,6 @@
                             android:id="@+id/loan_details_text_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="dada"
                             android:textColor="@color/common_brown_text"
                             android:textSize="@dimen/common_16dp" />
 
@@ -69,7 +68,6 @@
                             android:id="@+id/loan_details_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="dknakndkandkadkak"
                             android:textColor="@color/common_brown_text"
                             android:textSize="@dimen/common_14dp" />
 

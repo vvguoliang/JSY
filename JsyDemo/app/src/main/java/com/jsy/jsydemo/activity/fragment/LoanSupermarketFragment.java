@@ -194,7 +194,6 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
             case "product":
                 break;
         }
-
     }
 
     @Override

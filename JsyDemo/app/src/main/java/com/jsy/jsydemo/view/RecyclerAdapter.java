@@ -129,7 +129,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
             positionEnd = mViewCount - 2;
         }
         if (loadMoreAble && !isShowNoMore && position == positionEnd) {
-            mLoadMoreView.setVisibility(View.VISIBLE);
+            mLoadMoreView.setVisibility(View.GONE);
             if (mLoadMoreAction != null) {
                 mLoadMoreAction.onAction();
             }
@@ -178,7 +178,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         mLoadMoreView.post(new Runnable() {
             @Override
             public void run() {
-                mLoadMoreView.setVisibility(View.VISIBLE);
+                mLoadMoreView.setVisibility(View.GONE);
                 mNoMoreView.setVisibility(View.GONE);
             }
         });

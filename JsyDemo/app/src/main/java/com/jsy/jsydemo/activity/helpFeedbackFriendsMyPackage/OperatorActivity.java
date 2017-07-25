@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.base.BaseActivityManager;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
@@ -42,6 +44,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Request;
 
@@ -121,7 +125,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.title_image:
                 intent = new Intent();
-                intent.putExtra("operator", "");
+                intent.putExtra("operator", "2");
                 setResult(1000, intent);
                 finish();
                 break;
@@ -470,4 +474,19 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
         });
         builder.create().show();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            intent = new Intent();
+            intent.putExtra("operator", "2");
+            setResult(1000, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
 }

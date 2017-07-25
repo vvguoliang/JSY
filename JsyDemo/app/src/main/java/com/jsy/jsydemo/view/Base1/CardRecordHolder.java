@@ -26,6 +26,9 @@ import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.view.BaseViewHolder;
 
+import java.util.Random;
+
+@SuppressWarnings({"LoopStatementThatDoesntLoop", "UnusedAssignment"})
 public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
 
     private TextView home_loan_product_title;
@@ -76,7 +79,11 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
             builder.setSpan(redSpan, 3, home_loan_product_interest_rate.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             home_loan_product_interest_rate.setText(builder);
 
-            home_loan_product_number.setText(context.getString(R.string.loan_fragment_applicants) + object.getPro_hits() + "人");
+            if (object.getPro_hits().length() < 5) {
+                home_loan_product_number.setText(context.getString(R.string.loan_fragment_applicants) + object.getPro_hits() + testRandom() + "人");
+            } else {
+                home_loan_product_number.setText(context.getString(R.string.loan_fragment_applicants) + object.getPro_hits() + "人");
+            }
             builder = new SpannableStringBuilder(home_loan_product_number.getText().toString());
             //ForegroundColorSpan 为文字前景色，BackgroundColorSpan为文字背景色
             redSpan = new ForegroundColorSpan(Color.RED);
@@ -84,6 +91,14 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
             home_loan_product_number.setText(builder);
 
         }
+    }
+
+    private String testRandom() {
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            return random.nextInt(20) + "";
+        }
+        return "0";
     }
 
     @Override

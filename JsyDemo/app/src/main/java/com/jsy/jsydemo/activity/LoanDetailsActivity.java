@@ -41,6 +41,7 @@ import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
@@ -71,10 +72,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     private EditText loan_details_editText_day;
     private TextView loan_details_textView_day;
 
-//    private TextView loan_details_resource_rat;
-//    private TextView loan_details_repayment;
-//    private TextView loan_details_loan_time;
-
     private Button loan_details_basic_information;
     private Button loan_details_phone_operator;
     private Button loan_details_id;
@@ -83,8 +80,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     private Button oan_details_esame_credit;
 
     private Button loan_details_button;
-
-//    private TextView details_repayment_text;
 
     private TextView details_editText_day_text;
 
@@ -103,10 +98,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
 
     private double day_monthMin = 0;
 
-    private double profit = 0;
-
-    private int anInt = 0;
-
     private LoanDatailsData loanDatailsData;
 
     private LinearLayout basic_information_linear;
@@ -120,6 +111,8 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     private CreditApp creditApp;
 
     private String username = "";
+
+    private String other = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,23 +131,40 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             case R.id.title_image:
                 finish();
                 break;
+            case R.id.phone_operator_linear:
             case R.id.loan_details_phone_operator://运营商
                 startActivityForResult(new Intent(LoanDetailsActivity.this, OperatorActivity.class), 1000);
                 break;
+            case R.id.basic_information_linear:
             case R.id.loan_details_basic_information://基础信息认证
-                startActivity(new Intent(LoanDetailsActivity.this, BasicAuthenticationActivity.class));
+                startActivityForResult(new Intent(LoanDetailsActivity.this, BasicAuthenticationActivity.class), 1001);
                 break;
             case R.id.loan_details_id://身份证
-                startActivity(new Intent(LoanDetailsActivity.this, PersonalDataCertificatesActivity.class));
+                startActivityForResult(new Intent(LoanDetailsActivity.this, PersonalDataCertificatesActivity.class), 1002);
                 break;
+            case R.id.details_other_linear:
             case R.id.loan_details_other://其他
                 intent = new Intent(LoanDetailsActivity.this, OtherInformationActivity.class);
-                intent.putExtra("other", loanDatailsData.getOther_id());
-                startActivity(intent);
+                intent.putExtra("other", other);
+                intent.putExtra("pid", id);
+                startActivityForResult(intent, 1003);
                 break;
             case R.id.loan_details_button://补齐
+                if (loanDatailsData != null) {
+                    switch (loanDatailsData.getApi_type()) {
+                        case "1":
+                        case "2":
+                            intent = new Intent(LoanDetailsActivity.this, LoanWebViewActivity.class);
+                            intent.putExtra("url", loanDatailsData.getPro_link());
+                            startActivity(intent);
+                            break;
+                        case "3":
 
+                            break;
+                    }
+                }
                 break;
+            case R.id.esame_credit_linear:
             case R.id.oan_details_esame_credit://芝麻信用
                 getSesameCredit();
                 break;
@@ -209,6 +219,12 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         esame_credit_linear = (LinearLayout) findViewById(R.id.esame_credit_linear);
         etails_id_linear = (LinearLayout) findViewById(R.id.etails_id_linear);
         details_other_linear = (LinearLayout) findViewById(R.id.details_other_linear);
+
+        basic_information_linear.setOnClickListener(this);
+        phone_operator_linear.setOnClickListener(this);
+        esame_credit_linear.setOnClickListener(this);
+        etails_id_linear.setOnClickListener(this);
+        details_other_linear.setOnClickListener(this);
     }
 
     @Override
@@ -312,7 +328,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 day_monthMin = Double.parseDouble(edufan1[0]);
                 loan_details_editText_day.setText(edufan1[1]);
 
-                anInt++;
                 if (StringUtil.isNullOrEmpty(loanDatailsData.getUser_auth()) || loanDatailsData.getUser_auth().equals("null")
                         || loanDatailsData.getUser_auth().equals("0")) {
                     loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
@@ -321,7 +336,33 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                     loan_details_other.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                     oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                 } else {
-
+                    JSONObject object = new JSONObject(loanDatailsData.getUser_auth());
+                    if (object.optString("base_auth").equals("1")) {
+                        loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
+                    } else {
+                        loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                    }
+                    if (object.optString("mobile_auth").equals("1")) {
+                        loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
+                    } else {
+                        loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                    }
+                    if (object.optString("zhima_auth").equals("1")) {
+                        oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
+                    } else {
+                        oan_details_esame_credit.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                    }
+                    if (object.optString("idcard_auth").equals("1")) {
+                        loan_details_id.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
+                    } else {
+                        loan_details_id.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                    }
+                    if (object.optString("base_auth").equals("1")) {
+                        loan_details_other.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
+                    } else {
+                        loan_details_other.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+                    }
+                    other = object.optString("other_auth");
                 }
                 String data_id = loanDatailsData.getData_id();
                 Pattern pattern = Pattern.compile("\\[(.*)\\]");
@@ -330,20 +371,20 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 while (matcher.find()) {
                     ResponseDates = matcher.group(1);
                 }
-//                String[] data_ids = ResponseDates.split(",");
-//                for (String data_id1 : data_ids) {
-//                    if (data_id1.contains("1")) {
-                basic_information_linear.setVisibility(View.VISIBLE);
-//                    } else if (data_id1.contains("2")) {
-                phone_operator_linear.setVisibility(View.VISIBLE);
-//                    } else if (data_id1.contains("3")) {
-                esame_credit_linear.setVisibility(View.VISIBLE);
-//                    } else if (data_id1.contains("4")) {
-                etails_id_linear.setVisibility(View.VISIBLE);
-//                    } else if (data_id1.contains("5")) {
-                details_other_linear.setVisibility(View.VISIBLE);
-//                    }
-//                }
+                String[] data_ids = ResponseDates.split(",");
+                for (String data_id1 : data_ids) {
+                    if (data_id1.contains("1")) {
+                        basic_information_linear.setVisibility(View.VISIBLE);
+                    } else if (data_id1.contains("2")) {
+                        phone_operator_linear.setVisibility(View.VISIBLE);
+                    } else if (data_id1.contains("3")) {
+                        esame_credit_linear.setVisibility(View.VISIBLE);
+                    } else if (data_id1.contains("4")) {
+                        etails_id_linear.setVisibility(View.VISIBLE);
+                    } else if (data_id1.contains("5")) {
+                        details_other_linear.setVisibility(View.VISIBLE);
+                    }
+                }
                 break;
             case "SesameCredit":
                 JSONObject object = new JSONObject(result);
@@ -459,6 +500,30 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
             } else {
                 loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+            }
+            return;
+        } else if (requestCode == 1001) {
+            String datastring = data.getExtras().getString("operator");
+            if (datastring != null && datastring.equals("1")) {
+                loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
+            } else {
+                loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+            }
+            return;
+        } else if (requestCode == 1002) {
+            String datastring = data.getExtras().getString("operator");
+            if (datastring != null && datastring.equals("1")) {
+                loan_details_id.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
+            } else {
+                loan_details_id.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
+            }
+            return;
+        } else if (requestCode == 1003) {
+            String datastring = data.getExtras().getString("operator");
+            if (datastring != null && datastring.equals("1")) {
+                loan_details_other.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
+            } else {
+                loan_details_other.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
             }
             return;
         }

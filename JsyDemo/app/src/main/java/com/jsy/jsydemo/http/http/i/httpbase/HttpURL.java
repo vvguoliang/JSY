@@ -45,6 +45,10 @@ public class HttpURL implements Serializable {
 
     public String HTTP_OPERATOR = "http://api.tanzhishuju.com/api/gateway";
 
+    public String HTTP_URL_JUAICHA = "http://www.kuaicha.info/mobile/credit/credit.html";
+
+    public String HTTP_DETAILS = "https://www.jishiyu007.com/app/zhiqinggaozhi_bj.html";
+
     public void initUrl(Context context) {
         if (SharedPreferencesUtils.contains(context, HTTP_URL_KEY)) {
             HTTP_URL = SharedPreferencesUtils.get(context, HTTP_URL_KEY, HTTP_URL).toString();
@@ -135,6 +139,8 @@ public class HttpURL implements Serializable {
     public String SIGN = HTTP_URL + "&m=userdetail&a=mobileSign";
 
     public String BASEADD = HTTP_URL + "&m=userdetail&a=base_add";
+
+    public String OTHER_INFO = HTTP_URL + "&m=userdetail&a=other_info_add_add";
 
     public String PRODUCTINDEX = HTTP_URL + "&m=product&a=index";
 

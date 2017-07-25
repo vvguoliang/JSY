@@ -5,10 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,13 +74,9 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
 
     private int page = 1;
 
-    private int getPage = 0;
-
     private LinearLayout loan_frame;
 
     private ViewPager loan_viewpage;
-
-    private View mHeader;
 
     //图片地址集合( 项目中一般是对于的HTTP地址 )
     List<Map<String, String>> mImageUrl = new ArrayList<>();
@@ -91,13 +85,9 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     //banner上点点的集合
     List<ImageView> mBannerDots = new ArrayList<>();
 
-    private HomeLoanBannerList homeLoanBannerList;
-
     private HomeProductList homeProductList;
 
     private HomeProduct[] VirtualData;
-
-    private Intent intent = null;
 
     @Override
     protected int getLayout() {
@@ -115,18 +105,20 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         title_view.setText(mActivity.getString(R.string.app_name));
 
         //添加Header
-        mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_loan_top, null);
+        View mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_loan_top, null);
         mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 AppUtil.getInstance().Dispay(mActivity)[1] / 2 + DisplayUtils.dip2px(mActivity, 12)));
         getHeader(mHeader);
         mAdapter.setHeader(mHeader);
         //添加footer
-        final TextView footer = new TextView(mActivity);
-        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtils.dip2px(mActivity, 24)));
-        footer.setTextSize(16);
-        footer.setGravity(Gravity.CENTER);
-        footer.setText("");
-        mAdapter.setFooter(footer);
+//        final TextView footer = new TextView(mActivity);
+//        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                DisplayUtils.dip2px(mActivity, 24)));
+//        footer.setTextSize(16);
+//        footer.setGravity(Gravity.CENTER);
+//        footer.setText("");
+//        mAdapter.setFooter(footer);
+        mAdapter.removeFooter();
 
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.loan_recycler_view);
         mRecyclerView.setSwipeRefreshColors(0xFF437845, 0xFFE44F98, 0xFF2FAC21);
@@ -272,7 +264,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                 }
 
             };
-            bannerTimer.schedule(bannerTask, 3000);// 3秒钟自动翻页一次
+            bannerTimer.schedule(bannerTask, 2000);// 3秒钟自动翻页一次
         }
     }
 
@@ -300,8 +292,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
             case "banner":
-                homeLoanBannerList = new HomeLoanBannerList();
-                homeLoanBannerList = JsonData.getInstance().getJsonLaonHome(result);
+                HomeLoanBannerList homeLoanBannerList = JsonData.getInstance().getJsonLaonHome(result);
                 for (int i = 0; homeLoanBannerList.getLoanBanners().size() > i; i++) {
                     Map<String, String> map = new HashMap<>();
                     map.put("path", HttpURL.getInstance().HTTP_URL_PATH + homeLoanBannerList.getLoanBanners().get(i).getImg().
@@ -344,8 +335,10 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                                 homeProductList.getHomeProductList().get(i).getApi_type());
                     }
                     if (page != 1) {
+                        mAdapter.clear();
                         mAdapter.addAll(VirtualData);
                     }
+                    mAdapter.notifyDataSetChanged();
                 }
                 break;
         }
@@ -365,7 +358,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                 break;
             case R.id.loan_speed2_linear:
                 intent = new Intent(mActivity, LoanWebViewActivity.class);
-                intent.putExtra("url", "http://www.kuaicha.info/mobile/credit/credit.html");
+                intent.putExtra("url", HttpURL.getInstance().HTTP_URL_JUAICHA);
                 mActivity.startActivity(intent);
                 break;
             case R.id.loan_tab_linear:

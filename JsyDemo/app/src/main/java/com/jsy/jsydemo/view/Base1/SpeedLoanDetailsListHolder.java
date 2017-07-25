@@ -70,13 +70,18 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
                     })
                     .into(speed_loan_detailsList_image);
             speed_loan_detailsList_name.setText(data.getPro_name());
-            speed_loan_detailsList_text.setText("申请人数:" + data.getPro_describe());
+            speed_loan_detailsList_text.setText("申请人数:" + data.getPro_hits());
             SpannableStringBuilder builder = new SpannableStringBuilder(speed_loan_detailsList_text.getText().toString());
             //ForegroundColorSpan 为文字前景色，BackgroundColorSpan为文字背景色
             ForegroundColorSpan redSpan = new ForegroundColorSpan(Color.RED);
             builder.setSpan(redSpan, 5, speed_loan_detailsList_text.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             speed_loan_detailsList_text.setText(builder);
-            speed_loan_detailsList_rate.setText(data.getFeilv());
+            speed_loan_detailsList_rate.setText(context.getString(R.string.loan_fragment_rate) + "  " + data.getFeilv());
+            builder = new SpannableStringBuilder(speed_loan_detailsList_text.getText().toString());
+            //ForegroundColorSpan 为文字前景色，BackgroundColorSpan为文字背景色
+            redSpan = new ForegroundColorSpan(Color.RED);
+            builder.setSpan(redSpan, 2, speed_loan_detailsList_text.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            speed_loan_detailsList_text.setText(builder);
         }
     }
 
@@ -92,8 +97,17 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
     @Override
     public void onItemViewClick(SpeedLoanDetailsListData data) {
         super.onItemViewClick(data);
+//        switch (data.getApi_type()) {
+//            case "1":
+//            case "2":
+//                break;
+//            case "3":
+//                break;
+//            default:
         Intent intent = new Intent(context, LoanDetailsActivity.class);
         intent.putExtra("id", data.getId());
         context.startActivity(intent);
+//                break;
+//        }
     }
 }
