@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -93,7 +94,8 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
         if (ImmersiveUtils.BuildVERSION()) {
             LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.height = DisplayUtils.px2dip(mActivity, 48 * 11);
+            lp.gravity = Gravity.CENTER;
+            lp.height = DisplayUtils.px2dip(mActivity, 48 * 30);
         }
         loan_supermarket_listview = (ListView) findViewById(R.id.loan_supermarket_listview);
         TextView title_view = (TextView) findViewById(R.id.title_view);

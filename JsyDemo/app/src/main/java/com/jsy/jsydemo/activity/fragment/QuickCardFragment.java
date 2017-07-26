@@ -103,7 +103,8 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
         if (ImmersiveUtils.BuildVERSION()) {
             LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.height = DisplayUtils.px2dip(mActivity, 48 * 11);
+            lp.gravity = Gravity.CENTER;
+            lp.height = DisplayUtils.px2dip(mActivity, 48 * 30);
         }
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(mActivity.getString(R.string.name_quick_card));

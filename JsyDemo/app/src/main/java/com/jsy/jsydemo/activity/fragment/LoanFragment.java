@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,11 +102,12 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
         mHandler = new Handler();
         mAdapter = new CardRecordAdapter(mActivity);
-//沉浸式状态设置
+         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
             LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.height = DisplayUtils.px2dip(mActivity, 48 * 11);
+            lp.gravity = Gravity.CENTER;
+            lp.height = DisplayUtils.px2dip(mActivity, 48 * 20);
         }
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(mActivity.getString(R.string.app_name));
@@ -116,14 +118,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                 AppUtil.getInstance().Dispay(mActivity)[1] / 2 + DisplayUtils.dip2px(mActivity, 12)));
         getHeader(mHeader);
         mAdapter.setHeader(mHeader);
-        //添加footer
-//        final TextView footer = new TextView(mActivity);
-//        footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                DisplayUtils.dip2px(mActivity, 24)));
-//        footer.setTextSize(16);
-//        footer.setGravity(Gravity.CENTER);
-//        footer.setText("");
-//        mAdapter.setFooter(footer);
         mAdapter.removeFooter();
 
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.loan_recycler_view);

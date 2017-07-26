@@ -170,6 +170,7 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
                 } else {
                     transaction.show(listfragment.get(i));
                 }
+                stateBarTint("#305591", true);
 //                if (position % 2 == 0) {
                 //fragment首页和我的页状态栏字体颜色为白色
                 SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "WHITE");
