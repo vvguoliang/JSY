@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_commissioning"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/commissioning_image1"
@@ -66,7 +66,7 @@
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="@dimen/common_50dp"
+            android:layout_marginBottom="@dimen/common_30dp"
             CircleIndicator:ci_background="@android:color/white"
             CircleIndicator:ci_gravity="center"
             CircleIndicator:ci_margin="5dp"
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="@dimen/common_100dp"
+            android:layout_marginBottom="@dimen/common_90dp"
             android:background="@drawable/bg_speedloan_red_selector"
             android:paddingBottom="@dimen/common_10dp"
             android:paddingLeft="@dimen/common_20dp"

@@ -42,10 +42,6 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
 
     private String code = "";
 
-    private String msg = "";
-
-    private boolean booMsg = false;
-
     private int aoth = 0;
 
     private String operator = "";
@@ -72,22 +68,13 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
         switch (v.getId()) {
             case R.id.operator_no_authorization_linear:
             case R.id.operator_no_authorization:
-                if(booMsg){
-                    startActivityForResult(new Intent(PersonalDataOperatorActivity.this,
-                            OperatorActivity.class), 1000);
-                }else{
-                    getPhone("提示", "为了您的信息安全,30天内不得重\n复授权.请30天后再来授权哦.");
-                }
+                getUserDataHttp();
                 break;
             case R.id.title_image:
                 finish();
                 break;
             case R.id.title_complete:
-                if (booMsg) {
-                    getUserDataHttp();
-                } else {
-                    getUserDataAothHttp();
-                }
+                getUserDataAothHttp();
                 break;
         }
 
@@ -164,10 +151,8 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "user_auth":
-                Log.e("", "");
                 break;
             case "user_data":
-                Log.e("", "");
                 break;
         }
 
@@ -177,19 +162,15 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
             case "user_auth":
-                Log.e("", "");
                 break;
             case "user_data":
-                Log.e("", "");
                 JSONObject object = new JSONObject(result);
                 code = object.optString("code");
-                msg = object.optString("msg");
                 if (code.equals("0000")) {
-                    booMsg = true;
-                } else {
-                    booMsg = false;
-                    operator_no_authorization.setText(this.getString(R.string.name_loan_operator_authorization));
-                    getUserDataAothHttp();
+                    startActivityForResult(new Intent(PersonalDataOperatorActivity.this,
+                            OperatorActivity.class), 1000);
+                } else if (code.equals("0002")) {
+                    getPhone("提示", object.optString("msg"));
                 }
                 break;
         }

@@ -8,12 +8,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.CommissioningActivity;
 import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.view.PublicPhoneDialog;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/6/28.
@@ -21,8 +35,12 @@ import com.jsy.jsydemo.view.PublicPhoneDialog;
  * 设置
  */
 
-public class SetUPActivity extends BaseActivity implements View.OnClickListener {
+public class SetUPActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
     private Intent intent = null;
+
+    private String update_url = "";
+
+    private UserCenterRealize userCenterRealize = new UserCenterRealize();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +74,16 @@ public class SetUPActivity extends BaseActivity implements View.OnClickListener 
             case R.id.set_up_sign_out:
                 getPhone("提示", "您是否确认安全退出?");
                 break;
+            case R.id.set_up_sign_upde:
+                break;
         }
 
+    }
+
+    private void getUPDATE() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("version", AppUtil.getInstance().getVersionName(1, this));
+        OkHttpManager.postAsync(HttpURL.getInstance().UPDATE, "update", map, this);
     }
 
     @Override
@@ -69,6 +95,7 @@ public class SetUPActivity extends BaseActivity implements View.OnClickListener 
 
         findViewById(R.id.set_up_about).setOnClickListener(this);
         findViewById(R.id.set_up_password).setOnClickListener(this);
+        findViewById(R.id.set_up_sign_upde).setOnClickListener(this);
         findViewById(R.id.set_up_sign_out).setOnClickListener(this);
 
     }
@@ -92,6 +119,68 @@ public class SetUPActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferencesUtils.logoutSuccess(SetUPActivity.this);
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    private void getPhone3(String title, String msg) {
+        PublicPhoneDialog.Builder builder = new PublicPhoneDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setTiltleMsg(msg);
+        builder.setContentViewCancel("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setContentViewDetermine("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+        JSONObject object = new JSONObject(result);
+        if (object.optString("code").equals("0001")) {
+            getPhone3("提示", object.optString("msg"));
+        } else if (object.optString("code").equals("0000")) {
+            object = new JSONObject(object.optString("data"));
+            update_url = object.optString("update_url");
+            String type = object.optString("type");
+            String content = object.optString("content");
+            getPhone1(content, type);
+        }
+    }
+
+    private void getPhone1(String msg, final String phone) {
+        PublicPhoneDialog.Builder builder = new PublicPhoneDialog.Builder(this);
+        builder.setTiltleMsg(msg);
+        if (phone.equals("2")) {
+            builder.setTitle("建议更新");
+            builder.setContentViewCancel("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        } else {
+            builder.setTitle("强制更新");
+        }
+        builder.setContentViewDetermine("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                userCenterRealize.getUpdata(SetUPActivity.this, update_url);
                 dialog.dismiss();
             }
         });

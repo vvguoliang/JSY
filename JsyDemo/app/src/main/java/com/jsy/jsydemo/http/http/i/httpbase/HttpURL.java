@@ -152,5 +152,7 @@ public class HttpURL implements Serializable {
 
     public String BOOTAPP = HTTP_URL + "&m=app&a=boot";
 
+    public String UPDATE = HTTP_URL + "&m=app&a=update";
+
 
 }

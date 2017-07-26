@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.jsy.jsydemo.EntityClass.ContactInfo;
 import com.jsy.jsydemo.interfaces.UserCenterModel;
+import com.jsy.jsydemo.service.UpdataService;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.CTelephoneInfo;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
@@ -304,6 +305,26 @@ public class UserCenterRealize implements UserCenterModel {
             }
         } else {
             getPhone(context, mHandler, imei);
+        }
+    }
+
+    @Override
+    public void getUpdata(Context context, String url) {
+        Activity activity = (Activity) context;
+        if (AppUtil.getInstance().mBuildVersion >= 23) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                //申请联系人权限  允许程序读取用户联系人数据
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        AppUtil.getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK);
+            } else {
+                Intent intent = new Intent(context, UpdataService.class);
+                intent.putExtra("url", url);
+                context.startService(intent);
+            }
+        } else {
+            Intent intent = new Intent(context, UpdataService.class);
+            intent.putExtra("url", url);
+            context.startService(intent);
         }
     }
 

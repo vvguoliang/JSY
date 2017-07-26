@@ -2,11 +2,10 @@ package com.jsy.jsydemo.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,7 +29,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.control.MyButton;
+import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.OperatorActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
@@ -41,6 +40,7 @@ import com.jsy.jsydemo.utils.PublicClass.CommissioningTimerUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.CircleIndicator;
+import com.jsy.jsydemo.view.PublicPhoneDialog;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.umeng.analytics.MobclickAgent;
 
@@ -51,7 +51,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import okhttp3.Request;
 
@@ -86,6 +85,8 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
 
     private Button commissioning_loan_button;
 
+    private String update_url = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,15 +115,14 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
     }
 
     protected void initView() {
-        if (TextUtils.isEmpty(SharedPreferencesUtils.get(this, "first time", "").toString())) {
-            SharedPreferencesUtils.put(this, "first_time", "1");
+        if (TextUtils.isEmpty(SharedPreferencesUtils.get(this, "first_time", "").toString())) {
             commissioning_relat.setVisibility(View.GONE);
             viewpager_relat.setVisibility(View.VISIBLE);
         } else {
             commissioning_relat.setVisibility(View.VISIBLE);
             viewpager_relat.setVisibility(View.GONE);
             userCenterRealize.getIMEIPHONE(this, mHandler, 100);
-            getBOOTAPP();
+            getUPDATE();
         }
         commissioning_button.setOnClickListener(this);
         commissioning_image1.setOnClickListener(this);
@@ -149,7 +149,6 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
 
             }
         });
-
     }
 
     private void initData() {
@@ -196,10 +195,11 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                 }
                 break;
             case R.id.commissioning_loan_button:
+                SharedPreferencesUtils.put(this, "first_time", "1");
                 commissioning_relat.setVisibility(View.VISIBLE);
                 viewpager_relat.setVisibility(View.GONE);
                 userCenterRealize.getIMEIPHONE(this, mHandler, 100);
-                getBOOTAPP();
+                getUPDATE();
                 break;
         }
     }
@@ -216,15 +216,24 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
         OkHttpManager.postAsync(HttpURL.getInstance().BOOTAPP, "boot_app", null, this);
     }
 
+    private void getUPDATE() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("version", AppUtil.getInstance().getVersionName(1, this));
+        OkHttpManager.postAsync(HttpURL.getInstance().UPDATE, "update", map, this);
+    }
+
     @Override
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "commissioning_activity":
                 break;
             case "boot_app":
-                startActivity(new Intent(this, MainActivity.class));
+                break;
+            case "update":
                 break;
         }
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     @Override
@@ -268,7 +277,44 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                     startActivity(new Intent(this, MainActivity.class));
                 }
                 break;
+            case "update":
+                object = new JSONObject(result);
+                if (object.optString("code").equals("0001")) {
+                    getBOOTAPP();
+                } else if (object.optString("code").equals("0000")) {
+                    object = new JSONObject(object.optString("data"));
+                    update_url = object.optString("update_url");
+                    String type = object.optString("type");
+                    String content = object.optString("content");
+                    getPhone(content, type);
+                }
+                break;
         }
+    }
+
+    private void getPhone(String msg, final String phone) {
+        PublicPhoneDialog.Builder builder = new PublicPhoneDialog.Builder(this);
+        builder.setTiltleMsg(msg);
+        if (phone.equals("2")) {
+            builder.setTitle("建议更新");
+            builder.setContentViewCancel("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    getBOOTAPP();
+                    dialog.dismiss();
+                }
+            });
+        } else {
+            builder.setTitle("强制更新");
+        }
+        builder.setContentViewDetermine("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                userCenterRealize.getUpdata(CommissioningActivity.this, update_url);
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 
     @Override
@@ -279,6 +325,12 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                 userCenterRealize.getIMEIPHONE(this, mHandler, 100);
             } else {
                 ToatUtils.showShort1(this, "请授予手机权限");
+            }
+        } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.getUpdata(this, update_url);
+            } else {
+                ToatUtils.showShort1(this, "请授予SD卡权限");
             }
         }
     }

@@ -76,25 +76,34 @@ public interface UserCenterModel {
      *
      * @param activity
      */
-    void getContactID(Activity activity, Handler mHandler,int booint);
+    void getContactID(Activity activity, Handler mHandler, int booint);
 
     /**
-     *  拨打电话权限
+     * 拨打电话权限
+     *
      * @param context
      */
-    void startPhoneDial(Context context , String phone);
+    void startPhoneDial(Context context, String phone);
 
     /**
      * 进行拨打电话
+     *
      * @param context
      * @param phone
      */
-    void getPhoneDial(Context context , String phone);
+    void getPhoneDial(Context context, String phone);
 
     /**
      * 获取IMEI权限
      */
 
-    void getIMEIPHONE(Context context,Handler mHandler,int imei);
+    void getIMEIPHONE(Context context, Handler mHandler, int imei);
+
+    /**
+     * 版本更新
+     *
+     * @param context
+     */
+    void getUpdata(Context context, String url);
 
 }

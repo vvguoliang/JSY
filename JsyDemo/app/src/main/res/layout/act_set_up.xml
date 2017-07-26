@@ -72,6 +72,36 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/set_up_sign_upde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_10dp"
+        android:background="@drawable/bg_fillet_shadow_selector"
+        android:padding="@dimen/common_10dp">
+
+        <com.jsy.jsydemo.control.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/common_10dp"
+            android:text="@string/name_loan_set_up_sign_upde"
+            android:textColor="@color/common_loan_personal"
+            android:textSize="@dimen/common_16dp"
+            tools:ignore="RelativeOverlap" />
+
+
+        <ImageView
+            android:layout_width="@dimen/common_20dp"
+            android:layout_height="@dimen/common_20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:paddingLeft="@dimen/common_10dp"
+            android:src="@drawable/bg_personal_right_selector" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/set_up_sign_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
