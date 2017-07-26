@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+
+        <activity android:name=".activity.CommissioningActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +30,7 @@
         </activity>
 
         <activity
-            android:name=".activity.CommissioningActivity"
+            android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.personaldata.PersonalDataActivity"
@@ -215,7 +216,6 @@
     <!-- 允许相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <!-- 添加操作联系人的权限
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    -->
+
+    <uses-permission android:name="android.permission.READ_SMS"/>
 </manifest>

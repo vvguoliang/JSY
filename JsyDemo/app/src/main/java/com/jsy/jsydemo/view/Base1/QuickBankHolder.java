@@ -47,7 +47,7 @@ public class QuickBankHolder extends BaseViewHolder<QuickBank> {
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
-                            quick_bank_image.setImageResource(R.mipmap.ic_launcher);
+                            quick_bank_image.setImageResource(R.mipmap.ic_path_in_load);
                             return false;
                         }
 

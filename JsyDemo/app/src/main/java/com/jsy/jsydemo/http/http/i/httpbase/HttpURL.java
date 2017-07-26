@@ -148,5 +148,9 @@ public class HttpURL implements Serializable {
 
     public String USERDATAILAUTH = HTTP_URL + "&m=userdetail&a=mobile_auth";
 
+    public String ACTIVITY = HTTP_URL + "&m=toutiao&a=activate";
+
+    public String BOOTAPP = HTTP_URL + "&m=app&a=boot";
+
 
 }

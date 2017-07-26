@@ -216,5 +216,6 @@
     <string name="operator_text_result">登入完成,正在同步...\n离开页面不会影响授权结果</string>
     <string name="loan_fragment_applicants">申请人数</string>
     <string name="loan_fragment_rate">费率</string>
+    <string name="loan_commossooning">立即体验</string>
 
 </resources>

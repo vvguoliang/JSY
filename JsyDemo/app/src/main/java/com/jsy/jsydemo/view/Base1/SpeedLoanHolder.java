@@ -51,7 +51,7 @@ public class SpeedLoanHolder extends BaseViewHolder<SpeedLoanData> {
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
-                            speed_loan_image.setImageResource(R.mipmap.ic_launcher);
+                            speed_loan_image.setImageResource(R.mipmap.ic_path_in_load);
                             return false;
                         }
 

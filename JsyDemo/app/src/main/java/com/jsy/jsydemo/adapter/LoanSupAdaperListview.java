@@ -68,13 +68,6 @@ public class LoanSupAdaperListview extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-//        Glide.with(context)
-//                .load(list.get(position).get("url"))
-//                .fitCenter()
-//                .placeholder(R.mipmap.ic_launcher)
-//                .crossFade()
-//                .into(viewHolder.loan_praise);
-//        viewHolder.loan_praise.setTag(R.id.loan_praise, position);
         if (position == 0) {
             viewHolder.loan_recommend.setText(productSuList.getProduct().get(position));
             viewHolder.loan_gridView.setTag("0");

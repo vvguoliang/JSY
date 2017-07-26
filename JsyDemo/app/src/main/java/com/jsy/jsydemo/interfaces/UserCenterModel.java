@@ -91,4 +91,10 @@ public interface UserCenterModel {
      */
     void getPhoneDial(Context context , String phone);
 
+    /**
+     * 获取IMEI权限
+     */
+
+    void getIMEIPHONE(Context context,Handler mHandler,int imei);
+
 }

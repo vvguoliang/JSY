@@ -69,7 +69,7 @@ public class BannerLoopAdapter extends PagerAdapter implements View.OnClickListe
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
-                        view.setImageResource(R.mipmap.ic_launcher);
+                        view.setImageResource(R.mipmap.ic_path_in_load);
                         return false;
                     }
 

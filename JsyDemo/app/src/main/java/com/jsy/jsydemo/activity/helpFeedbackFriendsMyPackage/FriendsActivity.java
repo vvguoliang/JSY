@@ -145,7 +145,7 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
-                            friends_image.setImageResource(R.mipmap.ic_launcher);
+                            friends_image.setImageResource(R.mipmap.ic_path_in_load);
                             return false;
                         }
 

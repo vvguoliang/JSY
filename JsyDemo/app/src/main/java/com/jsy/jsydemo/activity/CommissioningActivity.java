@@ -1,14 +1,59 @@
 package com.jsy.jsydemo.activity;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.base.BaseActivity;
+import com.jsy.jsydemo.control.MyButton;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
+import com.jsy.jsydemo.utils.PublicClass.CommissioningTimerUtils;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
+import com.jsy.jsydemo.view.CircleIndicator;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/6/23.
@@ -16,7 +61,8 @@ import com.umeng.analytics.MobclickAgent;
  * 启动页面
  */
 
-public class CommissioningActivity extends BaseActivity implements View.OnClickListener {
+@SuppressWarnings("deprecation")
+public class CommissioningActivity extends FragmentActivity implements View.OnClickListener, DataCallBack {
 
     private ImageView commissioning_image;
 
@@ -24,34 +70,108 @@ public class CommissioningActivity extends BaseActivity implements View.OnClickL
 
     private Button commissioning_button;
 
+    private UserCenterRealize userCenterRealize = new UserCenterRealize();
+    private String getImei = "";
+
+    private CommissioningTimerUtils commissioningTimerUtils;
+
+    private String boot_url = "";
+
+    private ViewPager viewpager;
+    private RelativeLayout viewpager_relat;
+    private CircleIndicator indicator;
+    private List<ImageView> viewList;
+
+    private RelativeLayout commissioning_relat;
+
+    private Button commissioning_loan_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_commissioning);
+        findViewById();
+        initView();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            stateBarTint("#305591", true);
-            statusFragmentBarDarkMode();
+            setTranslucentStatus(true);
+            ImmersiveUtils.StatusBarLightMode(this);
         }
-        findViewById();
+    }
+
+    protected void findViewById() {
+        commissioning_image = (ImageView) findViewById(R.id.commissioning_image);
+        commissioning_image1 = (ImageView) findViewById(R.id.commissioning_image1);
+        commissioning_button = (Button) findViewById(R.id.commissioning_button);
+        viewpager = (ViewPager) findViewById(R.id.viewpager);
+        viewpager_relat = (RelativeLayout) findViewById(R.id.viewpager_relat);
+        indicator = (CircleIndicator) findViewById(R.id.indicator);
+
+        commissioning_relat = (RelativeLayout) findViewById(R.id.commissioning_relat);
+
+        commissioning_loan_button = (Button) findViewById(R.id.commissioning_loan_button);
+
+    }
+
+    protected void initView() {
+        if (TextUtils.isEmpty(SharedPreferencesUtils.get(this, "first time", "").toString())) {
+            SharedPreferencesUtils.put(this, "first_time", "1");
+            commissioning_relat.setVisibility(View.GONE);
+            viewpager_relat.setVisibility(View.VISIBLE);
+        } else {
+            commissioning_relat.setVisibility(View.VISIBLE);
+            viewpager_relat.setVisibility(View.GONE);
+            userCenterRealize.getIMEIPHONE(this, mHandler, 100);
+            getBOOTAPP();
+        }
+        commissioning_button.setOnClickListener(this);
+        commissioning_image1.setOnClickListener(this);
+        initData();
+        viewpager.setAdapter(pagerAdapter);
+        indicator.setViewPager(viewpager);
+        commissioning_loan_button.setOnClickListener(this);
+
+        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 2) {
+                    commissioning_loan_button.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+    }
+
+    private void initData() {
+        viewList = new ArrayList<>();
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(R.mipmap.ic_boot_page1);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        viewList.add(imageView);
+        imageView = new ImageView(this);
+        imageView.setImageResource(R.mipmap.ic_boot_page2);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        viewList.add(imageView);
+        imageView = new ImageView(this);
+        imageView.setImageResource(R.mipmap.ic_boot_page3);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        viewList.add(imageView);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
-    }
-
-    @Override
-    protected void findViewById() {
-        commissioning_image = (ImageView) findViewById(R.id.commissioning_image);
-        commissioning_image1 = (ImageView) findViewById(R.id.commissioning_image1);
-        commissioning_button = (Button) findViewById(R.id.commissioning_button);
-    }
-
-    @Override
-    protected void initView() {
-
     }
 
     @Override
@@ -64,7 +184,181 @@ public class CommissioningActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.commissioning_button:
+                commissioningTimerUtils.onFinish();
+                finish();
+                break;
+            case R.id.commissioning_image1:
+                if (!TextUtils.isEmpty(boot_url)) {
+                    Intent intent = new Intent(this, LoanWebViewActivity.class);
+                    intent.putExtra("url", boot_url);
+                    startActivity(intent);
+                    finish();
+                }
+                break;
+            case R.id.commissioning_loan_button:
+                commissioning_relat.setVisibility(View.VISIBLE);
+                viewpager_relat.setVisibility(View.GONE);
+                userCenterRealize.getIMEIPHONE(this, mHandler, 100);
+                getBOOTAPP();
                 break;
         }
+    }
+
+    private void getHTTPActivity() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("imei", getImei);
+        map.put("mac", AppUtil.getInstance().getMacAddress());
+        map.put("channel", AppUtil.getInstance().getChannel(this, 2));
+        OkHttpManager.postAsync(HttpURL.getInstance().ACTIVITY, "commissioning_activity", map, this);
+    }
+
+    private void getBOOTAPP() {
+        OkHttpManager.postAsync(HttpURL.getInstance().BOOTAPP, "boot_app", null, this);
+    }
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+        switch (name) {
+            case "commissioning_activity":
+                break;
+            case "boot_app":
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+        }
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+        switch (name) {
+            case "commissioning_activity":
+                break;
+            case "boot_app":
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    commissioning_button.setVisibility(View.VISIBLE);
+                    commissioning_image1.setVisibility(View.VISIBLE);
+                    commissioning_image.setVisibility(View.GONE);
+                    object = new JSONObject(object.optString("data"));
+                    boot_url = object.optString("boot_url");
+                    Glide.with(this)
+                            .load(HttpURL.getInstance().HTTP_URL_PATH + object.optString("boot_img"))
+                            .listener(new RequestListener<Drawable>() {
+                                @Override
+                                public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                                    commissioning_button.setVisibility(View.GONE);
+                                    commissioning_image1.setVisibility(View.GONE);
+                                    commissioning_image.setVisibility(View.VISIBLE);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource,
+                                                               boolean b) {
+                                    return false;
+                                }
+                            })
+                            .into(commissioning_image1);
+                    commissioningTimerUtils = new CommissioningTimerUtils(this, mHandler, commissioning_button,
+                            (Long.parseLong(object.optString("time")) + 1) * 1000, 1000);
+                    commissioningTimerUtils.start();
+                } else {
+                    commissioning_button.setVisibility(View.GONE);
+                    commissioning_image1.setVisibility(View.GONE);
+                    commissioning_image.setVisibility(View.VISIBLE);
+                    startActivity(new Intent(this, MainActivity.class));
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_PHONE_IMEI) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.getIMEIPHONE(this, mHandler, 100);
+            } else {
+                ToatUtils.showShort1(this, "请授予手机权限");
+            }
+        }
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 100:
+                    String[] phonestrings = msg.obj.toString().split("#");
+                    if (TextUtils.isEmpty(SharedPreferencesUtils.get(CommissioningActivity.this, "username", "").
+                            toString())) {
+                        if (phonestrings.length > 2) {
+                            getImei = phonestrings[1] + "," + phonestrings[2];
+                        } else {
+                            getImei = phonestrings[1];
+                        }
+                    } else if (phonestrings[0].equals(SharedPreferencesUtils.get(CommissioningActivity.this,
+                            "username", "").toString())) {
+                        getImei = phonestrings[1];
+                    } else {
+                        getImei = phonestrings[1];
+                    }
+                    getHTTPActivity();
+                    break;
+                case 101:
+                    startActivity(new Intent(CommissioningActivity.this, MainActivity.class));
+                    finish();
+                    break;
+            }
+        }
+    };
+
+    PagerAdapter pagerAdapter = new PagerAdapter() {
+
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            return arg0 == arg1;
+        }
+
+        @Override
+        public int getCount() {
+            return viewList.size();
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView(viewList.get(position));
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return super.getItemPosition(object);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "title";
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            container.addView(viewList.get(position));
+            return viewList.get(position);
+        }
+    };
+
+    @TargetApi(19)
+    protected void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
     }
 }

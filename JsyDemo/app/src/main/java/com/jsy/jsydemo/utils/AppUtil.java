@@ -1,12 +1,16 @@
 package com.jsy.jsydemo.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -15,13 +19,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 
 /**
  * Created by vvguoliang on 2017/6/24.
  * <p>
  * APP 操作
  */
-
+@SuppressLint("HardwareIds")
 public class AppUtil {
 
 
@@ -76,7 +84,8 @@ public class AppUtil {
     public File mOutFile;//图片uri路径
     public File mImageFile = null;//图片file路径
     public final int MY_PERMISSIONS_REQUEST_CONTACTS = 107;
-    public final int MY_PERMISSIONS_PHONE_DIAL= 108;
+    public final int MY_PERMISSIONS_PHONE_DIAL = 108;
+    public final int MY_PERMISSIONS_PHONE_IMEI = 109;
 
 
     public Integer mBuildVersion = android.os.Build.VERSION.SDK_INT;//当前SDK版本
@@ -127,7 +136,8 @@ public class AppUtil {
     }
 
     /**
-     *获取城市数据
+     * 获取城市数据
+     *
      * @param context
      * @param fileName
      * @return
@@ -185,6 +195,33 @@ public class AppUtil {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
+    }
+
+    public String getMacAddress() {
+        String macAddress;
+        StringBuffer buf = new StringBuffer();
+        NetworkInterface networkInterface;
+        try {
+            networkInterface = NetworkInterface.getByName("eth1");
+            if (networkInterface == null) {
+                networkInterface = NetworkInterface.getByName("wlan0");
+            }
+            if (networkInterface == null) {
+                return "02:00:00:00:00:02";
+            }
+            byte[] addr = networkInterface.getHardwareAddress();
+            for (byte b : addr) {
+                buf.append(String.format("%02X:", b));
+            }
+            if (buf.length() > 0) {
+                buf.deleteCharAt(buf.length() - 1);
+            }
+            macAddress = buf.toString();
+        } catch (SocketException e) {
+            e.printStackTrace();
+            return "02:00:00:00:00:02";
+        }
+        return macAddress;
     }
 
     /**

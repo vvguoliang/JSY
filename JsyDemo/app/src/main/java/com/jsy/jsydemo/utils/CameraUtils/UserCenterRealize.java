@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.jsy.jsydemo.EntityClass.ContactInfo;
 import com.jsy.jsydemo.interfaces.UserCenterModel;
 import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.CTelephoneInfo;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.TimeUtils;
 
@@ -286,6 +288,56 @@ public class UserCenterRealize implements UserCenterModel {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void getIMEIPHONE(Context context, Handler mHandler, int imei) {
+        Activity activity = (Activity) context;
+        if (AppUtil.getInstance().mBuildVersion >= 23) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+                //申请联系人权限  允许程序读取用户联系人数据
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS},
+                        AppUtil.getInstance().MY_PERMISSIONS_PHONE_IMEI);
+            } else {
+                getPhone(context, mHandler, imei);
+            }
+        } else {
+            getPhone(context, mHandler, imei);
+        }
+    }
+
+    /**
+     * 获取手机号信息
+     *
+     * @param context
+     * @param mHandle
+     * @param imei
+     */
+    private void getPhone(Context context, Handler mHandle, int imei) {
+        CTelephoneInfo telephonyInfo = CTelephoneInfo.getInstance(context);
+        telephonyInfo.setCTelephoneInfo();
+        String phone = telephonyInfo.getLine1Number();
+        String imeiSIM1 = telephonyInfo.getImeiSIM1();
+        String imeiSIM2 = telephonyInfo.getImeiSIM2();
+        boolean isSIM1Ready = telephonyInfo.isSIM1Ready();
+        boolean isSIM2Ready = telephonyInfo.isSIM2Ready();
+        if (isSIM1Ready && isSIM2Ready) {
+            Message message = new Message();
+            message.what = imei;
+            message.obj = phone + "#" + imeiSIM1 + "#" + imeiSIM2;
+            mHandle.sendMessage(message);
+        } else if (isSIM1Ready) {
+            Message message = new Message();
+            message.what = imei;
+            message.obj = phone + "#" + imeiSIM1;
+            mHandle.sendMessage(message);
+        } else {
+            Message message = new Message();
+            message.what = imei;
+            message.obj = phone + "#" + imeiSIM1;
+            mHandle.sendMessage(message);
+        }
     }
 
     private List<ContactInfo> result = null;

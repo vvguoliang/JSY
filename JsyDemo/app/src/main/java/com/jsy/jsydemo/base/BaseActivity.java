@@ -47,8 +47,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
 
     private final static int WAIT_EXIT_TIME = 60;
 
-//    private PowerKeyObserver mPowerKeyObserver;
-
     private boolean isImmerStateBar = true;
 
     private String color = "#ffffff";
@@ -126,20 +124,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
         stateBarTint(color, flag);
     }
 
-//    @Override
-//    public void onPowerKeyPressed() {
-//        SharedPreferencesUtils.put(this, APP_OUT, System.currentTimeMillis());
-//        SharedPreferencesUtils.put(this, APP_IS_OUT, true);
-//    }
-//
-//    @Override
-//    public void onPowerKeyPressedOn() {
-//        if (isForeground(this, getClass().getName())) {
-//            startGestureVerfy();
-//        } else {
-//        }
-//    }
-
     /**
      * 判断某个界面是否在前台
      *
@@ -177,36 +161,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
 
     protected void netWorkChange(int netWorkState) {
     }
-//
-//    /**
-//     * 初始化title @Title: initHeadView @author: xusonghui @Description:
-//     * View @throws
-//     */
-//    protected View initHeadView(int title) {
-//        return initHeadView(getString(title));
-//    }
-//
-//    private ImageView backView;
-//
-//    protected View initHeadView(String title) {
-//        TextView mMyTabTextview = (TextView) findViewById(R.id.my_tab_textview);
-//
-//        if (mMyTabTextview == null)
-//            mMyTabTextview = (TextView) findViewById(R.id.my_tab_textview);
-//        mMyTabTextview.setText(title);
-//        backView = (ImageView) findViewById(R.id.my_return_button);
-//        if (backView == null)
-//            backView = (ImageView) findViewById(R.id.my_return_button);
-//        backView.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                KeyBoardUtils.getInstance().closeKeybord(backView, BaseActivity.this);
-//                finish();
-//            }
-//        });
-//        backView.setVisibility(View.VISIBLE);
-//        return backView;
-//    }
 
     @Override
     protected void onDestroy() {
@@ -367,7 +321,6 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
         if (NetWorkshow(intent)) {
         } else {
             if (!NetWorkUtils.isNetworkConnected(this) && intent.getComponent() != null
-                    && !intent.getComponent().getClassName().equals(VectoringActivity.class.getName())
                     && !intent.getComponent().getClassName().equals(CommissioningActivity.class.getName())) {
                 ToatUtils.showShort1(this, getString(R.string.no_network_timed));
                 return;
@@ -397,6 +350,8 @@ public abstract class BaseActivity extends FragmentActivity {//implements OnClic
 
     //设置状态栏黑色字体
     public void statusBarLightMode() {
+        //沉浸式状态栏
+        ImmersiveUtils.stateBarTint(this, "#00000000", true, false);
         ImmersiveUtils.StatusBarLightMode(this);
     }
 

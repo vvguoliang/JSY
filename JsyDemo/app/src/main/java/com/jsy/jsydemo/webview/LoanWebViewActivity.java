@@ -15,6 +15,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
@@ -46,6 +47,10 @@ public class LoanWebViewActivity extends BaseActivity implements View.OnClickLis
 
     private TextView title_view;
 
+    private LinearLayout banner_linear;
+
+    private RelativeLayout fail_linear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +76,10 @@ public class LoanWebViewActivity extends BaseActivity implements View.OnClickLis
         webview = (WebView) findViewById(R.id.banner_webview);
 
         banner_progressBar = (ProgressBar) findViewById(R.id.banner_progressBar);
+
+        banner_linear = (LinearLayout) findViewById(R.id.banner_linear);
+        fail_linear = (RelativeLayout) findViewById(R.id.fail_linear);
+
         getSettings();
 
     }
@@ -79,6 +88,8 @@ public class LoanWebViewActivity extends BaseActivity implements View.OnClickLis
     protected void initView() {
         webview.setWebViewClient(webViewClient);
         webview.setWebChromeClient(webChromeClient);
+        banner_linear.setVisibility(View.VISIBLE);
+        fail_linear.setVisibility(View.GONE);
 
     }
 
@@ -145,6 +156,8 @@ public class LoanWebViewActivity extends BaseActivity implements View.OnClickLis
                 banner_progressBar.setVisibility(View.GONE);
                 webview.setVisibility(View.GONE);
                 title_view.setText("");
+                banner_linear.setVisibility(View.GONE);
+                fail_linear.setVisibility(View.VISIBLE);
             } else {
                 title_view.setText(view.getTitle());
             }

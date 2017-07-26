@@ -300,7 +300,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                         .listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
-                                loan_details_image.setImageResource(R.mipmap.ic_launcher);
+                                loan_details_image.setImageResource(R.mipmap.ic_path_in_load);
                                 return false;
                             }
 
