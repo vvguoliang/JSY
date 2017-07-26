@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
@@ -20,6 +21,8 @@ import com.jsy.jsydemo.activity.personaldata.PersonalDataActivity;
 import com.jsy.jsydemo.base.BaseFragment;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
+import com.jsy.jsydemo.utils.DisplayUtils;
+import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.view.BottomDialog;
@@ -61,6 +64,12 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 
     @Override
     protected void initView() {
+        //沉浸式状态设置
+        if (ImmersiveUtils.BuildVERSION()) {
+            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
+            lp.height = DisplayUtils.px2dip(mActivity, 48 * 11);
+        }
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(mActivity.getString(R.string.name_personal_center));
 

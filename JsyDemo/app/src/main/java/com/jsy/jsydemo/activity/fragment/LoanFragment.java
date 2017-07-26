@@ -19,6 +19,7 @@ import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.HomeProductList;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.SpeedLoanDetailsListActivity;
+import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.activity.SpeedLoanActivity;
 import com.jsy.jsydemo.adapter.BannerLoopAdapter;
@@ -100,7 +101,12 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
         mHandler = new Handler();
         mAdapter = new CardRecordAdapter(mActivity);
-
+//沉浸式状态设置
+        if (ImmersiveUtils.BuildVERSION()) {
+            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
+            lp.height = DisplayUtils.px2dip(mActivity, 48 * 11);
+        }
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(mActivity.getString(R.string.app_name));
 

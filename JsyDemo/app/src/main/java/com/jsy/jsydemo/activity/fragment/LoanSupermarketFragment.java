@@ -20,6 +20,7 @@ import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.DisplayUtils;
+import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.umeng.analytics.MobclickAgent;
 
@@ -88,6 +89,12 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
     }
 
     private void getHeader() {
+        //沉浸式状态设置
+        if (ImmersiveUtils.BuildVERSION()) {
+            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
+            lp.height = DisplayUtils.px2dip(mActivity, 48 * 11);
+        }
         loan_supermarket_listview = (ListView) findViewById(R.id.loan_supermarket_listview);
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(mActivity.getString(R.string.name_loan_supermarket));
