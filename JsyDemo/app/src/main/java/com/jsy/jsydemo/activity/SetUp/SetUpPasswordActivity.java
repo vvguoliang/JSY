@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.EntityClass.RegisterSignCodeModify;
@@ -14,6 +15,8 @@ import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.DisplayUtils;
+import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.CountDownTimerUtils;
 import com.jsy.jsydemo.utils.StringUtil;
@@ -56,6 +59,14 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.act_set_up_password);
         name = getIntent().getExtras().getString("name");
         findViewById();
+        //沉浸式状态设置
+        if (ImmersiveUtils.BuildVERSION()) {
+            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
+            stateBarTint("#305591", true);
+            statusFragmentBarDarkMode();
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
+            lp.height = DisplayUtils.px2dip(this, 48 * 11);
+        }
     }
 
     @Override

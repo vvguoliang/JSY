@@ -75,6 +75,7 @@ public class SetUPActivity extends BaseActivity implements View.OnClickListener,
                 getPhone("提示", "您是否确认安全退出?");
                 break;
             case R.id.set_up_sign_upde:
+                getUPDATE();
                 break;
         }
 
@@ -120,6 +121,7 @@ public class SetUPActivity extends BaseActivity implements View.OnClickListener,
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferencesUtils.logoutSuccess(SetUPActivity.this);
                 dialog.dismiss();
+                finish();
             }
         });
         builder.create().show();
