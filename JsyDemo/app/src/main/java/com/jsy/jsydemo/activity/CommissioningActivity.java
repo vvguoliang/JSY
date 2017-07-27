@@ -223,10 +223,13 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "commissioning_activity":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "boot_app":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "update":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
         startActivity(new Intent(this, MainActivity.class));
@@ -237,6 +240,7 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
             case "commissioning_activity":
+                getBOOTAPP();
                 break;
             case "boot_app":
                 JSONObject object = new JSONObject(result);
@@ -280,7 +284,6 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                     commissioning_relat.setVisibility(View.VISIBLE);
                     viewpager_relat.setVisibility(View.GONE);
                     userCenterRealize.getIMEIPHONE(this, mHandler, 100);
-                    getBOOTAPP();
                 } else if (object.optString("code").equals("0000")) {
                     object = new JSONObject(object.optString("data"));
                     update_url = object.optString("update_url");
