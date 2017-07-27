@@ -9,6 +9,7 @@ import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -44,6 +45,7 @@ public class PersonalDataBankCardActivity extends BaseActivity implements View.O
                 finish();
                 break;
             case R.id.title_complete:
+                ToatUtils.showShort1(this,"此功能暂时未开放");
                 break;
         }
 

@@ -289,7 +289,6 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                 Base64.DEFAULT).replace("\n", " ").trim());
         map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
         map.put("version", "1.0.0");
-//        map.put("sign", "01e2d79356a9ecba8161701000a1eba13094e461");
         map.put("sign", sgin);
         OkHttpManager.postAsync(HttpURL.getInstance().HTTP_OPERATOR, "product_content_content", map, this);
     }

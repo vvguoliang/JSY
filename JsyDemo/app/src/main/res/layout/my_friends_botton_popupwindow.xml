@@ -51,7 +51,7 @@
         android:layout_marginTop="@dimen/common_10dp"
         android:src="@color/common_grey_color" />
 
-    <com.sxsfinance.SXS.view.MyButton
+    <com.jsy.jsydemo.control.MyButton
         android:id="@+id/my_pop_cancel_button"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_40dp"

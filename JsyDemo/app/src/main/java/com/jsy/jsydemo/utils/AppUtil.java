@@ -88,6 +88,7 @@ public class AppUtil {
     public final int MY_PERMISSIONS_REQUEST_CONTACTS = 107;
     public final int MY_PERMISSIONS_PHONE_DIAL = 108;
     public final int MY_PERMISSIONS_PHONE_IMEI = 109;
+    public final int MY_PERMISSIONS_PHONE_READWRITE = 110;
 
 
     public Integer mBuildVersion = android.os.Build.VERSION.SDK_INT;//当前SDK版本

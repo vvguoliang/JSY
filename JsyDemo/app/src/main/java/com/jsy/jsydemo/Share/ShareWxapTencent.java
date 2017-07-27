@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.BottomDialog;
 import com.tencent.connect.share.QQShare;
@@ -30,9 +31,11 @@ import java.util.ArrayList;
  * 邀请好友
  */
 
+@SuppressWarnings("ConstantConditions")
 public class ShareWxapTencent implements View.OnClickListener {
 
-    public ShareWxapTencent(Activity mActivity, String url, String mQqTitle, String mQqSummary, String mWxwebtitle, String mWxwebdescription) {
+    public ShareWxapTencent(Activity mActivity, String url, String mQqTitle, String mQqSummary, String mWxwebtitle,
+                            String mWxwebdescription, Bitmap bitmap) {
         super();
         this.mActivity = mActivity;
         if (!TextUtils.isEmpty(url) || !url.equals("null")) {
@@ -53,6 +56,7 @@ public class ShareWxapTencent implements View.OnClickListener {
         if (!TextUtils.isEmpty(mWxwebdescription) && !mWxwebdescription.equals("null")) {
             this.mWxwebdescription = mWxwebdescription;
         }
+        this.bitmap = bitmap;
         getShare();
     }
 
@@ -79,9 +83,7 @@ public class ShareWxapTencent implements View.OnClickListener {
 
     private BottomDialog mSXSDialog;
 
-    private int sxs_icon = R.mipmap.ic_launcher;
-
-    private Bitmap thumb = null;
+    private Bitmap bitmap;
 
     private void getShare() {
         api = WXAPIFactory.createWXAPI(mActivity, "wx43b913bd07fb3715", false);
@@ -89,8 +91,6 @@ public class ShareWxapTencent implements View.OnClickListener {
 
         mTencent = Tencent.createInstance("1106281166", mActivity);
         StatConfig.setAppKey(mActivity, "Ghf9Q7U7IuQbOWDm");
-        thumb = BitmapFactory.decodeResource(mActivity.getResources(), sxs_icon);
-        BitmapUtils.saveBitmap(thumb);
 
         if (url == null || url.equals("")) {
             ToatUtils.showShort1(mActivity, "操作失败，请重试");
@@ -138,7 +138,7 @@ public class ShareWxapTencent implements View.OnClickListener {
         params.putString(QQShare.SHARE_TO_QQ_TITLE, mQqTitle);
         params.putString(QQShare.SHARE_TO_QQ_SUMMARY, mQqSummary);
         params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, url);
-        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, Environment.getExternalStorageDirectory().getAbsolutePath() + "/cache/pics/sxs_icon_share.png");
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, BitmapUtils.FILE_PATH + "/jsy_ic_launcher.png");
 //        params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "");SHARE_TO_QQ_IMAGE_LOCAL_URL
 //        params.putString(QQShare.SHARE_TO_QQ_EXT_INT, "其他附加功能");
         if (mTencent != null)
@@ -151,8 +151,8 @@ public class ShareWxapTencent implements View.OnClickListener {
         params.putString(QzoneShare.SHARE_TO_QQ_TITLE, mQqTitle);
         params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, mQqSummary);
         params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, url);
-        ArrayList<String> imageUrls = new ArrayList<String>();
-        imageUrls.add(Environment.getExternalStorageDirectory().getAbsolutePath() + "/sxs/sxs_icon_share.png");
+        ArrayList<String> imageUrls = new ArrayList<>();
+        imageUrls.add(BitmapUtils.FILE_PATH + "/jsy_ic_launcher.png");
         params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imageUrls);
         params.putInt(QzoneShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
         if (mTencent != null)
@@ -172,7 +172,7 @@ public class ShareWxapTencent implements View.OnClickListener {
         msg.title = mWxwebtitle;
         msg.description = mWxwebdescription;
         // 这里替换一张自己工程里的图片资源
-        msg.setThumbImage(thumb);
+        msg.setThumbImage(bitmap);
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("webpage");
         req.message = msg;

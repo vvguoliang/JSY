@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.jsy.jsydemo.EntityClass.ContactInfo;
+import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.interfaces.UserCenterModel;
 import com.jsy.jsydemo.service.UpdataService;
 import com.jsy.jsydemo.utils.AppUtil;
@@ -36,6 +38,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.jsy.jsydemo.utils.CameraUtils.BitmapUtils.*;
 
 /**
  * Created by vvguoliang on 2017/7/1.
@@ -128,7 +132,7 @@ public class UserCenterRealize implements UserCenterModel {
 
     @Override
     public void startPhotoAlbum(Context context) {
-        if (!BitmapUtils.existSDCard()) {
+        if (!existSDCard()) {
             Toast.makeText(context, "未检测到SD卡", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -140,7 +144,7 @@ public class UserCenterRealize implements UserCenterModel {
 
     @Override
     public void startPhotograph(Context context) {
-        if (!BitmapUtils.existSDCard()) {
+        if (!existSDCard()) {
             Toast.makeText(context, "未检测到SD卡", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -326,6 +330,36 @@ public class UserCenterRealize implements UserCenterModel {
             intent.putExtra("url", url);
             context.startService(intent);
         }
+    }
+
+    private int sxs_icon = R.mipmap.ic_launcher;
+    private Bitmap thumb = null;
+
+    @Override
+    public void getReadWRite(Context context, Handler mHandler) {
+        Activity activity = (Activity) context;
+        if (AppUtil.getInstance().mBuildVersion >= 23) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                //申请联系人权限  允许程序读取用户联系人数据
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        AppUtil.getInstance().MY_PERMISSIONS_PHONE_READWRITE);
+            } else {
+                thumb = BitmapFactory.decodeResource(context.getResources(), sxs_icon);
+                com.jsy.jsydemo.Share.BitmapUtils.getBitmap(thumb);
+                Message message = new Message();
+                message.obj = thumb;
+                mHandler.sendMessage(message);
+            }
+        } else {
+            thumb = BitmapFactory.decodeResource(context.getResources(), sxs_icon);
+            com.jsy.jsydemo.Share.BitmapUtils.getBitmap(thumb);
+            Message message = new Message();
+            message.obj = thumb;
+            mHandler.sendMessage(message);
+        }
+
     }
 
     /**

@@ -106,4 +106,10 @@ public interface UserCenterModel {
      */
     void getUpdata(Context context, String url);
 
+    /**
+     * 写入和读取
+     * @param context
+     */
+    void getReadWRite(Context context , Handler mHandler);
+
 }
