@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.jsy.jsydemo.EntityClass.ProductSuList;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
+import com.jsy.jsydemo.activity.LogoActivity;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.view.MyGridView;
 
@@ -84,33 +86,37 @@ public class LoanSupAdaperListview extends BaseAdapter {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (viewHolder.loan_gridView.getTag().toString()) {
-                    case "0":
-                        if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
-                            if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
-                                intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
-                                intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
+                if (TextUtils.isEmpty(SharedPreferencesUtils.get(context, "uid", "").toString())) {
+                    context.startActivity(new Intent(context, LogoActivity.class));
+                } else {
+                    switch (viewHolder.loan_gridView.getTag().toString()) {
+                        case "0":
+                            if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
+                                if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
+                                    intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
+                                    intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
+                                    context.startActivity(intent);
+                                }
+                            } else {
+                                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                                intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
                                 context.startActivity(intent);
                             }
-                        } else {
-                            intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                            intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
-                            context.startActivity(intent);
-                        }
-                        break;
-                    case "1":
-                        if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
-                            if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
-                                intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
-                                intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
+                            break;
+                        case "1":
+                            if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
+                                if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
+                                    intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
+                                    intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
+                                    context.startActivity(intent);
+                                }
+                            } else {
+                                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                                intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
                                 context.startActivity(intent);
                             }
-                        } else {
-                            intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                            intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
-                            context.startActivity(intent);
-                        }
-                        break;
+                            break;
+                    }
                 }
             }
         });

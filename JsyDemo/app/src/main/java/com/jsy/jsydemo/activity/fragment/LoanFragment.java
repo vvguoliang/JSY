@@ -95,6 +95,8 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
 
     private HomeProduct[] VirtualData;
 
+    private Intent intent = null;
+
     @Override
     protected int getLayout() {
         return R.layout.fra_loan;
@@ -360,9 +362,13 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                 }
                 break;
             case R.id.loan_speed1_linear:
-                Intent intent = new Intent(mActivity, SpeedLoanDetailsListActivity.class);
-                intent.putExtra("type", 0);
-                mActivity.startActivity(intent);
+                if (TextUtils.isEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
+                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                } else {
+                    intent = new Intent(mActivity, SpeedLoanDetailsListActivity.class);
+                    intent.putExtra("type", 0);
+                    mActivity.startActivity(intent);
+                }
                 break;
             case R.id.loan_speed2_linear:
                 intent = new Intent(mActivity, LoanWebViewActivity.class);

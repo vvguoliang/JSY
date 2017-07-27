@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.QuickBank;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.LogoActivity;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.view.BaseViewHolder;
 
@@ -73,9 +76,13 @@ public class QuickBankHolder extends BaseViewHolder<QuickBank> {
     @Override
     public void onItemViewClick(QuickBank data) {
         super.onItemViewClick(data);
-//点击事件
-        Intent intent = new Intent(context, LoanWebViewActivity.class);
-        intent.putExtra("url", data.getLink());
-        context.startActivity(intent);
+        if (TextUtils.isEmpty(SharedPreferencesUtils.get(context, "uid", "").toString())) {
+            context.startActivity(new Intent(context, LogoActivity.class));
+        } else {
+            //点击事件
+            Intent intent = new Intent(context, LoanWebViewActivity.class);
+            intent.putExtra("url", data.getLink());
+            context.startActivity(intent);
+        }
     }
 }
