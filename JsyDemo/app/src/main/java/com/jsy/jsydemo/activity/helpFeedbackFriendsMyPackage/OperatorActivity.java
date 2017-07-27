@@ -98,6 +98,8 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
 
     private Handler handler = null;
 
+    private int auth = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,6 +144,9 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
             case R.id.operator_no_password:
                 booNoPassword = 2;
                 getSIGNPhone();
+                break;
+            case R.id.operator_complete_button:
+                getUSERDATAILAUTH();
                 break;
         }
     }
@@ -200,6 +205,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
         });
         operator_submit_button.setOnClickListener(this);
         operator_no_password.setOnClickListener(this);
+        findViewById(R.id.operator_complete_button).setOnClickListener(this);
         handler = new Handler();
     }
 
@@ -209,6 +215,13 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
         if (booType) {
             ShowDialog.getInstance().getEdiText(this, "北京移动需要输入客服密码", "客服密码:", 1000, isID, mHandler);
         }
+    }
+
+    private void getUSERDATAILAUTH() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        map.put("auth", auth);
+        OkHttpManager.postAsync(HttpURL.getInstance().USERDATAILAUTH, "USERDATAILAUTH", map, this);
     }
 
     /**
@@ -241,23 +254,22 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
             ShowDialog.getInstance().getEdiText(this, "需要输入身份证号", "身份证号:", 1004, "idcard", mHandler);
         } else if (TextUtils.isEmpty(SharedPreferencesUtils.get(this, "realname", "").toString())) {
             ShowDialog.getInstance().getEdiText(this, "需要输入姓名", "姓名:", 1004, "realname", mHandler);
+        } else {
+            Map<String, Object> map = new HashMap<>();
+            map.put("apiKey", "0618854278903691");
+            map.put("contentType", "busi");
+            map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
+            map.put("identityName", SharedPreferencesUtils.get(this, "realname", "").toString());
+            map.put("method", "api.mobile.get");
+            if (!TextUtils.isEmpty(otherInfo)) {
+                map.put("otherInfo", otherInfo);
+            }
+            map.put("password", Base64.encodeToString(operator_password.getText().toString().getBytes(),
+                    Base64.DEFAULT).replace("\n", " ").trim());
+            map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
+            map.put("version", "1.0.0");
+            OkHttpManager.postAsync(HttpURL.getInstance().SIGN, "product_phone_content", map, this);
         }
-        Map<String, Object> map = new HashMap<>();
-        map.put("apiKey", "0618854278903691");
-        map.put("version", "1.0.0");
-        map.put("method", "api.mobile.area");
-        map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
-        try {
-            map.put("identityName", URLEncoder.encode(
-                    SharedPreferencesUtils.get(this, "realname", "").toString(), "utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
-        map.put("password", Base64.encodeToString(operator_password.getText().toString().getBytes(), Base64.DEFAULT));
-        map.put("contentType", "busi");
-        map.put("otherInfo", otherInfo);
-        OkHttpManager.postAsync(HttpURL.getInstance().SIGN, "product_phone_content", map, this);
     }
 
     /**
@@ -266,26 +278,25 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
     private void getOperator() {
         Map<String, Object> map = new HashMap<>();
         map.put("apiKey", "0618854278903691");
-        map.put("version", "1.0.0");
-        map.put("method", "api.mobile.area");
-        map.put("sign", sgin);
-        map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
-        try {
-            map.put("identityName", URLEncoder.encode(
-                    SharedPreferencesUtils.get(this, "realname", "").toString(), "utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
-        map.put("password", Base64.encodeToString(operator_password.getText().toString().getBytes(), Base64.DEFAULT));
         map.put("contentType", "busi");
-        map.put("otherInfo", otherInfo);
+        map.put("identityCardNo", SharedPreferencesUtils.get(this, "idcard", "").toString());
+        map.put("identityName", SharedPreferencesUtils.get(this, "realname", "").toString());
+        map.put("method", "api.mobile.get");
+        if (!TextUtils.isEmpty(otherInfo)) {
+            map.put("otherInfo", otherInfo);
+        }
+        map.put("password", Base64.encodeToString(operator_password.getText().toString().getBytes(),
+                Base64.DEFAULT).replace("\n", " ").trim());
+        map.put("username", SharedPreferencesUtils.get(this, "username", "").toString());
+        map.put("version", "1.0.0");
+//        map.put("sign", "01e2d79356a9ecba8161701000a1eba13094e461");
+        map.put("sign", sgin);
         OkHttpManager.postAsync(HttpURL.getInstance().HTTP_OPERATOR, "product_content_content", map, this);
     }
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
-
+        ToatUtils.showShort1(this, this.getString(R.string.network_timed));
     }
 
     /**
@@ -324,6 +335,8 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                                         booType = true;
                                         ShowDialog.getInstance().getEdiText(this, "北京移动需要输入客服密码",
                                                 "客服密码:", 1000, isID, mHandler);
+                                    } else {
+                                        getSINGOPerator();
                                     }
                                     break;
                                 case "广西":
@@ -334,6 +347,8 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                                         } else {
                                             otherInfo = SharedPreferencesUtils.get(this, "idcard", "").toString();
                                         }
+                                    } else {
+                                        getSINGOPerator();
                                     }
                                     break;
                                 case "山西":
@@ -344,12 +359,16 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                                         } else {
                                             otherInfo = SharedPreferencesUtils.get(this, "idcard", "").toString();
                                         }
+                                    } else {
+                                        getSINGOPerator();
                                     }
                                     break;
                                 case "吉林":
                                     if (type.equals("电信")) {
                                         ShowDialog.getInstance().getEdiText(this, "吉林电信需要编辑短信'CXXD'\n发送给1001获取验证码",
                                                 "短信验证码:", 1003, "code", mHandler);
+                                    } else {
+                                        getSINGOPerator();
                                     }
                                     break;
                                 default:
@@ -360,6 +379,8 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                                             toString())) {
                                         ShowDialog.getInstance().getEdiText(this, "需要输入姓名", "姓名:", 1004,
                                                 "realname", mHandler);
+                                    } else {
+                                        getSINGOPerator();
                                     }
                             }
                         } else {//忘记密码
@@ -369,13 +390,36 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                 }
                 break;
             case "product_content_content":
-                Log.e("", "");
+                object = new JSONObject(result);
+                if (object.optString("code").equals("0010")) {
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                    auth = 1;
+                } else {
+                    auth = 2;
+                }
+                operator_logo.setImageResource(R.mipmap.ic_operator_complete);
+                operator_linear.setVisibility(View.GONE);
+                operator_linear1.setVisibility(View.GONE);
+                operator_linear2.setVisibility(View.VISIBLE);
                 break;
             case "product_phone_content":
                 object = new JSONObject(result);
                 object = new JSONObject(object.optString("data"));
                 sgin = object.optString("sign");
                 getOperator();
+                break;
+            case "USERDATAILAUTH":
+                object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    intent = new Intent();
+                    intent.putExtra("operator", "1");
+                    setResult(1000, intent);
+                } else {
+                    intent = new Intent();
+                    intent.putExtra("operator", "2");
+                    setResult(1000, intent);
+                }
+                finish();
                 break;
         }
     }
@@ -408,7 +452,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                                 1001, "idcard", mHandler);
                     } else {
                         otherInfo = msg.obj.toString();
-                        getOperator();
+                        getSINGOPerator();
                     }
                     break;
                 case 1002:
@@ -417,7 +461,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                                 1002, "idcard", mHandler);
                     } else {
                         otherInfo = msg.obj.toString();
-                        getOperator();
+                        getSINGOPerator();
                     }
                     break;
                 case 1003:
@@ -426,11 +470,11 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                                 "短信验证码:", 1003, "", mHandler);
                     } else {
                         otherInfo = msg.obj.toString();
-                        getOperator();
+                        getSINGOPerator();
                     }
                     break;
                 case 1004:
-                    getOperator();
+                    getSINGOPerator();
                     break;
             }
         }

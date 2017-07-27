@@ -75,7 +75,7 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
                 finish();
                 break;
             case R.id.title_complete:
-                getUserDataAothHttp();
+                finish();
                 break;
         }
 
@@ -103,7 +103,6 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
 
     @Override
     protected void initView() {
-        getUserDataHttp();
     }
 
     @Override
@@ -141,19 +140,9 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
         OkHttpManager.postAsync(HttpURL.getInstance().USERDATAIL, "user_data", map, this);
     }
 
-    private void getUserDataAothHttp() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        map.put("auth", aoth);
-        OkHttpManager.postAsync(HttpURL.getInstance().USERDATAILAUTH, "user_auth", map, this);
-    }
-
     @Override
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
-            case "user_auth":
-                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
-                break;
             case "user_data":
                 ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
@@ -164,8 +153,6 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
     @Override
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
-            case "user_auth":
-                break;
             case "user_data":
                 JSONObject object = new JSONObject(result);
                 code = object.optString("code");
