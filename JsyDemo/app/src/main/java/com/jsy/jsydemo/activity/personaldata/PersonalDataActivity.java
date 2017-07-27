@@ -61,7 +61,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             stateBarTint("#305591", true);
             statusFragmentBarDarkMode();
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.height = DisplayUtils.px2dip(this, 48 * 11);
+            lp.height = DisplayUtils.px2dip(this, 48 * 13);
         }
     }
 

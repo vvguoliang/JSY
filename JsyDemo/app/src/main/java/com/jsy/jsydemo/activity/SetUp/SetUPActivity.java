@@ -53,7 +53,7 @@ public class SetUPActivity extends BaseActivity implements View.OnClickListener,
             statusFragmentBarDarkMode();
             LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.height = DisplayUtils.px2dip(this, 48 * 11);
+            lp.height = DisplayUtils.px2dip(this, 48 * 13);
         }
     }
 
