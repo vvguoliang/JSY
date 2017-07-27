@@ -30,6 +30,7 @@ import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -268,10 +269,10 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "banner":
-                Log.e("", "=====" + request);
+                ToatUtils.showShort1(mActivity, this.getString(R.string.network_timed));
                 break;
             case "bank":
-                Log.e("", "=====" + request);
+                ToatUtils.showShort1(mActivity, this.getString(R.string.network_timed));
                 break;
         }
     }

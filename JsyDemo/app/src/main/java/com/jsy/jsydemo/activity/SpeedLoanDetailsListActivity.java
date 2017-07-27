@@ -24,6 +24,7 @@ import com.jsy.jsydemo.interfaces.Action;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -167,7 +168,7 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
     @Override
     public void requestFailure(Request request, String name, IOException e) {
         if (name.equals("product_filter")) {
-            Log.e("", "===" + request + "===" + name + "=====" + e);
+            ToatUtils.showShort1(this, this.getString(R.string.network_timed));
         }
 
     }
@@ -175,7 +176,6 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
     @Override
     public void requestSuccess(String result, String name) throws Exception {
         if (name.equals("product_filter")) {
-
             SpeedLoanDetailsListDataList loanDetailsListData = JsonData.getInstance().getJsonSpeedLoanDetailsList(result);
             speedLoanDetailsListData = new SpeedLoanDetailsListData[loanDetailsListData.getLoanDetailsListData().size()];
             for (int i = 0; loanDetailsListData.getLoanDetailsListData().size() > i; i++) {

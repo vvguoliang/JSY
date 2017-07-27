@@ -57,6 +57,7 @@
             android:background="@color/common_gray" />
 
         <LinearLayout
+            android:id="@+id/car_new_car_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

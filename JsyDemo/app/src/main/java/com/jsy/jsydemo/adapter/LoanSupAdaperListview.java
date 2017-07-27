@@ -3,6 +3,7 @@ package com.jsy.jsydemo.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,14 +86,30 @@ public class LoanSupAdaperListview extends BaseAdapter {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (viewHolder.loan_gridView.getTag().toString()) {
                     case "0":
-                        intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                        intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
-                        context.startActivity(intent);
+                        if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
+                            if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
+                                intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
+                                intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
+                                context.startActivity(intent);
+                            }
+                        } else {
+                            intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                            intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
+                            context.startActivity(intent);
+                        }
                         break;
                     case "1":
-                        intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                        intent.putExtra("id", productSuList.getProductSus().get(position).getId());
-                        context.startActivity(intent);
+                        if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
+                            if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
+                                intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
+                                intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
+                                context.startActivity(intent);
+                            }
+                        } else {
+                            intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                            intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
+                            context.startActivity(intent);
+                        }
                         break;
                 }
             }

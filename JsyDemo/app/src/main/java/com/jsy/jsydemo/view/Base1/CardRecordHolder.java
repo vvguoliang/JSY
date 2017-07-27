@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,6 +26,7 @@ import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.view.BaseViewHolder;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
 
 import java.util.Random;
 
@@ -98,7 +100,7 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
         for (int i = 0; i < 10; i++) {
             return random.nextInt(20) + "";
         }
-        return "0";
+        return "";
     }
 
     @Override
@@ -117,9 +119,17 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
         if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(parent.getContext(), "uid", "").toString())) {
             parent.getContext().startActivity(new Intent(parent.getContext(), LogoActivity.class));
         } else {
-            intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-            intent.putExtra("id", object.getId());
-            parent.getContext().startActivity(intent);
+            if (object.getApi_type().equals("3")) {
+                if (!TextUtils.isEmpty(object.getPro_link())) {
+                    intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
+                    intent.putExtra("url", object.getPro_link());
+                    context.startActivity(intent);
+                }
+            } else {
+                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                intent.putExtra("id", object.getId());
+                parent.getContext().startActivity(intent);
+            }
         }
     }
 }

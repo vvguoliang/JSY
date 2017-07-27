@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,8 +20,11 @@ import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.HomeProductList;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.activity.SpeedLoanDetailsListActivity;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.activity.SpeedLoanActivity;
 import com.jsy.jsydemo.adapter.BannerLoopAdapter;
@@ -279,10 +283,10 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "banner":
-                Log.e("", "=====" + request);
+                ToatUtils.showShort1(mActivity, this.getString(R.string.network_timed));
                 break;
             case "home_product":
-                Log.e("", "=====" + request);
+                ToatUtils.showShort1(mActivity, this.getString(R.string.network_timed));
                 break;
         }
 
@@ -349,7 +353,11 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loan_speed_linear:
-                mActivity.startActivity(new Intent(mActivity, SpeedLoanActivity.class));
+                if (TextUtils.isEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
+                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                } else {
+                    mActivity.startActivity(new Intent(mActivity, SpeedLoanActivity.class));
+                }
                 break;
             case R.id.loan_speed1_linear:
                 Intent intent = new Intent(mActivity, SpeedLoanDetailsListActivity.class);

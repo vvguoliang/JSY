@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,9 @@ import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.view.BaseViewHolder;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
+
+import java.util.Random;
 
 /**
  * Created by vvguoliang on 2017/7/8.
@@ -31,6 +35,7 @@ import com.jsy.jsydemo.view.BaseViewHolder;
  * 数据展示
  */
 
+@SuppressWarnings("UnusedAssignment")
 public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsListData> {
 
     private ImageView speed_loan_detailsList_image;
@@ -42,6 +47,8 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
     private TextView speed_loan_detailsList_rate;
 
     private Context context;
+
+    private Intent intent = null;
 
 
     public SpeedLoanDetailsListHolder(Context context, ViewGroup parent) {
@@ -70,7 +77,11 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
                     })
                     .into(speed_loan_detailsList_image);
             speed_loan_detailsList_name.setText(data.getPro_name());
-            speed_loan_detailsList_text.setText("申请人数:" + data.getPro_hits());
+            if (data.getPro_hits().length() > 5) {
+                speed_loan_detailsList_text.setText("申请人数:" + data.getPro_hits());
+            } else {
+                speed_loan_detailsList_text.setText("申请人数:" + data.getPro_hits() + testRandom());
+            }
             SpannableStringBuilder builder = new SpannableStringBuilder(speed_loan_detailsList_text.getText().toString());
             //ForegroundColorSpan 为文字前景色，BackgroundColorSpan为文字背景色
             ForegroundColorSpan redSpan = new ForegroundColorSpan(Color.RED);
@@ -85,6 +96,14 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
         }
     }
 
+    private String testRandom() {
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            return random.nextInt(20) + "";
+        }
+        return "";
+    }
+
     @Override
     public void onInitializeView() {
         super.onInitializeView();
@@ -97,17 +116,20 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
     @Override
     public void onItemViewClick(SpeedLoanDetailsListData data) {
         super.onItemViewClick(data);
-//        switch (data.getApi_type()) {
-//            case "1":
-//            case "2":
-//                break;
-//            case "3":
-//                break;
-//            default:
-        Intent intent = new Intent(context, LoanDetailsActivity.class);
-        intent.putExtra("id", data.getId());
-        context.startActivity(intent);
-//                break;
-//        }
+        switch (data.getApi_type()) {
+            case "1":
+            case "2":
+                intent = new Intent(context, LoanDetailsActivity.class);
+                intent.putExtra("id", data.getId());
+                context.startActivity(intent);
+                break;
+            case "3":
+                if (!TextUtils.isEmpty(data.getPro_link())) {
+                    intent = new Intent(context, LoanWebViewActivity.class);
+                    intent.putExtra("url", data.getPro_link());
+                    context.startActivity(intent);
+                }
+                break;
+        }
     }
 }

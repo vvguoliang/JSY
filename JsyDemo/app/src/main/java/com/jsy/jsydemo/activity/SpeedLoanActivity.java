@@ -23,6 +23,7 @@ import com.jsy.jsydemo.interfaces.Action;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -71,7 +72,7 @@ public class SpeedLoanActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void requestFailure(Request request, String name, IOException e) {
         if (name.equals("product_filter")) {
-            Log.e("", "==" + request + "====" + e);
+            ToatUtils.showShort1(this, this.getString(R.string.network_timed));
         }
     }
 

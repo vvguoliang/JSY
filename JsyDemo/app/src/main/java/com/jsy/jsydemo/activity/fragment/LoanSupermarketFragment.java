@@ -23,6 +23,7 @@ import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
@@ -198,8 +199,10 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "banner":
+                ToatUtils.showShort1(mActivity, this.getString(R.string.network_timed));
                 break;
             case "product":
+                ToatUtils.showShort1(mActivity, this.getString(R.string.network_timed));
                 break;
         }
     }

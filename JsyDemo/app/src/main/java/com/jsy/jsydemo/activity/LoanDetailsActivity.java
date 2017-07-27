@@ -135,7 +135,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             stateBarTint("#305591", true);
             statusFragmentBarDarkMode();
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.height = DisplayUtils.px2dip(this, 48 * 11);
+            lp.height = DisplayUtils.px2dip(this, 48 * 12);
         }
         findViewById();
         initView();
@@ -276,14 +276,16 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "product_detail":
-                Log.e("", "====" + request + "====" + e);
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "SesameCredit":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "authorize":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "product_sign":
-
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
 

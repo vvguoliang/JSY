@@ -367,6 +367,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "basic":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
 
