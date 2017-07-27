@@ -26,9 +26,11 @@ import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,8 +71,7 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
 
     private String[] enterprise_life = new String[]{"不足半年", "半年～1年", "1年～2年", "2年～3年", "3年以上"};
 
-    private String[] enterprise_time = new String[]{"未办理", "已办理且注册不满6个月", "已办理且注册不满一年",
-            "已办理且注册超过一年", ""};
+    private String[] enterprise_time = new String[]{"未办理", "已办理且注册不满6个月", "已办理且注册不满一年", "已办理且注册超过一年"};
 
 
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
@@ -131,7 +132,7 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
                             "enterprise_type", mHandler, 1001);
                 }
                 break;
-            case R.id.personal_enterprise_industry_linear:
+            case R.id.personal_enterprise_time_linear:
             case R.id.personal_enterprise_time:
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -141,7 +142,7 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
                             "enterprise_time", mHandler, 1005);
                 }
                 break;
-            case R.id.personal_enterprise_time_linear:
+            case R.id.personal_enterprise_industry_linear:
             case R.id.personal_enterprise_industry:
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
@@ -378,8 +379,10 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "company_status_list":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "company_status_add":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
 
@@ -390,18 +393,26 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
         switch (name) {
             case "company_status_list":
                 List<Map<String, String>> maps = JsonData.getInstance().getJsonPersonalDataenterprise(result);
-                personal_enterprise_identity.setText(maps.get(0).get("company_identity"));
-                personal_enterprise_shares.setText(maps.get(0).get("company_share"));
-                personal_enterprise_location.setText(maps.get(0).get("address"));
-                personal_enterprise_type.setText(maps.get(0).get("type"));
-                personal_enterprise_industry.setText(maps.get(0).get("industry"));
-                personal_enterprise_time.setText(maps.get(0).get("charter_date"));
-                personal_enterprise_life.setText(maps.get(0).get("operation_year"));
-                personal_enterprise_private_water.setText(maps.get(0).get("private"));
-                personal_enterprise_public_water.setText(maps.get(0).get("public"));
+                if (maps != null && maps.size() > 0) {
+                    personal_enterprise_identity.setText(maps.get(0).get("company_identity"));
+                    personal_enterprise_shares.setText(maps.get(0).get("company_share"));
+                    personal_enterprise_location.setText(maps.get(0).get("address"));
+                    personal_enterprise_type.setText(maps.get(0).get("type"));
+                    personal_enterprise_industry.setText(maps.get(0).get("industry"));
+                    personal_enterprise_time.setText(maps.get(0).get("charter_date"));
+                    personal_enterprise_life.setText(maps.get(0).get("operation_year"));
+                    personal_enterprise_private_water.setText(maps.get(0).get("private"));
+                    personal_enterprise_public_water.setText(maps.get(0).get("public"));
+                }
                 break;
             case "company_status_add":
-                finish();
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    finish();
+                } else {
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                }
+
                 break;
         }
     }

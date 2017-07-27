@@ -102,7 +102,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
         mHandler = new Handler();
         mAdapter = new CardRecordAdapter(mActivity);
-         //沉浸式状态设置
+        //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
             LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
@@ -115,7 +115,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         //添加Header
         View mHeader = LayoutInflater.from(mActivity).inflate(R.layout.fra_loan_top, null);
         mHeader.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                AppUtil.getInstance().Dispay(mActivity)[1] / 2 + DisplayUtils.dip2px(mActivity, 12)));
+                AppUtil.getInstance().Dispay(mActivity)[1] / (int) 2.8));
         getHeader(mHeader);
         mAdapter.setHeader(mHeader);
         mAdapter.removeFooter();

@@ -424,6 +424,7 @@ public class JsonData {
                 map.put("address", jsonObject.optString("address"));
                 map.put("type", jsonObject.optString("type"));
                 map.put("industry", jsonObject.optString("industry"));
+                map.put("charter_date", jsonObject.optString("charter_date"));
                 map.put("operation_year", jsonObject.optString("operation_year"));
                 map.put("private", jsonObject.optString("private"));
                 map.put("public", jsonObject.optString("public"));

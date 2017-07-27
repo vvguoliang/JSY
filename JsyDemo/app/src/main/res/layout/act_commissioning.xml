@@ -67,12 +67,12 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="@dimen/common_30dp"
-            CircleIndicator:ci_background="@android:color/white"
+            CircleIndicator:ci_background="@color/common_loan_personal"
             CircleIndicator:ci_gravity="center"
             CircleIndicator:ci_margin="5dp"
             CircleIndicator:ci_mode="inside"
             CircleIndicator:ci_radius="10dp"
-            CircleIndicator:ci_selected_background="0xffe6454a" />
+            CircleIndicator:ci_selected_background="0xffFFD700" />
 
         <com.jsy.jsydemo.control.MyButton
             android:id="@+id/commissioning_loan_button"

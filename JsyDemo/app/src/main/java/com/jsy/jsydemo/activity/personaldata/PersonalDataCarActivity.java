@@ -20,7 +20,10 @@ import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -88,7 +91,7 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                 } else {
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(this, "car_mortgage", this.getString(R.string.name_loan_wu),
-                            this.getString(R.string.name_loan_you), mHandler,1002);
+                            this.getString(R.string.name_loan_you), mHandler, 1002);
                 }
                 break;
             case R.id.car_no_mortgage_linear:
@@ -98,7 +101,7 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                 } else {
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().showDialog(this, "car_no_mortgage", this.getString(R.string.name_loan_wu),
-                            this.getString(R.string.name_loan_you), mHandler,1003);
+                            this.getString(R.string.name_loan_you), mHandler, 1003);
                 }
                 break;
             case R.id.title_image:
@@ -234,8 +237,10 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "car_add":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "car_list":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
 
@@ -245,15 +250,22 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
             case "car_add":
-                finish();
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    finish();
+                } else {
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                }
                 break;
             case "car_list":
-                List<Map<String ,String>> maps = JsonData.getInstance().getJsonPersonalDataCar(result);
-                car_life.setText(maps.get(0).get("car"));
-                car_new_car.setText(maps.get(0).get("car_price"));
-                car_estate.setText(maps.get(0).get("use_time"));
-                car_mortgage.setText(maps.get(0).get("installment"));
-                car_no_mortgage.setText(maps.get(0).get("mortgage"));
+                List<Map<String, String>> maps = JsonData.getInstance().getJsonPersonalDataCar(result);
+                if (maps != null && maps.size() > 0) {
+                    car_life.setText(maps.get(0).get("car"));
+                    car_new_car.setText(maps.get(0).get("car_price"));
+                    car_estate.setText(maps.get(0).get("use_time"));
+                    car_mortgage.setText(maps.get(0).get("installment"));
+                    car_no_mortgage.setText(maps.get(0).get("mortgage"));
+                }
                 break;
         }
 

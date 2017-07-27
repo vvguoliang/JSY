@@ -1,7 +1,7 @@
 package com.jsy.jsydemo.activity.SetUp;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +19,11 @@ import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.CountDownTimerUtils;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -143,6 +146,9 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
             password_button_confirm.setText(this.getString(R.string.name_loan_logo_register));
             findViewById(R.id.agreement_password).setVisibility(View.VISIBLE);
         } else {
+            if (!TextUtils.isEmpty(SharedPreferencesUtils.get(this, "username", "").toString())) {
+                password_phone.setText(SharedPreferencesUtils.get(this, "username", "").toString());
+            }
             title_view.setText(this.getString(R.string.name_loan_set_up_password));
             password_button_confirm.setText(this.getString(R.string.name_loan_personal_data_complete));
             findViewById(R.id.agreement_password).setVisibility(View.GONE);
@@ -159,17 +165,20 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
         switch (name) {
             case "code":
                 mCountDownTimerUtils.onFinish();
-                Log.e("", "====" + request + "===" + e);
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "password":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "register":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
     }
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
+        JSONObject object;
         switch (name) {
             case "code":
                 RegisterSignCodeModify registerSignCodeModify = JsonData.getInstance().getJsonLogoCode(result);
@@ -182,11 +191,24 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                 }
                 break;
             case "password":
-                Log.e("", "====" + result);
-                finish();
+                object = new JSONObject(result);
+                if (object.optString("state").equals("fail")) {
+                    ToatUtils.showShort1(this, object.optString("info"));
+                } else {
+                    SharedPreferencesUtils.put(this, "username", password_phone.getText().toString());
+                    SharedPreferencesUtils.put(this, "password", password_edittext_pass_confirm.getText());
+                    finish();
+                }
                 break;
             case "register":
-                finish();
+                object = new JSONObject(result);
+                if (object.optString("state").equals("fail")) {
+                    ToatUtils.showShort1(this, object.optString("info"));
+                } else {
+                    SharedPreferencesUtils.put(this, "username", password_phone.getText().toString());
+                    SharedPreferencesUtils.put(this, "password", password_edittext_pass_confirm.getText());
+                    finish();
+                }
                 break;
         }
     }

@@ -20,7 +20,10 @@ import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,8 +60,6 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
     private String[] cards_record = new String[]{"无信用记录", "应用记录良好", "少量逾期", "征信较差"};
 
     private String[] degree_education = new String[]{"大专以下", "大专", "本科", "研究生及以上"};
-
-    private int purpose_int = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +169,7 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                 } else {
                     //弹出Toast或者Dialog
                     ShowDialog.getInstance().getDialog(this, getList_cards_record(),
-                            "credit_purpose", mHandler, 1001);
+                            "cards_record", mHandler, 1001);
                 }
                 break;
             case R.id.personal_credit_liabilities_linear:
@@ -316,31 +317,36 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "user_credit":
-                Log.e("", "+++++" + request + "===" + e);
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "user_credit_add":
-                Log.e("", "+++++" + request + "===" + e);
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
     }
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-
         switch (name) {
             case "user_credit":
                 List<Map<String, String>> list = JsonData.getInstance().getJsonPersonalDataCredit(result);
-                personal_credit_degree_education.setText(list.get(0).get("edu"));
-                personal_no_cards.setText(list.get(0).get("creditcard"));
-                personal_no_cards_record.setText(list.get(0).get("credit_record"));
-                personal_credit_liabilities.setText(list.get(0).get("liabilities_status"));
-                personal_credit_no_loan.setText(list.get(0).get("loan_record"));
-                personal_credit_no_taobao.setText(list.get(0).get("taobao_id"));
-                personal_credit_purpose.setText(list.get(0).get("loan_use"));
+                if (list != null && list.size() > 0) {
+                    personal_credit_degree_education.setText(list.get(0).get("edu"));
+                    personal_no_cards.setText(list.get(0).get("creditcard"));
+                    personal_no_cards_record.setText(list.get(0).get("credit_record"));
+                    personal_credit_liabilities.setText(list.get(0).get("liabilities_status"));
+                    personal_credit_no_loan.setText(list.get(0).get("loan_record"));
+                    personal_credit_no_taobao.setText(list.get(0).get("taobao_id"));
+                    personal_credit_purpose.setText(list.get(0).get("loan_use"));
+                }
                 break;
             case "user_credit_add":
-                Log.e("", "+++++" + result);
-                finish();
+                JSONObject object = new JSONObject(result);
+                if(object.optString("code").equals("0000")){
+                    finish();
+                }else{
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                }
                 break;
         }
     }

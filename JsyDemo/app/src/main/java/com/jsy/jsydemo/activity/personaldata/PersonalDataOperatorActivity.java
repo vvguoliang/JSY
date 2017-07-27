@@ -19,6 +19,7 @@ import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.PublicPhoneDialog;
 import com.umeng.analytics.MobclickAgent;
 
@@ -151,8 +152,10 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "user_auth":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "user_data":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
 

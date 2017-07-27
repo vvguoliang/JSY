@@ -186,9 +186,9 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
     @Override
     public void requestFailure(Request request, String name, IOException e) {
         if (name.equals("parees")) {
-
+            ToatUtils.showShort1(this, this.getString(R.string.network_timed));
         } else if (name.equals("parees_list")) {
-            Log.e("", "");
+            ToatUtils.showShort1(this, this.getString(R.string.network_timed));
         }
     }
 

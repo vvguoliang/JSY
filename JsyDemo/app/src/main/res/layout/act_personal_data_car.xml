@@ -78,6 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/common_15dp"
                 android:layout_weight="0.5"
+                android:inputType="number"
+                android:digits="1234567890."
                 android:background="@color/transparent"
                 android:gravity="center|right"
                 android:hint="@string/name_loan_details_basic_content"

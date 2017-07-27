@@ -25,9 +25,11 @@ import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -87,10 +89,12 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
                 break;
             case R.id.personal_family_city_linear:
             case R.id.personal_family_city:
+                AppUtil.getInstance().getManager(this, personal_family_city);
                 showPickerView(1);
                 break;
             case R.id.personal_family_household_register_linear:
             case R.id.personal_family_household_register:
+                AppUtil.getInstance().getManager(this, personal_family_household_register);
                 showPickerView(2);
                 break;
             case R.id.title_image:
@@ -170,8 +174,10 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "family_list":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "family_add":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
 
@@ -182,13 +188,20 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
         switch (name) {
             case "family_list":
                 List<Map<String, String>> maps = JsonData.getInstance().getJsonPersonalDataFamily(result);
-                personal_family_marriage.setText(maps.get(0).get("marriage_status"));
-                personal_family_city.setText(maps.get(0).get("city"));
-                personal_family_address.setText(maps.get(0).get("address"));
-                personal_family_household_register.setText(maps.get(0).get("hj_address"));
+                if (maps != null && maps.size() > 0) {
+                    personal_family_marriage.setText(maps.get(0).get("marriage_status"));
+                    personal_family_city.setText(maps.get(0).get("city"));
+                    personal_family_address.setText(maps.get(0).get("address"));
+                    personal_family_household_register.setText(maps.get(0).get("hj_address"));
+                }
                 break;
             case "family_add":
-                finish();
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    finish();
+                } else {
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                }
                 break;
         }
     }

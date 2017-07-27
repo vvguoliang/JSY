@@ -24,9 +24,11 @@ import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -186,10 +188,10 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
                     house_estate.setText(msg.obj.toString());
                     break;
                 case 1002:
-                    house_estate.setText(msg.obj.toString());
+                    house_mortgage.setText(msg.obj.toString());
                     break;
                 case 1003:
-                    house_estate.setText(msg.obj.toString());
+                    house_no_mortgage.setText(msg.obj.toString());
                     break;
             }
         }
@@ -243,8 +245,10 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "hose_add":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "hose_list":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
 
@@ -254,16 +258,23 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
             case "hose_add":
-                finish();
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    finish();
+                } else {
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                }
                 break;
             case "hose_list":
                 List<Map<String, String>> list = JsonData.getInstance().getJsonPersonalDataHose(result);
-                house_estate.setText(list.get(0).get("house"));
-                house_location.setText(list.get(0).get("house_address"));
-                house_type.setText(list.get(0).get("house_type"));
-                house_market_price.setText(list.get(0).get("house_price"));
-                house_mortgage.setText(list.get(0).get("installment"));
-                house_no_mortgage.setText(list.get(0).get("mortgage"));
+                if (list != null && list.size() > 0) {
+                    house_estate.setText(list.get(0).get("house"));
+                    house_location.setText(list.get(0).get("house_address"));
+                    house_type.setText(list.get(0).get("house_type"));
+                    house_market_price.setText(list.get(0).get("house_price"));
+                    house_mortgage.setText(list.get(0).get("installment"));
+                    house_no_mortgage.setText(list.get(0).get("mortgage"));
+                }
                 break;
         }
     }

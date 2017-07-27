@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -97,16 +98,28 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.personal_loan_data:// 个人资料
-                mActivity.startActivity(new Intent(mActivity, PersonalDataActivity.class));
+                if (TextUtils.isEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
+                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                } else {
+                    mActivity.startActivity(new Intent(mActivity, PersonalDataActivity.class));
+                }
                 break;
             case R.id.personal_loan_inviting_friends://邀请好哟
-                mActivity.startActivity(new Intent(mActivity, FriendsActivity.class));
+                if (TextUtils.isEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
+                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                } else {
+                    mActivity.startActivity(new Intent(mActivity, FriendsActivity.class));
+                }
                 break;
             case R.id.personal_loan_help_center://帮助中心
                 mActivity.startActivity(new Intent(mActivity, HelpCenterActivity.class));
                 break;
             case R.id.personal_loan_feedback://意见反馈
-                mActivity.startActivity(new Intent(mActivity, FeedbackActivity.class));
+                if (TextUtils.isEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
+                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                } else {
+                    mActivity.startActivity(new Intent(mActivity, FeedbackActivity.class));
+                }
                 break;
             case R.id.personal_loan_setup://设置
                 mActivity.startActivity(new Intent(mActivity, SetUPActivity.class));
@@ -123,7 +136,7 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
                 }
                 break;
             case R.id.personal_camera://照片
-                showDialog(mActivity.getString(R.string.name_loan_personal_camera), mActivity.getString(R.string.name_loan_personal_album));
+//                showDialog(mActivity.getString(R.string.name_loan_personal_camera), mActivity.getString(R.string.name_loan_personal_album));
                 break;
         }
     }

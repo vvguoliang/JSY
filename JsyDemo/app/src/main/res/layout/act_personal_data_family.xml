@@ -45,7 +45,7 @@
             <ImageView
                 android:layout_width="@dimen/common_20dp"
                 android:layout_height="@dimen/common_20dp"
-                android:paddingLeft="@dimen/common_10dp"
+                android:paddingRight="@dimen/common_10dp"
                 android:src="@drawable/bg_personal_right_selector" />
         </LinearLayout>
 
@@ -85,7 +85,7 @@
             <ImageView
                 android:layout_width="@dimen/common_20dp"
                 android:layout_height="@dimen/common_20dp"
-                android:paddingLeft="@dimen/common_10dp"
+                android:paddingRight="@dimen/common_10dp"
                 android:src="@drawable/bg_personal_right_selector" />
         </LinearLayout>
 
@@ -164,7 +164,7 @@
             <ImageView
                 android:layout_width="@dimen/common_20dp"
                 android:layout_height="@dimen/common_20dp"
-                android:paddingLeft="@dimen/common_10dp"
+                android:paddingRight="@dimen/common_10dp"
                 android:src="@drawable/bg_personal_right_selector" />
         </LinearLayout>
 

@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.jsy.jsydemo.utils.AppUtil;
@@ -98,7 +99,9 @@ public class BitmapUtils {
             e.printStackTrace();
         } finally {
             try {
-                fis.close();//关闭流
+                if (TextUtils.isEmpty(fis.toString())) {
+                    fis.close();//关闭流
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

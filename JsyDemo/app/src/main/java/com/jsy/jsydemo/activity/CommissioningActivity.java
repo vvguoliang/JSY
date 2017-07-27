@@ -196,9 +196,6 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                 break;
             case R.id.commissioning_loan_button:
                 SharedPreferencesUtils.put(this, "first_time", "1");
-                commissioning_relat.setVisibility(View.VISIBLE);
-                viewpager_relat.setVisibility(View.GONE);
-                userCenterRealize.getIMEIPHONE(this, mHandler, 100);
                 getUPDATE();
                 break;
         }
@@ -280,6 +277,9 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
             case "update":
                 object = new JSONObject(result);
                 if (object.optString("code").equals("0001")) {
+                    commissioning_relat.setVisibility(View.VISIBLE);
+                    viewpager_relat.setVisibility(View.GONE);
+                    userCenterRealize.getIMEIPHONE(this, mHandler, 100);
                     getBOOTAPP();
                 } else if (object.optString("code").equals("0000")) {
                     object = new JSONObject(object.optString("data"));

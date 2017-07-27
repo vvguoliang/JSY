@@ -34,7 +34,10 @@ import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -164,8 +167,10 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "other_list":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "other_add":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
     }
@@ -175,13 +180,20 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
         switch (name) {
             case "other_list":
                 List<Map<String, String>> maps = JsonData.getInstance().getJsonPersonalDataOther(result);
-                other_relatives_name.setText(maps.get(0).get("kinsfolk_name"));
-                other_relatives_phone.setText(maps.get(0).get("kinsfolk_mobile"));
-                other_contacts_name.setText(maps.get(0).get("urgency_name"));
-                other_contacts_phone.setText(maps.get(0).get("urgency_mobile"));
+                if (maps != null && maps.size() > 0) {
+                    other_relatives_name.setText(maps.get(0).get("kinsfolk_name"));
+                    other_relatives_phone.setText(maps.get(0).get("kinsfolk_mobile"));
+                    other_contacts_name.setText(maps.get(0).get("urgency_name"));
+                    other_contacts_phone.setText(maps.get(0).get("urgency_mobile"));
+                }
                 break;
             case "other_add":
-                finish();
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    finish();
+                } else {
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                }
                 break;
         }
     }
@@ -199,8 +211,8 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
                     break;
                 case 101:
                     get = msg.obj.toString().split(",");
-                    other_relatives_phone.setText(get[1]);
-                    other_relatives_name.setText(get[0]);
+                    other_contacts_phone.setText(get[1]);
+                    other_contacts_name.setText(get[0]);
                     break;
             }
         }

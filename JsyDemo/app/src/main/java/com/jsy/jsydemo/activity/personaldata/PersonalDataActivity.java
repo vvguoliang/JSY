@@ -18,6 +18,7 @@ import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
@@ -117,41 +118,26 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void getHpptuserInfo() {
-        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-            OkHttpManager.postAsync(HttpURL.getInstance().USERINFO, "username", map, this);
-        } else {
-            intent = new Intent(this, LogoActivity.class);
-            startActivity(intent);
-        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        OkHttpManager.postAsync(HttpURL.getInstance().USERINFO, "username_uid", map, this);
     }
 
     private void getHttp() {
-        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-            map.put("realname", personal_data_name.getText().toString());
-            map.put("idcard", personal_data_id.getText().toString());
-            OkHttpManager.postAsync(HttpURL.getInstance().USERINFOADD, "username_add", map, this);
-        } else {
-            intent = new Intent(this, LogoActivity.class);
-            startActivity(intent);
-        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        map.put("realname", personal_data_name.getText().toString());
+        map.put("idcard", personal_data_id.getText().toString());
+        OkHttpManager.postAsync(HttpURL.getInstance().USERINFOADD, "username_add", map, this);
     }
 
     /**
      * 个人资料拉去
      */
     private void getHttpstater() {
-        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-            OkHttpManager.postAsync(HttpURL.getInstance().STATUS, "username_list", map, this);
-        } else {
-            intent = new Intent(this, LogoActivity.class);
-            startActivity(intent);
-        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        OkHttpManager.postAsync(HttpURL.getInstance().STATUS, "username_list", map, this);
     }
 
     @Override
@@ -255,13 +241,14 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
-            case "username":
-                Log.e("", "===" + request + "==" + e);
+            case "username_uid":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "username_add":
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "username_list":
-
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
 
@@ -269,16 +256,28 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
+        JSONObject object;
         switch (name) {
-            case "username":
-                Log.e("", "====" + result);
+            case "username_uid":
+                object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    object = new JSONObject(object.optString("data"));
+                    object = new JSONObject(object.optString("data"));
+                    SharedPreferencesUtils.put(this, "uid", object.optString("uid"));
+                    personal_data_name.setText(object.optString("realname"));
+                    personal_data_id.setText(object.optString("idcard"));
+                }
                 break;
             case "username_add":
-                SharedPreferencesUtils.put(this, "realname", personal_data_name.getText().toString());
-                SharedPreferencesUtils.put(this, "idcard", personal_data_id.getText().toString());
+                object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    SharedPreferencesUtils.put(this, "realname", personal_data_name.getText().toString());
+                    SharedPreferencesUtils.put(this, "idcard", personal_data_id.getText().toString());
+                    finish();
+                }
                 break;
             case "username_list":
-                JSONObject object = new JSONObject(result);
+                object = new JSONObject(result);
                 object = new JSONObject(object.optString("data"));
                 if (object.optString("credit_status").equals("1")) {//人资信完成状态
                     personal_data_complete0.setText(this.getString(R.string.name_loan_personal_data_complete));

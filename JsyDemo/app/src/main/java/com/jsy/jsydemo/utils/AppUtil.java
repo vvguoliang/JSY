@@ -12,7 +12,9 @@ import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -118,6 +120,13 @@ public class AppUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    public void getManager(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     /**
