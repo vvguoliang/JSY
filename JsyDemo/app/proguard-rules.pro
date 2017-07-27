@@ -75,6 +75,11 @@ public static final int *;
 #这个是警告，警告路过
 -dontwarn okio.**
 
+-dontwarn android.net.**
+-keep class android.net.SSLCertificateSocketFactory {*;}
+
+-keep class com.unionpay.mobile.android.**{*;}
+
 -keep public abstract interface com.asqw.android.Listener{
 public protected <methods>;
 }
