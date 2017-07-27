@@ -87,7 +87,7 @@ public class ShareWxapTencent implements View.OnClickListener {
 
     private void getShare() {
         api = WXAPIFactory.createWXAPI(mActivity, "wx43b913bd07fb3715", false);
-        api.registerApp("wx063dfcc3aee6e094");
+        api.registerApp("wx43b913bd07fb3715");
 
         mTencent = Tencent.createInstance("1106281166", mActivity);
         StatConfig.setAppKey(mActivity, "Ghf9Q7U7IuQbOWDm");
