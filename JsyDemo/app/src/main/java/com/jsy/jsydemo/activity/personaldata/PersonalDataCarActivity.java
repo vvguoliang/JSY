@@ -183,17 +183,17 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                     break;
                 case 1001:
                     car_estate.setText(msg.obj.toString());
-                    if (msg.obj.toString().equals("无车产")) {
-                        findViewById(R.id.car_new_car_linear).setVisibility(View.GONE);
-                        findViewById(R.id.car_life_linear).setVisibility(View.GONE);
-                        findViewById(R.id.car_mortgage_linear).setVisibility(View.GONE);
-                        findViewById(R.id.car_no_mortgage_linear).setVisibility(View.GONE);
-                    } else {
-                        findViewById(R.id.car_new_car_linear).setVisibility(View.VISIBLE);
-                        findViewById(R.id.car_life_linear).setVisibility(View.VISIBLE);
-                        findViewById(R.id.car_mortgage_linear).setVisibility(View.VISIBLE);
-                        findViewById(R.id.car_no_mortgage_linear).setVisibility(View.VISIBLE);
-                    }
+//                    if (msg.obj.toString().equals("无车产")) {
+//                        findViewById(R.id.car_new_car_linear).setVisibility(View.GONE);
+//                        findViewById(R.id.car_life_linear).setVisibility(View.GONE);
+//                        findViewById(R.id.car_mortgage_linear).setVisibility(View.GONE);
+//                        findViewById(R.id.car_no_mortgage_linear).setVisibility(View.GONE);
+//                    } else {
+//                        findViewById(R.id.car_new_car_linear).setVisibility(View.VISIBLE);
+//                        findViewById(R.id.car_life_linear).setVisibility(View.VISIBLE);
+//                        findViewById(R.id.car_mortgage_linear).setVisibility(View.VISIBLE);
+//                        findViewById(R.id.car_no_mortgage_linear).setVisibility(View.VISIBLE);
+//                    }
                     break;
                 case 1002:
                     car_mortgage.setText(msg.obj.toString());
