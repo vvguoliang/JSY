@@ -51,10 +51,13 @@
    public static final int *;
 }
 #gson混淆配置
+-keep public class com.google.gson.**
+-keep public class com.google.gson.** {public private protected *;}
+
+-keepattributes Signature
 -keepattributes *Annotation*
--keep class sun.misc.Unsafe { *; }
--keep class com.idea.fifaalarmclock.entity.***
--keep class com.google.gson.stream.** { *; }
+-keep public class com.project.mocha_patient.login.SignResponseData { private *; }
+
 
 #友盟
 -keepclassmembers class * {

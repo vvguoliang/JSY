@@ -99,7 +99,6 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.personal_enterprise_identity_linear:
             case R.id.personal_enterprise_identity:
