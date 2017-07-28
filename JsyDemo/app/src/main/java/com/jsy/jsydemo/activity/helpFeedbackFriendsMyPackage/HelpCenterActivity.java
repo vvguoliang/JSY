@@ -1,5 +1,6 @@
 package com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,11 +47,7 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
-            stateBarTint("#305591", true);
-            statusFragmentBarDarkMode();
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.height = DisplayUtils.px2dip(this, 48 * 13);
+            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
         }
         initView();
     }

@@ -2,6 +2,7 @@ package com.jsy.jsydemo.activity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
@@ -93,10 +94,7 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
     private void getHeader() {
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.gravity = Gravity.CENTER;
-            lp.height = DisplayUtils.px2dip(mActivity, 48 * 30);
+            ImmersiveUtils.setStateBar(mActivity, Color.parseColor("#305591"));
         }
         loan_supermarket_listview = (ListView) findViewById(R.id.loan_supermarket_listview);
         TextView title_view = (TextView) findViewById(R.id.title_view);

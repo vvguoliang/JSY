@@ -8,7 +8,7 @@
         android:id="@+id/loan_tab"
         layout="@layout/tab_activity_fra"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_48dp" />
+        android:layout_height="wrap_content" />
 
     <FrameLayout
         android:layout_width="match_parent"

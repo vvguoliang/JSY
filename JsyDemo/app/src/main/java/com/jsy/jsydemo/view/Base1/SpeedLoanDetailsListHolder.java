@@ -20,14 +20,24 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.SpeedLoanDetailsListData;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.view.BaseViewHolder;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/7/8.
@@ -36,7 +46,7 @@ import java.util.Random;
  */
 
 @SuppressWarnings("UnusedAssignment")
-public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsListData> {
+public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsListData> implements DataCallBack{
 
     private ImageView speed_loan_detailsList_image;
 
@@ -116,6 +126,7 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
     @Override
     public void onItemViewClick(SpeedLoanDetailsListData data) {
         super.onItemViewClick(data);
+        getHITSPRODUCT(data);
         switch (data.getApi_type()) {
             case "1":
             case "2":
@@ -131,5 +142,24 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
                 }
                 break;
         }
+    }
+
+    private void getHITSPRODUCT(SpeedLoanDetailsListData speedLoanDetailsListData) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(context, "uid", "").toString()));
+        map.put("id", Long.parseLong(speedLoanDetailsListData.getId()));
+        map.put("channel", AppUtil.getInstance().getChannel(context, 2));
+        OkHttpManager.postAsync(HttpURL.getInstance().HITSPRODUCT, "", map, this);
+
+    }
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+
     }
 }

@@ -23,15 +23,24 @@ import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
 import com.jsy.jsydemo.activity.LogoActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.view.BaseViewHolder;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
+import okhttp3.Request;
+
 @SuppressWarnings({"LoopStatementThatDoesntLoop", "UnusedAssignment"})
-public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
+public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements DataCallBack {
 
     private TextView home_loan_product_title;
     private TextView home_loan_product_quota;
@@ -119,6 +128,7 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
         if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(parent.getContext(), "uid", "").toString())) {
             parent.getContext().startActivity(new Intent(parent.getContext(), LogoActivity.class));
         } else {
+            getHITSPRODUCT(object);
             if (object.getApi_type().equals("3")) {
                 if (!TextUtils.isEmpty(object.getPro_link())) {
                     intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
@@ -131,5 +141,24 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> {
                 parent.getContext().startActivity(intent);
             }
         }
+    }
+
+    private void getHITSPRODUCT(HomeProduct homeProduct) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(context, "uid", "").toString()));
+        map.put("id", Long.parseLong(homeProduct.getId()));
+        map.put("channel", AppUtil.getInstance().getChannel(context, 2));
+        OkHttpManager.postAsync(HttpURL.getInstance().HITSPRODUCT, "", map, this);
+
+    }
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
+
     }
 }

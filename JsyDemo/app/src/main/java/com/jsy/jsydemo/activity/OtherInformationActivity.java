@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -101,11 +102,7 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
         pid = getIntent().getExtras().getString("pid");
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
-            stateBarTint("#305591", true);
-            statusFragmentBarDarkMode();
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.height = DisplayUtils.px2dip(this, 48 * 13);
+            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
         }
         findViewById();
         initView();

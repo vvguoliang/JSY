@@ -3,6 +3,8 @@ package com.jsy.jsydemo.activity.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,6 +43,7 @@ import com.jsy.jsydemo.view.RefreshRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +61,7 @@ import okhttp3.Request;
  * 借款
  */
 @SuppressWarnings({"deprecation", "StatementWithEmptyBody"})
-@SuppressLint({"ValidFragment", "InflateParams"})
+@SuppressLint({"ValidFragment", "InflateParams", "ResourceType"})
 public class LoanFragment extends BaseFragment implements DataCallBack, View.OnClickListener {
 
     private Activity mActivity;
@@ -110,10 +113,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         mAdapter = new CardRecordAdapter(mActivity);
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.gravity = Gravity.CENTER;
-            lp.height = DisplayUtils.px2dip(mActivity, 48 * 20);
+            ImmersiveUtils.setStateBar(mActivity, Color.parseColor("#305591"));
         }
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(mActivity.getString(R.string.app_name));

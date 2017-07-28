@@ -13,12 +13,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.EntityClass.ProductSuList;
+import com.jsy.jsydemo.EntityClass.SpeedLoanDetailsListData;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
 import com.jsy.jsydemo.activity.LogoActivity;
+import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.view.MyGridView;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.Request;
 
 /**
  * Created by vvguoliang on 2017/6/26.
@@ -26,7 +37,7 @@ import com.jsy.jsydemo.view.MyGridView;
  * 设置listview
  */
 
-public class LoanSupAdaperListview extends BaseAdapter {
+public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack{
 
     private ProductSuList productSuList;
     private LayoutInflater mInflater;
@@ -89,6 +100,7 @@ public class LoanSupAdaperListview extends BaseAdapter {
                 if (TextUtils.isEmpty(SharedPreferencesUtils.get(context, "uid", "").toString())) {
                     context.startActivity(new Intent(context, LogoActivity.class));
                 } else {
+                    getHITSPRODUCT(productSuList.getProductSuList().get(position).getId());
                     switch (viewHolder.loan_gridView.getTag().toString()) {
                         case "0":
                             if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
@@ -127,6 +139,25 @@ public class LoanSupAdaperListview extends BaseAdapter {
         ImageView loan_praise;
         TextView loan_recommend;
         MyGridView loan_gridView;
+
+    }
+
+    private void getHITSPRODUCT(String id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(context, "uid", "").toString()));
+        map.put("id", Long.parseLong(id));
+        map.put("channel", AppUtil.getInstance().getChannel(context, 2));
+        OkHttpManager.postAsync(HttpURL.getInstance().HITSPRODUCT, "", map, this);
+
+    }
+
+    @Override
+    public void requestFailure(Request request, String name, IOException e) {
+
+    }
+
+    @Override
+    public void requestSuccess(String result, String name) throws Exception {
 
     }
 }

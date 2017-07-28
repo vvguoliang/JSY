@@ -3,8 +3,8 @@
 
     <style name="AppBaseTheme" parent="android:Theme.Light" >
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/common_navy_blue</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
     <!-- Application theme. -->
     <style name="AppTheme" parent="@style/AppBaseTheme">
