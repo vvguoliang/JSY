@@ -1,12 +1,18 @@
 package com.jsy.jsydemo.activity;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +37,7 @@ import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,8 +47,8 @@ import okhttp3.Request;
  * Created by vvguoliang on 2017/6/28.
  * 登录页面
  */
-
-public class LogoActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
+@SuppressLint("ResourceType")
+public class LogoActivity extends FragmentActivity implements View.OnClickListener, DataCallBack {
 
     private LinearLayout tab_activity_lin;
 
@@ -81,11 +88,20 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_logo);
+        findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
+            setTranslucentStatus(true);
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
+            lp.gravity = Gravity.CENTER;
+            lp.height = DisplayUtils.px2dip(this, 48 * 5);
+            ImmersiveUtils.StatusBarLightMode(this);
+
+//            ImageView loan_logo_image = (ImageView) findViewById(R.id.loan_logo_image);
+//            RelativeLayout.LayoutParams para = (RelativeLayout.LayoutParams) loan_logo_image.getLayoutParams();
+//            para.height = DisplayUtils.px2dip(this, 48 * 20);
+//            loan_logo_image.setLayoutParams(para);
         }
-        findViewById();
         initView();
     }
 
@@ -170,7 +186,6 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
-    @Override
     protected void findViewById() {
         tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
         tab_activity_lin.setBackgroundResource(R.color.transparent);
@@ -206,7 +221,6 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
-    @Override
     protected void initView() {
 
         loan_logo_edittext_phone.addTextChangedListener(new TextWatcher() {
@@ -292,5 +306,18 @@ public class LogoActivity extends BaseActivity implements View.OnClickListener, 
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @TargetApi(19)
+    protected void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
     }
 }

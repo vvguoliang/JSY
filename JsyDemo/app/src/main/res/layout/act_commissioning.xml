@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/commissioning_image"
@@ -33,16 +33,15 @@
 
         <com.jsy.jsydemo.control.MyButton
             android:id="@+id/commissioning_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/common_80dp"
+            android:layout_height="@dimen/common_30dp"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/common_30dp"
             android:background="@drawable/bg_commissioning_selector"
-            android:padding="@dimen/common_10dp"
+            android:text="sdsd"
             android:textColor="@color/white"
             android:textSize="@dimen/common_14dp"
-            android:visibility="gone"
-            tools:ignore="RelativeOverlap" />
+            android:visibility="visible" />
 
     </RelativeLayout>
 
@@ -50,8 +49,8 @@
         android:id="@+id/viewpager_relat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
 
         <android.support.v4.view.ViewPager

@@ -29,7 +29,6 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.OperatorActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
@@ -121,7 +120,6 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
         } else {
             commissioning_relat.setVisibility(View.VISIBLE);
             viewpager_relat.setVisibility(View.GONE);
-            userCenterRealize.getIMEIPHONE(this, mHandler, 100);
             getUPDATE();
         }
         commissioning_button.setOnClickListener(this);
@@ -191,7 +189,6 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                     Intent intent = new Intent(this, LoanWebViewActivity.class);
                     intent.putExtra("url", boot_url);
                     startActivity(intent);
-                    finish();
                 }
                 break;
             case R.id.commissioning_loan_button:

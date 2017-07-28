@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="@dimen/common_20dp"
+    android:padding="@dimen/common_100dp"
     android:shape="rectangle">
     <solid android:color="@color/common_loan_personal" />
     <corners

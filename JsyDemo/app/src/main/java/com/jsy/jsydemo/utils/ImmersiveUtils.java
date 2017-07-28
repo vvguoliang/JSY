@@ -233,7 +233,8 @@ public class ImmersiveUtils {
             MIUISetStatusBarLightMode(activity, activity.getWindow(), true);
             FlymeSetStatusBarLightMode(activity, activity.getWindow(), true);
             if (Build.VERSION.SDK_INT >= 23) {
-                activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
         }
     }
