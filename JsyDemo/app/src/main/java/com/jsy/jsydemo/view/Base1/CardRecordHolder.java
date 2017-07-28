@@ -130,15 +130,15 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
         } else {
             getHITSPRODUCT(object);
             if (object.getApi_type().equals("3")) {
+                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                intent.putExtra("id", object.getId());
+                parent.getContext().startActivity(intent);
+            } else {
                 if (!TextUtils.isEmpty(object.getPro_link())) {
                     intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
                     intent.putExtra("url", object.getPro_link());
                     context.startActivity(intent);
                 }
-            } else {
-                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                intent.putExtra("id", object.getId());
-                parent.getContext().startActivity(intent);
             }
         }
     }

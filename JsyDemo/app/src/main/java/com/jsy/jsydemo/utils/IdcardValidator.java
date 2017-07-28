@@ -1,5 +1,7 @@
 package com.jsy.jsydemo.utils;
 
+import android.text.TextUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -425,6 +427,22 @@ public class IdcardValidator {
                 break;
         }
         return checkCode;
+    }
+
+    public String getIDager(String id) {
+        if (TextUtils.isEmpty(id)) {
+            return "未知";
+        }
+        if (id.length() == 15) {
+            id = id.substring(id.length() - 1, id.length());
+        } else if (id.length() == 18) {
+            id = id.substring(id.length() - 2, id.length() - 1);
+        }
+        if (Integer.parseInt(id) % 2 == 0) {
+            return "女士";
+        } else {
+            return "先生";
+        }
     }
 
     /**

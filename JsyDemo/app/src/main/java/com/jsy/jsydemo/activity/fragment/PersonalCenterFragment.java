@@ -24,6 +24,7 @@ import com.jsy.jsydemo.base.BaseFragment;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.DisplayUtils;
+import com.jsy.jsydemo.utils.IdcardValidator;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
@@ -174,15 +175,20 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onResume() {
         super.onResume();
         if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
-            if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "username", "").toString())) {
-                personal_logo.setText(SharedPreferencesUtils.get(mActivity, "username", "").toString());
+            if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "realname", "").toString())) {
+                String realname = SharedPreferencesUtils.get(mActivity, "realname", "").toString();
+                realname = realname.substring(0, 1) +
+                        IdcardValidator.getInstance().getIDager(SharedPreferencesUtils.get(mActivity,"idcard","").toString());
+                personal_logo.setText(realname);
                 findViewById(R.id.personal_logo_image).setVisibility(View.GONE);
             } else {
-                personal_logo.setText(SharedPreferencesUtils.get(mActivity, "uid", "").toString());
+                String username = SharedPreferencesUtils.get(mActivity, "username", "").toString();
+                personal_logo.setText("****" + username.substring(username.length() - 4, username.length()));
                 findViewById(R.id.personal_logo_image).setVisibility(View.GONE);
             }
         } else {

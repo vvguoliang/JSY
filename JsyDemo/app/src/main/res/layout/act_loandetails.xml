@@ -32,7 +32,9 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="horizontal"
-                    android:padding="@dimen/common_10dp">
+                    android:paddingBottom="@dimen/common_10dp"
+                    android:paddingLeft="@dimen/common_10dp"
+                    android:paddingTop="@dimen/common_10dp">
 
                     <ImageView
                         android:id="@+id/loan_details_image"
@@ -43,13 +45,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/common_10dp"
                         android:orientation="vertical">
 
                         <com.jsy.jsydemo.control.MyTextView
                             android:id="@+id/loan_details_text_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/common_10dp"
+                            android:layout_marginRight="@dimen/common_10dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
                             android:textColor="@color/common_brown_text"
                             android:textSize="@dimen/common_16dp" />
 
@@ -57,17 +62,20 @@
                             android:id="@+id/loan_details_gridView"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/common_60dp"
-                            android:columnWidth="@dimen/common_85dp"
-                            android:scrollbars="none"
+                            android:layout_marginLeft="@dimen/common_10dp"
+                            android:columnWidth="@dimen/common_80dp"
+                            android:layout_marginRight="@dimen/common_10dp"
                             android:horizontalSpacing="@dimen/common_1dp"
                             android:numColumns="3"
-                            android:stretchMode="spacingWidth"
+                            android:scrollbars="none"
+                            android:stretchMode="columnWidth"
                             android:verticalSpacing="@dimen/common_1dp" />
 
                         <com.jsy.jsydemo.control.MyTextView
                             android:id="@+id/loan_details_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/common_10dp"
                             android:textColor="@color/common_brown_text"
                             android:textSize="@dimen/common_14dp" />
 
@@ -351,8 +359,8 @@
 
                         <com.jsy.jsydemo.control.MyButton
                             android:id="@+id/loan_details_basic_information"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/common_50dp"
+                            android:layout_height="@dimen/common_20dp"
                             android:layout_marginRight="@dimen/common_10dp"
                             android:background="@mipmap/ic_loan_details_authentication" />
 
@@ -389,8 +397,8 @@
 
                     <com.jsy.jsydemo.control.MyButton
                         android:id="@+id/loan_details_phone_operator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/common_50dp"
+                        android:layout_height="@dimen/common_20dp"
                         android:layout_marginRight="@dimen/common_10dp"
                         android:background="@mipmap/ic_loan_details_authentication" />
 
@@ -425,8 +433,8 @@
 
                     <com.jsy.jsydemo.control.MyButton
                         android:id="@+id/oan_details_esame_credit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/common_50dp"
+                        android:layout_height="@dimen/common_20dp"
                         android:layout_marginRight="@dimen/common_10dp"
                         android:background="@mipmap/ic_loan_details_authentication" />
 
@@ -466,8 +474,8 @@
 
                         <com.jsy.jsydemo.control.MyButton
                             android:id="@+id/loan_details_id"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/common_50dp"
+                            android:layout_height="@dimen/common_20dp"
                             android:layout_marginRight="@dimen/common_10dp"
                             android:background="@mipmap/ic_loan_details_authentication" />
 
@@ -507,8 +515,8 @@
 
                         <com.jsy.jsydemo.control.MyButton
                             android:id="@+id/loan_details_other"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/common_50dp"
+                            android:layout_height="@dimen/common_20dp"
                             android:layout_marginRight="@dimen/common_10dp"
                             android:background="@mipmap/ic_loan_details_authentication" />
 

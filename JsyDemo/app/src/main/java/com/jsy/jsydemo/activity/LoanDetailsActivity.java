@@ -131,11 +131,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         id = getIntent().getExtras().getString("id");
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
-            stateBarTint("#305591", true);
-            statusFragmentBarDarkMode();
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-            lp.height = DisplayUtils.px2dip(this, 48 * 12);
+            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
         }
         findViewById();
         initView();

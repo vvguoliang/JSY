@@ -37,7 +37,7 @@ import okhttp3.Request;
  * 设置listview
  */
 
-public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack{
+public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
 
     private ProductSuList productSuList;
     private LayoutInflater mInflater;
@@ -104,28 +104,28 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack{
                     switch (viewHolder.loan_gridView.getTag().toString()) {
                         case "0":
                             if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
+                                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                                intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
+                                context.startActivity(intent);
+                            } else {
                                 if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
                                     intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
                                     intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
                                     context.startActivity(intent);
                                 }
-                            } else {
-                                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                                intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
-                                context.startActivity(intent);
                             }
                             break;
                         case "1":
                             if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
+                                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                                intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
+                                context.startActivity(intent);
+                            } else {
                                 if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
                                     intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
                                     intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
                                     context.startActivity(intent);
                                 }
-                            } else {
-                                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                                intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
-                                context.startActivity(intent);
                             }
                             break;
                     }

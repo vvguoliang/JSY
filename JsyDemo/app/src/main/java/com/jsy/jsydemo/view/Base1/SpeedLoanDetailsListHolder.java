@@ -46,7 +46,7 @@ import okhttp3.Request;
  */
 
 @SuppressWarnings("UnusedAssignment")
-public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsListData> implements DataCallBack{
+public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsListData> implements DataCallBack {
 
     private ImageView speed_loan_detailsList_image;
 
@@ -130,16 +130,16 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
         switch (data.getApi_type()) {
             case "1":
             case "2":
-                intent = new Intent(context, LoanDetailsActivity.class);
-                intent.putExtra("id", data.getId());
-                context.startActivity(intent);
-                break;
-            case "3":
                 if (!TextUtils.isEmpty(data.getPro_link())) {
                     intent = new Intent(context, LoanWebViewActivity.class);
                     intent.putExtra("url", data.getPro_link());
                     context.startActivity(intent);
                 }
+                break;
+            case "3":
+                intent = new Intent(context, LoanDetailsActivity.class);
+                intent.putExtra("id", data.getId());
+                context.startActivity(intent);
                 break;
         }
     }

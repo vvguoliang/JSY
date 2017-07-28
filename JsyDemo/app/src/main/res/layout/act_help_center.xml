@@ -82,6 +82,11 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_1dp"
+                    android:background="@color/common_loan_personal" />
+
                 <LinearLayout
                     android:id="@+id/help_application_linear"
                     android:layout_width="match_parent"
@@ -133,6 +138,11 @@
                         android:src="@mipmap/ic_loan_help_down" />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_1dp"
+                    android:background="@color/common_loan_personal" />
 
                 <LinearLayout
                     android:id="@+id/help_application_loan_linear"
@@ -186,6 +196,11 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_1dp"
+                    android:background="@color/common_loan_personal" />
+
                 <LinearLayout
                     android:id="@+id/help_application_loan_success_linear"
                     android:layout_width="match_parent"
@@ -237,6 +252,11 @@
                         android:src="@mipmap/ic_loan_help_down" />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_1dp"
+                    android:background="@color/common_loan_personal" />
 
                 <LinearLayout
                     android:id="@+id/help_application_loan_repayment_linear"
@@ -290,6 +310,11 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_1dp"
+                    android:background="@color/common_loan_personal" />
+
                 <LinearLayout
                     android:id="@+id/help_application_loan_order_linear"
                     android:layout_width="match_parent"
@@ -341,6 +366,11 @@
                         android:src="@mipmap/ic_loan_help_down" />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_1dp"
+                    android:background="@color/common_loan_personal" />
 
                 <LinearLayout
                     android:id="@+id/help_application_loan_fail_linear"
