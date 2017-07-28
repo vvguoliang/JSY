@@ -72,7 +72,7 @@ public class HttpURL implements Serializable {
 
     public String LOGO = HTTP_URL + "&m=login&a=dologin";
 
-    public String PASSWORD = HTTP_URL + "&m=login&a=reset_password";
+    public String PASSWORD = HTTP_URL + "&m=register&a=reset_password";
 
     public String REGISTER_CODE = HTTP_URL + "&m=register&a=send_code";
 

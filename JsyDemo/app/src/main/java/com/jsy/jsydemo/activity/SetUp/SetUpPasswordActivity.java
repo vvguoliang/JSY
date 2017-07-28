@@ -65,11 +65,6 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-//            LinearLayout tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
-//            stateBarTint("#305591", true);
-//            statusFragmentBarDarkMode();
-//            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
-//            lp.height = DisplayUtils.px2dip(this, 48 * 12);
             ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
         }
     }
@@ -90,10 +85,9 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     mCountDownTimerUtils = new CountDownTimerUtils(password_button_code, 60 * 1000, 1000);
                     mCountDownTimerUtils.start();
                     Map<String, Object> map = new HashMap<>();
-                    Long lg = Long.parseLong(password_phone.getText().toString().trim());
-                    map.put("mobile", lg);
-                    map.put("password", "");
-                    map.put("code", 0);
+                    map.put("mobile", Long.parseLong(password_phone.getText().toString().trim()));
+//                    map.put("password", "");
+//                    map.put("code", 0);
                     OkHttpManager.postAsync(HttpURL.getInstance().REGISTER_CODE, "code", map, this);
                 }
                 break;
@@ -120,9 +114,10 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     map.put("code", Long.parseLong(password_edittext_code.getText().toString()));
                     if (name.equals("1")) {
                         map.put("no", AppUtil.getInstance().getChannel(SetUpPasswordActivity.this, 2));
-                        OkHttpManager.postAsync(HttpURL.getInstance().REGISTER, "register", map, this);
-                    } else
-                        OkHttpManager.postAsync(HttpURL.getInstance().PASSWORD, "password", map, this);
+                        OkHttpManager.postAsync(HttpURL.getInstance().REGISTER, "register_code", map, this);
+                    } else {
+                        OkHttpManager.postAsync(HttpURL.getInstance().PASSWORD, "password_code", map, this);
+                    }
                 }
                 break;
         }
@@ -169,10 +164,10 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                 mCountDownTimerUtils.onFinish();
                 ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
-            case "password":
+            case "password_code":
                 ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
-            case "register":
+            case "register_code":
                 ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
@@ -186,13 +181,14 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                 RegisterSignCodeModify registerSignCodeModify = JsonData.getInstance().getJsonLogoCode(result);
                 if (registerSignCodeModify.getStatus() == 0) {
                     ToatUtils.showShort1(this, registerSignCodeModify.getInfo());
+                    mCountDownTimerUtils.onFinish();
                 } else {
                     if (registerSignCodeModify.getStatus() == 1 && registerSignCodeModify.getState().equals("success")) {
                         ToatUtils.showShort1(this, registerSignCodeModify.getInfo());
                     }
                 }
                 break;
-            case "password":
+            case "password_code":
                 object = new JSONObject(result);
                 if (object.optString("state").equals("fail")) {
                     ToatUtils.showShort1(this, object.optString("info"));
@@ -202,7 +198,7 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     finish();
                 }
                 break;
-            case "register":
+            case "register_code":
                 object = new JSONObject(result);
                 if (object.optString("state").equals("fail")) {
                     ToatUtils.showShort1(this, object.optString("info"));

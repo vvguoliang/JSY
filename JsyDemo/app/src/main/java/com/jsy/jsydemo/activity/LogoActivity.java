@@ -245,15 +245,10 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
         switch (name) {
             case "code":
                 mCountDownTimerUtils.onFinish();
-                Log.e("", "====" + request + "===" + e);
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "logo_code":
-                if (logintype == 1) {
-
-                } else {
-
-                }
-                Log.e("", "====" + request + "===" + e);
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
 
@@ -288,9 +283,19 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
                         }
                     }
                 } else {
-
+                    RegisterSignCodeModify registerSignCodeModify1 = JsonData.getInstance().getJsonLogoCode(result);
+                    if (registerSignCodeModify1.getStatus() == 0) {
+                        ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());
+                    } else {
+                        if (registerSignCodeModify1.getStatus() == 1 && registerSignCodeModify1.getState().equals("success")) {
+                            SharedPreferencesUtils.put(this, "username", registerSignCodeModify1.getUsername());
+                            SharedPreferencesUtils.put(this, "uid", registerSignCodeModify1.getUid());
+                            finish();
+                        } else {
+                            ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());
+                        }
+                    }
                 }
-                Log.e("", "====" + result);
                 break;
 
         }
