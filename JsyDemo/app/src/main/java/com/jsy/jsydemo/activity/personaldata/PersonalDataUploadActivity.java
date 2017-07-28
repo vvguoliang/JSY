@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -67,6 +68,8 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
     private UserCenterRealize userCenterRealize = new UserCenterRealize();
     private String getpath = "0";
 
+    private Intent intent = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +85,9 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_image:
+                intent = new Intent();
+                intent.putExtra("complete", "2");
+                setResult(107, intent);
                 finish();
                 break;
             case R.id.title_complete:
@@ -192,6 +198,9 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
     @Override
     public void requestSuccess(String result, String name) throws Exception {
         if (name.equals("parees")) {
+            intent = new Intent();
+            intent.putExtra("complete", "1");
+            setResult(107, intent);
             finish();
         } else if (name.equals("parees_list")) {
             String idcard_front = "";
@@ -361,6 +370,19 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
             }
             BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            intent = new Intent();
+            intent.putExtra("complete", "2");
+            setResult(107, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

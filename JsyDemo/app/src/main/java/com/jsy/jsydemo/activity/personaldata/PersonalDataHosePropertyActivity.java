@@ -1,10 +1,12 @@
 package com.jsy.jsydemo.activity.personaldata;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -64,6 +66,8 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
 
+    private Intent intent = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,9 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
 
         switch (v.getId()) {
             case R.id.title_image:
+                intent = new Intent();
+                intent.putExtra("complete", "2");
+                setResult(104, intent);
                 finish();
                 break;
             case R.id.title_complete:
@@ -256,6 +263,9 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
             case "hose_add":
                 JSONObject object = new JSONObject(result);
                 if (object.optString("code").equals("0000")) {
+                    intent = new Intent();
+                    intent.putExtra("complete", "1");
+                    setResult(104, intent);
                     finish();
                 } else {
                     ToatUtils.showShort1(this, object.optString("msg"));
@@ -366,5 +376,18 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
             // mHandler.sendEmptyMessage(MSG_LOAD_FAILED);
         }
         return detail;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            intent = new Intent();
+            intent.putExtra("complete", "2");
+            setResult(104, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

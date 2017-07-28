@@ -1,11 +1,13 @@
 package com.jsy.jsydemo.activity.personaldata;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -77,6 +79,8 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+
+    private Intent intent = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +163,9 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
                 }
                 break;
             case R.id.title_image:
+                intent = new Intent();
+                intent.putExtra("complete", "2");
+                setResult(101, intent);
                 finish();
                 break;
             case R.id.title_complete:
@@ -404,6 +411,9 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
             case "company_status_add":
                 JSONObject object = new JSONObject(result);
                 if (object.optString("code").equals("0000")) {
+                    intent = new Intent();
+                    intent.putExtra("complete", "1");
+                    setResult(101, intent);
                     finish();
                 } else {
                     ToatUtils.showShort1(this, object.optString("msg"));
@@ -504,5 +514,18 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
             // mHandler.sendEmptyMessage(MSG_LOAD_FAILED);
         }
         return detail;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            intent = new Intent();
+            intent.putExtra("complete", "2");
+            setResult(101, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

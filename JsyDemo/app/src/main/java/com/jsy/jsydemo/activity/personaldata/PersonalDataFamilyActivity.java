@@ -1,10 +1,12 @@
 package com.jsy.jsydemo.activity.personaldata;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -57,6 +59,8 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
 
+    private Intent intent = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +98,9 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
                 showPickerView(2);
                 break;
             case R.id.title_image:
+                intent = new Intent();
+                intent.putExtra("complete", "2");
+                setResult(102, intent);
                 finish();
                 break;
             case R.id.title_complete:
@@ -194,6 +201,9 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
             case "family_add":
                 JSONObject object = new JSONObject(result);
                 if (object.optString("code").equals("0000")) {
+                    intent = new Intent();
+                    intent.putExtra("complete", "1");
+                    setResult(102, intent);
                     finish();
                 } else {
                     ToatUtils.showShort1(this, object.optString("msg"));
@@ -291,11 +301,9 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
                     City_AreaList.add("");
                 } else {
 
-                    for (int d = 0; d < jsonBean.get(i).getCityList().get(c).getArea().size(); d++) {//该城市对应地区所有数据
-                        String AreaName = jsonBean.get(i).getCityList().get(c).getArea().get(d);
-
-                        City_AreaList.add(AreaName);//添加该城市所有地区数据
-                    }
+                    //该城市对应地区所有数据
+                    //添加该城市所有地区数据
+                    City_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
                 }
                 Province_AreaList.add(City_AreaList);//添加该省所有地区数据
             }
@@ -324,6 +332,19 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
             // mHandler.sendEmptyMessage(MSG_LOAD_FAILED);
         }
         return detail;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            intent = new Intent();
+            intent.putExtra("complete", "2");
+            setResult(102, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

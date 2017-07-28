@@ -1,7 +1,9 @@
 package com.jsy.jsydemo.activity.personaldata;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ import com.umeng.analytics.MobclickAgent;
 
 public class PersonalDataBankCardActivity extends BaseActivity implements View.OnClickListener {
 
+    private Intent intent = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +40,21 @@ public class PersonalDataBankCardActivity extends BaseActivity implements View.O
     public void onClick(View v) {
 
         switch (v.getId()){
+            case R.id.personal_bank_savings_linear:
             case R.id.personal_bank_savings_card:
+                ToatUtils.showShort1(this,"此功能暂时未开放");
                 break;
             case R.id.title_image:
+                intent = new Intent();
+                intent.putExtra("complete", "2");
+                setResult(108, intent);
                 finish();
                 break;
             case R.id.title_complete:
-                ToatUtils.showShort1(this,"此功能暂时未开放");
+                intent = new Intent();
+                intent.putExtra("complete", "2");
+                setResult(108, intent);
+                finish();
                 break;
         }
 
@@ -62,6 +74,8 @@ public class PersonalDataBankCardActivity extends BaseActivity implements View.O
         findViewById(R.id.title_complete).setVisibility(View.VISIBLE);
         findViewById(R.id.title_complete).setOnClickListener(this);
 
+        findViewById(R.id.personal_bank_savings_linear).setOnClickListener(this);
+
     }
 
     @Override
@@ -79,5 +93,18 @@ public class PersonalDataBankCardActivity extends BaseActivity implements View.O
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            intent = new Intent();
+            intent.putExtra("complete", "2");
+            setResult(108, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

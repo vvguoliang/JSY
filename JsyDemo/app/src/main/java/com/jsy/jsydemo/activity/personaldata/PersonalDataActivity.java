@@ -3,6 +3,7 @@ package com.jsy.jsydemo.activity.personaldata;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -191,33 +192,73 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        String complete = "";
+        if(!TextUtils.isEmpty(data.getExtras().getString("complete"))){
+            complete = data.getExtras().getString("complete");
+        }
         switch (requestCode) {
             case 100:
-                personal_data_complete0.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if(!TextUtils.isEmpty(complete) && complete.equals("1")){
+                    personal_data_complete0.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                }else{
+                    personal_data_complete0.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                }
                 break;
             case 101:
-                personal_data_complete1.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if(!TextUtils.isEmpty(complete) && complete.equals("1")){
+                    personal_data_complete1.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                }else{
+                    personal_data_complete1.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                }
                 break;
             case 102:
-                personal_data_complete2.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if(!TextUtils.isEmpty(complete) && complete.equals("1")){
+                    personal_data_complete2.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                }else{
+                    personal_data_complete3.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                }
                 break;
             case 103:
-                personal_data_complete3.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if(!TextUtils.isEmpty(complete) && complete.equals("1")){
+                    personal_data_complete3.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                }else{
+                    personal_data_complete3.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                }
                 break;
             case 104:
-                personal_data_complete4.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if(!TextUtils.isEmpty(complete) && complete.equals("1")){
+                    personal_data_complete4.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                }else{
+                    personal_data_complete4.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                }
                 break;
             case 105:
-                personal_data_complete5.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if(!TextUtils.isEmpty(complete) && complete.equals("1")){
+                    personal_data_complete5.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                }else{
+                    personal_data_complete5.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                }
                 break;
             case 106:
-                personal_data_complete6.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if(!TextUtils.isEmpty(complete) && complete.equals("1")){
+                    personal_data_complete6.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                }else{
+                    personal_data_complete6.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                }
                 break;
             case 107:
-                personal_data_complete8.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if(!TextUtils.isEmpty(complete) && complete.equals("1")){
+                    personal_data_complete8.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                }else{
+                    personal_data_complete8.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                }
                 break;
             case 108:
-                personal_data_complete9.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if(!TextUtils.isEmpty(complete) && complete.equals("1")){
+                    personal_data_complete9.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                }else{
+                    personal_data_complete9.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                }
                 break;
         }
     }

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,9 +45,9 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
 
     private String code = "";
 
-    private int aoth = 0;
-
     private String operator = "";
+
+    private Intent intent = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +70,15 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
                 getUserDataHttp();
                 break;
             case R.id.title_image:
+                intent = new Intent();
+                intent.putExtra("complete", "2");
+                setResult(106, intent);
                 finish();
                 break;
             case R.id.title_complete:
+                intent = new Intent();
+                intent.putExtra("complete", "1");
+                setResult(106, intent);
                 finish();
                 break;
         }
@@ -121,10 +128,8 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
             String datastring = data.getExtras().getString("operator");
             if (!TextUtils.isEmpty(datastring)) {
                 if (datastring.equals("1")) {
-                    aoth = 1;
                     operator_no_authorization.setText(this.getString(R.string.name_loan_operator_authorization));
                 } else {
-                    aoth = 2;
                     operator_no_authorization.setText(this.getString(R.string.name_loan_operator_no_authorization));
                 }
             }
@@ -174,5 +179,18 @@ public class PersonalDataOperatorActivity extends BaseActivity implements View.O
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            intent = new Intent();
+            intent.putExtra("complete", "2");
+            setResult(106, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

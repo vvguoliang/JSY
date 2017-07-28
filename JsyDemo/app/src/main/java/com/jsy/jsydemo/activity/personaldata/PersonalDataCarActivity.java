@@ -1,10 +1,12 @@
 package com.jsy.jsydemo.activity.personaldata;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -50,6 +52,8 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
 
     private String[] car_life_String = new String[]{"0-6个月", "1年", "2年", "3年", "3-5年", "5年以上"};
     private String[] list_car_estate_String = new String[]{"无车产", "有车产有抵押", "有车产无抵押"};
+
+    private Intent intent = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +106,9 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                 }
                 break;
             case R.id.title_image:
+                intent = new Intent();
+                intent.putExtra("complete", "2");
+                setResult(105, intent);
                 finish();
                 break;
             case R.id.title_complete:
@@ -259,6 +266,9 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
             case "car_add":
                 JSONObject object = new JSONObject(result);
                 if (object.optString("code").equals("0000")) {
+                    intent = new Intent();
+                    intent.putExtra("complete", "1");
+                    setResult(105, intent);
                     finish();
                 } else {
                     ToatUtils.showShort1(this, object.optString("msg"));
@@ -275,6 +285,18 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
                 }
                 break;
         }
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            intent = new Intent();
+            intent.putExtra("complete", "2");
+            setResult(105, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
