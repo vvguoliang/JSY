@@ -283,6 +283,7 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                 if (object.optString("code").equals("0001")) {
                     commissioning_relat.setVisibility(View.VISIBLE);
                     viewpager_relat.setVisibility(View.GONE);
+                    commissioning_button.setVisibility(View.GONE);
                     userCenterRealize.getIMEIPHONE(this, mHandler, 100);
                 } else if (object.optString("code").equals("0000")) {
                     object = new JSONObject(object.optString("data"));

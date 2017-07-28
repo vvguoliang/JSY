@@ -1,7 +1,6 @@
 #在运行状态中出现报错现象
 -keepattributes EnclosingMethod
 #极光推送 
--dontoptimize
 -dontpreverify
 -dontwarn cn.jpush.**
 -keep class cn.jpush.** { *; }
@@ -51,13 +50,25 @@
    public static final int *;
 }
 #gson混淆配置
--keep public class com.google.gson.**
--keep public class com.google.gson.** {public private protected *;}
-
 -keepattributes Signature
 -keepattributes *Annotation*
--keep public class com.project.mocha_patient.login.SignResponseData { private *; }
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.stream.** { *; }
+-keep class com.google.gson.examples.android.model.** { *; }
 
+# Explicitly preserve all serialization members. The Serializable interface
+# is only a marker interface, so it wouldn't save them.
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+-keep public class * implements java.io.Serializable {*;}
+-dontobfuscate
 
 #友盟
 -keepclassmembers class * {
