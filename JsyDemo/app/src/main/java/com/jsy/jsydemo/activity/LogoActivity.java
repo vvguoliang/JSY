@@ -94,7 +94,7 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
             setTranslucentStatus(true);
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
             lp.gravity = Gravity.CENTER;
-            lp.height = DisplayUtils.px2dip(this, 48 * 5);
+            lp.height = DisplayUtils.px2dip(this, 48 * 8);
             ImmersiveUtils.StatusBarLightMode(this);
 
 //            ImageView loan_logo_image = (ImageView) findViewById(R.id.loan_logo_image);
