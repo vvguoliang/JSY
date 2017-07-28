@@ -1,5 +1,6 @@
 package com.jsy.jsydemo.activity.SetUp;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.EntityClass.RegisterSignCodeModify;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
@@ -66,6 +68,9 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
             ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
+            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
+            //清除状态栏黑色字体
+            statusFragmentBarDarkMode();
         }
     }
 
@@ -86,8 +91,6 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     mCountDownTimerUtils.start();
                     Map<String, Object> map = new HashMap<>();
                     map.put("mobile", Long.parseLong(password_phone.getText().toString().trim()));
-//                    map.put("password", "");
-//                    map.put("code", 0);
                     OkHttpManager.postAsync(HttpURL.getInstance().REGISTER_CODE, "code", map, this);
                 }
                 break;
@@ -195,6 +198,7 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                 } else {
                     SharedPreferencesUtils.put(this, "username", password_phone.getText().toString());
                     SharedPreferencesUtils.put(this, "password", password_edittext_pass_confirm.getText());
+                    startActivity(new Intent(this, LogoActivity.class));
                     finish();
                 }
                 break;

@@ -92,10 +92,6 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
     }
 
     private void getHeader() {
-        //沉浸式状态设置
-        if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(mActivity, Color.parseColor("#305591"));
-        }
         loan_supermarket_listview = (ListView) findViewById(R.id.loan_supermarket_listview);
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(mActivity.getString(R.string.name_loan_supermarket));

@@ -96,6 +96,9 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
         if (ImmersiveUtils.BuildVERSION()) {
             setTranslucentStatus(true);
             ImmersiveUtils.StatusBarLightMode(this);
+            ImmersiveUtils.stateBarTint(this, "#00000000", true, false);
+            //设置状态栏白色字体
+            ImmersiveUtils.StatusFragmentBarDarkMode(this);
         }
     }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -89,25 +90,17 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
 
         if (position == -1) {
         } else {
-//            if (position == 2) {//修改密码后重新登录
-//                judgeIsNotLogin();// 先判断用户是否登录
-//            } else if (position == 1) {
             showFragment(position);
-//            }
         }
+        SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "WHITE");
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
             setTranslucentStatus(true);
+            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
+            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
         }
-
-//        if (mSelectPosition == 1) {//初始化设置状态栏颜色
-        stateBarTint("#ffffff", false);
-        SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "WHITE");
-//        } else {
-//            //fragment产品页和发现页状态栏字体颜色为黑色
-//            SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "BLACK");
-//            stateBarTint("#000000", true);
-//        }
+        //清除状态栏黑色字体
+        statusFragmentBarDarkMode();
     }
 
     @Override
@@ -170,17 +163,15 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
                 } else {
                     transaction.show(listfragment.get(i));
                 }
-//                if (position % 2 == 0) {
                 //fragment首页和我的页状态栏字体颜色为白色
                 SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "WHITE");
-                //stateBarTint("#ffffff", false);
+                //沉浸式状态设置
+                if (ImmersiveUtils.BuildVERSION()) {
+                    ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
+                    ImmersiveUtils.stateBarTint(this, "#305591", true, false);
+                }
                 //清除状态栏黑色字体
                 statusFragmentBarDarkMode();
-//                } else {
-//                    //fragment产品页和发现页状态栏字体颜色为黑色
-//                    SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "BLACK");
-//                    stateBarTint("#000000", true);
-//                }
             }
         }
         transaction.commitAllowingStateLoss();

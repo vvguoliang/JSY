@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -67,10 +68,6 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 
     @Override
     protected void initView() {
-        //沉浸式状态设置
-        if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(mActivity, Color.parseColor("#305591"));
-        }
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(mActivity.getString(R.string.name_personal_center));
 
@@ -196,6 +193,14 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
             findViewById(R.id.personal_logo_image).setVisibility(View.VISIBLE);
         }
         MobclickAgent.onPageStart("PersonalCenterFragment"); //统计页面，"MainScreen"为页面名称，可自定义
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            onResume();
+        }
     }
 
     @Override

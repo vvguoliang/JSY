@@ -76,6 +76,9 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
             ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
+            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
+            //清除状态栏黑色字体
+            statusFragmentBarDarkMode();
         }
         initJsonData();
     }

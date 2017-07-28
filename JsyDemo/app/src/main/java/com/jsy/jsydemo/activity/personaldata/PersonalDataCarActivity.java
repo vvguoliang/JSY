@@ -63,6 +63,9 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
             ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
+            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
+            //清除状态栏黑色字体
+            statusFragmentBarDarkMode();
         }
     }
 

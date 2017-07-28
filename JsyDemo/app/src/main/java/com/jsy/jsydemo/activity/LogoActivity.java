@@ -3,12 +3,10 @@ package com.jsy.jsydemo.activity;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -23,7 +21,6 @@ import android.widget.TextView;
 import com.jsy.jsydemo.EntityClass.RegisterSignCodeModify;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.SetUp.SetUpPasswordActivity;
-import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
@@ -37,7 +34,6 @@ import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -94,13 +90,11 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
             setTranslucentStatus(true);
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
             lp.gravity = Gravity.CENTER;
-            lp.height = DisplayUtils.px2dip(this, 48 * 8);
+            lp.height = DisplayUtils.px2dip(this, 48 * 10) + 120;
             ImmersiveUtils.StatusBarLightMode(this);
-
-//            ImageView loan_logo_image = (ImageView) findViewById(R.id.loan_logo_image);
-//            RelativeLayout.LayoutParams para = (RelativeLayout.LayoutParams) loan_logo_image.getLayoutParams();
-//            para.height = DisplayUtils.px2dip(this, 48 * 20);
-//            loan_logo_image.setLayoutParams(para);
+            ImmersiveUtils.stateBarTint(this, "#00000000", true, false);
+            //设置状态栏白色字体
+            ImmersiveUtils.StatusFragmentBarDarkMode(this);
         }
         initView();
     }

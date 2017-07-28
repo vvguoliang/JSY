@@ -111,10 +111,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
         mHandler = new Handler();
         mAdapter = new CardRecordAdapter(mActivity);
-        //沉浸式状态设置
-        if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(mActivity, Color.parseColor("#305591"));
-        }
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(mActivity.getString(R.string.app_name));
 
@@ -313,6 +309,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                 homeProductList = new HomeProductList();
                 homeProductList = JsonData.getInstance().getJsonLoanProduct(result);
                 if (homeProductList.getHomeProductList().size() == 0) {
+                    page = 1;
                     mRecyclerView.showNoMore();
                 } else {
                     VirtualData = new HomeProduct[homeProductList.getHomeProductList().size()];

@@ -101,10 +101,6 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
         mHandler = new Handler();
         mAdapter = new QuickCardAdapter(mActivity);
 
-        //沉浸式状态设置
-        if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(mActivity, Color.parseColor("#305591"));
-        }
         TextView title_view = (TextView) findViewById(R.id.title_view);
         title_view.setText(mActivity.getString(R.string.name_quick_card));
 
