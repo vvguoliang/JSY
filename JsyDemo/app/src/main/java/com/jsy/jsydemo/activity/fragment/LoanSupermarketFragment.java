@@ -21,6 +21,7 @@ import com.jsy.jsydemo.base.BaseFragment;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
@@ -178,7 +179,7 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
                 }
 
             };
-            bannerTimer.schedule(bannerTask, 3000);// 3秒钟自动翻页一次
+            bannerTimer.schedule(bannerTask, AppUtil.getInstance().TIME);// 3秒钟自动翻页一次
         }
     }
 
@@ -257,7 +258,7 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
                         bannerHandler.obtainMessage().sendToTarget();
                     }
                 };
-                bannerTimer.schedule(bannerTask, 3000);
+                bannerTimer.schedule(bannerTask, AppUtil.getInstance().TIME);
             }
         }
 
@@ -280,6 +281,7 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
     @Override
     public void onResume() {
         super.onResume();
+        pollBanner();
         MobclickAgent.onPageStart("LoanSupermarketFragment"); //统计页面，"MainScreen"为页面名称，可自定义
     }
 

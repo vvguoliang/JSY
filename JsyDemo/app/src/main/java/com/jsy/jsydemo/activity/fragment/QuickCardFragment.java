@@ -155,7 +155,7 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
                     mRecyclerView.getRecyclerView().scrollToPosition(0);
                 }
             }
-        }, 1500);
+        }, 1000);
     }
 
     private void getBank() {
@@ -245,7 +245,7 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
                 }
 
             };
-            bannerTimer.schedule(bannerTask, 3000);// 3秒钟自动翻页一次
+            bannerTimer.schedule(bannerTask, 2000);// 3秒钟自动翻页一次
         }
     }
 
@@ -339,7 +339,7 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
                         bannerHandler.obtainMessage().sendToTarget();
                     }
                 };
-                bannerTimer.schedule(bannerTask, 3000);
+                bannerTimer.schedule(bannerTask, AppUtil.getInstance().TIME);
             }
         }
 
@@ -362,6 +362,7 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
     @Override
     public void onResume() {
         super.onResume();
+        pollBanner();
         MobclickAgent.onPageStart("QuickCardFragment"); //统计页面，"MainScreen"为页面名称，可自定义
     }
 
