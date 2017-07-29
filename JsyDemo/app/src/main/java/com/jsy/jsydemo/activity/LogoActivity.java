@@ -180,37 +180,37 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
     }
 
     protected void findViewById() {
-        tab_activity_lin = (LinearLayout) findViewById(R.id.tab_activity_lin);
+        tab_activity_lin = findViewById(R.id.tab_activity_lin);
         tab_activity_lin.setBackgroundResource(R.color.transparent);
-        title_image = (ImageView) findViewById(R.id.title_image);
+        title_image = findViewById(R.id.title_image);
         title_image.setVisibility(View.VISIBLE);
         title_image.setOnClickListener(this);
 
-        title_complete = (TextView) findViewById(R.id.title_complete);
+        title_complete = findViewById(R.id.title_complete);
         title_complete.setVisibility(View.VISIBLE);
         title_complete.setOnClickListener(this);
         title_complete.setText(this.getString(R.string.name_loan_logo_register));
 
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setVisibility(View.INVISIBLE);
 
-        loan_logo_edittext_phone = (EditText) findViewById(R.id.loan_logo_edittext_phone);
-        loan_logo_edittext_code = (EditText) findViewById(R.id.loan_logo_edittext_code);
+        loan_logo_edittext_phone = findViewById(R.id.loan_logo_edittext_phone);
+        loan_logo_edittext_code = findViewById(R.id.loan_logo_edittext_code);
 
-        loan_logo_button_code = (Button) findViewById(R.id.loan_logo_button_code);
+        loan_logo_button_code = findViewById(R.id.loan_logo_button_code);
         loan_logo_button_code.setOnClickListener(this);
 
         findViewById(R.id.loan_logo_button_logo).setOnClickListener(this);
 
-        loan_logo_account_number = (TextView) findViewById(R.id.loan_logo_account_number);
+        loan_logo_account_number = findViewById(R.id.loan_logo_account_number);
         loan_logo_account_number.setOnClickListener(this);
-        loan_logo_Re_code = (LinearLayout) findViewById(R.id.loan_logo_Re_code);
-        loan_logo_Re_password = (RelativeLayout) findViewById(R.id.loan_logo_Re_password);
+        loan_logo_Re_code = findViewById(R.id.loan_logo_Re_code);
+        loan_logo_Re_password = findViewById(R.id.loan_logo_Re_password);
 
-        loan_logo_no_password = (TextView) findViewById(R.id.loan_logo_no_password);
+        loan_logo_no_password = findViewById(R.id.loan_logo_no_password);
         loan_logo_no_password.setOnClickListener(this);
 
-        loan_logo_edittext_password_code = (EditText) findViewById(R.id.loan_logo_edittext_password_code);
+        loan_logo_edittext_password_code = findViewById(R.id.loan_logo_edittext_password_code);
 
     }
 
