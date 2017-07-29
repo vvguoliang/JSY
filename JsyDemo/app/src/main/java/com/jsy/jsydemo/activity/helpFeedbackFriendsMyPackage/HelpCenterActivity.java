@@ -47,10 +47,7 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
         initView();
     }
@@ -141,26 +138,26 @@ public class HelpCenterActivity extends BaseActivity implements View.OnClickList
     protected void findViewById() {
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_help_center));
 
-        help_application_image = (ImageView) findViewById(R.id.help_application_image);
-        help_application_linear = (LinearLayout) findViewById(R.id.help_application_linear);
+        help_application_image = findViewById(R.id.help_application_image);
+        help_application_linear = findViewById(R.id.help_application_linear);
 
-        help_application_loan_image = (ImageView) findViewById(R.id.help_application_loan_image);
-        help_application_loan_linear = (LinearLayout) findViewById(R.id.help_application_loan_linear);
+        help_application_loan_image = findViewById(R.id.help_application_loan_image);
+        help_application_loan_linear = findViewById(R.id.help_application_loan_linear);
 
-        help_application_loan_success_image = (ImageView) findViewById(R.id.help_application_loan_success_image);
-        help_application_loan_success_linear = (LinearLayout) findViewById(R.id.help_application_loan_success_linear);
+        help_application_loan_success_image = findViewById(R.id.help_application_loan_success_image);
+        help_application_loan_success_linear = findViewById(R.id.help_application_loan_success_linear);
 
-        help_application_loan_repayment_image = (ImageView) findViewById(R.id.help_application_loan_repayment_image);
-        help_application_loan_repayment_linear = (LinearLayout) findViewById(R.id.help_application_loan_repayment_linear);
+        help_application_loan_repayment_image = findViewById(R.id.help_application_loan_repayment_image);
+        help_application_loan_repayment_linear = findViewById(R.id.help_application_loan_repayment_linear);
 
-        help_application_loan_order_image = (ImageView) findViewById(R.id.help_application_loan_order_image);
-        help_application_loan_order_linear = (LinearLayout) findViewById(R.id.help_application_loan_order_linear);
+        help_application_loan_order_image = findViewById(R.id.help_application_loan_order_image);
+        help_application_loan_order_linear = findViewById(R.id.help_application_loan_order_linear);
 
-        help_application_loan_fail_image = (ImageView) findViewById(R.id.help_application_loan_fail_image);
-        help_application_loan_fail_linear = (LinearLayout) findViewById(R.id.help_application_loan_fail_linear);
+        help_application_loan_fail_image = findViewById(R.id.help_application_loan_fail_image);
+        help_application_loan_fail_linear = findViewById(R.id.help_application_loan_fail_linear);
     }
 
     @Override

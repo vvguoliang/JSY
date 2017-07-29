@@ -108,10 +108,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
         initView();
     }
@@ -155,28 +152,28 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
     protected void findViewById() {
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.operator_grant));
 
-        operator_phone = (EditText) findViewById(R.id.operator_phone);
+        operator_phone = findViewById(R.id.operator_phone);
 
-        operator_password = (EditText) findViewById(R.id.operator_password);
+        operator_password = findViewById(R.id.operator_password);
 
-        operator_no_password = (TextView) findViewById(R.id.operator_no_password);
+        operator_no_password = findViewById(R.id.operator_no_password);
 
-        operator_checkbox = (CheckBox) findViewById(R.id.operator_checkbox);
+        operator_checkbox = findViewById(R.id.operator_checkbox);
 
-        operator_clausr_text = (TextView) findViewById(R.id.operator_clausr_text);
+        operator_clausr_text = findViewById(R.id.operator_clausr_text);
 
-        operator_submit_button = (Button) findViewById(R.id.operator_submit_button);
+        operator_submit_button = findViewById(R.id.operator_submit_button);
 
-        operator_linear = (LinearLayout) findViewById(R.id.operator_linear);
+        operator_linear = findViewById(R.id.operator_linear);
 
-        operator_linear1 = (LinearLayout) findViewById(R.id.operator_linear1);
+        operator_linear1 = findViewById(R.id.operator_linear1);
 
-        operator_linear2 = (LinearLayout) findViewById(R.id.operator_linear2);
+        operator_linear2 = findViewById(R.id.operator_linear2);
 
-        operator_logo = (ImageView) findViewById(R.id.operator_logo);
+        operator_logo = findViewById(R.id.operator_logo);
     }
 
     @Override

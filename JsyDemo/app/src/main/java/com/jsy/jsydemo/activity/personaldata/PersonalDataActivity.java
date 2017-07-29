@@ -59,10 +59,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
     }
 
@@ -72,7 +69,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         findViewById(R.id.title_image).setOnClickListener(this);
         findViewById(R.id.title_complete).setVisibility(View.VISIBLE);
         findViewById(R.id.title_complete).setOnClickListener(this);
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_data));
         findViewById(R.id.personal_data_credit).setOnClickListener(this);
         findViewById(R.id.personal_data_enterprise).setOnClickListener(this);
@@ -85,8 +82,8 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         findViewById(R.id.personal_data_certificates).setOnClickListener(this);
         findViewById(R.id.personal_data_bank_card).setOnClickListener(this);
 
-        personal_data_phone = (TextView) findViewById(R.id.personal_data_phone);
-        personal_data_name = (EditText) findViewById(R.id.personal_data_name);
+        personal_data_phone = findViewById(R.id.personal_data_phone);
+        personal_data_name = findViewById(R.id.personal_data_name);
         if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
             personal_data_phone.setText(SharedPreferencesUtils.get(this, "username", "").toString());
         }
@@ -95,22 +92,22 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         } else {
             personal_data_name.setText("");
         }
-        personal_data_id = (EditText) findViewById(R.id.personal_data_id);
+        personal_data_id = findViewById(R.id.personal_data_id);
         if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "idcard", "").toString())) {
             personal_data_id.setText(SharedPreferencesUtils.get(this, "idcard", "").toString());
         } else {
             personal_data_id.setText("");
         }
-        personal_data_complete0 = (TextView) findViewById(R.id.personal_data_complete0);
-        personal_data_complete1 = (TextView) findViewById(R.id.personal_data_complete1);
-        personal_data_complete2 = (TextView) findViewById(R.id.personal_data_complete2);
-        personal_data_complete3 = (TextView) findViewById(R.id.personal_data_complete3);
-        personal_data_complete4 = (TextView) findViewById(R.id.personal_data_complete4);
-        personal_data_complete5 = (TextView) findViewById(R.id.personal_data_complete5);
-        personal_data_complete6 = (TextView) findViewById(R.id.personal_data_complete6);
+        personal_data_complete0 = findViewById(R.id.personal_data_complete0);
+        personal_data_complete1 = findViewById(R.id.personal_data_complete1);
+        personal_data_complete2 = findViewById(R.id.personal_data_complete2);
+        personal_data_complete3 = findViewById(R.id.personal_data_complete3);
+        personal_data_complete4 = findViewById(R.id.personal_data_complete4);
+        personal_data_complete5 = findViewById(R.id.personal_data_complete5);
+        personal_data_complete6 = findViewById(R.id.personal_data_complete6);
 //        personal_data_complete7 = (TextView) findViewById(R.id.personal_data_complete7);
-        personal_data_complete8 = (TextView) findViewById(R.id.personal_data_complete8);
-        personal_data_complete9 = (TextView) findViewById(R.id.personal_data_complete9);
+        personal_data_complete8 = findViewById(R.id.personal_data_complete8);
+        personal_data_complete9 = findViewById(R.id.personal_data_complete9);
 
     }
 

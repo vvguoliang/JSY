@@ -61,10 +61,7 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
         type = getIntent().getExtras().getLong("type");
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
         findViewById();
     }
@@ -80,7 +77,7 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
 
     @Override
     protected void findViewById() {
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         if (type == 0) {
             title_view.setText(this.getString(R.string.name_Loan_recommend));
             getHttpIndex();
@@ -102,7 +99,7 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
         footer.setText("");
         mAdapter.setFooter(footer);
 
-        mRecyclerView = (RefreshRecyclerView) findViewById(R.id.loan_recycler_view);
+        mRecyclerView = findViewById(R.id.loan_recycler_view);
         mRecyclerView.setSwipeRefreshColors(0xFF437845, 0xFFE44F98, 0xFF2FAC21);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setBackgroundResource(R.color.common_light_grey);

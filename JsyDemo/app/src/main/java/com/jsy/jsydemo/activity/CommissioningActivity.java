@@ -1,7 +1,6 @@
 package com.jsy.jsydemo.activity;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,8 +16,6 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -94,25 +91,21 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
         initView();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            setTranslucentStatus(true);
-            ImmersiveUtils.StatusBarLightMode(this);
-            ImmersiveUtils.stateBarTint(this, "#00000000", true, false);
-            //设置状态栏白色字体
-            ImmersiveUtils.StatusFragmentBarDarkMode(this);
+            ImmersiveUtils.getInstance().getWhite(this);
         }
     }
 
     protected void findViewById() {
-        commissioning_image = (ImageView) findViewById(R.id.commissioning_image);
-        commissioning_image1 = (ImageView) findViewById(R.id.commissioning_image1);
-        commissioning_button = (Button) findViewById(R.id.commissioning_button);
-        viewpager = (ViewPager) findViewById(R.id.viewpager);
-        viewpager_relat = (RelativeLayout) findViewById(R.id.viewpager_relat);
-        indicator = (CircleIndicator) findViewById(R.id.indicator);
+        commissioning_image = findViewById(R.id.commissioning_image);
+        commissioning_image1 = findViewById(R.id.commissioning_image1);
+        commissioning_button = findViewById(R.id.commissioning_button);
+        viewpager = findViewById(R.id.viewpager);
+        viewpager_relat = findViewById(R.id.viewpager_relat);
+        indicator = findViewById(R.id.indicator);
 
-        commissioning_relat = (RelativeLayout) findViewById(R.id.commissioning_relat);
+        commissioning_relat = findViewById(R.id.commissioning_relat);
 
-        commissioning_loan_button = (Button) findViewById(R.id.commissioning_loan_button);
+        commissioning_loan_button = findViewById(R.id.commissioning_loan_button);
 
     }
 
@@ -141,6 +134,11 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
             @Override
             public void onPageSelected(int position) {
                 if (position == 2) {
+                    if (ImmersiveUtils.BuildVERSION()) {
+                        ImmersiveUtils.getInstance().getBlack(CommissioningActivity.this);
+                    } else {
+                        ImmersiveUtils.getInstance().getWhite(CommissioningActivity.this);
+                    }
                     commissioning_loan_button.setVisibility(View.VISIBLE);
                 }
             }
@@ -404,17 +402,4 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
             return viewList.get(position);
         }
     };
-
-    @TargetApi(19)
-    protected void setTranslucentStatus(boolean on) {
-        Window win = getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
-    }
 }

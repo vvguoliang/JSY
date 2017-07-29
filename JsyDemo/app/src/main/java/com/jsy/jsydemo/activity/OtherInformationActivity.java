@@ -102,10 +102,7 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
         pid = getIntent().getExtras().getString("pid");
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
         findViewById();
         initView();
@@ -208,35 +205,35 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
     protected void findViewById() {
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_details_other));
 
-        information_mailbox_linear = (LinearLayout) findViewById(R.id.information_mailbox_linear);
-        information_spouse_linear = (LinearLayout) findViewById(R.id.information_spouse_linear);
-        information_live_linear = (LinearLayout) findViewById(R.id.information_live_linear);
-        information_mode_linear = (LinearLayout) findViewById(R.id.information_mode_linear);
-        information_corporate_linear = (LinearLayout) findViewById(R.id.information_corporate_linear);
-        information_corporate_address_linear = (LinearLayout) findViewById(R.id.information_corporate_address_linear);
-        information_corporate_phone_linear = (LinearLayout) findViewById(R.id.information_corporate_phone_linear);
-        loan_personal_linear = (LinearLayout) findViewById(R.id.loan_personal_linear);
-        other_contacts_linear = (LinearLayout) findViewById(R.id.other_contacts_linear);
+        information_mailbox_linear = findViewById(R.id.information_mailbox_linear);
+        information_spouse_linear = findViewById(R.id.information_spouse_linear);
+        information_live_linear = findViewById(R.id.information_live_linear);
+        information_mode_linear = findViewById(R.id.information_mode_linear);
+        information_corporate_linear = findViewById(R.id.information_corporate_linear);
+        information_corporate_address_linear = findViewById(R.id.information_corporate_address_linear);
+        information_corporate_phone_linear = findViewById(R.id.information_corporate_phone_linear);
+        loan_personal_linear = findViewById(R.id.loan_personal_linear);
+        other_contacts_linear = findViewById(R.id.other_contacts_linear);
 
-        information_mailbox_editText = (EditText) findViewById(R.id.information_mailbox_editText);
-        information_spouse_editText = (EditText) findViewById(R.id.information_spouse_editText);
-        information_live_editText = (EditText) findViewById(R.id.information_live_editText);
-        information_corporate_editText = (EditText) findViewById(R.id.information_corporate_editText);
-        information_corporate_address_editText = (EditText) findViewById(R.id.information_corporate_address_editText);
-        information_corporate_phone_editText = (EditText) findViewById(R.id.information_corporate_phone_editText);
+        information_mailbox_editText = findViewById(R.id.information_mailbox_editText);
+        information_spouse_editText = findViewById(R.id.information_spouse_editText);
+        information_live_editText = findViewById(R.id.information_live_editText);
+        information_corporate_editText = findViewById(R.id.information_corporate_editText);
+        information_corporate_address_editText = findViewById(R.id.information_corporate_address_editText);
+        information_corporate_phone_editText = findViewById(R.id.information_corporate_phone_editText);
 
-        information_mode_text = (TextView) findViewById(R.id.information_mode_text);
-        other_relatives_name = (TextView) findViewById(R.id.other_relatives_name);
-        other_relatives_phone = (TextView) findViewById(R.id.other_relatives_phone);
-        other_contacts_name = (TextView) findViewById(R.id.other_contacts_name);
-        other_contacts_phone = (TextView) findViewById(R.id.other_contacts_phone);
+        information_mode_text = findViewById(R.id.information_mode_text);
+        other_relatives_name = findViewById(R.id.other_relatives_name);
+        other_relatives_phone = findViewById(R.id.other_relatives_phone);
+        other_contacts_name = findViewById(R.id.other_contacts_name);
+        other_contacts_phone = findViewById(R.id.other_contacts_phone);
 
-        information_please_button = (Button) findViewById(R.id.information_please_button);
-        other_relatives_wathet = (Button) findViewById(R.id.other_relatives_wathet);
-        other_contacts_wathet = (Button) findViewById(R.id.other_contacts_wathet);
+        information_please_button = findViewById(R.id.information_please_button);
+        other_relatives_wathet = findViewById(R.id.other_relatives_wathet);
+        other_contacts_wathet = findViewById(R.id.other_contacts_wathet);
 
         if (!TextUtils.isEmpty(other)) {
             Pattern pattern = Pattern.compile("\\[(.*)\\]");

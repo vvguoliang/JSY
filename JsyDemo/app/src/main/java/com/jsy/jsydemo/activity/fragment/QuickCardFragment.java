@@ -2,12 +2,10 @@ package com.jsy.jsydemo.activity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +27,6 @@ import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.interfaces.Action;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
-import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
@@ -166,12 +163,12 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
     }
 
     private void getHeader(View mHeader) {
-        loan_viewpage = (ViewPager) mHeader.findViewById(R.id.loan_viewpage);
+        loan_viewpage = mHeader.findViewById(R.id.loan_viewpage);
         final ViewGroup.LayoutParams lp = loan_viewpage.getLayoutParams();
         lp.height = DisplayUtils.dip2px(mActivity, 150);
         loan_viewpage.setLayoutParams(lp);
         loan_viewpage.setOnPageChangeListener(new NavigationPageChangeListener());
-        loan_frame = (LinearLayout) mHeader.findViewById(R.id.loan_frame);
+        loan_frame = mHeader.findViewById(R.id.loan_frame);
     }
 
     // -------------------------------------------------------------------------

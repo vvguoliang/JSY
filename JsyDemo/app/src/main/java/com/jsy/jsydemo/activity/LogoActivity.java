@@ -91,7 +91,6 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab_activity_lin.getLayoutParams();
             lp.gravity = Gravity.CENTER;
             lp.height = DisplayUtils.px2dip(this, 48 * 10) + 120;
-            ImmersiveUtils.StatusBarLightMode(this);
             ImmersiveUtils.stateBarTint(this, "#00000000", true, false);
             //设置状态栏白色字体
             ImmersiveUtils.StatusFragmentBarDarkMode(this);

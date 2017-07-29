@@ -62,10 +62,7 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
     }
 
@@ -128,14 +125,14 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
         findViewById(R.id.title_image).setOnClickListener(this);
         findViewById(R.id.title_complete).setVisibility(View.VISIBLE);
         findViewById(R.id.title_complete).setOnClickListener(this);
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_data_car_production));
 
-        car_estate = (TextView) findViewById(R.id.car_estate);
-        car_new_car = (EditText) findViewById(R.id.car_new_car);
-        car_life = (TextView) findViewById(R.id.car_life);
-        car_mortgage = (TextView) findViewById(R.id.car_mortgage);
-        car_no_mortgage = (TextView) findViewById(R.id.car_no_mortgage);
+        car_estate = findViewById(R.id.car_estate);
+        car_new_car = findViewById(R.id.car_new_car);
+        car_life = findViewById(R.id.car_life);
+        car_mortgage = findViewById(R.id.car_mortgage);
+        car_no_mortgage = findViewById(R.id.car_no_mortgage);
 
         getHttp();
         car_estate.setOnClickListener(this);

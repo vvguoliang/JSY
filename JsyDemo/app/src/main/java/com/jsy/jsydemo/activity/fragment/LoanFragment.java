@@ -167,20 +167,20 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
 
     private void getHeader(View mHeader) {
         mHeader.findViewById(R.id.loan_speed_linear).setOnClickListener(this);
-        ImageView loan_speed = (ImageView) mHeader.findViewById(R.id.loan_speed);
+        ImageView loan_speed = mHeader.findViewById(R.id.loan_speed);
         mHeader.findViewById(R.id.loan_speed1_linear).setOnClickListener(this);
-        ImageView loan_speed1 = (ImageView) mHeader.findViewById(R.id.loan_speed1);
+        ImageView loan_speed1 = mHeader.findViewById(R.id.loan_speed1);
         mHeader.findViewById(R.id.loan_speed2_linear).setOnClickListener(this);
-        ImageView loan_speed2 = (ImageView) mHeader.findViewById(R.id.loan_speed2);
+        ImageView loan_speed2 = mHeader.findViewById(R.id.loan_speed2);
 
         mHeader.findViewById(R.id.loan_tab_linear).setOnClickListener(this);
 
-        loan_viewpage = (ViewPager) mHeader.findViewById(R.id.loan_viewpage);
+        loan_viewpage = mHeader.findViewById(R.id.loan_viewpage);
         final ViewGroup.LayoutParams lp = loan_viewpage.getLayoutParams();
         lp.height = DisplayUtils.dip2px(mActivity, 150);
         loan_viewpage.setLayoutParams(lp);
         loan_viewpage.setOnPageChangeListener(new NavigationPageChangeListener());
-        loan_frame = (LinearLayout) mHeader.findViewById(R.id.loan_frame);
+        loan_frame = mHeader.findViewById(R.id.loan_frame);
     }
 
 

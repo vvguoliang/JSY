@@ -67,10 +67,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
     }
 
@@ -94,19 +91,19 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     protected void findViewById() {
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_feedback));
 
-        information_corporate_editText = (EditText) findViewById(R.id.information_corporate_editText);
-        feedback_image = (ImageView) findViewById(R.id.feedback_image);
-        feedback_path = (TextView) findViewById(R.id.feedback_path);
-        feedback_path_editText = (EditText) findViewById(R.id.feedback_path_editText);
+        information_corporate_editText = findViewById(R.id.information_corporate_editText);
+        feedback_image = findViewById(R.id.feedback_image);
+        feedback_path = findViewById(R.id.feedback_path);
+        feedback_path_editText = findViewById(R.id.feedback_path_editText);
         findViewById(R.id.feedback_path_button).setOnClickListener(this);
         feedback_image.setOnClickListener(this);
         information_corporate_editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(num)});
         information_corporate_editText.addTextChangedListener(textWatcher);
 
-        feedback_path_text = (TextView) findViewById(R.id.feedback_path_text);
+        feedback_path_text = findViewById(R.id.feedback_path_text);
         feedback_path_text.setText("0/" + num);
     }
 
@@ -144,15 +141,12 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
-        if (name.equals("feedback")) {
-            Log.e("", "=====" + request + "=====" + e);
-        }
+        ToatUtils.showShort1(this, this.getString(R.string.network_timed));
     }
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
         if (name.equals("feedback")) {
-            Log.e("", "====" + result);
             finish();
         }
     }

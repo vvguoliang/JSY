@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
+import com.jsy.jsydemo.activity.CommissioningActivity;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -24,6 +26,30 @@ import java.lang.reflect.Method;
 public class ImmersiveUtils {
 
     private final static int STATE_BAR_ID = 10000;
+
+    /**
+     * 单例对象实例
+     */
+    private static class ImmersiveUtilsHolder {
+        static final ImmersiveUtils INSTANCE = new ImmersiveUtils();
+    }
+
+    public static ImmersiveUtils getInstance() {
+        return ImmersiveUtils.ImmersiveUtilsHolder.INSTANCE;
+    }
+
+    /**
+     * private的构造函数用于避免外界直接使用new来实例化对象
+     */
+    private ImmersiveUtils() {
+    }
+
+    /**
+     * readResolve方法应对单例对象被序列化时候
+     */
+    private Object readResolve() {
+        return getInstance();
+    }
 
     /**
      * 需要设置activity主题为<item name="android:windowContentOverlay">@null</item>
@@ -275,7 +301,9 @@ public class ImmersiveUtils {
         }
     }
 
-    /** * 设置状态栏颜色 * * @param activity 需要设置的activity * @param color 状态栏颜色值 */
+    /**
+     * 设置状态栏颜色 * * @param activity 需要设置的activity * @param color 状态栏颜色值
+     */
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public static void setColor(Activity activity, int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -291,6 +319,46 @@ public class ImmersiveUtils {
             rootView.setFitsSystemWindows(true);
             rootView.setClipToPadding(true);
         }
+    }
+
+    /**
+     * 设置黑色
+     *
+     * @param activity
+     */
+    public void getBlack(Activity activity) {
+        setTranslucentStatus(activity, true);
+        stateBarTint(activity, "#00000000", true, false);
+        StatusBarLightMode(activity);
+    }
+
+    /**
+     * 设置白色
+     *
+     * @param activity
+     */
+    public void getWhite(Activity activity) {
+        setTranslucentStatus(activity, true);
+        stateBarTint(activity, "#00000000", true, false);
+        //设置状态栏白色字体
+        StatusFragmentBarDarkMode(activity);
+    }
+
+    public void getW_add_B(Activity activity) {
+        setTranslucentStatus(activity, true);
+        setStateBar(activity, Color.parseColor("#305591"));
+        stateBarTint(activity, "#305591", true, false);
+        //设置状态栏白色字体
+        StatusFragmentBarDarkMode(activity);
+    }
+
+    @TargetApi(19)
+    protected void setTranslucentStatus(Activity activity, boolean no) {
+        Window win = activity.getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        winParams.flags |= bits;
+        win.setAttributes(winParams);
     }
 
 }

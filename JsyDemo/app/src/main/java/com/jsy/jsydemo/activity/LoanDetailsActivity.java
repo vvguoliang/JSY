@@ -131,10 +131,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         id = getIntent().getExtras().getString("id");
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
         findViewById();
         initView();
@@ -196,48 +193,48 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
 
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_details));
 
-        loan_details_editText_range = (EditText) findViewById(R.id.loan_details_editText_range);
-        loan_details_textView_rang = (TextView) findViewById(R.id.loan_details_textView_rang);
-        loan_details_editText_day = (EditText) findViewById(R.id.loan_details_editText_day);
-        loan_details_textView_day = (TextView) findViewById(R.id.loan_details_textView_day);
+        loan_details_editText_range = findViewById(R.id.loan_details_editText_range);
+        loan_details_textView_rang = findViewById(R.id.loan_details_textView_rang);
+        loan_details_editText_day = findViewById(R.id.loan_details_editText_day);
+        loan_details_textView_day = findViewById(R.id.loan_details_textView_day);
 
 //        loan_details_resource_rat = (TextView) findViewById(R.id.loan_details_resource_rat);
 //        loan_details_repayment = (TextView) findViewById(R.id.loan_details_repayment);
 //        loan_details_loan_time = (TextView) findViewById(R.id.loan_details_loan_time);
 
-        loan_details_basic_information = (Button) findViewById(R.id.loan_details_basic_information);
+        loan_details_basic_information = findViewById(R.id.loan_details_basic_information);
         loan_details_basic_information.setOnClickListener(this);
-        loan_details_phone_operator = (Button) findViewById(R.id.loan_details_phone_operator);
+        loan_details_phone_operator = findViewById(R.id.loan_details_phone_operator);
         loan_details_phone_operator.setOnClickListener(this);
-        loan_details_id = (Button) findViewById(R.id.loan_details_id);
+        loan_details_id = findViewById(R.id.loan_details_id);
         loan_details_id.setOnClickListener(this);
-        loan_details_other = (Button) findViewById(R.id.loan_details_other);
+        loan_details_other = findViewById(R.id.loan_details_other);
         loan_details_other.setOnClickListener(this);
-        oan_details_esame_credit = (Button) findViewById(R.id.oan_details_esame_credit);
+        oan_details_esame_credit = findViewById(R.id.oan_details_esame_credit);
         oan_details_esame_credit.setOnClickListener(this);
-        loan_details_button = (Button) findViewById(R.id.loan_details_button);
+        loan_details_button = findViewById(R.id.loan_details_button);
         loan_details_button.setOnClickListener(this);
 
 //        details_repayment_text = (TextView) findViewById(R.id.details_repayment_text);
-        details_editText_day_text = (TextView) findViewById(R.id.details_editText_day_text);
+        details_editText_day_text = findViewById(R.id.details_editText_day_text);
 
-        loan_details_image = (ImageView) findViewById(R.id.loan_details_image);
-        loan_details_text_name = (TextView) findViewById(R.id.loan_details_text_name);
-        loan_details_gridView = (GridView) findViewById(R.id.loan_details_gridView);
-        loan_details_text = (TextView) findViewById(R.id.loan_details_text);
+        loan_details_image = findViewById(R.id.loan_details_image);
+        loan_details_text_name = findViewById(R.id.loan_details_text_name);
+        loan_details_gridView = findViewById(R.id.loan_details_gridView);
+        loan_details_text = findViewById(R.id.loan_details_text);
 
 
         loan_details_editText_range.addTextChangedListener(textWatcher(1));
         loan_details_editText_day.addTextChangedListener(textWatcher(2));
 
-        basic_information_linear = (LinearLayout) findViewById(R.id.basic_information_linear);
-        phone_operator_linear = (LinearLayout) findViewById(R.id.phone_operator_linear);
-        esame_credit_linear = (LinearLayout) findViewById(R.id.esame_credit_linear);
-        etails_id_linear = (LinearLayout) findViewById(R.id.etails_id_linear);
-        details_other_linear = (LinearLayout) findViewById(R.id.details_other_linear);
+        basic_information_linear = findViewById(R.id.basic_information_linear);
+        phone_operator_linear = findViewById(R.id.phone_operator_linear);
+        esame_credit_linear = findViewById(R.id.esame_credit_linear);
+        etails_id_linear = findViewById(R.id.etails_id_linear);
+        details_other_linear = findViewById(R.id.details_other_linear);
 
         basic_information_linear.setOnClickListener(this);
         phone_operator_linear.setOnClickListener(this);
@@ -581,7 +578,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             }
             return;
         }
-        creditApp.onActivityResult(requestCode, resultCode, data);
+        CreditApp.onActivityResult(requestCode, resultCode, data);
     }
 
     ICreditListener iCreditListener = new ICreditListener() {

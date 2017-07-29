@@ -85,10 +85,7 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
     }
 
@@ -96,20 +93,20 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
     protected void findViewById() {
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
-        title_complete = (TextView) findViewById(R.id.title_complete);
+        title_complete = findViewById(R.id.title_complete);
         title_complete.setVisibility(View.VISIBLE);
         title_complete.setOnClickListener(this);
         title_complete.setText(this.getString(R.string.name_loan_personal_data_preservation));
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_basic_identity));
 
-        face_recognition_correct_text = (TextView) findViewById(R.id.face_recognition_correct_text);
+        face_recognition_correct_text = findViewById(R.id.face_recognition_correct_text);
 
-        face_recognition_camera = (ImageView) findViewById(R.id.face_recognition_camera);
+        face_recognition_camera = findViewById(R.id.face_recognition_camera);
 
-        positive = (ImageView) findViewById(R.id.positive);
-        other_sid = (ImageView) findViewById(R.id.other_sid);
-        face_recognition = (ImageView) findViewById(R.id.face_recognition);
+        positive = findViewById(R.id.positive);
+        other_sid = findViewById(R.id.other_sid);
+        face_recognition = findViewById(R.id.face_recognition);
 
 
         findViewById(R.id.personal_data_certificates_positive).setOnClickListener(this);

@@ -88,10 +88,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
         initView();
     }
@@ -204,18 +201,18 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
     protected void findViewById() {
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_basic_information));
 
-        loan_basic_please_in_text = (TextView) findViewById(R.id.loan_basic_please_in_text);
-        loan_basic_number_text = (TextView) findViewById(R.id.loan_basic_number_text);
-        loan_basic_application_text = (TextView) findViewById(R.id.loan_basic_application_text);
-        loan_loan_application_text = (TextView) findViewById(R.id.loan_loan_application_text);
-        loan_loan_highest_text = (TextView) findViewById(R.id.loan_loan_highest_text);
-        loan_education_level_text = (TextView) findViewById(R.id.loan_education_level_text);
-        loan_basic_security_text = (TextView) findViewById(R.id.loan_basic_security_text);
-        loan_basic_cat_text = (TextView) findViewById(R.id.loan_basic_cat_text);
-        loan_basic_typ_text = (TextView) findViewById(R.id.loan_basic_typ_text);
+        loan_basic_please_in_text = findViewById(R.id.loan_basic_please_in_text);
+        loan_basic_number_text = findViewById(R.id.loan_basic_number_text);
+        loan_basic_application_text = findViewById(R.id.loan_basic_application_text);
+        loan_loan_application_text = findViewById(R.id.loan_loan_application_text);
+        loan_loan_highest_text = findViewById(R.id.loan_loan_highest_text);
+        loan_education_level_text = findViewById(R.id.loan_education_level_text);
+        loan_basic_security_text = findViewById(R.id.loan_basic_security_text);
+        loan_basic_cat_text = findViewById(R.id.loan_basic_cat_text);
+        loan_basic_typ_text = findViewById(R.id.loan_basic_typ_text);
 
         findViewById(R.id.loan_basic_application_linear).setOnClickListener(this);
         findViewById(R.id.loan_loan_application_linear).setOnClickListener(this);
@@ -225,22 +222,22 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
         findViewById(R.id.loan_basic_typ_linear).setOnClickListener(this);
         findViewById(R.id.loan_basic_life_linear).setOnClickListener(this);
 
-        loan_basic_please_in_editText = (EditText) findViewById(R.id.loan_basic_please_in_editText);
-        loan_details_basic_id_editText = (EditText) findViewById(R.id.loan_details_basic_id_editText);
-        loan_loan_highest_editText = (EditText) findViewById(R.id.loan_loan_highest_editText);
-        loan_basic_content_editText = (EditText) findViewById(R.id.loan_basic_content_editText);
+        loan_basic_please_in_editText = findViewById(R.id.loan_basic_please_in_editText);
+        loan_details_basic_id_editText = findViewById(R.id.loan_details_basic_id_editText);
+        loan_loan_highest_editText = findViewById(R.id.loan_loan_highest_editText);
+        loan_basic_content_editText = findViewById(R.id.loan_basic_content_editText);
 
-        loan_basic_application = (EditText) findViewById(R.id.loan_basic_application);
-        loan_loan_application = (TextView) findViewById(R.id.loan_loan_application);
-        loan_education_level = (TextView) findViewById(R.id.loan_education_level);
-        loan_basic_security = (TextView) findViewById(R.id.loan_basic_security);
-        loan_basic_typ = (TextView) findViewById(R.id.loan_basic_typ);
-        loan_basic_cat = (TextView) findViewById(R.id.loan_basic_cat);
-        loan_basic_life = (TextView) findViewById(R.id.loan_basic_life);
+        loan_basic_application = findViewById(R.id.loan_basic_application);
+        loan_loan_application = findViewById(R.id.loan_loan_application);
+        loan_education_level = findViewById(R.id.loan_education_level);
+        loan_basic_security = findViewById(R.id.loan_basic_security);
+        loan_basic_typ = findViewById(R.id.loan_basic_typ);
+        loan_basic_cat = findViewById(R.id.loan_basic_cat);
+        loan_basic_life = findViewById(R.id.loan_basic_life);
 
-        loan_details_basic_loan_text = (TextView) findViewById(R.id.loan_details_basic_loan_text);
-        loan_basic_image_image = (CheckBox) findViewById(R.id.loan_basic_image_image);
-        loan_basic_button = (Button) findViewById(R.id.loan_basic_button);
+        loan_details_basic_loan_text = findViewById(R.id.loan_details_basic_loan_text);
+        loan_basic_image_image = findViewById(R.id.loan_basic_image_image);
+        loan_basic_button = findViewById(R.id.loan_basic_button);
 
 
     }

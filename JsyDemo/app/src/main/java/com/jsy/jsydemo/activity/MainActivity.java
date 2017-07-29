@@ -95,12 +95,8 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
         SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "WHITE");
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            setTranslucentStatus(true);
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
-        //清除状态栏黑色字体
-        statusFragmentBarDarkMode();
     }
 
     @Override
@@ -116,7 +112,7 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
         // 获取屏幕宽度
         Display dm = getWindowManager().getDefaultDisplay();
         final int screenWith = dm.getWidth();
-        mainActivityView = (MainActivityView) findViewById(R.id.act_main_tab);
+        mainActivityView = findViewById(R.id.act_main_tab);
         // 初始化获取底部导航自身高度
         final ViewTreeObserver vt = mainActivityView.getViewTreeObserver();
         vt.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -167,11 +163,8 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
                 SharedPreferencesUtils.put(activity, "STATUS_FONT_COLOR", "WHITE");
                 //沉浸式状态设置
                 if (ImmersiveUtils.BuildVERSION()) {
-                    ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-                    ImmersiveUtils.stateBarTint(this, "#305591", true, false);
+                    ImmersiveUtils.getInstance().getW_add_B(this);
                 }
-                //清除状态栏黑色字体
-                statusFragmentBarDarkMode();
             }
         }
         transaction.commitAllowingStateLoss();

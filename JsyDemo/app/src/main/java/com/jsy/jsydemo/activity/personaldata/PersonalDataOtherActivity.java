@@ -79,10 +79,7 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
     }
 
@@ -117,16 +114,16 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
         findViewById(R.id.title_image).setOnClickListener(this);
         findViewById(R.id.title_complete).setVisibility(View.VISIBLE);
         findViewById(R.id.title_complete).setOnClickListener(this);
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_data_other));
 
         findViewById(R.id.other_relatives_wathet).setOnClickListener(this);
         findViewById(R.id.other_contacts_wathet).setOnClickListener(this);
 
-        other_relatives_name = (EditText) findViewById(R.id.other_relatives_name);
-        other_relatives_phone = (TextView) findViewById(R.id.other_relatives_phone);
-        other_contacts_name = (EditText) findViewById(R.id.other_contacts_name);
-        other_contacts_phone = (TextView) findViewById(R.id.other_contacts_phone);
+        other_relatives_name = findViewById(R.id.other_relatives_name);
+        other_relatives_phone = findViewById(R.id.other_relatives_phone);
+        other_contacts_name = findViewById(R.id.other_contacts_name);
+        other_contacts_phone = findViewById(R.id.other_contacts_phone);
 
         findViewById(R.id.loan_personal_linear).setVisibility(View.VISIBLE);
         findViewById(R.id.other_contacts_linear).setVisibility(View.VISIBLE);

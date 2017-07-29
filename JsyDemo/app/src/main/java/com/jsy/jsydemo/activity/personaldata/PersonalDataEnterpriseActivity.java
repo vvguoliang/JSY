@@ -86,10 +86,7 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
         initJsonData();
     }
@@ -176,15 +173,15 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
 
     @Override
     protected void findViewById() {
-        personal_enterprise_identity = (TextView) findViewById(R.id.personal_enterprise_identity);
-        personal_enterprise_shares = (TextView) findViewById(R.id.personal_enterprise_shares);
-        personal_enterprise_location = (TextView) findViewById(R.id.personal_enterprise_location);
-        personal_enterprise_type = (TextView) findViewById(R.id.personal_enterprise_type);
-        personal_enterprise_time = (TextView) findViewById(R.id.personal_enterprise_time);
-        personal_enterprise_industry = (TextView) findViewById(R.id.personal_enterprise_industry);
-        personal_enterprise_life = (TextView) findViewById(R.id.personal_enterprise_life);
-        personal_enterprise_private_water = (EditText) findViewById(R.id.personal_enterprise_private_water);
-        personal_enterprise_public_water = (EditText) findViewById(R.id.personal_enterprise_public_water);
+        personal_enterprise_identity = findViewById(R.id.personal_enterprise_identity);
+        personal_enterprise_shares = findViewById(R.id.personal_enterprise_shares);
+        personal_enterprise_location = findViewById(R.id.personal_enterprise_location);
+        personal_enterprise_type = findViewById(R.id.personal_enterprise_type);
+        personal_enterprise_time = findViewById(R.id.personal_enterprise_time);
+        personal_enterprise_industry = findViewById(R.id.personal_enterprise_industry);
+        personal_enterprise_life = findViewById(R.id.personal_enterprise_life);
+        personal_enterprise_private_water = findViewById(R.id.personal_enterprise_private_water);
+        personal_enterprise_public_water = findViewById(R.id.personal_enterprise_public_water);
 
         getHttp();
 
@@ -207,7 +204,7 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
 
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_data_enterprise));
 
         findViewById(R.id.title_complete).setVisibility(View.VISIBLE);

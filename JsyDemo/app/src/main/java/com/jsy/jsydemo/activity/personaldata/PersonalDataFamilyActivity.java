@@ -68,10 +68,7 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.setStateBar(this, Color.parseColor("#305591"));
-            ImmersiveUtils.stateBarTint(this, "#305591", true, false);
-            //清除状态栏黑色字体
-            statusFragmentBarDarkMode();
+            ImmersiveUtils.getInstance().getW_add_B(this);
         }
         initJsonData();
     }
@@ -119,16 +116,16 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         findViewById(R.id.title_image).setOnClickListener(this);
 
-        TextView title_view = (TextView) findViewById(R.id.title_view);
+        TextView title_view = findViewById(R.id.title_view);
         title_view.setText(this.getString(R.string.name_loan_personal_data_family));
 
         findViewById(R.id.title_complete).setVisibility(View.VISIBLE);
         findViewById(R.id.title_complete).setOnClickListener(this);
 
-        personal_family_marriage = (TextView) findViewById(R.id.personal_family_marriage);
-        personal_family_city = (TextView) findViewById(R.id.personal_family_city);
-        personal_family_address = (EditText) findViewById(R.id.personal_family_address);
-        personal_family_household_register = (TextView) findViewById(R.id.personal_family_household_register);
+        personal_family_marriage = findViewById(R.id.personal_family_marriage);
+        personal_family_city = findViewById(R.id.personal_family_city);
+        personal_family_address = findViewById(R.id.personal_family_address);
+        personal_family_household_register = findViewById(R.id.personal_family_household_register);
 
         findViewById(R.id.personal_family_marriage_linear).setOnClickListener(this);
         findViewById(R.id.personal_family_city_linear).setOnClickListener(this);
