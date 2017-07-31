@@ -32,9 +32,9 @@
 
             <ImageView
                 android:id="@+id/loan_speed"
-                android:adjustViewBounds="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
                 android:src="@mipmap/ic_loan_sky"
                 tools:ignore="ContentDescription" />
 
@@ -194,6 +194,9 @@
             android:layout_marginRight="@dimen/common_10dp"
             android:gravity="center"
             android:orientation="horizontal"
+            android:paddingLeft="@dimen/common_10dp"
+            android:paddingRight="@dimen/common_10dp"
+            android:paddingTop="@dimen/common_10dp"
             tools:ignore="RtlHardcoded">
 
             <com.jsy.jsydemo.control.MyTextView

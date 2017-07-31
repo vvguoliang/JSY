@@ -127,14 +127,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
             }
         });
 
-        mRecyclerView.setLoadMoreAction(new Action() {
-            @Override
-            public void onAction() {
-                getData(false);
-                page++;
-            }
-        });
-
         mRecyclerView.post(new Runnable() {
             @Override
             public void run() {
@@ -148,13 +140,11 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (isRefresh) {
-                    page = 1;
-                    mAdapter.clear();
-                    mAdapter.addAll(VirtualData);
-                    mRecyclerView.dismissSwipeRefresh();
-                    mRecyclerView.getRecyclerView().scrollToPosition(0);
-                }
+                page = 1;
+                mAdapter.clear();
+                mAdapter.addAll(VirtualData);
+                mRecyclerView.dismissSwipeRefresh();
+                mRecyclerView.getRecyclerView().scrollToPosition(0);
             }
         }, 1000);
     }
@@ -331,10 +321,8 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                                 homeProductList.getHomeProductList().get(i).getTiaojian(),
                                 homeProductList.getHomeProductList().get(i).getApi_type());
                     }
-                    if (page != 1) {
-                        mAdapter.clear();
-                        mAdapter.addAll(VirtualData);
-                    }
+                    mAdapter.clear();
+                    mAdapter.addAll(VirtualData);
                     mAdapter.notifyDataSetChanged();
                 }
                 break;
