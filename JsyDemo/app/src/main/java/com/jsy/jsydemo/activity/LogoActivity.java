@@ -128,7 +128,8 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
                     map.put("mobile", Long.parseLong(phone));
                     map.put("password", "");
                     map.put("code", 0);
-                    OkHttpManager.postAsync(HttpURL.getInstance().CODE, "code", map, this);
+                    OkHttpManager.postAsync(HttpURL.getInstance().REGISTER_CODE, "code", map, this);
+//                    OkHttpManager.postAsync(HttpURL.getInstance().REGISTER_CODE, "code", map, this);
                 }
                 break;
             case R.id.loan_logo_button_logo://登入按钮
