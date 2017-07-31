@@ -111,7 +111,7 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
                                 intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
                                 intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
                                 context.startActivity(intent);
-                            } else if (productSuList.getProductSuList().get(position).getApi_type().equals("1")) {
+                            } else if (productSuList.getProductSuList().get(position).getApi_type().equals("2")) {
                                 getHttp(productSuList.getProductSuList().get(position).getId());
                             } else {
                                 if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
