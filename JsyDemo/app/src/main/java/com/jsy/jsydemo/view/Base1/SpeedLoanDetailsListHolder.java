@@ -89,11 +89,7 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
                     })
                     .into(speed_loan_detailsList_image);
             speed_loan_detailsList_name.setText(data.getPro_name());
-            if (data.getPro_hits().length() > 5) {
-                speed_loan_detailsList_text.setText("申请人数:" + data.getPro_hits());
-            } else {
-                speed_loan_detailsList_text.setText("申请人数:" + data.getPro_hits() + testRandom());
-            }
+            speed_loan_detailsList_text.setText("申请人数:" + data.getPro_hits());
             SpannableStringBuilder builder = new SpannableStringBuilder(speed_loan_detailsList_text.getText().toString());
             //ForegroundColorSpan 为文字前景色，BackgroundColorSpan为文字背景色
             ForegroundColorSpan redSpan = new ForegroundColorSpan(Color.RED);
@@ -106,14 +102,6 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
             builder.setSpan(redSpan, 2, speed_loan_detailsList_text.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             speed_loan_detailsList_text.setText(builder);
         }
-    }
-
-    private String testRandom() {
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            return random.nextInt(20) + "";
-        }
-        return "";
     }
 
     @Override

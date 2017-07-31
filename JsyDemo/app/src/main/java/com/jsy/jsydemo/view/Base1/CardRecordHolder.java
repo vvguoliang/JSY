@@ -94,12 +94,7 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
             ForegroundColorSpan redSpan = new ForegroundColorSpan(Color.RED);
             builder.setSpan(redSpan, 3, home_loan_product_interest_rate.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             home_loan_product_interest_rate.setText(builder);
-
-            if (object.getPro_hits().length() < 5) {
-                home_loan_product_number.setText(context.getString(R.string.loan_fragment_applicants) + object.getPro_hits() + testRandom() + "人");
-            } else {
-                home_loan_product_number.setText(context.getString(R.string.loan_fragment_applicants) + object.getPro_hits() + "人");
-            }
+            home_loan_product_number.setText(context.getString(R.string.loan_fragment_applicants) + object.getPro_hits() + "人");
             builder = new SpannableStringBuilder(home_loan_product_number.getText().toString());
             //ForegroundColorSpan 为文字前景色，BackgroundColorSpan为文字背景色
             redSpan = new ForegroundColorSpan(Color.RED);
@@ -107,14 +102,6 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
             home_loan_product_number.setText(builder);
 
         }
-    }
-
-    private String testRandom() {
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            return random.nextInt(20) + "";
-        }
-        return "";
     }
 
     @Override
