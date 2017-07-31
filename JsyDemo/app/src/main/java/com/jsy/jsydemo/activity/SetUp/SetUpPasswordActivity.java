@@ -96,24 +96,27 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     password_phone.setText("");
                 } else if (StringUtil.isNullOrEmpty(password_button_code.getText().toString())) {
                     ToatUtils.showShort1(this, "请输入验证码");
-                } else if (StringUtil.isNullOrEmpty(password_edittext_pass.getText().toString())) {
-                    ToatUtils.showShort1(this, "您输入的新密码为空");
-                } else if (StringUtil.isNullOrEmpty(password_edittext_pass_confirm.getText().toString())) {
-                    ToatUtils.showShort1(this, "您输入的确认密码为空");
-                } else if (!password_edittext_pass.getText().toString().trim().equals(password_edittext_pass_confirm.getText().toString().trim())) {
-                    ToatUtils.showShort1(this, "您输入的新密码和确认密码不一致");
-                    password_edittext_pass.setText("");
-                    password_edittext_pass_confirm.setText("");
                 } else {
                     Map<String, Object> map = new HashMap<>();
                     map.put("mobile", Long.parseLong(password_phone.getText().toString()));
-                    map.put("password", password_edittext_pass_confirm.getText());
                     map.put("code", Long.parseLong(password_edittext_code.getText().toString()));
                     if (name.equals("1")) {
                         map.put("no", AppUtil.getInstance().getChannel(SetUpPasswordActivity.this, 2));
-                        OkHttpManager.postAsync(HttpURL.getInstance().REGISTER, "register_code", map, this);
+                        OkHttpManager.postAsync(HttpURL.getInstance().REGISTERCODE, "register_code", map, this);
                     } else {
-                        OkHttpManager.postAsync(HttpURL.getInstance().PASSWORD, "password_code", map, this);
+                        if (StringUtil.isNullOrEmpty(password_edittext_pass.getText().toString())) {
+                            ToatUtils.showShort1(this, "您输入的新密码为空");
+                        } else if (StringUtil.isNullOrEmpty(password_edittext_pass_confirm.getText().toString())) {
+                            ToatUtils.showShort1(this, "您输入的确认密码为空");
+                        } else if (!password_edittext_pass.getText().toString().trim().equals(
+                                password_edittext_pass_confirm.getText().toString().trim())) {
+                            ToatUtils.showShort1(this, "您输入的新密码和确认密码不一致");
+                            password_edittext_pass.setText("");
+                            password_edittext_pass_confirm.setText("");
+                        } else {
+                            map.put("password", password_edittext_pass_confirm.getText());
+                            OkHttpManager.postAsync(HttpURL.getInstance().PASSWORD, "password_code", map, this);
+                        }
                     }
                 }
                 break;
@@ -139,6 +142,8 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
             title_view.setText(this.getString(R.string.name_loan_logo_register));
             password_button_confirm.setText(this.getString(R.string.name_loan_logo_register));
             findViewById(R.id.agreement_password).setVisibility(View.VISIBLE);
+            findViewById(R.id.password_edittext_pass_linear).setVisibility(View.GONE);
+            findViewById(R.id.password_edittext_pass_confirm_linear).setVisibility(View.GONE);
         } else {
             if (!TextUtils.isEmpty(SharedPreferencesUtils.get(this, "username", "").toString())) {
                 password_phone.setText(SharedPreferencesUtils.get(this, "username", "").toString());
@@ -146,6 +151,8 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
             title_view.setText(this.getString(R.string.name_loan_set_up_password));
             password_button_confirm.setText(this.getString(R.string.name_loan_personal_data_complete));
             findViewById(R.id.agreement_password).setVisibility(View.GONE);
+            findViewById(R.id.password_edittext_pass_linear).setVisibility(View.VISIBLE);
+            findViewById(R.id.password_edittext_pass_confirm_linear).setVisibility(View.VISIBLE);
         }
     }
 
@@ -201,7 +208,7 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     ToatUtils.showShort1(this, object.optString("info"));
                 } else {
                     SharedPreferencesUtils.put(this, "username", password_phone.getText().toString());
-                    SharedPreferencesUtils.put(this, "password", password_edittext_pass_confirm.getText());
+                    SharedPreferencesUtils.put(this, "uid", object.optString("uid"));
                     finish();
                 }
                 break;
