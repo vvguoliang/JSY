@@ -1,4 +1,4 @@
-package wxapi;
+package com.jsy.jsydemo.wxapi;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
