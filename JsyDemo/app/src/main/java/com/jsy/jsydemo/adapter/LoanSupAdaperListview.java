@@ -104,9 +104,9 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
                 if (TextUtils.isEmpty(SharedPreferencesUtils.get(context, "uid", "").toString())) {
                     context.startActivity(new Intent(context, LogoActivity.class));
                 } else {
-                    getHITSPRODUCT(productSuList.getProductSuList().get(position).getId());
                     switch (viewHolder.loan_gridView.getTag().toString()) {
                         case "0":
+                            getHITSPRODUCT(productSuList.getProductSuList().get(position).getId());
                             if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
                                 intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
                                 intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
@@ -122,7 +122,8 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
                             }
                             break;
                         case "1":
-                            if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
+                            getHITSPRODUCT(productSuList.getProductSus().get(position).getId());
+                            if (productSuList.getProductSus().get(position).getApi_type().equals("3")) {
                                 intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
                                 intent.putExtra("id", productSuList.getProductSus().get(position).getId());
                                 context.startActivity(intent);
