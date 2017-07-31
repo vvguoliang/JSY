@@ -192,7 +192,6 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                 } else {
                     SharedPreferencesUtils.put(this, "username", password_phone.getText().toString());
                     SharedPreferencesUtils.put(this, "password", password_edittext_pass_confirm.getText());
-                    startActivity(new Intent(this, LogoActivity.class));
                     finish();
                 }
                 break;
