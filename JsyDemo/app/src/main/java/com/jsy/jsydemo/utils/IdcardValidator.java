@@ -461,18 +461,13 @@ public class IdcardValidator {
         return a;
     }
 
-    /**
-     * 正则表达式：验证邮箱
-     */
-    public static final String REGEX_EMAIL = "^([a-z0-9A-Z]+[-|.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
-
-    /**
-     * 校验邮箱
-     *
-     * @param email
-     * @return 校验通过返回true，否则返回false
-     */
-    public boolean isEmail(String email) {
-        return Pattern.matches(REGEX_EMAIL, email);
+    public boolean isEmail(String strEmail) {
+        String strPattern = "^[a-zA-Z0-9][\\w.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z.]*[a-zA-Z]$";
+        if (TextUtils.isEmpty(strPattern)) {
+            return false;
+        } else {
+            return strEmail.matches(strPattern);
+        }
     }
+
 }

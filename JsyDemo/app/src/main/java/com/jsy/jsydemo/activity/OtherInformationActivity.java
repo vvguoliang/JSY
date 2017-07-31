@@ -119,65 +119,84 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
                 if (information_mailbox_linear.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(information_mailbox_editText.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入邮箱");
-                    } else if (IdcardValidator.getInstance().isEmail(information_mailbox_editText.getText().toString())) {
+                        return;
+                    } else if (!IdcardValidator.getInstance().isEmail(information_mailbox_editText.getText().toString())) {
                         ToatUtils.showShort1(this, "输入邮箱不正确");
                         information_mailbox_editText.setText("");
+                        return;
                     }
-                } else if (information_spouse_linear.getVisibility() == View.VISIBLE) {
+                }
+                if (information_spouse_linear.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(information_spouse_editText.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入配偶名字");
-                    } else if (information_spouse_editText.getText().toString().length() >= 2) {
+                        return;
+                    } else if (information_spouse_editText.getText().toString().length() < 2) {
                         ToatUtils.showShort1(this, "输入配偶名字不正确");
                         information_spouse_editText.setText("");
+                        return;
                     }
-                } else if (information_live_linear.getVisibility() == View.VISIBLE) {
+                }
+                if (information_live_linear.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(information_live_editText.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入详细地址");
-                    } else if (information_live_editText.getText().toString().length() >= 5) {
+                        return;
+                    } else if (information_live_editText.getText().toString().length() < 5) {
                         ToatUtils.showShort1(this, "请输入详细地址");
                         information_live_editText.setText("");
+                        return;
                     }
-                } else if (information_mode_linear.getVisibility() == View.VISIBLE) {
+                }
+                if (information_mode_linear.getVisibility() == View.VISIBLE) {
                     if (information_mode_text.getText().toString().equals(this.getString(R.string.name_loan_credit_please_select))) {
                         ToatUtils.showShort1(this, "请选择居住方式");
+                        return;
                     }
-                } else if (information_corporate_linear.getVisibility() == View.VISIBLE) {
+                }
+                if (information_corporate_linear.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(information_corporate_editText.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入公司名字");
+                        return;
                     }
-                } else if (information_corporate_address_linear.getVisibility() == View.VISIBLE) {
+                }
+                if (information_corporate_address_linear.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(information_corporate_address_editText.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入公司地址");
+                        return;
                     }
-                } else if (information_corporate_phone_linear.getVisibility() == View.VISIBLE) {
+                }
+                if (information_corporate_phone_linear.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(information_corporate_phone_editText.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入公司电话");
+                        return;
                     }
-                } else if (loan_personal_linear.getVisibility() == View.VISIBLE) {
+                }
+                if (loan_personal_linear.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(other_relatives_name.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入联系人姓名");
-                    } else if (other_relatives_name.getText().toString().length() >= 2) {
-                        ToatUtils.showShort1(this, "请输入联系人姓名有误");
+                        return;
                     } else if (TextUtils.isEmpty(other_relatives_phone.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入联系人电话");
+                        return;
                     } else if (IdcardValidator.getInstance().isIdcard(other_relatives_phone.getText().toString().trim())) {
                         ToatUtils.showShort1(this, "请输入联系人电话有误");
                         other_relatives_phone.setText("");
+                        return;
                     }
-                } else if (other_contacts_linear.getVisibility() == View.VISIBLE) {
+                }
+                if (other_contacts_linear.getVisibility() == View.VISIBLE) {
                     if (TextUtils.isEmpty(other_contacts_name.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入联系人姓名");
-                    } else if (other_contacts_name.getText().toString().length() >= 2) {
-                        ToatUtils.showShort1(this, "请输入联系人姓名有误");
+                        return;
                     } else if (TextUtils.isEmpty(other_contacts_phone.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入联系人电话");
+                        return;
                     } else if (IdcardValidator.getInstance().isIdcard(other_contacts_phone.getText().toString().trim())) {
                         ToatUtils.showShort1(this, "请输入联系人电话有误");
                         other_contacts_phone.setText("");
+                        return;
                     }
-                } else {
-                    getHttp();
                 }
+                getHttp();
                 break;
             case R.id.other_relatives_wathet:
                 id = 1;
@@ -328,8 +347,8 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
                     break;
                 case 101:
                     get = msg.obj.toString().split(",");
-                    other_relatives_phone.setText(get[1]);
-                    other_relatives_name.setText(get[0]);
+                    other_contacts_phone.setText(get[1]);
+                    other_contacts_name.setText(get[0]);
                     break;
 
             }
