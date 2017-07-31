@@ -54,11 +54,10 @@
 
                 <com.jsy.jsydemo.control.MyButton
                     android:id="@+id/other_relatives_wathet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/common_70dp"
+                    android:layout_height="@dimen/common_30dp"
                     android:layout_marginRight="@dimen/common_10dp"
                     android:background="@drawable/bg_fillet_shadow_wathet_selector"
-                    android:padding="@dimen/common_2dp"
                     android:text="@string/name_loan_other_import"
                     android:textColor="@color/common_loan_personal_data_other"
                     android:textSize="@dimen/common_16dp" />
@@ -148,11 +147,10 @@
 
                 <com.jsy.jsydemo.control.MyButton
                     android:id="@+id/other_contacts_wathet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/common_70dp"
+                    android:layout_height="@dimen/common_30dp"
                     android:layout_marginRight="@dimen/common_10dp"
                     android:background="@drawable/bg_fillet_shadow_wathet_selector"
-                    android:padding="@dimen/common_3dp"
                     android:text="@string/name_loan_other_import"
                     android:textColor="@color/common_loan_personal_data_other"
                     android:textSize="@dimen/common_16dp" />

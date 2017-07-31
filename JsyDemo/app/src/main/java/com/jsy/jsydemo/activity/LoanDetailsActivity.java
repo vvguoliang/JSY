@@ -112,8 +112,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
 
     private String username = "";
 
-    private String other = "";
-
     private boolean phone_operator = false;
     private boolean basic_information = false;
     private boolean details_id = false;
@@ -154,10 +152,12 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.details_other_linear:
             case R.id.loan_details_other://其他
-                intent = new Intent(LoanDetailsActivity.this, OtherInformationActivity.class);
-                intent.putExtra("other", other);
-                intent.putExtra("pid", id);
-                startActivityForResult(intent, 1003);
+                if (loanDatailsData != null) {
+                    intent = new Intent(LoanDetailsActivity.this, OtherInformationActivity.class);
+                    intent.putExtra("other", loanDatailsData.getOther_id());
+                    intent.putExtra("pid", id);
+                    startActivityForResult(intent, 1003);
+                }
                 break;
             case R.id.loan_details_button://补齐
                 if (loanDatailsData != null) {
@@ -170,7 +170,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                                 startActivity(intent);
                                 break;
                             case "3":
-
                                 break;
                         }
                     } else {
@@ -386,7 +385,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                         details_other = false;
                         loan_details_other.setBackgroundResource(R.mipmap.ic_loan_detail_no_authentication);
                     }
-                    other = object.optString("other_auth");
                 }
                 String data_id = loanDatailsData.getData_id();
                 Pattern pattern = Pattern.compile("\\[(.*)\\]");
