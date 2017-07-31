@@ -79,6 +79,7 @@ public class BannerLoopAdapter extends PagerAdapter implements View.OnClickListe
                     }
                 })
                 .into(view);
+        view.setScaleType(ImageView.ScaleType.FIT_XY);
         view.setOnClickListener(this);
         container.addView(view);
         return view;
