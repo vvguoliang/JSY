@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jsy.jsydemo.EntityClass.LoanDatailsData;
 import com.jsy.jsydemo.EntityClass.ProductSuList;
 import com.jsy.jsydemo.EntityClass.SpeedLoanDetailsListData;
 import com.jsy.jsydemo.R;
@@ -21,7 +22,9 @@ import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.view.MyGridView;
 
@@ -45,6 +48,8 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
     private Context context;
 
     private Intent intent = null;
+
+    private LoanDatailsData loanDatailsData;
 
     public LoanSupAdaperListview(Context context, ProductSuList productSuList) {
         this.context = context;
@@ -107,6 +112,8 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
                                 intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
                                 intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
                                 context.startActivity(intent);
+                            } else if (productSuList.getProductSuList().get(position).getApi_type().equals("1")) {
+                                getHttp(productSuList.getProductSuList().get(position).getId());
                             } else {
                                 if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
                                     intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
@@ -120,6 +127,8 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
                                 intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
                                 intent.putExtra("id", productSuList.getProductSus().get(position).getId());
                                 context.startActivity(intent);
+                            } else if (productSuList.getProductSus().get(position).getApi_type().equals("1")) {
+                                getHttp(productSuList.getProductSus().get(position).getId());
                             } else {
                                 if (!TextUtils.isEmpty(productSuList.getProductSus().get(position).getPro_link())) {
                                     intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
@@ -151,13 +160,27 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
 
     }
 
+    private void getHttp(String id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", SharedPreferencesUtils.get(context, "uid", "").toString());
+        map.put("id", Long.parseLong(id));
+        OkHttpManager.postAsync(HttpURL.getInstance().PRODUCT_DETAIL, "product_detail", map, this);
+    }
+
     @Override
     public void requestFailure(Request request, String name, IOException e) {
-
+        ToatUtils.showShort1(context, context.getString(R.string.network_timed));
     }
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-
+        if (name.equals("product_detail")) {
+            loanDatailsData = JsonData.getInstance().getJsonLoanDailsData(result);
+            if (!TextUtils.isEmpty(loanDatailsData.getPro_link())) {
+                intent = new Intent(context, LoanWebViewActivity.class);
+                intent.putExtra("url", loanDatailsData.getPro_link());
+                context.startActivity(intent);
+            }
+        }
     }
 }

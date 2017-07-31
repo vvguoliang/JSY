@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
+import com.jsy.jsydemo.EntityClass.LoanDatailsData;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
 import com.jsy.jsydemo.activity.LogoActivity;
@@ -27,8 +28,10 @@ import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.BaseViewHolder;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 
@@ -54,6 +57,8 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
     private Context context;
 
     private Intent intent;
+
+    private LoanDatailsData loanDatailsData;
 
     public CardRecordHolder(Context context, ViewGroup parent) {
         super(context, parent, R.layout.holder_consume);
@@ -129,16 +134,22 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
             parent.getContext().startActivity(new Intent(parent.getContext(), LogoActivity.class));
         } else {
             getHITSPRODUCT(object);
-            if (object.getApi_type().equals("3")) {
-                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                intent.putExtra("id", object.getId());
-                parent.getContext().startActivity(intent);
-            } else {
-                if (!TextUtils.isEmpty(object.getPro_link())) {
-                    intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
-                    intent.putExtra("url", object.getPro_link());
-                    context.startActivity(intent);
-                }
+            switch (object.getApi_type()) {
+                case "1":
+                    if (!TextUtils.isEmpty(object.getPro_link())) {
+                        intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
+                        intent.putExtra("url", object.getPro_link());
+                        context.startActivity(intent);
+                    }
+                    break;
+                case "2":
+                    getHttp(object.getId());
+                    break;
+                case "3":
+                    intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+                    intent.putExtra("id", object.getId());
+                    parent.getContext().startActivity(intent);
+                    break;
             }
         }
     }
@@ -152,13 +163,27 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
 
     }
 
+    private void getHttp(String id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", SharedPreferencesUtils.get(context, "uid", "").toString());
+        map.put("id", Long.parseLong(id));
+        OkHttpManager.postAsync(HttpURL.getInstance().PRODUCT_DETAIL, "product_detail", map, this);
+    }
+
     @Override
     public void requestFailure(Request request, String name, IOException e) {
-
+        ToatUtils.showShort1(context, context.getString(R.string.network_timed));
     }
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-
+        if (name.equals("product_detail")) {
+            loanDatailsData = JsonData.getInstance().getJsonLoanDailsData(result);
+            if (!TextUtils.isEmpty(loanDatailsData.getPro_link())) {
+                intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
+                intent.putExtra("url", loanDatailsData.getPro_link());
+                context.startActivity(intent);
+            }
+        }
     }
 }

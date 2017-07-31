@@ -155,4 +155,6 @@ public class HttpURL implements Serializable {
     public String UPDATE = HTTP_URL + "&m=app&a=update";
 
     public String HITSPRODUCT = HTTP_URL + "&m=product&a=hits";
+
+    public String REGISTERCODE = HTTP_URL + "&m=register&a=bycode";
 }

@@ -26,6 +26,7 @@ import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.activity.SpeedLoanDetailsListActivity;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.activity.SpeedLoanActivity;
@@ -352,14 +353,14 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loan_speed_linear:
-                if (TextUtils.isEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
+                if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
                     mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
                 } else {
                     mActivity.startActivity(new Intent(mActivity, SpeedLoanActivity.class));
                 }
                 break;
             case R.id.loan_speed1_linear:
-                if (TextUtils.isEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
+                if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
                     mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
                 } else {
                     intent = new Intent(mActivity, SpeedLoanDetailsListActivity.class);

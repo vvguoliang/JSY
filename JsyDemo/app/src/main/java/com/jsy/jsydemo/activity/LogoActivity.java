@@ -24,6 +24,7 @@ import com.jsy.jsydemo.activity.SetUp.SetUpPasswordActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
@@ -140,32 +141,34 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
                     return;
                 }
                 Map<String, Object> map = new HashMap<>();
-                map.put("username", Long.parseLong(phone));
                 if (loan_logo_account_number.getText().toString().equals(LogoActivity.this.getString(logoCodeLogo))) {
                     logintype = 1;
                     if (StringUtil.isNullOrEmpty(loan_logo_edittext_password_code.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入密码");
                         return;
                     }
+                    map.put("username", Long.parseLong(phone));
                     map.put("code", 0);
                     map.put("logintype", logintype);
                     map.put("password", loan_logo_edittext_password_code.getText().toString());
+                    OkHttpManager.postAsync(HttpURL.getInstance().LOGO, "logo_code", map, this);
                 } else {
                     logintype = 2;
                     if (StringUtil.isNullOrEmpty(loan_logo_edittext_code.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入验证码");
                         return;
                     }
+                    map.put("mobile", Long.parseLong(phone));
                     map.put("code", Long.parseLong(loan_logo_edittext_code.getText().toString()));
-                    map.put("password", "");
-                    map.put("logintype", logintype);
+                    map.put("no", AppUtil.getInstance().getChannel(this, 2));
+                    OkHttpManager.postAsync(HttpURL.getInstance().REGISTERCODE, "logo_code", map, this);
                 }
-                OkHttpManager.postAsync(HttpURL.getInstance().LOGO, "logo_code", map, this);
                 break;
             case R.id.title_complete://注册
                 intent = new Intent(LogoActivity.this, SetUpPasswordActivity.class);
                 intent.putExtra("name", "1");
                 startActivity(intent);
+                finish();
                 break;
             case R.id.title_image://返回键
                 finish();

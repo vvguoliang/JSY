@@ -21,14 +21,19 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
+import com.jsy.jsydemo.EntityClass.LoanDatailsData;
 import com.jsy.jsydemo.EntityClass.SpeedLoanDetailsListData;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
+import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.AppUtil;
+import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
+import com.jsy.jsydemo.utils.StringUtil;
+import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.BaseViewHolder;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 
@@ -60,6 +65,7 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
 
     private Intent intent = null;
 
+    private LoanDatailsData loanDatailsData;
 
     public SpeedLoanDetailsListHolder(Context context, ViewGroup parent) {
         super(context, parent, R.layout.act_speedloan_details_list);
@@ -129,12 +135,14 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
         getHITSPRODUCT(data);
         switch (data.getApi_type()) {
             case "1":
-            case "2":
                 if (!TextUtils.isEmpty(data.getPro_link())) {
                     intent = new Intent(context, LoanWebViewActivity.class);
                     intent.putExtra("url", data.getPro_link());
                     context.startActivity(intent);
                 }
+                break;
+            case "2":
+                getHttp(data.getId());
                 break;
             case "3":
                 intent = new Intent(context, LoanDetailsActivity.class);
@@ -153,13 +161,27 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
 
     }
 
+    private void getHttp(String id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", SharedPreferencesUtils.get(context, "uid", "").toString());
+        map.put("id", Long.parseLong(id));
+        OkHttpManager.postAsync(HttpURL.getInstance().PRODUCT_DETAIL, "product_detail", map, this);
+    }
+
     @Override
     public void requestFailure(Request request, String name, IOException e) {
-
+        ToatUtils.showShort1(context, context.getString(R.string.network_timed));
     }
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-
+        if (name.equals("product_detail")) {
+            loanDatailsData = JsonData.getInstance().getJsonLoanDailsData(result);
+            if (!TextUtils.isEmpty(loanDatailsData.getPro_link())) {
+                intent = new Intent(context, LoanWebViewActivity.class);
+                intent.putExtra("url", loanDatailsData.getPro_link());
+                context.startActivity(intent);
+            }
+        }
     }
 }
