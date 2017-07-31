@@ -14,11 +14,14 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.DocumentsProvider;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import junit.framework.Assert;
+
+import org.w3c.dom.Document;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -475,7 +478,6 @@ public class Util {
 	 * 
 	 * @param activity
 	 * @param message
-	 * @param logLevel
 	 *            填d, w, e分别代表debug, warn, error; 默认是debug
 	 */
 	public static final void toastMessage(final Activity activity,

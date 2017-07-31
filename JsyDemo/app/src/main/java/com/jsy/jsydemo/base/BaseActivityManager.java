@@ -16,6 +16,7 @@ import java.util.Stack;
  * @version: V1.1.0
  * @Copyright 沙小僧
  */
+@SuppressWarnings("EqualsBetweenInconvertibleTypes")
 public class BaseActivityManager {
 
     private static Stack<Activity> activityStack;

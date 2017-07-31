@@ -86,13 +86,13 @@ public class LoansupemarketGridviewAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.adapter_loan_supemarket_gridview, null);
             viewHolder = new ViewHolder();
-            viewHolder.supemarket_image = (ImageView) convertView.findViewById(R.id.adapter_gtidview_supemarket_image);
-            viewHolder.supemarket_text = (TextView) convertView.findViewById(R.id.adapter_gtidview_supemarket_text);
-            viewHolder.supemarket_text_qinyin = (TextView) convertView.findViewById(R.id.adapter_gtidview_supemarket_text_qinyin);
-            viewHolder.supemarket_text_textview = (TextView) convertView.findViewById(R.id.adapter_gtidview_supemarket_text_textview);
-            viewHolder.adapter_gtidview_supemarket_linear = (LinearLayout) convertView.findViewById(R.id.adapter_gtidview_supemarket_linear);
-            viewHolder.adapter_gtidview_loan_linear = (LinearLayout) convertView.findViewById(R.id.adapter_gtidview_loan_linear);
-            viewHolder.adapter_gtidview_loan_text = (TextView) convertView.findViewById(R.id.adapter_gtidview_loan_text);
+            viewHolder.supemarket_image = convertView.findViewById(R.id.adapter_gtidview_supemarket_image);
+            viewHolder.supemarket_text = convertView.findViewById(R.id.adapter_gtidview_supemarket_text);
+            viewHolder.supemarket_text_qinyin = convertView.findViewById(R.id.adapter_gtidview_supemarket_text_qinyin);
+            viewHolder.supemarket_text_textview = convertView.findViewById(R.id.adapter_gtidview_supemarket_text_textview);
+            viewHolder.adapter_gtidview_supemarket_linear = convertView.findViewById(R.id.adapter_gtidview_supemarket_linear);
+            viewHolder.adapter_gtidview_loan_linear = convertView.findViewById(R.id.adapter_gtidview_loan_linear);
+            viewHolder.adapter_gtidview_loan_text = convertView.findViewById(R.id.adapter_gtidview_loan_text);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

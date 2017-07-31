@@ -1,5 +1,6 @@
 package com.jsy.jsydemo.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
@@ -74,11 +75,12 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         notifyDataSetChanged();
     }
 
+    @SuppressLint("InflateParams")
     public void initStatusView(Context context) {
         mStatusView = LayoutInflater.from(context).inflate(R.layout.view_rectcler_status_last, null);
         mStatusView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        mLoadMoreView = (LinearLayout) mStatusView.findViewById(R.id.load_more_view);
-        mNoMoreView = (TextView) mStatusView.findViewById(R.id.no_more_view);
+        mLoadMoreView = mStatusView.findViewById(R.id.load_more_view);
+        mNoMoreView = mStatusView.findViewById(R.id.no_more_view);
         mViewCount++;
     }
 

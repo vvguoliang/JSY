@@ -1,5 +1,6 @@
 package wxapi;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.jsy.jsydemo.base.BaseActivity;
@@ -11,6 +12,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+@SuppressLint("Registered")
 public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler {
 
     private IWXAPI api;

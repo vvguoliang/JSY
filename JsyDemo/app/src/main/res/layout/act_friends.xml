@@ -30,7 +30,7 @@
             android:layout_marginBottom="@dimen/common_30dp"
             android:background="@mipmap/ic_set_up_confirm_button"
             android:padding="@dimen/common_10dp"
-            android:text="@string/name_loan_basic_submit"
+            android:text="@string/name_loan_personal_inviting_friends"
             android:textColor="@color/white"
             android:textSize="@dimen/common_14dp" />
     </RelativeLayout>

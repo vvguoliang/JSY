@@ -74,9 +74,9 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.view_loan_bvh, null);
-            viewHolder.loan_praise = (ImageView) convertView.findViewById(R.id.loan_praise);
-            viewHolder.loan_recommend = (TextView) convertView.findViewById(R.id.loan_recommend);
-            viewHolder.loan_gridView = (MyGridView) convertView.findViewById(R.id.loan_gridView);
+            viewHolder.loan_praise = convertView.findViewById(R.id.loan_praise);
+            viewHolder.loan_recommend = convertView.findViewById(R.id.loan_recommend);
+            viewHolder.loan_gridView = convertView.findViewById(R.id.loan_gridView);
             viewHolder.loan_recommend.setTag(position);
             convertView.setTag(viewHolder);
         } else {
@@ -118,12 +118,12 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
                         case "1":
                             if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
                                 intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                                intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
+                                intent.putExtra("id", productSuList.getProductSus().get(position).getId());
                                 context.startActivity(intent);
                             } else {
-                                if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
+                                if (!TextUtils.isEmpty(productSuList.getProductSus().get(position).getPro_link())) {
                                     intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
-                                    intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
+                                    intent.putExtra("url", productSuList.getProductSus().get(position).getPro_link());
                                     context.startActivity(intent);
                                 }
                             }

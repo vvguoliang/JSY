@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_light_grey"
@@ -19,7 +20,8 @@
         <ImageView
             android:layout_width="@dimen/common_20dp"
             android:layout_height="@dimen/common_20dp"
-            android:src="@mipmap/ic_loan_basic_authentication" />
+            android:src="@mipmap/ic_loan_basic_authentication"
+            tools:ignore="ContentDescription" />
 
         <com.jsy.jsydemo.control.MyTextView
             android:layout_width="wrap_content"
