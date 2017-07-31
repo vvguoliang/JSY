@@ -84,17 +84,17 @@ public class UserCenterRealize implements UserCenterModel {
     @Override
     public File getImagefile() {
         File mediaStorageDir = null;
-        File mediaFile = null;
+        File mediaFile;
         try {
             mediaStorageDir = new File(Environment.getExternalStorageDirectory().toString() + "/IMAGE/");
-            Log.d("创建文件夹成功", mediaStorageDir.toString());
+//            Log.d("创建文件夹成功", mediaStorageDir.toString());
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("创建文件夹失败", mediaStorageDir.toString());
+//            Log.d("创建文件夹失败", mediaStorageDir.toString());
         }
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("创建文件失败", "WRITE_EXTERNAL_STORAGE 权限");
+//                Log.d("创建文件失败", "WRITE_EXTERNAL_STORAGE 权限");
                 return null;
             }
         }
@@ -190,8 +190,8 @@ public class UserCenterRealize implements UserCenterModel {
     @Override
     public Uri getImageContentUri(Context context, File imageFile) {
         String filePath = imageFile.getAbsolutePath();
-        Uri uri = null;
-        Cursor cursor = context.getContentResolver().query(
+        Uri uri;
+        @SuppressLint("Recycle") Cursor cursor = context.getContentResolver().query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 new String[]{MediaStore.Images.Media._ID},
                 MediaStore.Images.Media.DATA + "=? ",
@@ -258,7 +258,6 @@ public class UserCenterRealize implements UserCenterModel {
         }//用完记得关闭
         cursor.close();
         if (TimeUtils.isFastDoubleClick()) {
-            return;
         } else {
             if (booint == 1) {
                 //弹出Toast或者Dialog

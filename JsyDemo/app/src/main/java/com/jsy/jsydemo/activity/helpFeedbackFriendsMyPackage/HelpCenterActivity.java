@@ -1,6 +1,5 @@
 package com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
-import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.umeng.analytics.MobclickAgent;
 

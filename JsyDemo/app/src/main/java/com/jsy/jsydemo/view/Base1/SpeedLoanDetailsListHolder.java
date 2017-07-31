@@ -10,7 +10,6 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,19 +19,16 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.LoanDatailsData;
 import com.jsy.jsydemo.EntityClass.SpeedLoanDetailsListData;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
-import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
-import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.BaseViewHolder;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
@@ -50,7 +46,7 @@ import okhttp3.Request;
  * 数据展示
  */
 
-@SuppressWarnings("UnusedAssignment")
+@SuppressWarnings({"UnusedAssignment", "LoopStatementThatDoesntLoop"})
 public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsListData> implements DataCallBack {
 
     private ImageView speed_loan_detailsList_image;

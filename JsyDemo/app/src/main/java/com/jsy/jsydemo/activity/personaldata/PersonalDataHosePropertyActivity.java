@@ -9,7 +9,6 @@ import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
@@ -21,7 +20,6 @@ import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.AppUtil;
-import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.PublicClass.ShowDialog;
@@ -309,7 +307,7 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
 
 
     private void initJsonData() {   //解析数据
-        /**
+        /*
          * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
          * 关键逻辑在于循环体
          */
@@ -317,7 +315,7 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
         String JsonData = AppUtil.getJson(this, "province_data.json");
         ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
 
-        /**
+        /*
          * 添加省份数据
          *
          * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
@@ -341,21 +339,19 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
                     City_AreaList.add("");
                 } else {
 
-                    for (int d = 0; d < jsonBean.get(i).getCityList().get(c).getArea().size(); d++) {//该城市对应地区所有数据
-                        String AreaName = jsonBean.get(i).getCityList().get(c).getArea().get(d);
-
-                        City_AreaList.add(AreaName);//添加该城市所有地区数据
-                    }
+                    //该城市对应地区所有数据
+                    //添加该城市所有地区数据
+                    City_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
                 }
                 Province_AreaList.add(City_AreaList);//添加该省所有地区数据
             }
 
-            /**
+            /*
              * 添加城市数据
              */
             options2Items.add(CityList);
 
-            /**
+            /*
              * 添加地区数据
              */
             options3Items.add(Province_AreaList);

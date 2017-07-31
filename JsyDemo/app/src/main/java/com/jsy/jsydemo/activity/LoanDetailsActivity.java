@@ -11,7 +11,6 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +36,6 @@ import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
-import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
@@ -585,10 +583,8 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         @Override
         public void onComplete(Bundle result) {
             Set keys = result.keySet();
-            Map<String, Object> map = null;
+            Map<String, Object> map = new HashMap<>();
             for (Object key : keys) {
-                map = new HashMap<>();
-                Log.d("", key + " = " + result.getString(key.toString()));
                 map.put(key.toString(), result.getString(key.toString()));
             }
             map.put("uid", SharedPreferencesUtils.get(LoanDetailsActivity.this, "uid", "").toString());
@@ -599,10 +595,8 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         @Override
         public void onError(Bundle error) {
             Set keys = error.keySet();
-            Map<String, Object> map = null;
+            Map<String, Object> map = new HashMap<>();
             for (Object key : keys) {
-                map = new HashMap<>();
-                Log.d("", key + " = " + error.getString(key.toString()));
                 map.put(key.toString(), error.getString(key.toString()));
             }
             map.put("uid", SharedPreferencesUtils.get(LoanDetailsActivity.this, "uid", "").toString());

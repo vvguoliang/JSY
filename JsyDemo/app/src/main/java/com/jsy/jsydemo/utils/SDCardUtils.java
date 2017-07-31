@@ -23,6 +23,7 @@ import java.io.IOException;
  * 从ＳＤ卡中读取数据
  * vvguoliang
  */
+@SuppressWarnings({"ConstantConditions", "ResultOfMethodCallIgnored"})
 public class SDCardUtils {
 
     /**
@@ -212,7 +213,7 @@ public class SDCardUtils {
                 bis = new BufferedInputStream(
                         new FileInputStream(fileAbsolutePath));
                 byte[] buffer = new byte[1024 * 8];
-                int len = 0;
+                int len;
                 while ((len = bis.read(buffer)) != -1) {
                     baos.write(buffer, 0, len);
                     baos.flush();
@@ -225,9 +226,7 @@ public class SDCardUtils {
                     if (bis != null) {
                         bis.close();
                     }
-                    if (baos != null) {
-                        baos.close();
-                    }
+                    baos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -260,8 +259,8 @@ public class SDCardUtils {
     private static void deleteAllFiles(Context context, String filePath, String[] fileName) {
         File f = new File(filePath);
         if (f.exists()) {
-            for (int i = 0; fileName.length > i; i++) {
-                File file = new File(filePath + "/" + fileName[i]);
+            for (String aFileName : fileName) {
+                File file = new File(filePath + "/" + aFileName);
                 clear(file);
             }
         } else {

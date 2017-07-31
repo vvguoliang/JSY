@@ -36,10 +36,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
+@SuppressWarnings("StatementWithEmptyBody")
 public class Util {
 	
-	
-	private static final String TAG = "SDK_Sample.Util";
 	
 	private static Dialog mProgressDialog;
 	private static Toast mToast;
@@ -53,14 +52,14 @@ public class Util {
         if (src == null || src.length <= 0) {
             return null;
         }
-        for (int i = 0; i < src.length; i++) {
-            int v = src[i] & 0xFF;
-            String hv = Integer.toHexString(v);
-            if (hv.length() < 2) {
-                stringBuilder.append(0);
-            }
-            stringBuilder.append(hv);
-        }
+		for (byte aSrc : src) {
+			int v = aSrc & 0xFF;
+			String hv = Integer.toHexString(v);
+			if (hv.length() < 2) {
+				stringBuilder.append(0);
+			}
+			stringBuilder.append(hv);
+		}
         return stringBuilder.toString();
     }
     /**
@@ -110,11 +109,10 @@ public class Util {
 		if (bytes == null) return null;
         StringBuilder sb=new StringBuilder(bytes.length*2);
 //将字节数组中每个字节拆解成2位16进制整数
-        for(int i=0;i<bytes.length;i++)
-        {
-            sb.append(hexString.charAt((bytes[i]&0xf0)>>4));
-            sb.append(hexString.charAt((bytes[i]&0x0f)>>0));
-        }
+		for (byte aByte : bytes) {
+			sb.append(hexString.charAt((aByte & 0xf0) >> 4));
+			sb.append(hexString.charAt((aByte & 0x0f) >> 0));
+		}
         return sb.toString();
     }
 
@@ -167,7 +165,7 @@ public class Util {
 	}
 	
 	public static byte[] getHtmlByteArray(final String url) {
-		 URL htmlUrl = null;     
+		 URL htmlUrl;
 		 InputStream inStream = null;     
 		 try {         
 			 htmlUrl = new URL(url);         
@@ -345,7 +343,6 @@ public class Util {
 			Bitmap tmp = BitmapFactory.decodeFile(path, options);
 			if (tmp != null) {
 				tmp.recycle();
-				tmp = null;
 			}
 
 			final double beY = options.outHeight * 1.0 / height;
@@ -401,22 +398,21 @@ public class Util {
 			return bm;
 
 		} catch (final OutOfMemoryError e) {
-			options = null;
 		}
 
 		return null;
 	}
 	
-	public static final void showResultDialog(Context context, String msg,
-			String title) {
+	public static void showResultDialog(Context context, String msg,
+										String title) {
 		if(msg == null) return;
 		String rmsg = msg.replace(",", "\n");
 		new AlertDialog.Builder(context).setTitle(title).setMessage(rmsg)
 				.setNegativeButton("知道了", null).create().show();
 	}
 
-	public static final void showProgressDialog(Context context, String title,
-			String message) {
+	public static void showProgressDialog(Context context, String title,
+										  String message) {
 		dismissDialog();
 		if (TextUtils.isEmpty(title)) {
 			title = "请稍候";
@@ -438,7 +434,7 @@ public class Util {
 		return dlg;
 	}
 
-	public static final void dismissDialog() {
+	public static void dismissDialog() {
 		if (mProgressDialog != null) {
 			mProgressDialog.dismiss();
 			mProgressDialog = null;
@@ -453,7 +449,7 @@ public class Util {
 	 * @param logLevel
 	 *            填d, w, e分别代表debug, warn, error; 默认是debug
 	 */
-	public static final void toastMessage(final Activity activity,
+	public static void toastMessage(final Activity activity,
 			final String message, String logLevel) {
 		if ("w".equals(logLevel)) {
 		} else if ("e".equals(logLevel)) {
@@ -480,7 +476,7 @@ public class Util {
 	 * @param message
 	 *            填d, w, e分别代表debug, warn, error; 默认是debug
 	 */
-	public static final void toastMessage(final Activity activity,
+	public static void toastMessage(final Activity activity,
 			final String message) {
 		toastMessage(activity, message, null);
 	}
@@ -494,7 +490,7 @@ public class Util {
 	 */
 	public static Bitmap getbitmap(String imageUri) {
 		// 显示网络上的图片
-		Bitmap bitmap = null;
+		Bitmap bitmap;
 		try {
 			URL myFileUrl = new URL(imageUri);
 			HttpURLConnection conn = (HttpURLConnection) myFileUrl
@@ -602,12 +598,8 @@ public class Util {
         if (paths.size() < 2) {
             return false;
         }
-        if (!PATH_DOCUMENT.equals(paths.get(0))) {
-            return false;
-        }
-
-        return true;
-    }
+		return PATH_DOCUMENT.equals(paths.get(0));
+	}
 
     private static String getDocumentId(Uri documentUri) {
         final List<String> paths = documentUri.getPathSegments();

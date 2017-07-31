@@ -2,10 +2,8 @@ package com.jsy.jsydemo.activity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,7 +21,6 @@ import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
-import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;

@@ -387,11 +387,6 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
         }
 
         @Override
-        public int getItemPosition(Object object) {
-            return super.getItemPosition(object);
-        }
-
-        @Override
         public CharSequence getPageTitle(int position) {
             return "title";
         }

@@ -30,43 +30,10 @@ import java.net.URL;
 
 /**
  * Created by vvguoliang on 2017/7/1.
+ * 图片类
  */
 
 public class BitmapUtils {
-
-    /**
-     * 获取网络图片资源
-     *
-     * @param url
-     * @return
-     */
-    public static Bitmap getHttpBitmap(String url) {
-        URL myFileURL;
-        Bitmap bitmap = null;
-        try {
-            myFileURL = new URL(url);
-            //获得连接
-            HttpURLConnection conn = (HttpURLConnection) myFileURL.openConnection();
-            //设置超时时间为6000毫秒，conn.setConnectionTiem(0);表示没有时间限制
-            conn.setConnectTimeout(6000);
-            //连接设置获得数据流
-            conn.setDoInput(true);
-            //不使用缓存
-            conn.setUseCaches(false);
-            //这句可有可无，没有影响
-            //conn.connect();
-            //得到数据流
-            InputStream is = conn.getInputStream();
-            //解析得到图片
-            bitmap = BitmapFactory.decodeStream(is);
-            //关闭数据流
-            is.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-
-    }
 
     /**
      * 判断是否有SD卡
@@ -74,11 +41,7 @@ public class BitmapUtils {
      * @return
      */
     public static boolean existSDCard() {
-        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
-            return true;
-        } else {
-            return false;
-        }
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 
     /**
@@ -99,7 +62,7 @@ public class BitmapUtils {
             e.printStackTrace();
         } finally {
             try {
-                if (TextUtils.isEmpty(fis.toString())) {
+                if (fis != null) {
                     fis.close();//关闭流
                 }
             } catch (IOException e) {
@@ -156,7 +119,7 @@ public class BitmapUtils {
         try {
             // 将原始图片按照旋转矩阵进行旋转，并得到新的图片
             returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-        } catch (OutOfMemoryError e) {
+        } catch (OutOfMemoryError ignored) {
         }
         if (returnBm == null) {
             returnBm = bm;
@@ -224,10 +187,7 @@ public class BitmapUtils {
          */
         public static boolean deleteFile(String filePath) {
             File file = new File(filePath);
-            if (file.isFile() && file.exists()) {
-                return file.delete();
-            }
-            return false;
+            return file.isFile() && file.exists() && file.delete();
         }
 
 

@@ -3,7 +3,6 @@ package com.jsy.jsydemo.activity.personaldata;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,7 +12,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +24,6 @@ import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.CameraUtils.BitmapUtils;
 import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
-import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
@@ -48,6 +45,7 @@ import okhttp3.Request;
  * 证件上传
  */
 
+@SuppressWarnings("ConstantConditions")
 public class PersonalDataCertificatesActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private TextView title_complete;

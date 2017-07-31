@@ -36,7 +36,7 @@ public class CountDownTimerUtils extends CountDownTimer {
         mButton.setText(millisUntilFinished / 1000 + "秒");  //设置倒计时时间
 //        mButton.setBackgroundResource(R.drawable.bg_identify_code_press); //设置按钮为灰色，这时是不能点击的
 
-        /**
+        /*
          * 超链接 URLSpan
          * 文字背景颜色 BackgroundColorSpan
          * 文字颜色 ForegroundColorSpan
@@ -49,7 +49,7 @@ public class CountDownTimerUtils extends CountDownTimer {
          */
         SpannableString spannableString = new SpannableString(mButton.getText().toString());  //获取按钮上的文字
         ForegroundColorSpan span = new ForegroundColorSpan(Color.WHITE);
-        /**
+        /*
          * public void setSpan(Object what, int start, int end, int flags) {
          * 主要是start跟end，start是起始位置,无论中英文，都算一个。
          * 从0开始计算起。end是结束位置，所以处理的文字，包含开始位置，但不包含结束位置。

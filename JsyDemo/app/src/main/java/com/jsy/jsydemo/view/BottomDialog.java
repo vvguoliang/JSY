@@ -1,5 +1,6 @@
 package com.jsy.jsydemo.view;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import java.util.Map;
  * 
  *vvguolaing 2017-06-29
  */
+@SuppressWarnings("unchecked")
+@SuppressLint("UseSparseArrays")
 public class BottomDialog extends Dialog implements View.OnClickListener {
 	protected View view;
 	protected Map<Integer, View.OnClickListener> map = new HashMap<>();
@@ -27,14 +30,6 @@ public class BottomDialog extends Dialog implements View.OnClickListener {
 		view = LayoutInflater.from(context).inflate(layout, null);
 	}
 
-	public BottomDialog(Context context, View view) {
-		super(context, R.style.customDialog);
-		this.view = view;
-	}
-	public BottomDialog(Context context, int layout, int style) {
-		super(context,style);
-		view = LayoutInflater.from(context).inflate(layout, null);
-	}
 	@Override
 	public View findViewById(int id) {
 		return view.findViewById(id);

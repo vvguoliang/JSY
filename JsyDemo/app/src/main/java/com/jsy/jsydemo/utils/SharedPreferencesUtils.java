@@ -31,8 +31,6 @@ public class SharedPreferencesUtils {
      * 保存在手机里面的文件名
      */
     public static final String FILE_NAME = "share_data";
-    public static final String FILE_NAME_LIST = "list_data";
-
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
      *
@@ -115,7 +113,7 @@ public class SharedPreferencesUtils {
                 Entry<String, Object> entry = iterator.next();
                 try {
                     object.put(entry.getKey(), entry.getValue());
-                } catch (JSONException e) {
+                } catch (JSONException ignored) {
 
                 }
             }
@@ -125,12 +123,12 @@ public class SharedPreferencesUtils {
     }
 
     public static List<Map<String, Object>> getInfo(Context context, String result) {
-        List<Map<String, Object>> datas = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> datas = new ArrayList<>();
         try {
             JSONArray array = new JSONArray(result);
             for (int i = 0; i < array.length(); i++) {
                 JSONObject itemObject = array.getJSONObject(i);
-                Map<String, Object> itemMap = new HashMap<String, Object>();
+                Map<String, Object> itemMap = new HashMap<>();
                 JSONArray names = itemObject.names();
                 if (names != null) {
                     for (int j = 0; j < names.length(); j++) {
@@ -141,7 +139,7 @@ public class SharedPreferencesUtils {
                 }
                 datas.add(itemMap);
             }
-        } catch (JSONException e) {
+        } catch (JSONException ignored) {
 
         }
         return datas;
@@ -213,7 +211,7 @@ public class SharedPreferencesUtils {
             try {
                 Class clz = Editor.class;
                 return clz.getMethod("apply");
-            } catch (NoSuchMethodException e) {
+            } catch (NoSuchMethodException ignored) {
             }
 
             return null;
@@ -230,9 +228,9 @@ public class SharedPreferencesUtils {
                     sApplyMethod.invoke(editor);
                     return;
                 }
-            } catch (IllegalArgumentException e) {
-            } catch (IllegalAccessException e) {
-            } catch (InvocationTargetException e) {
+            } catch (IllegalArgumentException ignored) {
+            } catch (IllegalAccessException ignored) {
+            } catch (InvocationTargetException ignored) {
             }
             editor.commit();
         }

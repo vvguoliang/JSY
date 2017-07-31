@@ -13,7 +13,7 @@ public class ToatUtils {
 
     public static boolean isShow = true;
 
-    private static Context context;
+    public static Context context;
     private static Toast toast;
 
     /**

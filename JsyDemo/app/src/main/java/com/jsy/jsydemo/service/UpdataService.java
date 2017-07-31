@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
-import android.support.v4.BuildConfig;
 import android.support.v4.content.FileProvider;
 import android.webkit.MimeTypeMap;
 
@@ -25,6 +24,7 @@ import java.io.File;
  * 版本更新
  */
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class UpdataService extends Service {
     /**
      * 安卓系统下载类

@@ -23,7 +23,6 @@ import java.util.Map;
 public class UnCeHandler implements UncaughtExceptionHandler {
 
     private UncaughtExceptionHandler mDefaultHandler;
-    public static final String TAG = "CatchExcep";
     private Application application;
     private long time = 0;
 
@@ -76,11 +75,7 @@ public class UnCeHandler implements UncaughtExceptionHandler {
                 Class<?> clazz = Class.forName("android.content.Context");
                 Method method = clazz.getMethod("checkSelfPermission", String.class);
                 int rest = (Integer) method.invoke(context, permission);
-                if (rest == PackageManager.PERMISSION_GRANTED) {
-                    result = true;
-                } else {
-                    result = false;
-                }
+                result = rest == PackageManager.PERMISSION_GRANTED;
             } catch (Exception e) {
                 result = false;
             }
@@ -114,20 +109,11 @@ public class UnCeHandler implements UncaughtExceptionHandler {
         collectDeviceInfo(application.getApplicationContext());
         String str = formatCrashInfo(ex);
         Log.e("", "=========" + str);
-//		String str1 = com.sxsfinance.Utils.Base64.encode(str.getBytes()).toString();
-        try {
-//			Getintent.getInstance().httpEntityPost(application, "errorlog", 0, "", this,
-//					HttpUtils_Distribution.url_uploadfinle, null, new String[]{"user_id","errorlog"},
-//					SharedPreferencesUtils.get(application, "id", "") + "",str1 + "============auth_id=" +
-//							SharedPreferencesUtils.get(application, "Mid", ""));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return true;
     }
 
     // 用来存储设备信息和异常信息
-    private Map<String, String> deviceInfos = new HashMap<String, String>();
+    private Map<String, String> deviceInfos = new HashMap<>();
 
     /**
      * 格式化日志信息
@@ -174,7 +160,7 @@ public class UnCeHandler implements UncaughtExceptionHandler {
                 if (key.equals("TIME")) {
                     value = TimeUtils.getCurrentTimeInString();
                 }
-                exception.append(key + "=" + value + "\n");
+                exception.append(key).append("=").append(value).append("\n");
             }
         }
         Writer writer = new StringWriter();

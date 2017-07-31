@@ -37,7 +37,6 @@ public class BaseActivityManager {
         Activity activity = activityStack.lastElement();
         if (activity != null) {
             activity.finish();
-            activity = null;
         }
     }
 
@@ -51,7 +50,6 @@ public class BaseActivityManager {
         if (activity != null) {
             activity.finish();
             activityStack.remove(activity);
-            activity = null;
         }
     }
 
@@ -65,7 +63,7 @@ public class BaseActivityManager {
 
     public void pushActivity(Activity activity) {
         if (activityStack == null) {
-            activityStack = new Stack<Activity>();
+            activityStack = new Stack<>();
         }
         activityStack.add(activity);
     }

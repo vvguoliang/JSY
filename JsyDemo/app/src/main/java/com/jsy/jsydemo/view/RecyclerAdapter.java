@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.interfaces.Action;
 

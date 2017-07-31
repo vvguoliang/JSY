@@ -679,7 +679,7 @@
                                 android:layout_height="@dimen/common_20dp"
                                 android:paddingLeft="@dimen/common_10dp"
                                 android:src="@drawable/bg_personal_right_selector"
-                                tools:ignore="RtlHardcoded,RtlSymmetry" />
+                                tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry,TooManyViews" />
                         </LinearLayout>
 
                         <View

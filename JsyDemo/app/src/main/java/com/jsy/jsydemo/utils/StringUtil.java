@@ -59,7 +59,7 @@ public class StringUtil {
       String sep = sepArray[i];
       int index = s.indexOf(sep);
       while (index >= 0) {
-        tokenIndex.addElement(new Integer(index));
+        tokenIndex.addElement(index);
         tokenSep.addElement(sep);
         index = s.indexOf(sep, index + sep.length());
       }
@@ -156,8 +156,8 @@ public class StringUtil {
 
     Vector v = new Vector(array.length);
 
-    for (int i = 0; i < array.length; i++) {
-      v.addElement(array[i]);
+    for (Object anArray : array) {
+      v.addElement(anArray);
     }
 
     return v;
@@ -268,11 +268,7 @@ public class StringUtil {
       return false;
     }
     // Both are not null, compare the lowercase strings
-    if ((string1.toLowerCase()).equals(string2.toLowerCase())) {
-      return true;
-    } else {
-      return false;
-    }
+    return (string1.toLowerCase()).equals(string2.toLowerCase());
   }
 
   /**
@@ -286,11 +282,7 @@ public class StringUtil {
     if ((string == null) || string.equals("")) {
       return false;
     } else {
-      if (StringUtil.equalsIgnoreCase(string, "true")) {
-        return true;
-      } else {
-        return false;
-      }
+      return StringUtil.equalsIgnoreCase(string, "true");
     }
   }
 
@@ -331,10 +323,7 @@ public class StringUtil {
     if (str == null) {
       return true;
     }
-    if (str.trim().equals("")) {
-      return true;
-    }
-    return false;
+    return str.trim().equals("");
   }
 
   /**
@@ -428,11 +417,7 @@ public class StringUtil {
     String protocol = getProtocolFromUrl(url);
     if (protocol == null) {
       return false;
-    } else if (protocol.equals("http") || protocol.equals("https")) {
-      return true;
-    } else {
-      return false;
-    }
+    } else return protocol.equals("http") || protocol.equals("https");
   }
 
   /**

@@ -15,8 +15,6 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
-import com.jsy.jsydemo.activity.CommissioningActivity;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -173,8 +171,7 @@ public class ImmersiveUtils {
         }
     }
 
-    public static boolean FlymeSetStatusBarLightMode(Activity activity, Window window, boolean dark) {
-        boolean result = false;
+    public static void FlymeSetStatusBarLightMode(Activity activity, Window window, boolean dark) {
         if (window != null) {
             try {
                 WindowManager.LayoutParams lp = window.getAttributes();
@@ -199,20 +196,17 @@ public class ImmersiveUtils {
                 }
                 meizuFlags.setInt(lp, value);
                 window.setAttributes(lp);
-                result = true;
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
         }
-        return result;
     }
 
-    public static boolean MIUISetStatusBarLightMode(Activity activity, Window window, boolean dark) {
-        boolean result = false;
+    public static void MIUISetStatusBarLightMode(Activity activity, Window window, boolean dark) {
         if (window != null) {
             Class clazz = window.getClass();
             try {
-                int darkModeFlag = 0;
+                int darkModeFlag;
                 Class layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
                 Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
                 darkModeFlag = field.getInt(layoutParams);
@@ -228,22 +222,17 @@ public class ImmersiveUtils {
                         extraFlagField.invoke(window, 0, darkModeFlag);//清除黑色字体
                     }
                 }
-                result = true;
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
         }
-        return result;
     }
 
     /**
      * 小米 魅族 版本 的判断返回 true 或者 false
      */
     public static boolean BuildVERSION() {
-        if (Build.VERSION.SDK_INT >= 19 || Build.BRAND.contains("Meizu") || Build.BRAND.contains("Xiaomi")) {
-            return true;
-        }
-        return false;
+        return Build.VERSION.SDK_INT >= 19 || Build.BRAND.contains("Meizu") || Build.BRAND.contains("Xiaomi");
     }
 
     /**

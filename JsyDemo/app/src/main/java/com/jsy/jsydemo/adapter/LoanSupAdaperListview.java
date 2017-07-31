@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.jsy.jsydemo.EntityClass.LoanDatailsData;
 import com.jsy.jsydemo.EntityClass.ProductSuList;
-import com.jsy.jsydemo.EntityClass.SpeedLoanDetailsListData;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LoanDetailsActivity;
 import com.jsy.jsydemo.activity.LogoActivity;

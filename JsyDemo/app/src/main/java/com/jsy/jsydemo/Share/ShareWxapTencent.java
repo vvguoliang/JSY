@@ -2,16 +2,13 @@ package com.jsy.jsydemo.Share;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.utils.AppUtil;
-import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.BottomDialog;
 import com.tencent.connect.share.QQShare;
@@ -160,7 +157,7 @@ public class ShareWxapTencent implements View.OnClickListener {
     }
 
     private void shareToWXshare(final int WX_FRIENDS) {
-        /**
+        /*
          * 微信分享 （这里仅提供一个分享网页的示例，其它请参看官网示例代码）
          *
          * @param flag

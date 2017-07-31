@@ -1,18 +1,11 @@
 package com.jsy.jsydemo.Share;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Environment;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class BitmapUtils {

@@ -36,10 +36,8 @@ public class MyGridView extends GridView{
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if(ev.getAction() == MotionEvent.ACTION_MOVE){
-            return true;//true:禁止滚动
-        }
+        //true:禁止滚动
+        return ev.getAction() == MotionEvent.ACTION_MOVE || super.dispatchTouchEvent(ev);
 
-        return super.dispatchTouchEvent(ev);
     }
 }

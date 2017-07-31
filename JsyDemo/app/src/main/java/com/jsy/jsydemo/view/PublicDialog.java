@@ -5,17 +5,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.jsy.jsydemo.EntityClass.DialogListViewEntity;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.adapter.DialogListView;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
@@ -75,11 +70,10 @@ public class PublicDialog extends Dialog {
             return this;
         }
 
-        public Builder setItems(List<Map<String, Object>> items, String name, DialogInterface.OnClickListener listener) {
+        public void setItems(List<Map<String, Object>> items, String name, OnClickListener listener) {
             this.itemseButtonClickListener = listener;
             this.itemses = items;
             this.name = name;
-            return this;
         }
 
         public PublicDialog create() {
@@ -90,7 +84,7 @@ public class PublicDialog extends Dialog {
             dialog.addContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             // set the dialog title
-            ListView select_dialog_listview = (ListView) layout.findViewById(R.id.select_dialog_listview);
+            ListView select_dialog_listview = layout.findViewById(R.id.select_dialog_listview);
             if (itemseButtonClickListener != null) {
                 select_dialog_listview.setAdapter(new DialogListView(context, itemses));
 

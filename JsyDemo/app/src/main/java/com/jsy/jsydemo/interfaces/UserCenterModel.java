@@ -9,6 +9,8 @@ import java.io.File;
 
 /**
  * Created by vvguoliang on 2017/7/1.
+ *
+ * 权限接口调用
  */
 
 public interface UserCenterModel {

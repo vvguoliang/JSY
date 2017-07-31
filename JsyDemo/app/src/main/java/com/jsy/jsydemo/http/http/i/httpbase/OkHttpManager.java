@@ -55,14 +55,14 @@ public class OkHttpManager {
 
         mClient = new OkHttpClient();
 
-        /**
-         * 在这里直接设置连接超时.读取超时，写入超时
+        /*
+          在这里直接设置连接超时.读取超时，写入超时
          */
         mClient.newBuilder().connectTimeout(10 * 1000, TimeUnit.SECONDS);
         mClient.newBuilder().readTimeout(10 * 1000, TimeUnit.SECONDS);
         mClient.newBuilder().writeTimeout(10 * 1000, TimeUnit.SECONDS);
 
-        /**
+        /*
          * 如果是用的3.0之前的版本  使用以下直接设置连接超时.读取超时，写入超时
          */
 
@@ -71,14 +71,14 @@ public class OkHttpManager {
         //client.setReadTimeout(30, TimeUnit.SECONDS);
 
 
-        /**
+        /*
          * 初始化handler
          */
         mHandler = new Handler(Looper.getMainLooper());
     }
 
 
-    /**
+    /*
      * 单例模式  获取OkHttpManager实例
      *
      * @return
@@ -93,7 +93,7 @@ public class OkHttpManager {
 
     //-------------------------同步的方式请求数据--------------------------
 
-    /**
+    /*
      * 对外提供的get方法,同步的方式
      *
      * @param url 传入的地址
@@ -105,7 +105,7 @@ public class OkHttpManager {
         return sOkHttpManager.inner_getSync(url);
     }
 
-    /**
+    /*
      * GET方式请求的内部逻辑处理方式，同步的方式
      *
      * @param url
@@ -123,7 +123,7 @@ public class OkHttpManager {
         return response;
     }
 
-    /**
+    /*
      * 对外提供的同步获取String的方法
      *
      * @param url
@@ -134,13 +134,13 @@ public class OkHttpManager {
     }
 
 
-    /**
+    /*
      * 同步方法
      */
     private String inner_getSyncString(String url) {
         String result = null;
         try {
-            /**
+            /*
              * 把取得到的结果转为字符串，这里最好用string()
              */
             result = inner_getSync(url).body().string();
@@ -155,7 +155,7 @@ public class OkHttpManager {
         getInstance().inner_getAsync(url, name, callBack);
     }
 
-    /**
+    /*
      * 内部逻辑请求的方法
      *
      * @param url
@@ -185,7 +185,7 @@ public class OkHttpManager {
     }
 
 
-    /**
+    /*
      * 分发失败的时候调用
      *
      * @param request
@@ -193,7 +193,7 @@ public class OkHttpManager {
      * @param callBack
      */
     private void deliverDataFailure(final Request request, final String name, final IOException e, final DataCallBack callBack) {
-        /**
+        /*
          * 在这里使用异步处理
          */
         mHandler.post(new Runnable() {
@@ -206,14 +206,14 @@ public class OkHttpManager {
         });
     }
 
-    /**
+    /*
      * 分发成功的时候调用
      *
      * @param result
      * @param callBack
      */
     private void deliverDataSuccess(final String result, final String name, final DataCallBack callBack) {
-        /**
+        /*
          * 在这里使用异步线程处理
          */
         mHandler.post(new Runnable() {
@@ -243,23 +243,23 @@ public class OkHttpManager {
             params = new HashMap<>();
         }
 
-        /**
+        /*
          * 如果是3.0之前版本的，构建表单数据是下面的一句
          */
         //FormEncodingBuilder builder = new FormEncodingBuilder();
 
-        /**
+        /*
          * 3.0之后版本
          */
         FormBody.Builder builder = new FormBody.Builder();
 
-        /**
+        /*
          * 在这对添加的参数进行遍历，map遍历有四种方式，如果想要了解的可以网上查找
          */
         for (Map.Entry<String, Object> map : params.entrySet()) {
             String key = map.getKey();
             String value;
-            /**
+            /*
              * 判断值是否是空的
              */
             if (map.getValue() == null) {
@@ -267,7 +267,7 @@ public class OkHttpManager {
             } else {
                 value = map.getValue().toString();
             }
-            /**
+            /*
              * 把key和value添加到formbody中
              */
             builder.add(key, value);
@@ -297,7 +297,7 @@ public class OkHttpManager {
         getInstance().inner_downloadAsync(url, name, desDir, callBack);
     }
 
-    /**
+    /*
      * 下载文件的内部逻辑处理类
      *
      * @param url      下载地址
@@ -315,7 +315,7 @@ public class OkHttpManager {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
-                /**
+                /*
                  * 在这里进行文件的下载处理
                  */
                 InputStream inputStream = null;
@@ -326,7 +326,7 @@ public class OkHttpManager {
                     //把请求回来的response对象装换为字节流
                     inputStream = response.body().byteStream();
                     fileOutputStream = new FileOutputStream(file);
-                    int len = 0;
+                    int len;
                     byte[] bytes = new byte[2048];
                     //循环读取数据
                     while ((len = inputStream.read(bytes)) != -1) {
@@ -354,7 +354,7 @@ public class OkHttpManager {
         });
     }
 
-    /**
+    /*
      * 根据文件url获取文件的路径名字
      *
      * @param url

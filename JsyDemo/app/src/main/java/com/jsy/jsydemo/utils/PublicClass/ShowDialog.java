@@ -5,20 +5,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.OperatorActivity;
 import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.view.BottomDialog;
 import com.jsy.jsydemo.view.PublicDialog;
 import com.jsy.jsydemo.view.PublicEditTextDialog;
-import com.jsy.jsydemo.view.PublicPhoneDialog;
 
 import java.io.Serializable;
 import java.util.ArrayList;

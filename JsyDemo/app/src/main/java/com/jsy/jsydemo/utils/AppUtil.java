@@ -3,14 +3,11 @@ package com.jsy.jsydemo.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.preference.PreferenceManager;
-import android.telephony.TelephonyManager;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,8 +18,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 
@@ -31,6 +26,7 @@ import java.net.SocketException;
  * <p>
  * APP 操作
  */
+@SuppressWarnings("JavaDoc")
 @SuppressLint("HardwareIds")
 public class AppUtil {
 
@@ -51,14 +47,6 @@ public class AppUtil {
      */
     private AppUtil() {
     }
-
-    /**
-     * readResolve方法应对单例对象被序列化时候
-     */
-    private Object readResolve() {
-        return getInstance();
-    }
-
 
     /**
      * 屏幕分辨率

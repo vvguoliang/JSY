@@ -13,8 +13,6 @@ import android.view.ViewGroup;
  */
 public class BaseViewHolder<T> extends RecyclerView.ViewHolder{
 
-    private final String TAG = "BaseViewHolder";
-
     public BaseViewHolder(View itemView) {
         super(itemView);
     }

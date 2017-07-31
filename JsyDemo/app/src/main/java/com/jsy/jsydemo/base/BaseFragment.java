@@ -13,13 +13,6 @@ import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.utils.NetWorkUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 类功能介绍
  *
@@ -103,31 +96,6 @@ public abstract class BaseFragment extends Fragment {//implements OnClickRefresh
         return mRootView.findViewById(id);
     }
 
-    public void netWorkChange(int netWorkState) {
-    }
-
-    protected void showNotWorkDialog() {
-//        if (notWorkDialog == null) {
-//            notWorkDialog = new NotWorkDialog(getActivity());
-//            notWorkDialog.setOnClickRefreshListener(this);
-//        }
-//        if (getUserVisibleHint()) {
-//            if (!getActivity().isFinishing())
-//                notWorkDialog.show();
-//        }
-    }
-
-    protected void dissNotWorkDialog() {
-//        if (notWorkDialog != null) {
-//            notWorkDialog.dismiss();
-//        }
-    }
-
-//    @Override
-//    public void onRefresh() {
-//
-//    }
-
     /**
      * 判断是否是第一次看到这个页面 @Title: isFirstTime @author: xusonghui @Description:
      * TODO(这里用一句话描述这个方法的作用) @param: @return @return: boolean @throws
@@ -145,50 +113,6 @@ public abstract class BaseFragment extends Fragment {//implements OnClickRefresh
         onClickNum++;
     }
 
-    private void remind(String msg, boolean isExit) {
-        waitDismiss();
-//        Getintent.getInstance().getIntent(getActivity(), StartpageActivity.class, 0, new String[]{"sxsmian"}, "11");
-//        if ("0".equals(msg))
-//            ToatUtils.showLong(mContext, "距离上次登录时间过长,请重新登录");
-//        else
-//            ToatUtils.showLong(mContext, msg);
-    }
-
-
-//    private void exitRoutine(String flag, String title, String msg) {
-//        if (StringUtil.isNullOrEmpty(msg))
-//            msg = getString(R.string.sys_maintenance);
-//        CustomSysSureDialog builder = new CustomSysSureDialog.Builder(mContext);
-//        builder.setClose(flag, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int i) {
-//                dialog.dismiss();
-//                BaseActivityManager.getActivityManager().finishAllActivity();
-//                System.exit(0);
-//            }
-//        });
-//        if (!StringUtil.isNullOrEmpty(title)) {
-//            builder.setTitle(title);
-//        } else {
-//            builder.setTitle(getString(R.string.sys_tips));
-//        }
-//        builder.setMessage(msg);
-//        builder.setPositiveButton(getString(R.string.sys_myknow),
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(final DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                        BaseActivityManager.getActivityManager().finishAllActivity();
-//                        System.exit(0);
-//                    }
-//                });
-//        Dialog dialog = builder.create();
-//        dialog.setCancelable(false);
-//        dialog.show();
-//    }
-
-//    private SXSDialog mSxsDialog;
-
-    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (getUserVisibleHint()) {
@@ -196,28 +120,6 @@ public abstract class BaseFragment extends Fragment {//implements OnClickRefresh
         } else {
 
         }
-    }
-
-//    private SXSProgressBar mSxsProgressBar;
-
-    /**
-     * 网络请求耗时操作，弹出等等框 @Title: loadDataWait @author: xusonghui @Description:
-     * TODO(这里用一句话描述这个方法的作用) @param: @return: void @throws
-     */
-    protected void loadDataWait() {
-//        if (mSxsProgressBar == null)
-//            mSxsProgressBar = new SXSProgressBar(getContext());
-//        if (getUserVisibleHint())
-//            mSxsProgressBar.show();
-    }
-
-    /**
-     * 隐藏等等框 @Title: waitDismiss @author: xusonghui @Description:
-     * TODO(这里用一句话描述这个方法的作用) @param: @return: void @throws
-     */
-    protected void waitDismiss() {
-//        if (mSxsProgressBar != null)
-//            mSxsProgressBar.dismiss();
     }
 
     @Override

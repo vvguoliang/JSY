@@ -52,8 +52,8 @@ public class DialogListView extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.dialog_listview_item, null);
-            viewHolder.dialog_listview_item_checkBox = (ImageView) convertView.findViewById(R.id.dialog_listview_item_checkBox);
-            viewHolder.dialog_listview_item_textview = (TextView) convertView.findViewById(R.id.dialog_listview_item_textview);
+            viewHolder.dialog_listview_item_checkBox = convertView.findViewById(R.id.dialog_listview_item_checkBox);
+            viewHolder.dialog_listview_item_textview = convertView.findViewById(R.id.dialog_listview_item_textview);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

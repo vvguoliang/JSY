@@ -4,10 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -93,11 +90,11 @@ public class PublicEditTextDialog extends Dialog {
             dialog.setCanceledOnTouchOutside(false);
             dialog.setCancelable(false);
 
-            TextView dialog_editText_title = (TextView) layout.findViewById(R.id.dialog_editText_title);
-            final EditText dialog_editText_context = (EditText) layout.findViewById(R.id.dialog_editText_context);
-            Button dialog_editText_button_cancel = (Button) layout.findViewById(R.id.dialog_editText_button_cancel);
-            Button dialog_editText_button_determine = (Button) layout.findViewById(R.id.dialog_editText_button_determine);
-            TextView dialog_editText_text = (TextView) layout.findViewById(R.id.dialog_editText_text);
+            TextView dialog_editText_title = layout.findViewById(R.id.dialog_editText_title);
+            final EditText dialog_editText_context = layout.findViewById(R.id.dialog_editText_context);
+            Button dialog_editText_button_cancel = layout.findViewById(R.id.dialog_editText_button_cancel);
+            Button dialog_editText_button_determine = layout.findViewById(R.id.dialog_editText_button_determine);
+            TextView dialog_editText_text = layout.findViewById(R.id.dialog_editText_text);
 
             if (!TextUtils.isEmpty(msg)) {
                 dialog_editText_text.setText(msg);

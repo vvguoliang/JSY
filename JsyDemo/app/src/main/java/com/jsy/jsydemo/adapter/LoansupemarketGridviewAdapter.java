@@ -21,10 +21,7 @@ import com.jsy.jsydemo.EntityClass.ProductSu;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 
-import org.json.JSONObject;
-
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by vvguoliang on 2017/6/26.

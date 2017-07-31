@@ -3,14 +3,9 @@ package com.jsy.jsydemo.activity.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +19,6 @@ import com.jsy.jsydemo.EntityClass.HomeProductList;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.activity.LogoActivity;
 import com.jsy.jsydemo.activity.SpeedLoanDetailsListActivity;
-import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
@@ -44,7 +38,6 @@ import com.jsy.jsydemo.view.RefreshRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -310,7 +303,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                 homeProductList = new HomeProductList();
                 homeProductList = JsonData.getInstance().getJsonLoanProduct(result);
                 if (homeProductList.getHomeProductList().size() == 0) {
-                    page = 1;
+                    page = 0;
                     mRecyclerView.showNoMore();
                 } else {
                     VirtualData = new HomeProduct[homeProductList.getHomeProductList().size()];

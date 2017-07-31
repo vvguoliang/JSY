@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.view.Base1.CardRecordHolder;
-import com.jsy.jsydemo.view.Base1.Consumption;
 import com.jsy.jsydemo.view.BaseViewHolder;
 import com.jsy.jsydemo.view.RecyclerAdapter;
 

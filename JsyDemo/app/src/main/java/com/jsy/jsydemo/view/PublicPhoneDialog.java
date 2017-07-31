@@ -4,26 +4,15 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jsy.jsydemo.R;
-import com.jsy.jsydemo.adapter.DialogListView;
-import com.jsy.jsydemo.utils.SharedPreferencesUtils;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by vvguoliang on 2017/7/21.
@@ -90,10 +79,10 @@ public class PublicPhoneDialog extends Dialog {
             dialog.setCanceledOnTouchOutside(false);
             dialog.setCancelable(false);
 
-            TextView dialog_phone_title = (TextView) layout.findViewById(R.id.dialog_phone_title);
-            TextView dialog_phone_context = (TextView) layout.findViewById(R.id.dialog_phone_context);
-            Button dialog_phone_button_cancel = (Button) layout.findViewById(R.id.dialog_phone_button_cancel);
-            Button dialog_phone_button_determine = (Button) layout.findViewById(R.id.dialog_phone_button_determine);
+            TextView dialog_phone_title = layout.findViewById(R.id.dialog_phone_title);
+            TextView dialog_phone_context = layout.findViewById(R.id.dialog_phone_context);
+            Button dialog_phone_button_cancel = layout.findViewById(R.id.dialog_phone_button_cancel);
+            Button dialog_phone_button_determine = layout.findViewById(R.id.dialog_phone_button_determine);
 
             if (!TextUtils.isEmpty(title)) {
                 dialog_phone_title.setText(title);

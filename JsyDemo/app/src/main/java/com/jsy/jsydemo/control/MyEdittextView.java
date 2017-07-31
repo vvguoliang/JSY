@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 /**
  * Created by vvguoliang on 2017/6/28.
+ * 编辑框
  */
 
 @SuppressLint("AppCompatCustomView")

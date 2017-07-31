@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
 
 public class CTelephoneInfo {
 
-    private static final String TAG = CTelephoneInfo.class.getSimpleName();
     private String imeiSIM1;// IMEI
     private String imeiSIM2;//IMEI
     private String iNumeric1;//sim1 code number
@@ -23,6 +22,7 @@ public class CTelephoneInfo {
     private boolean isSIM2Ready;//sim2
     private String iDataConnected1 = "0";//sim1 0 no, 1 connecting, 2 connected, 3 suspended.
     private String iDataConnected2 = "0";//sim2
+    @SuppressLint("StaticFieldLeak")
     private static CTelephoneInfo CTelephoneInfo;
     private static Context mContext;
 
@@ -77,17 +77,11 @@ public class CTelephoneInfo {
     }
 
     public boolean isDataConnected1(){
-        if(TextUtils.equals(iDataConnected1, "2")||TextUtils.equals(iDataConnected1, "1"))
-            return true;
-        else
-            return false;
+        return TextUtils.equals(iDataConnected1, "2") || TextUtils.equals(iDataConnected1, "1");
     }
 
     public boolean isDataConnected2(){
-        if(TextUtils.equals(iDataConnected2, "2")||TextUtils.equals(iDataConnected2, "1"))
-            return true;
-        else
-            return false;
+        return TextUtils.equals(iDataConnected2, "2") || TextUtils.equals(iDataConnected2, "1");
     }
 
     public String getINumeric1(){

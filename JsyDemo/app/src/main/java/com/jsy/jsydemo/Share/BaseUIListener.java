@@ -14,7 +14,6 @@ import org.json.JSONObject;
 public class BaseUIListener implements IUiListener {
 
 	private Context mContext;
-	private String mScope;
 	private boolean mIsCaneled;
 	private static final int ON_COMPLETE = 0;
 	private static final int ON_ERROR = 1;
@@ -51,7 +50,6 @@ public class BaseUIListener implements IUiListener {
 	public BaseUIListener(Context mContext, String mScope) {
 		super();
 		this.mContext = mContext;
-		this.mScope = mScope;
 	}
 	
 	public void cancel() {
