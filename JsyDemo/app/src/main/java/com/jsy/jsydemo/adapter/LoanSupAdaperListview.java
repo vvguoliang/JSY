@@ -127,7 +127,7 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
                                 intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
                                 intent.putExtra("id", productSuList.getProductSus().get(position).getId());
                                 context.startActivity(intent);
-                            } else if (productSuList.getProductSus().get(position).getApi_type().equals("1")) {
+                            } else if (productSuList.getProductSus().get(position).getApi_type().equals("2")) {
                                 getHttp(productSuList.getProductSus().get(position).getId());
                             } else {
                                 if (!TextUtils.isEmpty(productSuList.getProductSus().get(position).getPro_link())) {
@@ -157,7 +157,6 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
         map.put("id", Long.parseLong(id));
         map.put("channel", AppUtil.getInstance().getChannel(context, 2));
         OkHttpManager.postAsync(HttpURL.getInstance().HITSPRODUCT, "", map, this);
-
     }
 
     private void getHttp(String id) {
