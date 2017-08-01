@@ -27,14 +27,11 @@ import com.jsy.jsydemo.utils.CameraUtils.BitmapUtils;
 import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
-import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.Request;
 
@@ -54,8 +51,6 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     private TextView feedback_path_text;
 
     private int num = 270;
-
-    private Bitmap bitmap;
 
     private File file = null;
 
@@ -237,11 +232,9 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
             }
             //剪裁
         } else if (AppUtil.getInstance().CLIP_IMAGE_REQUEST == requestCode) {
-            Log.d("剪裁得到图片", AppUtil.getInstance().mOutFile.toString());
             Bitmap bitmap = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
             file = AppUtil.getInstance().mOutFile;
             feedback_image.setImageBitmap(bitmap);
-            this.bitmap = bitmap;
             feedback_path.setVisibility(View.GONE);
             BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
         }

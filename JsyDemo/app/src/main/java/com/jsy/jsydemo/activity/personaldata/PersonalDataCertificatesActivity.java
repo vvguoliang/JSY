@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -28,7 +27,6 @@ import com.jsy.jsydemo.utils.CameraUtils.BitmapUtils;
 import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
-import com.jsy.jsydemo.utils.StringUtil;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.BottomDialog;
 import com.umeng.analytics.MobclickAgent;
@@ -38,13 +36,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
-import okhttp3.Callback;
-import okhttp3.MediaType;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -74,10 +66,6 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
     private ImageView face_recognition;
 
     private String getpath = "";
-
-    private byte[] bitmap1 = null;
-
-    private byte[] bitmap2 = null;
 
     private File file1 = null;
 
@@ -327,13 +315,11 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
             switch (getpath) {
                 case "1":
                     file1 = AppUtil.getInstance().mOutFile;
-                    bitmap1 = AppUtil.getInstance().bitmap2Bytes(bitmap4);
                     positive.setImageBitmap(bitmap4);
                     findViewById(R.id.positive_camera).setVisibility(View.GONE);
                     break;
                 case "2":
                     file2 = AppUtil.getInstance().mOutFile;
-                    bitmap2 = AppUtil.getInstance().bitmap2Bytes(bitmap4);
                     other_sid.setImageBitmap(bitmap4);
                     findViewById(R.id.other_sid_camera).setVisibility(View.GONE);
                     break;
@@ -344,8 +330,7 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
                     face_recognition_camera.setVisibility(View.VISIBLE);
                     break;
             }
-//            personal_camera.setImageBitmap(bitmap);
-//            BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
+            BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
         }
     }
 

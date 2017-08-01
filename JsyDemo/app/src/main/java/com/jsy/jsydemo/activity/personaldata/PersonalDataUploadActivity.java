@@ -151,7 +151,7 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
     }
 
     private void getHttp() {
-        if (file1 != null && file2 != null && file3 != null && file4 != null) {
+        if (file1 == null && file2 == null && file3 == null && file4 == null) {
             ToatUtils.showShort1(this, "您还没有上传图片，不能点击完成");
             return;
         }
