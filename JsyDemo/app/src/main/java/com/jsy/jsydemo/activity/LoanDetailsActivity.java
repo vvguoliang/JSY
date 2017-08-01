@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -533,9 +534,9 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        String datastring = data.getStringExtra("operator");
         if (requestCode == 1000) {
-            String datastring = data.getExtras().getString("operator");
-            if (datastring != null && datastring.equals("1")) {
+            if (!TextUtils.isEmpty(datastring) && datastring.equals("1")) {
                 phone_operator = true;
                 loan_details_phone_operator.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
             } else {
@@ -544,8 +545,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             }
             return;
         } else if (requestCode == 1001) {
-            String datastring = data.getExtras().getString("operator");
-            if (datastring != null && datastring.equals("1")) {
+            if (!TextUtils.isEmpty(datastring) && datastring.equals("1")) {
                 basic_information = true;
                 loan_details_basic_information.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
             } else {
@@ -554,8 +554,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             }
             return;
         } else if (requestCode == 1002) {
-            String datastring = data.getExtras().getString("operator");
-            if (datastring != null && datastring.equals("1")) {
+            if (!TextUtils.isEmpty(datastring) && datastring.equals("1")) {
                 details_id = true;
                 loan_details_id.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
             } else {
@@ -564,8 +563,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             }
             return;
         } else if (requestCode == 1003) {
-            String datastring = data.getExtras().getString("operator");
-            if (datastring != null && datastring.equals("1")) {
+            if (!TextUtils.isEmpty(datastring) && datastring.equals("1")) {
                 details_other = true;
                 loan_details_other.setBackgroundResource(R.mipmap.ic_loan_details_authentication);
             } else {

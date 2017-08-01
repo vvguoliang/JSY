@@ -60,10 +60,11 @@
 
                     <ImageView
                         android:id="@+id/positive"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/common_250dp"
+                        android:layout_height="@dimen/common_150dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/common_10dp"
+                        android:scaleType="fitXY"
                         android:src="@mipmap/ic_personal_data_certifcates_positive" />
 
                     <ImageView
@@ -120,10 +121,11 @@
 
                     <ImageView
                         android:id="@+id/other_sid"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/common_250dp"
+                        android:layout_height="@dimen/common_150dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/common_10dp"
+                        android:scaleType="fitXY"
                         android:src="@mipmap/ic_personal_data_certifactes_ther_sid" />
 
                     <ImageView
@@ -175,14 +177,16 @@
                 <RelativeLayout
                     android:id="@+id/personal_data_certificates_face_recognition"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/common_20dp">
 
                     <ImageView
                         android:id="@+id/face_recognition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/common_250dp"
+                        android:layout_height="@dimen/common_150dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/common_10dp"
+                        android:scaleType="fitXY"
                         android:src="@mipmap/ic_personal_data_certifactes_face_recognition" />
 
                     <ImageView

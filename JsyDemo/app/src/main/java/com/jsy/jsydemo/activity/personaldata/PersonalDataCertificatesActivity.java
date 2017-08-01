@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -72,9 +74,15 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
 
     private byte[] bitmap2 = null;
 
-    private Bitmap bitmap3 = null;
+    private byte[] bitmap3 = null;
+
+    private int bitmapint = 0;
+
+    private Bitmap bitmap4 = null;
 
     private UserCenterRealize userCenterRealize = new UserCenterRealize();
+
+    private Intent intent = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +114,6 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
         other_sid = findViewById(R.id.other_sid);
         face_recognition = findViewById(R.id.face_recognition);
 
-
         findViewById(R.id.personal_data_certificates_positive).setOnClickListener(this);
         findViewById(R.id.personal_data_certificates_other_sid).setOnClickListener(this);
         findViewById(R.id.personal_data_certificates_face_recognition).setOnClickListener(this);
@@ -121,9 +128,9 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_image:
-                Intent intent = new Intent();
-                intent.putExtra("operatr", "2");
-                setResult(1002, intent);
+                intent = new Intent();
+                intent.putExtra("operator", "2");
+                setResult(RESULT_CANCELED, intent);
                 finish();
                 break;
             case R.id.title_complete:
@@ -149,12 +156,17 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
     private void getHttp() {
         Map<String, Object> map = new HashMap<>();
         map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        if (StringUtil.isNullOrEmpty(Arrays.toString(bitmap1)) && StringUtil.isNullOrEmpty(Arrays.toString(bitmap2))) {
+        if (StringUtil.isNullOrEmpty(Arrays.toString(bitmap1)) && StringUtil.isNullOrEmpty(Arrays.toString(bitmap2))
+                && TextUtils.isEmpty(Arrays.toString(bitmap3))) {
+            bitmapint = 0;
             ToatUtils.showShort1(this, "您还没有上传图片，不能点击完成");
             return;
+        } else {
+            bitmapint = 1;
         }
         map.put("photo1", Arrays.toString(bitmap1));
         map.put("photo2", Arrays.toString(bitmap2));
+        map.put("is_face", bitmapint);
         OkHttpManager.postAsync(HttpURL.getInstance().IDCARDADD, "username_add", map, this);
     }
 
@@ -183,9 +195,9 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
             case "username_add":
-                Intent intent = new Intent();
-                intent.putExtra("operatr", "1");
-                setResult(1002, intent);
+                intent = new Intent();
+                intent.putExtra("operator", "1");
+                setResult(RESULT_CANCELED, intent);
                 finish();
                 break;
         }
@@ -301,19 +313,22 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
             }
             //剪裁
         } else if (AppUtil.getInstance().CLIP_IMAGE_REQUEST == requestCode) {
-            bitmap3 = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
+            bitmap4 = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
             switch (getpath) {
                 case "1":
-                    bitmap1 = AppUtil.getInstance().bitmap2Bytes(bitmap3);
-                    positive.setImageBitmap(bitmap3);
+                    bitmap1 = AppUtil.getInstance().bitmap2Bytes(bitmap4);
+                    positive.setImageBitmap(bitmap4);
+                    findViewById(R.id.positive_camera).setVisibility(View.GONE);
                     break;
                 case "2":
-                    bitmap2 = AppUtil.getInstance().bitmap2Bytes(bitmap3);
-                    other_sid.setImageBitmap(bitmap3);
+                    bitmap2 = AppUtil.getInstance().bitmap2Bytes(bitmap4);
+                    other_sid.setImageBitmap(bitmap4);
+                    findViewById(R.id.other_sid_camera).setVisibility(View.GONE);
                     break;
                 case "3":
-                    face_recognition.setImageBitmap(bitmap3);
-                    face_recognition_correct_text.setVisibility(View.GONE);
+                    bitmap3 = AppUtil.getInstance().bitmap2Bytes(bitmap4);
+                    face_recognition.setImageBitmap(bitmap4);
+                    face_recognition_correct_text.setVisibility(View.VISIBLE);
                     face_recognition_camera.setVisibility(View.VISIBLE);
                     break;
             }
@@ -326,9 +341,9 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent intent = new Intent();
+            intent = new Intent();
             intent.putExtra("operator", "2");
-            setResult(1002, intent);
+            setResult(RESULT_CANCELED, intent);
             finish();
             return true;
         }

@@ -125,7 +125,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
             case R.id.title_image:
                 intent = new Intent();
                 intent.putExtra("operator", "2");
-                setResult(1000, intent);
+                setResult(RESULT_CANCELED, intent);
                 finish();
                 break;
             case R.id.operator_no_password:
@@ -399,11 +399,12 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                 if (object.optString("code").equals("0000")) {
                     intent = new Intent();
                     intent.putExtra("operator", "1");
-                    setResult(1000, intent);
+                    setResult(RESULT_CANCELED, intent);
+                    finish();
                 } else {
                     intent = new Intent();
                     intent.putExtra("operator", "2");
-                    setResult(1000, intent);
+                    setResult(RESULT_CANCELED, intent);
                 }
                 finish();
                 break;
@@ -521,7 +522,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             intent = new Intent();
             intent.putExtra("operator", "2");
-            setResult(1000, intent);
+            setResult(RESULT_CANCELED, intent);
             finish();
             return true;
         }

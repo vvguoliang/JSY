@@ -184,8 +184,8 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 break;
             case R.id.title_image:
                 intent = new Intent();
-                intent.putExtra("operatr", "2");
-                setResult(1001, intent);
+                intent.putExtra("operator", "2");
+                setResult(RESULT_CANCELED, intent);
                 finish();
                 break;
         }
@@ -368,10 +368,9 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
             case "basic":
-                Log.e("", "");
-                Intent intent = new Intent();
+                intent = new Intent();
                 intent.putExtra("operator", "1");
-                setResult(1001, intent);
+                setResult(RESULT_CANCELED, intent);
                 finish();
                 break;
         }
@@ -381,9 +380,9 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent intent = new Intent();
+            intent = new Intent();
             intent.putExtra("operator", "2");
-            setResult(1001, intent);
+            setResult(RESULT_CANCELED, intent);
             finish();
             return true;
         }

@@ -84,6 +84,8 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
 
     private String pid = "";
 
+    private Intent intent = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,9 +104,9 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_image:
-                Intent intent = new Intent();
-                intent.putExtra("operatr", "2");
-                setResult(1003, intent);
+                intent = new Intent();
+                intent.putExtra("operator", "2");
+                setResult(RESULT_CANCELED, intent);
                 finish();
                 break;
             case R.id.information_mode_linear:
@@ -324,9 +326,9 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-        Intent intent = new Intent();
-        intent.putExtra("operatr", "1");
-        setResult(1003, intent);
+        intent = new Intent();
+        intent.putExtra("operator", "1");
+        setResult(RESULT_CANCELED, intent);
         finish();
     }
 
@@ -388,9 +390,9 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent intent = new Intent();
+            intent = new Intent();
             intent.putExtra("operator", "2");
-            setResult(1003, intent);
+            setResult(RESULT_CANCELED, intent);
             finish();
             return true;
         }
