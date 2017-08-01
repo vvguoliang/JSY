@@ -156,7 +156,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 if (ischerBox) {
                     if (TextUtils.isEmpty(loan_basic_please_in_editText.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入本人姓名");
-                    } else if (loan_basic_please_in_editText.getText().toString().length() >= 2) {
+                    } else if (loan_basic_please_in_editText.getText().toString().length() < 2) {
                         ToatUtils.showShort1(this, "输入本人姓名不正确");
                         loan_basic_please_in_editText.setText("");
                     } else if (TextUtils.isEmpty(loan_details_basic_id_editText.getText().toString())) {
