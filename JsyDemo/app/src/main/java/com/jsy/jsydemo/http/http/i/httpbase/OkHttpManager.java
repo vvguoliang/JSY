@@ -1,8 +1,11 @@
 package com.jsy.jsydemo.http.http.i.httpbase;
 
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 
+import com.jsy.jsydemo.Share.BitmapUtils;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 
 import java.io.File;
@@ -16,6 +19,8 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -242,7 +247,6 @@ public class OkHttpManager {
         if (params == null) {
             params = new HashMap<>();
         }
-
         /*
          * 如果是3.0之前版本的，构建表单数据是下面的一句
          */
@@ -252,7 +256,6 @@ public class OkHttpManager {
          * 3.0之后版本
          */
         FormBody.Builder builder = new FormBody.Builder();
-
         /*
          * 在这对添加的参数进行遍历，map遍历有四种方式，如果想要了解的可以网上查找
          */
@@ -286,8 +289,6 @@ public class OkHttpManager {
                 String result = response.body().string();
                 deliverDataSuccess(result, name, callBack);
             }
-
-
         });
     }
 
@@ -364,6 +365,118 @@ public class OkHttpManager {
         int separatorIndex = url.lastIndexOf("/");
         String path = (separatorIndex < 0) ? url : url.substring(separatorIndex + 1, url.length());
         return path;
+    }
+
+    public static void uploadAsync(String url, final String name, String uid, String is_face, File name1, File name2, final DataCallBack callBack) {
+        getInstance().inner_postAsync(url, name, uid, is_face, name1, name2, callBack);
+    }
+
+    private void inner_postAsync(String url, final String name, String uid, String is_face, File name1, File name2, final DataCallBack callBack) {
+        /* 第一个要上传的file */
+        RequestBody fileBody1 = RequestBody.create(MediaType.parse("application/octet-stream"), name1);
+
+        /* 第一个要上传的file */
+        RequestBody fileBody2 = RequestBody.create(MediaType.parse("application/octet-stream"), name2);
+
+        String file1Name = "jsy.png";
+        MultipartBody mBody = new MultipartBody.Builder(file1Name).setType(MultipartBody.FORM)
+            /* 上传一个普通的String参数 , key 叫 "p" */
+                .addFormDataPart("uid", uid)
+            /* 底下是上传了两个文件 */
+                .addFormDataPart("photo1", name1.toString(), fileBody1)
+                .addFormDataPart("photo2", name2.toString(), fileBody2)
+                .addFormDataPart("is_face", is_face)
+                .build();
+        //结果返回
+        final Request request = new Request.Builder().url(url).post(mBody).build();
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                deliverDataFailure(request, name, e, callBack);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                deliverDataSuccess(result, name, callBack);
+            }
+        });
+    }
+
+    public static void feedbackAsync(String url, final String name, String uid, String problem, String mobile, String email, File name1,
+                                     final DataCallBack callBack) {
+        getInstance().inner_postAsync(url, name, uid, problem, mobile, email, name1, callBack);
+    }
+
+    private void inner_postAsync(String url, final String name, String uid, String problem, String mobile, String email, File name1,
+                                 final DataCallBack callBack) {
+        /* 第一个要上传的file */
+        RequestBody fileBody1 = RequestBody.create(MediaType.parse("application/octet-stream"), name1);
+
+        String file1Name = "jsy.png";
+        MultipartBody mBody = new MultipartBody.Builder(file1Name).setType(MultipartBody.FORM)
+            /* 上传一个普通的String参数 , key 叫 "p" */
+                .addFormDataPart("user_id", uid)
+            /* 底下是上传了两个文件 */
+                .addFormDataPart("photo", name1.toString(), fileBody1)
+                .addFormDataPart("problem", problem)
+                .addFormDataPart("mobile", mobile)
+                .addFormDataPart("email", email)
+                .build();
+        //结果返回
+        final Request request = new Request.Builder().url(url).post(mBody).build();
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                deliverDataFailure(request, name, e, callBack);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                deliverDataSuccess(result, name, callBack);
+            }
+        });
+    }
+
+
+    public static void uploadAsync(String url, final String name, String uid, File name1, File name2, File name3, File name4,
+                                   final DataCallBack callBack) {
+        getInstance().inner_postAsync(url, name, uid, name1, name2, name3, name4, callBack);
+    }
+
+    private void inner_postAsync(String url, final String name, String uid, File name1, File name2, File name3, File name4,
+                                 final DataCallBack callBack) {
+        /* 第一个要上传的file */
+        RequestBody fileBody1 = RequestBody.create(MediaType.parse("application/octet-stream"), name1);
+        RequestBody fileBody2 = RequestBody.create(MediaType.parse("application/octet-stream"), name2);
+        RequestBody fileBody3 = RequestBody.create(MediaType.parse("application/octet-stream"), name3);
+        RequestBody fileBody4 = RequestBody.create(MediaType.parse("application/octet-stream"), name4);
+
+        String file1Name = "jsy.png";
+        MultipartBody mBody = new MultipartBody.Builder(file1Name).setType(MultipartBody.FORM)
+            /* 上传一个普通的String参数 , key 叫 "p" */
+                .addFormDataPart("uid", uid)
+            /* 底下是上传了两个文件 */
+                .addFormDataPart("photo1", name1.toString(), fileBody1)
+                .addFormDataPart("photo2", name1.toString(), fileBody2)
+                .addFormDataPart("photo3", name1.toString(), fileBody3)
+                .addFormDataPart("photo4", name1.toString(), fileBody4)
+                .build();
+        //结果返回
+        final Request request = new Request.Builder().url(url).post(mBody).build();
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                deliverDataFailure(request, name, e, callBack);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                deliverDataSuccess(result, name, callBack);
+            }
+        });
     }
 
 }

@@ -57,6 +57,8 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
 
     private Bitmap bitmap;
 
+    private File file = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,18 +112,12 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void getHttp() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("user_id", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        map.put("problem", information_corporate_editText.getText().toString());
-        if(!StringUtil.isNullOrEmpty(bitmap.toString())){
-            map.put("photo", bitmap);
+        if (file != null) {
+            OkHttpManager.feedbackAsync(HttpURL.getInstance().FEEDBACK, "feedback",
+                    SharedPreferencesUtils.get(this, "uid", "").toString(),
+                    information_corporate_editText.getText().toString(), feedback_path_editText.getText().toString(),
+                    feedback_path_editText.getText().toString(), file, this);
         }
-        if (StringUtil.isMobileNO(feedback_path_editText.getText().toString())) {
-            map.put("mobile", feedback_path_editText.getText().toString());
-        } else {
-            map.put("email", feedback_path_editText.getText().toString());
-        }
-        OkHttpManager.postAsync(HttpURL.getInstance().FEEDBACK, "feedback", map, this);
     }
 
     @Override
@@ -243,6 +239,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         } else if (AppUtil.getInstance().CLIP_IMAGE_REQUEST == requestCode) {
             Log.d("剪裁得到图片", AppUtil.getInstance().mOutFile.toString());
             Bitmap bitmap = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
+            file = AppUtil.getInstance().mOutFile;
             feedback_image.setImageBitmap(bitmap);
             this.bitmap = bitmap;
             feedback_path.setVisibility(View.GONE);

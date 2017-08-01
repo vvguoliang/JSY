@@ -49,6 +49,8 @@ public class HttpURL implements Serializable {
 
     public String HTTP_DETAILS = "https://www.jishiyu007.com/app/zhiqinggaozhi_bj.html";
 
+    private String HTTP_PATH = "http://47.93.122.140:8001//index.php?g=app";
+
     public void initUrl(Context context) {
         if (SharedPreferencesUtils.contains(context, HTTP_URL_KEY)) {
             HTTP_URL = SharedPreferencesUtils.get(context, HTTP_URL_KEY, HTTP_URL).toString();
@@ -96,7 +98,7 @@ public class HttpURL implements Serializable {
 
     public String USERINFO = HTTP_URL + "&m=userinfo&a=postDetail";
 
-    public String FEEDBACK = HTTP_URL + "&m=feedback&a=postAdd";
+    public String FEEDBACK = HTTP_PATH + "&m=feedback&a=postAdd";
 
     public String USERINFOADD = HTTP_URL + "&m=userinfo&a=postAdd";
 
@@ -124,13 +126,13 @@ public class HttpURL implements Serializable {
 
     public String CARLIST = HTTP_URL + "&m=userdetail&a=car_list";
 
-    public String PARPERSADD = HTTP_URL + "&m=userdetail&a=parpers_add";
+    public String PARPERSADD = HTTP_PATH + "&m=userdetail&a=parpers_add";
 
     public String PARPERSLIST = HTTP_URL + "&m=userdetail&a=parpers_list";
 
     public String STATUS = HTTP_URL + "&m=userinfo&a=status";
 
-    public String IDCARDADD = HTTP_URL + "&m=userdetail&a=idcard_add";
+    public String IDCARDADD = HTTP_PATH + "&m=userdetail&a=idcard_add";
 
     public String SHARE = HTTP_URL + "&m=userinfo&a=share";
 

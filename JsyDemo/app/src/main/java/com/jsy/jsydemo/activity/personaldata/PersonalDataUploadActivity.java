@@ -57,10 +57,10 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
 
     private ImageView upload_vehicle;
 
-    private byte[] bitmap1 = null;
-    private byte[] bitmap2 = null;
-    private byte[] bitmap3 = null;
-    private byte[] bitmap4 = null;
+    private File file1 = null;
+    private File file2 = null;
+    private File file3 = null;
+    private File file4 = null;
 
     private UserCenterRealize userCenterRealize = new UserCenterRealize();
     private String getpath = "0";
@@ -151,18 +151,12 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
     }
 
     private void getHttp() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        if (StringUtil.isNullOrEmpty(Arrays.toString(bitmap1)) && StringUtil.isNullOrEmpty(Arrays.toString(bitmap2)) &&
-                StringUtil.isNullOrEmpty(Arrays.toString(bitmap3)) && StringUtil.isNullOrEmpty(Arrays.toString(bitmap4))) {
+        if (file1 != null && file2 != null && file3 != null && file4 != null) {
             ToatUtils.showShort1(this, "您还没有上传图片，不能点击完成");
             return;
         }
-        map.put("photo1", Arrays.toString(bitmap1));
-        map.put("photo2", Arrays.toString(bitmap2));
-        map.put("photo3", Arrays.toString(bitmap3));
-        map.put("photo4", Arrays.toString(bitmap4));
-        OkHttpManager.postAsync(HttpURL.getInstance().PARPERSADD, "parees", map, this);
+        OkHttpManager.uploadAsync(HttpURL.getInstance().PARPERSADD, "parees",
+                SharedPreferencesUtils.get(this, "uid", "").toString(), file1, file2, file3, file4, this);
     }
 
     private void setGetpath() {
@@ -349,19 +343,19 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
         } else if (AppUtil.getInstance().CLIP_IMAGE_REQUEST == requestCode) {
             switch (getpath) {
                 case "1":
-                    bitmap1 = AppUtil.getInstance().bitmap2Bytes(BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile));
+                    file1 = AppUtil.getInstance().mOutFile;
                     upload_front_id.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
                     break;
                 case "2":
-                    bitmap2 = AppUtil.getInstance().bitmap2Bytes(BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile));
+                    file2 = AppUtil.getInstance().mOutFile;
                     upload_front_hold_id.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
                     break;
                 case "3":
-                    bitmap3 = AppUtil.getInstance().bitmap2Bytes(BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile));
+                    file3 = AppUtil.getInstance().mOutFile;
                     upload_hous.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
                     break;
                 case "4":
-                    bitmap4 = AppUtil.getInstance().bitmap2Bytes(BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile));
+                    file4 = AppUtil.getInstance().mOutFile;
                     upload_vehicle.setImageResource(R.mipmap.ic_personal_data_upload_front_id_success);
                     break;
             }

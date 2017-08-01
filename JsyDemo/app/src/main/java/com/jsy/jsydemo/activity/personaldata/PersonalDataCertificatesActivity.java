@@ -39,7 +39,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 /**
  * Created by vvguoliang on 2017/6/27.
@@ -73,6 +76,10 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
     private byte[] bitmap1 = null;
 
     private byte[] bitmap2 = null;
+
+    private File file1 = null;
+
+    private File file2 = null;
 
     private byte[] bitmap3 = null;
 
@@ -154,20 +161,15 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
     }
 
     private void getHttp() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        if (StringUtil.isNullOrEmpty(Arrays.toString(bitmap1)) && StringUtil.isNullOrEmpty(Arrays.toString(bitmap2))
-                && TextUtils.isEmpty(Arrays.toString(bitmap3))) {
+        if (file1 != null && file2 != null && TextUtils.isEmpty(Arrays.toString(bitmap3))) {
             bitmapint = 0;
             ToatUtils.showShort1(this, "您还没有上传图片，不能点击完成");
             return;
         } else {
             bitmapint = 1;
         }
-        map.put("photo1", Arrays.toString(bitmap1));
-        map.put("photo2", Arrays.toString(bitmap2));
-        map.put("is_face", bitmapint);
-        OkHttpManager.postAsync(HttpURL.getInstance().IDCARDADD, "username_add", map, this);
+        OkHttpManager.uploadAsync(HttpURL.getInstance().IDCARDADD, "username_add",
+                SharedPreferencesUtils.get(this, "uid", "").toString(), bitmapint + "", file1, file2, this);
     }
 
     @Override
@@ -316,11 +318,13 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
             bitmap4 = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
             switch (getpath) {
                 case "1":
+                    file1 = AppUtil.getInstance().mOutFile;
                     bitmap1 = AppUtil.getInstance().bitmap2Bytes(bitmap4);
                     positive.setImageBitmap(bitmap4);
                     findViewById(R.id.positive_camera).setVisibility(View.GONE);
                     break;
                 case "2":
+                    file2 = AppUtil.getInstance().mOutFile;
                     bitmap2 = AppUtil.getInstance().bitmap2Bytes(bitmap4);
                     other_sid.setImageBitmap(bitmap4);
                     findViewById(R.id.other_sid_camera).setVisibility(View.GONE);
