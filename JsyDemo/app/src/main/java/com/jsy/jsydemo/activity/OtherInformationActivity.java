@@ -30,6 +30,8 @@ import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -326,10 +328,15 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-        intent = new Intent();
-        intent.putExtra("operator", "1");
-        setResult(RESULT_CANCELED, intent);
-        finish();
+        JSONObject object = new JSONObject(result);
+        if (object.optString("code").equals("0000")) {
+            intent = new Intent();
+            intent.putExtra("operator", "1");
+            setResult(RESULT_CANCELED, intent);
+            finish();
+        } else {
+            ToatUtils.showShort1(this, object.optString("msg"));
+        }
     }
 
 

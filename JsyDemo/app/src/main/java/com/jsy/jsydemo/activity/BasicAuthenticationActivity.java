@@ -29,6 +29,8 @@ import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -161,7 +163,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                         loan_basic_please_in_editText.setText("");
                     } else if (TextUtils.isEmpty(loan_details_basic_id_editText.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入身份证号");
-                    } else if (IdcardValidator.getInstance().isValidatedAllIdcard(loan_details_basic_id_editText.getText().toString())) {
+                    } else if (!IdcardValidator.getInstance().isValidatedAllIdcard(loan_details_basic_id_editText.getText().toString())) {
                         ToatUtils.showShort1(this, "请输入正确身份证号");
                         loan_details_basic_id_editText.setText("");
                     } else if (TextUtils.isEmpty(loan_basic_application.getText().toString())) {
@@ -368,10 +370,15 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
             case "basic":
-                intent = new Intent();
-                intent.putExtra("operator", "1");
-                setResult(RESULT_CANCELED, intent);
-                finish();
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    intent = new Intent();
+                    intent.putExtra("operator", "1");
+                    setResult(RESULT_CANCELED, intent);
+                    finish();
+                } else {
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                }
                 break;
         }
     }

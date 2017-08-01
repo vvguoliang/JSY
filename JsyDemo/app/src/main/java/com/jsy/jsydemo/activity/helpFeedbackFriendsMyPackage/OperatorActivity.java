@@ -219,7 +219,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
         map.put("apiKey", "0618854278903691");
         map.put("version", "1.0.0");
         map.put("method", "api.mobile.area");
-        map.put("mobileNo", SharedPreferencesUtils.get(this, "username", "").toString());
+        map.put("mobileNo", operator_phone.getText().toString().trim());
         OkHttpManager.postAsync(HttpURL.getInstance().SIGN, "product_phone", map, this);
     }
 
@@ -402,11 +402,8 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
                     setResult(RESULT_CANCELED, intent);
                     finish();
                 } else {
-                    intent = new Intent();
-                    intent.putExtra("operator", "2");
-                    setResult(RESULT_CANCELED, intent);
+                    ToatUtils.showShort1(this, object.optString("msg"));
                 }
-                finish();
                 break;
         }
     }

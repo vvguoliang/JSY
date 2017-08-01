@@ -33,6 +33,8 @@ import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.BottomDialog;
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -197,9 +199,15 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
             case "username_add":
-                intent = new Intent();
-                intent.putExtra("operator", "1");
-                setResult(RESULT_CANCELED, intent);
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    intent = new Intent();
+                    intent.putExtra("operator", "1");
+                    setResult(RESULT_CANCELED, intent);
+                    finish();
+                } else {
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                }
                 finish();
                 break;
         }
