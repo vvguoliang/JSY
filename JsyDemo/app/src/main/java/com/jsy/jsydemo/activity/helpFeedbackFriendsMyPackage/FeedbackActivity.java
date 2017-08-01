@@ -56,12 +56,12 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_feedback);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.act_feedback );
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.getInstance().getW_add_B(this);
+            ImmersiveUtils.getInstance().getW_add_B( this );
         }
     }
 
@@ -76,29 +76,29 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.feedback_image:
                 userCenterRealize = new UserCenterRealize();
-                userCenterRealize.getFileByPhotoAlbum(this);
+                userCenterRealize.getFileByPhotoAlbum( this );
                 break;
         }
     }
 
     @Override
     protected void findViewById() {
-        findViewById(R.id.title_image).setVisibility(View.VISIBLE);
-        findViewById(R.id.title_image).setOnClickListener(this);
-        TextView title_view = findViewById(R.id.title_view);
-        title_view.setText(this.getString(R.string.name_loan_personal_feedback));
+        findViewById( R.id.title_image ).setVisibility( View.VISIBLE );
+        findViewById( R.id.title_image ).setOnClickListener( this );
+        TextView title_view = findViewById( R.id.title_view );
+        title_view.setText( this.getString( R.string.name_loan_personal_feedback ) );
 
-        information_corporate_editText = findViewById(R.id.information_corporate_editText);
-        feedback_image = findViewById(R.id.feedback_image);
-        feedback_path = findViewById(R.id.feedback_path);
-        feedback_path_editText = findViewById(R.id.feedback_path_editText);
-        findViewById(R.id.feedback_path_button).setOnClickListener(this);
-        feedback_image.setOnClickListener(this);
-        information_corporate_editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(num)});
-        information_corporate_editText.addTextChangedListener(textWatcher);
+        information_corporate_editText = findViewById( R.id.information_corporate_editText );
+        feedback_image = findViewById( R.id.feedback_image );
+        feedback_path = findViewById( R.id.feedback_path );
+        feedback_path_editText = findViewById( R.id.feedback_path_editText );
+        findViewById( R.id.feedback_path_button ).setOnClickListener( this );
+        feedback_image.setOnClickListener( this );
+        information_corporate_editText.setFilters( new InputFilter[]{new InputFilter.LengthFilter( num )} );
+        information_corporate_editText.addTextChangedListener( textWatcher );
 
-        feedback_path_text = findViewById(R.id.feedback_path_text);
-        feedback_path_text.setText("0/" + num);
+        feedback_path_text = findViewById( R.id.feedback_path_text );
+        feedback_path_text.setText( "0/" + num );
     }
 
     @Override
@@ -107,34 +107,32 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void getHttp() {
-        if (file != null) {
-            OkHttpManager.feedbackAsync(HttpURL.getInstance().FEEDBACK, "feedback",
-                    SharedPreferencesUtils.get(this, "uid", "").toString(),
-                    information_corporate_editText.getText().toString(), feedback_path_editText.getText().toString(),
-                    feedback_path_editText.getText().toString(), file, this);
-        }
+        OkHttpManager.feedbackAsync( HttpURL.getInstance().FEEDBACK, "feedback",
+                SharedPreferencesUtils.get( this, "uid", "" ).toString(),
+                information_corporate_editText.getText().toString(), feedback_path_editText.getText().toString(),
+                feedback_path_editText.getText().toString(), file, this );
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+        MobclickAgent.onResume( this );
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+        MobclickAgent.onPause( this );
     }
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
-        ToatUtils.showShort1(this, this.getString(R.string.network_timed));
+        ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
     }
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-        if (name.equals("feedback")) {
+        if (name.equals( "feedback" )) {
             finish();
         }
     }
@@ -153,90 +151,90 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void afterTextChanged(Editable s) {
             if (s.length() > num - 80) {
-                ToatUtils.showShort1(FeedbackActivity.this, "您输入的文字剩下不多了,请简介概括说明");
+                ToatUtils.showShort1( FeedbackActivity.this, "您输入的文字剩下不多了,请简介概括说明" );
             }
-            feedback_path_text.setText(s.length() + "/" + num);
+            feedback_path_text.setText( s.length() + "/" + num );
         }
     };
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult( requestCode, permissions, grantResults );
         if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_CAMERA) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                userCenterRealize.getFileByPhotograph(this);
+                userCenterRealize.getFileByPhotograph( this );
             } else {
-                Toast.makeText(this, "请授予相机权限", Toast.LENGTH_SHORT).show();
+                Toast.makeText( this, "请授予相机权限", Toast.LENGTH_SHORT ).show();
             }
         } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_READ_SD) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                userCenterRealize.getFileByPhotograph(this);
+                userCenterRealize.getFileByPhotograph( this );
             } else {
-                Toast.makeText(this, "请授予读SD卡权限", Toast.LENGTH_SHORT).show();
+                Toast.makeText( this, "请授予读SD卡权限", Toast.LENGTH_SHORT ).show();
             }
         } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                userCenterRealize.getFileByPhotograph(this);
+                userCenterRealize.getFileByPhotograph( this );
             } else {
-                Toast.makeText(this, "请授予写SD卡权限", Toast.LENGTH_SHORT).show();
+                Toast.makeText( this, "请授予写SD卡权限", Toast.LENGTH_SHORT ).show();
             }
         } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_READ_SD_PHOTOALBUM) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                userCenterRealize.startPhotoAlbum(this);
+                userCenterRealize.startPhotoAlbum( this );
             } else {
-                Toast.makeText(this, "请授予读SD卡权限", Toast.LENGTH_SHORT).show();
+                Toast.makeText( this, "请授予读SD卡权限", Toast.LENGTH_SHORT ).show();
             }
         } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK_PHOTOALBUM) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                userCenterRealize.startPhotoAlbum(this);
+                userCenterRealize.startPhotoAlbum( this );
             } else {
-                Toast.makeText(this, "请授予写SD卡权限", Toast.LENGTH_SHORT).show();
+                Toast.makeText( this, "请授予写SD卡权限", Toast.LENGTH_SHORT ).show();
             }
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult( requestCode, resultCode, data );
         // 拍照
         if (AppUtil.getInstance().CAPTURE_IMAGE_REQUEST == requestCode) {
             if (RESULT_OK == resultCode) {
-                Log.d("拍照得到图片", AppUtil.getInstance().mImageFile.toString());
-                int mDegree = BitmapUtils.getBitmapDegree(AppUtil.getInstance().mImageFile.getAbsolutePath());
-                Log.d("拍照得到图片的角度：", String.valueOf(mDegree));
+                Log.d( "拍照得到图片", AppUtil.getInstance().mImageFile.toString() );
+                int mDegree = BitmapUtils.getBitmapDegree( AppUtil.getInstance().mImageFile.getAbsolutePath() );
+                Log.d( "拍照得到图片的角度：", String.valueOf( mDegree ) );
                 if (mDegree == 90 || mDegree == 180 || mDegree == 270) {
                     try {
-                        Bitmap mBitmap = BitmapUtils.getFileBitmap(AppUtil.getInstance().mImageFile);
-                        Bitmap bitmap = BitmapUtils.rotateBitmapByDegree(mBitmap, mDegree);
-                        if (BitmapUtils.saveBitmapFile(bitmap, AppUtil.getInstance().mImageFile)) {
-                            userCenterRealize.startClip(this, AppUtil.getInstance().mImageFile);
+                        Bitmap mBitmap = BitmapUtils.getFileBitmap( AppUtil.getInstance().mImageFile );
+                        Bitmap bitmap = BitmapUtils.rotateBitmapByDegree( mBitmap, mDegree );
+                        if (BitmapUtils.saveBitmapFile( bitmap, AppUtil.getInstance().mImageFile )) {
+                            userCenterRealize.startClip( this, AppUtil.getInstance().mImageFile );
                         } else {
-                            Toast.makeText(this, "保存图片失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText( this, "保存图片失败", Toast.LENGTH_SHORT ).show();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Toast.makeText(this, "读取图片失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText( this, "读取图片失败", Toast.LENGTH_SHORT ).show();
                     }
                 } else {
-                    userCenterRealize.startClip(this, AppUtil.getInstance().mImageFile);
+                    userCenterRealize.startClip( this, AppUtil.getInstance().mImageFile );
                 }
             }
             //相册
         } else if (AppUtil.getInstance().LOAD_IMAGE_REQUEST == requestCode) {
             if (data != null) {
                 Uri uri = data.getData();
-                String filepath = BitmapUtils.FileUtils.getImageAbsolutePath(this, uri);
-                Log.d("相册获取到的文件路径", filepath);
-                File file = new File(filepath);
-                userCenterRealize.startClip(this, file);
+                String filepath = BitmapUtils.FileUtils.getImageAbsolutePath( this, uri );
+                Log.d( "相册获取到的文件路径", filepath );
+                File file = new File( filepath );
+                userCenterRealize.startClip( this, file );
             }
             //剪裁
         } else if (AppUtil.getInstance().CLIP_IMAGE_REQUEST == requestCode) {
-            Bitmap bitmap = BitmapUtils.getFileBitmap(AppUtil.getInstance().mOutFile);
+            Bitmap bitmap = BitmapUtils.getFileBitmap( AppUtil.getInstance().mOutFile );
             file = AppUtil.getInstance().mOutFile;
-            feedback_image.setImageBitmap(bitmap);
-            feedback_path.setVisibility(View.GONE);
-            BitmapUtils.deleteFile(AppUtil.getInstance().mImageFile);
+            feedback_image.setImageBitmap( bitmap );
+            feedback_path.setVisibility( View.GONE );
+            BitmapUtils.deleteFile( AppUtil.getInstance().mImageFile );
         }
     }
 }

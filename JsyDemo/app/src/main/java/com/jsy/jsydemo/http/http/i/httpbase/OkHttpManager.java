@@ -1,12 +1,10 @@
 package com.jsy.jsydemo.http.http.i.httpbase;
 
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
 
-import com.jsy.jsydemo.Share.BitmapUtils;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
+import com.jsy.jsydemo.utils.ToatUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -63,9 +61,9 @@ public class OkHttpManager {
         /*
           在这里直接设置连接超时.读取超时，写入超时
          */
-        mClient.newBuilder().connectTimeout(10 * 1000, TimeUnit.SECONDS);
-        mClient.newBuilder().readTimeout(10 * 1000, TimeUnit.SECONDS);
-        mClient.newBuilder().writeTimeout(10 * 1000, TimeUnit.SECONDS);
+        mClient.newBuilder().connectTimeout( 10 * 1000, TimeUnit.SECONDS );
+        mClient.newBuilder().readTimeout( 10 * 1000, TimeUnit.SECONDS );
+        mClient.newBuilder().writeTimeout( 10 * 1000, TimeUnit.SECONDS );
 
         /*
          * 如果是用的3.0之前的版本  使用以下直接设置连接超时.读取超时，写入超时
@@ -79,7 +77,7 @@ public class OkHttpManager {
         /*
          * 初始化handler
          */
-        mHandler = new Handler(Looper.getMainLooper());
+        mHandler = new Handler( Looper.getMainLooper() );
     }
 
 
@@ -107,7 +105,7 @@ public class OkHttpManager {
     public static Response getSync(String url) {
 
         //通过获取到的实例来调用内部方法
-        return sOkHttpManager.inner_getSync(url);
+        return sOkHttpManager.inner_getSync( url );
     }
 
     /*
@@ -117,11 +115,11 @@ public class OkHttpManager {
      * @return
      */
     private Response inner_getSync(String url) {
-        Request request = new Request.Builder().url(url).build();
+        Request request = new Request.Builder().url( url ).build();
         Response response = null;
         try {
             //同步请求返回的是response对象
-            response = mClient.newCall(request).execute();
+            response = mClient.newCall( request ).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -135,7 +133,7 @@ public class OkHttpManager {
      * @return
      */
     public static String getSyncString(String url) {
-        return sOkHttpManager.inner_getSyncString(url);
+        return sOkHttpManager.inner_getSyncString( url );
     }
 
 
@@ -148,7 +146,7 @@ public class OkHttpManager {
             /*
              * 把取得到的结果转为字符串，这里最好用string()
              */
-            result = inner_getSync(url).body().string();
+            result = inner_getSync( url ).body().string();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -157,7 +155,7 @@ public class OkHttpManager {
 
     //-------------------------异步的方式请求数据--------------------------
     public static void getAsync(String url, String name, DataCallBack callBack) {
-        getInstance().inner_getAsync(url, name, callBack);
+        getInstance().inner_getAsync( url, name, callBack );
     }
 
     /*
@@ -168,12 +166,12 @@ public class OkHttpManager {
      * @return
      */
     private void inner_getAsync(String url, final String name, final DataCallBack callBack) {
-        final Request request = new Request.Builder().url(url).build();
+        final Request request = new Request.Builder().url( url ).build();
 
-        mClient.newCall(request).enqueue(new Callback() {
+        mClient.newCall( request ).enqueue( new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                deliverDataFailure(request, name, e, callBack);
+                deliverDataFailure( request, name, e, callBack );
             }
 
             @Override
@@ -182,11 +180,11 @@ public class OkHttpManager {
                 try {
                     result = response.body().string();
                 } catch (IOException e) {
-                    deliverDataFailure(request, name, e, callBack);
+                    deliverDataFailure( request, name, e, callBack );
                 }
-                deliverDataSuccess(result, name, callBack);
+                deliverDataSuccess( result, name, callBack );
             }
-        });
+        } );
     }
 
 
@@ -201,14 +199,14 @@ public class OkHttpManager {
         /*
          * 在这里使用异步处理
          */
-        mHandler.post(new Runnable() {
+        mHandler.post( new Runnable() {
             @Override
             public void run() {
                 if (callBack != null) {
-                    callBack.requestFailure(request, name, e);
+                    callBack.requestFailure( request, name, e );
                 }
             }
-        });
+        } );
     }
 
     /*
@@ -221,24 +219,24 @@ public class OkHttpManager {
         /*
          * 在这里使用异步线程处理
          */
-        mHandler.post(new Runnable() {
+        mHandler.post( new Runnable() {
             @Override
             public void run() {
                 if (callBack != null) {
                     try {
-                        callBack.requestSuccess(result, name);
+                        callBack.requestSuccess( result, name );
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
-        });
+        } );
     }
 
     //-------------------------提交表单--------------------------
 
     public static void postAsync(String url, String name, Map<String, Object> params, DataCallBack callBack) {
-        getInstance().inner_postAsync(url, name, params, callBack);
+        getInstance().inner_postAsync( url, name, params, callBack );
     }
 
     private void inner_postAsync(String url, final String name, Map<String, Object> params, final DataCallBack callBack) {
@@ -273,29 +271,29 @@ public class OkHttpManager {
             /*
              * 把key和value添加到formbody中
              */
-            builder.add(key, value);
+            builder.add( key, value );
         }
         requestBody = builder.build();
         //结果返回
-        final Request request = new Request.Builder().url(url).post(requestBody).build();
-        mClient.newCall(request).enqueue(new Callback() {
+        final Request request = new Request.Builder().url( url ).post( requestBody ).build();
+        mClient.newCall( request ).enqueue( new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                deliverDataFailure(request, name, e, callBack);
+                deliverDataFailure( request, name, e, callBack );
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String result = response.body().string();
-                deliverDataSuccess(result, name, callBack);
+                deliverDataSuccess( result, name, callBack );
             }
-        });
+        } );
     }
 
 
     //-------------------------文件下载--------------------------
     public static void downloadAsync(String url, String name, String desDir, DataCallBack callBack) {
-        getInstance().inner_downloadAsync(url, name, desDir, callBack);
+        getInstance().inner_downloadAsync( url, name, desDir, callBack );
     }
 
     /*
@@ -306,11 +304,11 @@ public class OkHttpManager {
      * @param callBack
      */
     private void inner_downloadAsync(final String url, final String name, final String desDir, final DataCallBack callBack) {
-        final Request request = new Request.Builder().url(url).build();
-        mClient.newCall(request).enqueue(new Callback() {
+        final Request request = new Request.Builder().url( url ).build();
+        mClient.newCall( request ).enqueue( new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                deliverDataFailure(request, name, e, callBack);
+                deliverDataFailure( request, name, e, callBack );
             }
 
             @Override
@@ -323,23 +321,23 @@ public class OkHttpManager {
                 FileOutputStream fileOutputStream = null;
                 try {
                     //文件名和目标地址
-                    File file = new File(desDir, getFileName(url));
+                    File file = new File( desDir, getFileName( url ) );
                     //把请求回来的response对象装换为字节流
                     inputStream = response.body().byteStream();
-                    fileOutputStream = new FileOutputStream(file);
+                    fileOutputStream = new FileOutputStream( file );
                     int len;
                     byte[] bytes = new byte[2048];
                     //循环读取数据
-                    while ((len = inputStream.read(bytes)) != -1) {
-                        fileOutputStream.write(bytes, 0, len);
+                    while ((len = inputStream.read( bytes )) != -1) {
+                        fileOutputStream.write( bytes, 0, len );
                     }
                     //关闭文件输出流
                     fileOutputStream.flush();
                     //调用分发数据成功的方法
-                    deliverDataSuccess(file.getAbsolutePath(), name, callBack);
+                    deliverDataSuccess( file.getAbsolutePath(), name, callBack );
                 } catch (IOException e) {
                     //如果失败，调用此方法
-                    deliverDataFailure(request, name, e, callBack);
+                    deliverDataFailure( request, name, e, callBack );
                     e.printStackTrace();
                 } finally {
                     if (inputStream != null) {
@@ -352,7 +350,7 @@ public class OkHttpManager {
                 }
             }
 
-        });
+        } );
     }
 
     /*
@@ -362,121 +360,224 @@ public class OkHttpManager {
      * @return
      */
     private String getFileName(String url) {
-        int separatorIndex = url.lastIndexOf("/");
-        String path = (separatorIndex < 0) ? url : url.substring(separatorIndex + 1, url.length());
+        int separatorIndex = url.lastIndexOf( "/" );
+        String path = (separatorIndex < 0) ? url : url.substring( separatorIndex + 1, url.length() );
         return path;
     }
 
     public static void uploadAsync(String url, final String name, String uid, String is_face, File name1, File name2, final DataCallBack callBack) {
-        getInstance().inner_postAsync(url, name, uid, is_face, name1, name2, callBack);
+        getInstance().inner_postAsync( url, name, uid, is_face, name1, name2, callBack );
     }
 
     private void inner_postAsync(String url, final String name, String uid, String is_face, File name1, File name2, final DataCallBack callBack) {
         /* 第一个要上传的file */
-        RequestBody fileBody1 = RequestBody.create(MediaType.parse("application/octet-stream"), name1);
+        RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
 
         /* 第一个要上传的file */
-        RequestBody fileBody2 = RequestBody.create(MediaType.parse("application/octet-stream"), name2);
+        RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
 
         String file1Name = "jsy.png";
-        MultipartBody mBody = new MultipartBody.Builder(file1Name).setType(MultipartBody.FORM)
+        MultipartBody mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
             /* 上传一个普通的String参数 , key 叫 "p" */
-                .addFormDataPart("uid", uid)
+                .addFormDataPart( "uid", uid )
             /* 底下是上传了两个文件 */
-                .addFormDataPart("photo1", name1.toString(), fileBody1)
-                .addFormDataPart("photo2", name2.toString(), fileBody2)
-                .addFormDataPart("is_face", is_face)
+                .addFormDataPart( "photo1", name1.toString(), fileBody1 )
+                .addFormDataPart( "photo2", name2.toString(), fileBody2 )
+                .addFormDataPart( "is_face", is_face )
                 .build();
         //结果返回
-        final Request request = new Request.Builder().url(url).post(mBody).build();
-        mClient.newCall(request).enqueue(new Callback() {
+        final Request request = new Request.Builder().url( url ).post( mBody ).build();
+        mClient.newCall( request ).enqueue( new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                deliverDataFailure(request, name, e, callBack);
+                deliverDataFailure( request, name, e, callBack );
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String result = response.body().string();
-                deliverDataSuccess(result, name, callBack);
+                deliverDataSuccess( result, name, callBack );
             }
-        });
+        } );
     }
 
     public static void feedbackAsync(String url, final String name, String uid, String problem, String mobile, String email, File name1,
                                      final DataCallBack callBack) {
-        getInstance().inner_postAsync(url, name, uid, problem, mobile, email, name1, callBack);
+        getInstance().inner_postAsync( url, name, uid, problem, mobile, email, name1, callBack );
     }
 
     private void inner_postAsync(String url, final String name, String uid, String problem, String mobile, String email, File name1,
                                  final DataCallBack callBack) {
-        /* 第一个要上传的file */
-        RequestBody fileBody1 = RequestBody.create(MediaType.parse("application/octet-stream"), name1);
-
-        String file1Name = "jsy.png";
-        MultipartBody mBody = new MultipartBody.Builder(file1Name).setType(MultipartBody.FORM)
+        MultipartBody mBody;
+        if (name1 != null) {
+ /* 第一个要上传的file */
+            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            String file1Name = "jsy.png";
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
             /* 上传一个普通的String参数 , key 叫 "p" */
-                .addFormDataPart("user_id", uid)
+                    .addFormDataPart( "user_id", uid )
             /* 底下是上传了两个文件 */
-                .addFormDataPart("photo", name1.toString(), fileBody1)
-                .addFormDataPart("problem", problem)
-                .addFormDataPart("mobile", mobile)
-                .addFormDataPart("email", email)
-                .build();
+                    .addFormDataPart( "photo", name1.toString(), fileBody1 )
+                    .addFormDataPart( "problem", problem )
+                    .addFormDataPart( "mobile", mobile )
+                    .addFormDataPart( "email", email )
+                    .build();
+        } else {
+            String file1Name = "jsy.png";
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+            /* 上传一个普通的String参数 , key 叫 "p" */
+                    .addFormDataPart( "user_id", uid )
+            /* 底下是上传了两个文件 */
+                    .addFormDataPart( "problem", problem )
+                    .addFormDataPart( "mobile", mobile )
+                    .addFormDataPart( "email", email )
+                    .build();
+        }
         //结果返回
-        final Request request = new Request.Builder().url(url).post(mBody).build();
-        mClient.newCall(request).enqueue(new Callback() {
+        final Request request = new Request.Builder().url( url ).post( mBody ).build();
+        mClient.newCall( request ).enqueue( new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                deliverDataFailure(request, name, e, callBack);
+                deliverDataFailure( request, name, e, callBack );
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String result = response.body().string();
-                deliverDataSuccess(result, name, callBack);
+                deliverDataSuccess( result, name, callBack );
             }
-        });
+        } );
     }
 
 
     public static void uploadAsync(String url, final String name, String uid, File name1, File name2, File name3, File name4,
                                    final DataCallBack callBack) {
-        getInstance().inner_postAsync(url, name, uid, name1, name2, name3, name4, callBack);
+        getInstance().inner_postAsync( url, name, uid, name1, name2, name3, name4, callBack );
     }
 
     private void inner_postAsync(String url, final String name, String uid, File name1, File name2, File name3, File name4,
                                  final DataCallBack callBack) {
-        /* 第一个要上传的file */
-        RequestBody fileBody1 = RequestBody.create(MediaType.parse("application/octet-stream"), name1);
-        RequestBody fileBody2 = RequestBody.create(MediaType.parse("application/octet-stream"), name2);
-        RequestBody fileBody3 = RequestBody.create(MediaType.parse("application/octet-stream"), name3);
-        RequestBody fileBody4 = RequestBody.create(MediaType.parse("application/octet-stream"), name4);
-
         String file1Name = "jsy.png";
-        MultipartBody mBody = new MultipartBody.Builder(file1Name).setType(MultipartBody.FORM)
-            /* 上传一个普通的String参数 , key 叫 "p" */
-                .addFormDataPart("uid", uid)
-            /* 底下是上传了两个文件 */
-                .addFormDataPart("photo1", name1.toString(), fileBody1)
-                .addFormDataPart("photo2", name1.toString(), fileBody2)
-                .addFormDataPart("photo3", name1.toString(), fileBody3)
-                .addFormDataPart("photo4", name1.toString(), fileBody4)
-                .build();
+        MultipartBody mBody = null;
+        if (name1 != null && name2 != null && name3 != null && name4 != null) {
+            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo1", name1.toString(), fileBody1 )
+                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
+                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
+                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .build();
+
+        } else if (name1 != null && name2 != null && name3 != null) {
+            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo1", name1.toString(), fileBody1 )
+                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
+                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
+                    .build();
+        } else if (name2 != null && name3 != null && name4 != null) {
+            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
+                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
+                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .build();
+        } else if (name1 != null && name3 != null && name4 != null) {
+            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo1", name1.toString(), fileBody1 )
+                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
+                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .build();
+        } else if (name1 != null && name2 != null && name4 != null) {
+            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo1", name1.toString(), fileBody1 )
+                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
+                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .build();
+        } else if (name1 != null && name2 != null) {
+            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo1", name1.toString(), fileBody1 )
+                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
+                    .build();
+        } else if (name1 != null && name3 != null) {
+            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo1", name1.toString(), fileBody1 )
+                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
+                    .build();
+        } else if (name1 != null && name4 != null) {
+            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo1", name1.toString(), fileBody1 )
+                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .build();
+        } else if (name2 != null && name3 != null) {
+            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
+                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
+                    .build();
+        } else if (name2 != null && name4 != null) {
+            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
+                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .build();
+        } else if (name3 != null && name4 != null) {
+            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
+                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .build();
+        } else {
+            deliverDataFailure( null, name, null, callBack );
+        }
+
         //结果返回
-        final Request request = new Request.Builder().url(url).post(mBody).build();
-        mClient.newCall(request).enqueue(new Callback() {
+        final Request request = new Request.Builder().url( url ).post( mBody ).build();
+        mClient.newCall( request ).enqueue( new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                deliverDataFailure(request, name, e, callBack);
+                deliverDataFailure( request, name, e, callBack );
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String result = response.body().string();
-                deliverDataSuccess(result, name, callBack);
+                deliverDataSuccess( result, name, callBack );
             }
-        });
+        } );
     }
 
 }
