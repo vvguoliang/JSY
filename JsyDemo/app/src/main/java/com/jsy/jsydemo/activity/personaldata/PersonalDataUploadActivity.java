@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -46,7 +47,7 @@ import okhttp3.Request;
  * 所有证件上传
  */
 
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "ObjectEqualsNull"})
 public class PersonalDataUploadActivity extends BaseActivity implements View.OnClickListener, DataCallBack {
 
     private ImageView upload_front_id;
@@ -213,22 +214,22 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
                 house_card = jsonObject1.optString( "house_card" );
                 driving_card = jsonObject1.optString( "driving_card" );
             }
-            if (StringUtil.isNullOrEmpty( idcard_front )) {
+            if (TextUtils.isEmpty( idcard_front ) || "null".equals( idcard_front )) {
                 upload_front_id.setImageResource( R.mipmap.ic_personal_data_upload_front_id_no_success );
             } else {
                 upload_front_id.setImageResource( R.mipmap.ic_personal_data_upload_front_id_success );
             }
-            if (StringUtil.isNullOrEmpty( idcard )) {
+            if (TextUtils.isEmpty( idcard ) || "null".equals( idcard )) {
                 upload_front_hold_id.setImageResource( R.mipmap.ic_personal_data_upload_front_id_no_success );
             } else {
                 upload_front_hold_id.setImageResource( R.mipmap.ic_personal_data_upload_front_id_success );
             }
-            if (StringUtil.isNullOrEmpty( house_card )) {
+            if (TextUtils.isEmpty( house_card ) || "null".equals( house_card )) {
                 upload_front_hold_id.setImageResource( R.mipmap.ic_personal_data_upload_front_id_no_success );
             } else {
                 upload_hous.setImageResource( R.mipmap.ic_personal_data_upload_front_id_success );
             }
-            if (StringUtil.isNullOrEmpty( driving_card )) {
+            if (TextUtils.isEmpty( driving_card ) || "null".equals( driving_card )) {
                 upload_front_hold_id.setImageResource( R.mipmap.ic_personal_data_upload_front_id_no_success );
             } else {
                 upload_vehicle.setImageResource( R.mipmap.ic_personal_data_upload_front_id_success );
