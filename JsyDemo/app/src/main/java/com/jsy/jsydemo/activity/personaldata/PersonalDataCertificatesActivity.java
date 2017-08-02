@@ -215,23 +215,24 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
                 object = new JSONObject( result );
                 object = new JSONObject( object.optString( "data" ) );
                 JSONArray array = new JSONArray( object.optString( "data" ) );
+                String front_img = "";
                 if (array.length() > 0) {
                     if (TextUtils.isEmpty( object.optString( "front_img" ) ) && "null".equals( object.optString( "front_img" ) ))
                         if (object.optString( "front_img" ).contains( "data/upload" )) {
-                            String front_img = object.optString( "front_img" ).replace( "data/upload", "" );
-                            getPath( positive, front_img );
+                            front_img = object.optString( "front_img" ).replace( "data/upload", "" );
+                            getPath( positive, front_img.trim() );
                             findViewById( R.id.positive_camera ).setVisibility( View.GONE );
                         } else {
-                            getPath( positive, object.optString( "front_img" ) );
+                            getPath( positive, object.optString( "front_img" ).trim() );
                             findViewById( R.id.positive_camera ).setVisibility( View.GONE );
                         }
                     if (TextUtils.isEmpty( object.optString( "back_img" ) ) && "null".equals( object.optString( "back_img" ) ))
                         if (object.optString( "back_img" ).contains( "data/upload" )) {
-                            String front_img = object.optString( "back_img" ).replace( "data/upload", "" );
-                            getPath( other_sid, front_img );
+                            front_img = object.optString( "back_img" ).replace( "data/upload", "" );
+                            getPath( other_sid, front_img.trim() );
                             findViewById( R.id.other_sid_camera ).setVisibility( View.GONE );
                         } else {
-                            getPath( other_sid, object.optString( "back_img" ) );
+                            getPath( other_sid, object.optString( "back_img" ).trim() );
                             findViewById( R.id.other_sid_camera ).setVisibility( View.GONE );
                         }
                 }
