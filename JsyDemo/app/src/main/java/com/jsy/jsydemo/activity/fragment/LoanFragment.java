@@ -102,7 +102,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     @Override
     protected void initView() {
         getHttp();
-        OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
         mHandler = new Handler();
         mAdapter = new CardRecordAdapter(mActivity);
         TextView title_view = (TextView) findViewById(R.id.title_view);
@@ -123,7 +122,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         mRecyclerView.setRefreshAction(new Action() {
             @Override
             public void onAction() {
-                getData(true);
+                getData(false);
             }
         });
 
@@ -140,11 +139,16 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                page = 1;
-                mAdapter.clear();
-                mAdapter.addAll(VirtualData);
-                mRecyclerView.dismissSwipeRefresh();
-                mRecyclerView.getRecyclerView().scrollToPosition(0);
+                if(isRefresh){
+                    page = 1;
+                    mAdapter.clear();
+                    mAdapter.addAll(VirtualData);
+                    mRecyclerView.dismissSwipeRefresh();
+                    mRecyclerView.getRecyclerView().scrollToPosition(0);
+                }else{
+                    getHttp();
+                }
+
             }
         }, 1000);
     }
@@ -173,6 +177,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         map.put("page", page);
         map.put("os", "android");
         OkHttpManager.postAsync(HttpURL.getInstance().HOMEPRODUCT, "home_product", map, this);
+        OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
     }
 
     // -------------------------------------------------------------------------

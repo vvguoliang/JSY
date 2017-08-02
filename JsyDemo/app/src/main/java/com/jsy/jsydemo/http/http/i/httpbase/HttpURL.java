@@ -142,7 +142,7 @@ public class HttpURL implements Serializable {
 
     public String BASEADD = HTTP_URL + "&m=userdetail&a=base_add";
 
-    public String OTHER_INFO = HTTP_URL + "&m=userdetail&a=base_add";
+    public String OTHER_INFO = HTTP_URL + "&m=userdetail&a=other_info_add";
 
     public String PRODUCTINDEX = HTTP_URL + "&m=product&a=index";
 
