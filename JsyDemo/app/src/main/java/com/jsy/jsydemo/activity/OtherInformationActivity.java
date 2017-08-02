@@ -353,31 +353,31 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
                 JSONArray array = new JSONArray( object.optString( "data" ) );
                 if (array.length() > 0) {
                     JSONObject jsonObject = array.optJSONObject( 0 );
-                    if (TextUtils.isEmpty( jsonObject.optString( "email" ) ) && "null".equals( jsonObject.optString( "email" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "email" ) ) && !"null".equals( jsonObject.optString( "email" ) ))
                         information_mailbox_editText.setText( jsonObject.optString( "email" ) );
-                    if (TextUtils.isEmpty( jsonObject.optString( "mate" ) ) && "null".equals( jsonObject.optString( "mate" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "mate" ) ) && !"null".equals( jsonObject.optString( "mate" ) ))
                         information_spouse_editText.setText( jsonObject.optString( "mate" ) );
-                    if (TextUtils.isEmpty( jsonObject.optString( "dwell_address" ) ) && "null".equals( jsonObject.optString( "dwell_address" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "dwell_address" ) ) && !"null".equals( jsonObject.optString( "dwell_address" ) ))
                         information_live_editText.setText( jsonObject.optString( "dwell_address" ) );
-                    if (TextUtils.isEmpty( jsonObject.optString( "dwell_type" ) ) && "null".equals( jsonObject.optString( "dwell_type" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "dwell_type" ) ) && !"null".equals( jsonObject.optString( "dwell_type" ) ))
                         information_mode_text.setText( jsonObject.optString( "dwell_type" ) );
-                    if (TextUtils.isEmpty( jsonObject.optString( "company_name" ) ) && "null".equals( jsonObject.optString( "company_name" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "company_name" ) ) && !"null".equals( jsonObject.optString( "company_name" ) ))
                         information_corporate_editText.setText( jsonObject.optString( "company_name" ) );
-                    if (TextUtils.isEmpty( jsonObject.optString( "company_addr" ) ) && "null".equals( jsonObject.optString( "company_addr" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "company_addr" ) ) && !"null".equals( jsonObject.optString( "company_addr" ) ))
                         information_corporate_address_editText.setText( jsonObject.optString( "company_addr" ) );
-                    if (TextUtils.isEmpty( jsonObject.optString( "company_tel" ) ) && "null".equals( jsonObject.optString( "company_tel" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "company_tel" ) ) && !"null".equals( jsonObject.optString( "company_tel" ) ))
                         information_corporate_phone_editText.setText( jsonObject.optString( "company_tel" ) );
-                    if (TextUtils.isEmpty( jsonObject.optString( "user_a" ) ) && "null".equals( jsonObject.optString( "user_a" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "user_a" ) ) && !"null".equals( jsonObject.optString( "user_a" ) ))
                         other_relatives_name.setText( jsonObject.optString( "user_a" ) );
-//                    if(TextUtils.isEmpty( jsonObject.optString( "email" ) ) && "null".equals( jsonObject.optString( "email" ) ))
+//                    if(!TextUtils.isEmpty( jsonObject.optString( "email" ) ) && !"null".equals( jsonObject.optString( "email" ) ))
 //                loan_basic_typ.setText( jsonObject.optString( "relation_a" ) );
-                    if (TextUtils.isEmpty( jsonObject.optString( "mobile_a" ) ) && "null".equals( jsonObject.optString( "mobile_a" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "mobile_a" ) ) && !"null".equals( jsonObject.optString( "mobile_a" ) ))
                         other_relatives_phone.setText( jsonObject.optString( "mobile_a" ) );
-                    if (TextUtils.isEmpty( jsonObject.optString( "user_b" ) ) && "null".equals( jsonObject.optString( "user_b" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "user_b" ) ) && !"null".equals( jsonObject.optString( "user_b" ) ))
                         other_contacts_name.setText( jsonObject.optString( "user_b" ) );
-//                    if(TextUtils.isEmpty( jsonObject.optString( "email" ) ) && "null".equals( jsonObject.optString( "email" ) ))
+//                    if(!TextUtils.isEmpty( jsonObject.optString( "email" ) ) && !"null".equals( jsonObject.optString( "email" ) ))
 //                loan_basic_life.setText( jsonObject.optString( "relation_b" ) );
-                    if (TextUtils.isEmpty( jsonObject.optString( "mobile_b" ) ) && "null".equals( jsonObject.optString( "mobile_b" ) ))
+                    if (!TextUtils.isEmpty( jsonObject.optString( "mobile_b" ) ) && !"null".equals( jsonObject.optString( "mobile_b" ) ))
                         other_contacts_phone.setText( jsonObject.optString( "mobile_b" ) );
                 }
                 break;
