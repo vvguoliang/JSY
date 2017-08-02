@@ -38,7 +38,7 @@ android {
             zipAlignEnabled true
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.pro'
             //打包命名规则
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->

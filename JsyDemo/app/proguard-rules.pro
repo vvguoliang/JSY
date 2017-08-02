@@ -39,6 +39,7 @@
 #微信分享
 -keep class com.tencent.mm.**{*;}
 -keep public class com.tencent.** {*;}
+-keep class com.tencent.mm.sdk.** {*;}
 
 #jni动态库
 -keepclasseswithmembernames class * {
@@ -46,7 +47,7 @@
 }
 
 #资源文件
--keep public class com.sxsfinance.SXS.R$*{
+-keep public class com.jsy.jsydemo.R$*{
    public static final int *;
 }
 #gson混淆配置
@@ -73,9 +74,6 @@
 #友盟
 -keepclassmembers class * {
    public <init> (org.json.JSONObject);
-}
--keep public class com.jsy.jsydemo.R$*{
-public static final int *;
 }
 -keepclassmembers enum * {
     public static **[] values();
@@ -129,37 +127,14 @@ public static final android.os.Parcelable$Creator *;
    *** get*();
 }
 
--keep class com.tencent.mm.sdk.** {
-   *;
-}
-
--keep class com.sxsfinance.SXS.actvity.pay.**{
-	*;
-}
-
 -keepattributes *Annotation*
 #js交互
 -keepattributes *JavascriptInterface*
 
--keep class com.sxsfinace.httplib.decode.**{
+-keep class com.jsy.jsydemo.EntityClass.**{
 	*;
 }
 
--keep class com.sxsfinace.httplib.entity.**{
-	*;
-}
-
--keep class com.sxsfinace.httplib.entity.base.**{
-	*;
-}
-
--keep class com.sxsfinace.httplib.entity.bean.**{
-	*;
-}
-#
--keep class com.unionpay.mobile.android.**{
-   *;
-}
 -keep public class * extends com.bumptech.glide.AppGlideModule
 -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
   **[] $VALUES;
