@@ -261,7 +261,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     //应用OKhttp 中的3.2.0版本
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
-    compile 'com.github.bumptech.glide:okhttp-integration:1.2.2'
     compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
     // 友盟
     compile 'com.umeng.analytics:analytics:6.1.1'
