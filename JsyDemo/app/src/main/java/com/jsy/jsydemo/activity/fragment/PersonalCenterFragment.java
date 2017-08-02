@@ -122,8 +122,6 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
             case R.id.personal_logo://登录
                 if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
                     mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
-                } else {
-                    personal_logo.setClickable(false);
                 }
                 break;
             case R.id.personal_camera://照片
