@@ -3,9 +3,11 @@ package com.jsy.jsydemo.activity.personaldata;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,6 +19,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.base.BaseActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
@@ -31,6 +38,7 @@ import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.BottomDialog;
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -204,8 +212,50 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
                 finish();
                 break;
             case "username_idcatd":
+                object = new JSONObject( result );
+                object = new JSONObject( object.optString( "data" ) );
+                JSONArray array = new JSONArray( object.optString( "data" ) );
+                if (array.length() > 0) {
+                    if (TextUtils.isEmpty( object.optString( "front_img" ) ) && "null".equals( object.optString( "front_img" ) ))
+                        if (object.optString( "front_img" ).contains( "data/upload" )) {
+                            String front_img = object.optString( "front_img" ).replace( "data/upload", "" );
+                            getPath( positive, front_img );
+                            findViewById( R.id.positive_camera ).setVisibility( View.GONE );
+                        } else {
+                            getPath( positive, object.optString( "front_img" ) );
+                            findViewById( R.id.positive_camera ).setVisibility( View.GONE );
+                        }
+                    if (TextUtils.isEmpty( object.optString( "back_img" ) ) && "null".equals( object.optString( "back_img" ) ))
+                        if (object.optString( "back_img" ).contains( "data/upload" )) {
+                            String front_img = object.optString( "back_img" ).replace( "data/upload", "" );
+                            getPath( other_sid, front_img );
+                            findViewById( R.id.other_sid_camera ).setVisibility( View.GONE );
+                        } else {
+                            getPath( other_sid, object.optString( "back_img" ) );
+                            findViewById( R.id.other_sid_camera ).setVisibility( View.GONE );
+                        }
+                }
                 break;
         }
+
+    }
+
+    private void getPath(final ImageView imageView, String url) {
+        Glide.with( this )
+                .load( HttpURL.getInstance().HTTP_URL_PATH + url )
+                .listener( new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                        imageView.setImageResource( R.mipmap.ic_path_in_load );
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                        return false;
+                    }
+                } )
+                .into( imageView );
 
     }
 

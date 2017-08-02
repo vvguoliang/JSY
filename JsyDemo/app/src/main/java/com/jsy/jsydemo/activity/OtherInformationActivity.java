@@ -91,13 +91,13 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_other_information);
-        other = getIntent().getExtras().getString("other");
-        pid = getIntent().getExtras().getString("pid");
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.act_other_information );
+        other = getIntent().getExtras().getString( "other" );
+        pid = getIntent().getExtras().getString( "pid" );
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.getInstance().getW_add_B(this);
+            ImmersiveUtils.getInstance().getW_add_B( this );
         }
         findViewById();
         initView();
@@ -108,8 +108,8 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.title_image:
                 intent = new Intent();
-                intent.putExtra("operator", "2");
-                setResult(RESULT_CANCELED, intent);
+                intent.putExtra( "operator", "2" );
+                setResult( RESULT_CANCELED, intent );
                 finish();
                 break;
             case R.id.information_mode_linear:
@@ -117,87 +117,87 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
                 if (TimeUtils.isFastDoubleClick()) {
                     return;
                 } else {
-                    ShowDialog.getInstance().getDialog(this, getmode(), "mode", mHandler, 1000);
+                    ShowDialog.getInstance().getDialog( this, getmode(), "mode", mHandler, 1000 );
                 }
                 break;
             case R.id.information_please_button:
                 if (information_mailbox_linear.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(information_mailbox_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入邮箱");
+                    if (TextUtils.isEmpty( information_mailbox_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入邮箱" );
                         return;
-                    } else if (!IdcardValidator.getInstance().isEmail(information_mailbox_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "输入邮箱不正确");
-                        information_mailbox_editText.setText("");
+                    } else if (!IdcardValidator.getInstance().isEmail( information_mailbox_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "输入邮箱不正确" );
+                        information_mailbox_editText.setText( "" );
                         return;
                     }
                 }
                 if (information_spouse_linear.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(information_spouse_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入配偶名字");
+                    if (TextUtils.isEmpty( information_spouse_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入配偶名字" );
                         return;
                     } else if (information_spouse_editText.getText().toString().length() < 2) {
-                        ToatUtils.showShort1(this, "输入配偶名字不正确");
-                        information_spouse_editText.setText("");
+                        ToatUtils.showShort1( this, "输入配偶名字不正确" );
+                        information_spouse_editText.setText( "" );
                         return;
                     }
                 }
                 if (information_live_linear.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(information_live_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入详细地址");
+                    if (TextUtils.isEmpty( information_live_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入详细地址" );
                         return;
                     } else if (information_live_editText.getText().toString().length() < 5) {
-                        ToatUtils.showShort1(this, "请输入详细地址");
-                        information_live_editText.setText("");
+                        ToatUtils.showShort1( this, "请输入详细地址" );
+                        information_live_editText.setText( "" );
                         return;
                     }
                 }
                 if (information_mode_linear.getVisibility() == View.VISIBLE) {
-                    if (information_mode_text.getText().toString().equals(this.getString(R.string.name_loan_credit_please_select))) {
-                        ToatUtils.showShort1(this, "请选择居住方式");
+                    if (information_mode_text.getText().toString().equals( this.getString( R.string.name_loan_credit_please_select ) )) {
+                        ToatUtils.showShort1( this, "请选择居住方式" );
                         return;
                     }
                 }
                 if (information_corporate_linear.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(information_corporate_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入公司名字");
+                    if (TextUtils.isEmpty( information_corporate_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入公司名字" );
                         return;
                     }
                 }
                 if (information_corporate_address_linear.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(information_corporate_address_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入公司地址");
+                    if (TextUtils.isEmpty( information_corporate_address_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入公司地址" );
                         return;
                     }
                 }
                 if (information_corporate_phone_linear.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(information_corporate_phone_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入公司电话");
+                    if (TextUtils.isEmpty( information_corporate_phone_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入公司电话" );
                         return;
                     }
                 }
                 if (loan_personal_linear.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(other_relatives_name.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入联系人姓名");
+                    if (TextUtils.isEmpty( other_relatives_name.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入联系人姓名" );
                         return;
-                    } else if (TextUtils.isEmpty(other_relatives_phone.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入联系人电话");
+                    } else if (TextUtils.isEmpty( other_relatives_phone.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入联系人电话" );
                         return;
-                    } else if (IdcardValidator.getInstance().isIdcard(other_relatives_phone.getText().toString().trim())) {
-                        ToatUtils.showShort1(this, "请输入联系人电话有误");
-                        other_relatives_phone.setText("");
+                    } else if (IdcardValidator.getInstance().isIdcard( other_relatives_phone.getText().toString().trim() )) {
+                        ToatUtils.showShort1( this, "请输入联系人电话有误" );
+                        other_relatives_phone.setText( "" );
                         return;
                     }
                 }
                 if (other_contacts_linear.getVisibility() == View.VISIBLE) {
-                    if (TextUtils.isEmpty(other_contacts_name.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入联系人姓名");
+                    if (TextUtils.isEmpty( other_contacts_name.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入联系人姓名" );
                         return;
-                    } else if (TextUtils.isEmpty(other_contacts_phone.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入联系人电话");
+                    } else if (TextUtils.isEmpty( other_contacts_phone.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入联系人电话" );
                         return;
-                    } else if (IdcardValidator.getInstance().isIdcard(other_contacts_phone.getText().toString().trim())) {
-                        ToatUtils.showShort1(this, "请输入联系人电话有误");
-                        other_contacts_phone.setText("");
+                    } else if (IdcardValidator.getInstance().isIdcard( other_contacts_phone.getText().toString().trim() )) {
+                        ToatUtils.showShort1( this, "请输入联系人电话有误" );
+                        other_contacts_phone.setText( "" );
                         return;
                     }
                 }
@@ -205,11 +205,11 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
                 break;
             case R.id.other_relatives_wathet:
                 id = 1;
-                userCenterRealize.startPhone(OtherInformationActivity.this, mHandler, id);
+                userCenterRealize.startPhone( OtherInformationActivity.this, mHandler, id );
                 break;
             case R.id.other_contacts_wathet:
                 id = 2;
-                userCenterRealize.startPhone(OtherInformationActivity.this, mHandler, id);
+                userCenterRealize.startPhone( OtherInformationActivity.this, mHandler, id );
                 break;
         }
 
@@ -217,114 +217,114 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
 
     @Override
     protected void findViewById() {
-        findViewById(R.id.title_image).setVisibility(View.VISIBLE);
-        findViewById(R.id.title_image).setOnClickListener(this);
-        TextView title_view = findViewById(R.id.title_view);
-        title_view.setText(this.getString(R.string.name_loan_details_other));
+        findViewById( R.id.title_image ).setVisibility( View.VISIBLE );
+        findViewById( R.id.title_image ).setOnClickListener( this );
+        TextView title_view = findViewById( R.id.title_view );
+        title_view.setText( this.getString( R.string.name_loan_details_other ) );
 
-        information_mailbox_linear = findViewById(R.id.information_mailbox_linear);
-        information_spouse_linear = findViewById(R.id.information_spouse_linear);
-        information_live_linear = findViewById(R.id.information_live_linear);
-        information_mode_linear = findViewById(R.id.information_mode_linear);
-        information_corporate_linear = findViewById(R.id.information_corporate_linear);
-        information_corporate_address_linear = findViewById(R.id.information_corporate_address_linear);
-        information_corporate_phone_linear = findViewById(R.id.information_corporate_phone_linear);
-        loan_personal_linear = findViewById(R.id.loan_personal_linear);
-        other_contacts_linear = findViewById(R.id.other_contacts_linear);
+        information_mailbox_linear = findViewById( R.id.information_mailbox_linear );
+        information_spouse_linear = findViewById( R.id.information_spouse_linear );
+        information_live_linear = findViewById( R.id.information_live_linear );
+        information_mode_linear = findViewById( R.id.information_mode_linear );
+        information_corporate_linear = findViewById( R.id.information_corporate_linear );
+        information_corporate_address_linear = findViewById( R.id.information_corporate_address_linear );
+        information_corporate_phone_linear = findViewById( R.id.information_corporate_phone_linear );
+        loan_personal_linear = findViewById( R.id.loan_personal_linear );
+        other_contacts_linear = findViewById( R.id.other_contacts_linear );
 
-        information_mailbox_editText = findViewById(R.id.information_mailbox_editText);
-        information_spouse_editText = findViewById(R.id.information_spouse_editText);
-        information_live_editText = findViewById(R.id.information_live_editText);
-        information_corporate_editText = findViewById(R.id.information_corporate_editText);
-        information_corporate_address_editText = findViewById(R.id.information_corporate_address_editText);
-        information_corporate_phone_editText = findViewById(R.id.information_corporate_phone_editText);
+        information_mailbox_editText = findViewById( R.id.information_mailbox_editText );
+        information_spouse_editText = findViewById( R.id.information_spouse_editText );
+        information_live_editText = findViewById( R.id.information_live_editText );
+        information_corporate_editText = findViewById( R.id.information_corporate_editText );
+        information_corporate_address_editText = findViewById( R.id.information_corporate_address_editText );
+        information_corporate_phone_editText = findViewById( R.id.information_corporate_phone_editText );
 
-        information_mode_text = findViewById(R.id.information_mode_text);
-        other_relatives_name = findViewById(R.id.other_relatives_name);
-        other_relatives_phone = findViewById(R.id.other_relatives_phone);
-        other_contacts_name = findViewById(R.id.other_contacts_name);
-        other_contacts_phone = findViewById(R.id.other_contacts_phone);
+        information_mode_text = findViewById( R.id.information_mode_text );
+        other_relatives_name = findViewById( R.id.other_relatives_name );
+        other_relatives_phone = findViewById( R.id.other_relatives_phone );
+        other_contacts_name = findViewById( R.id.other_contacts_name );
+        other_contacts_phone = findViewById( R.id.other_contacts_phone );
 
-        information_please_button = findViewById(R.id.information_please_button);
-        other_relatives_wathet = findViewById(R.id.other_relatives_wathet);
-        other_contacts_wathet = findViewById(R.id.other_contacts_wathet);
+        information_please_button = findViewById( R.id.information_please_button );
+        other_relatives_wathet = findViewById( R.id.other_relatives_wathet );
+        other_contacts_wathet = findViewById( R.id.other_contacts_wathet );
 
-        if (!TextUtils.isEmpty(other)) {
-            Pattern pattern = Pattern.compile("\\[(.*)\\]");
-            Matcher matcher = pattern.matcher(other);
+        if (!TextUtils.isEmpty( other )) {
+            Pattern pattern = Pattern.compile( "\\[(.*)\\]" );
+            Matcher matcher = pattern.matcher( other );
             String ResponseDates = "";
             while (matcher.find()) {
-                ResponseDates = matcher.group(1);
+                ResponseDates = matcher.group( 1 );
             }
-            String[] data_ids = ResponseDates.split(",");
+            String[] data_ids = ResponseDates.split( "," );
             for (String data_id1 : data_ids) {
-                if (data_id1.contains("1")) {
-                    information_mailbox_linear.setVisibility(View.VISIBLE);
-                } else if (data_id1.contains("2")) {
-                    information_spouse_linear.setVisibility(View.VISIBLE);
-                } else if (data_id1.contains("3")) {
-                    information_live_linear.setVisibility(View.VISIBLE);
-                } else if (data_id1.contains("4")) {
-                    information_mode_linear.setVisibility(View.VISIBLE);
-                } else if (data_id1.contains("5")) {
-                    information_corporate_linear.setVisibility(View.VISIBLE);
-                } else if (data_id1.contains("6")) {
-                    information_corporate_address_linear.setVisibility(View.VISIBLE);
-                } else if (data_id1.contains("7")) {
-                    information_corporate_phone_linear.setVisibility(View.VISIBLE);
-                } else if (data_id1.contains("8")) {
-                    loan_personal_linear.setVisibility(View.VISIBLE);
-                } else if (data_id1.contains("9")) {
-                    other_contacts_linear.setVisibility(View.VISIBLE);
+                if (data_id1.contains( "1" )) {
+                    information_mailbox_linear.setVisibility( View.VISIBLE );
+                } else if (data_id1.contains( "2" )) {
+                    information_spouse_linear.setVisibility( View.VISIBLE );
+                } else if (data_id1.contains( "3" )) {
+                    information_live_linear.setVisibility( View.VISIBLE );
+                } else if (data_id1.contains( "4" )) {
+                    information_mode_linear.setVisibility( View.VISIBLE );
+                } else if (data_id1.contains( "5" )) {
+                    information_corporate_linear.setVisibility( View.VISIBLE );
+                } else if (data_id1.contains( "6" )) {
+                    information_corporate_address_linear.setVisibility( View.VISIBLE );
+                } else if (data_id1.contains( "7" )) {
+                    information_corporate_phone_linear.setVisibility( View.VISIBLE );
+                } else if (data_id1.contains( "8" )) {
+                    loan_personal_linear.setVisibility( View.VISIBLE );
+                } else if (data_id1.contains( "9" )) {
+                    other_contacts_linear.setVisibility( View.VISIBLE );
                 }
             }
         } else {
-            information_mailbox_linear.setVisibility(View.VISIBLE);
-            information_spouse_linear.setVisibility(View.VISIBLE);
-            information_live_linear.setVisibility(View.VISIBLE);
-            information_mode_linear.setVisibility(View.VISIBLE);
-            information_corporate_linear.setVisibility(View.VISIBLE);
-            information_corporate_address_linear.setVisibility(View.VISIBLE);
-            information_corporate_phone_linear.setVisibility(View.VISIBLE);
-            loan_personal_linear.setVisibility(View.VISIBLE);
-            other_contacts_linear.setVisibility(View.VISIBLE);
+            information_mailbox_linear.setVisibility( View.VISIBLE );
+            information_spouse_linear.setVisibility( View.VISIBLE );
+            information_live_linear.setVisibility( View.VISIBLE );
+            information_mode_linear.setVisibility( View.VISIBLE );
+            information_corporate_linear.setVisibility( View.VISIBLE );
+            information_corporate_address_linear.setVisibility( View.VISIBLE );
+            information_corporate_phone_linear.setVisibility( View.VISIBLE );
+            loan_personal_linear.setVisibility( View.VISIBLE );
+            other_contacts_linear.setVisibility( View.VISIBLE );
         }
 
-        information_mode_linear.setOnClickListener(this);
+        information_mode_linear.setOnClickListener( this );
     }
 
     private void getHttp() {
         Map<String, Object> map = new HashMap<>();
-        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        map.put("pid", Long.parseLong(pid));
-        map.put("email", information_mailbox_editText.getText().toString());
-        map.put("mate", information_spouse_editText.getText().toString());
-        map.put("dwell_address", information_live_editText.getText().toString());
-        map.put("dwell_type", information_mode_text.getText().toString());
-        map.put("company_name", information_corporate_editText.getText().toString());
-        map.put("company_addr", information_corporate_address_editText.getText().toString());
-        map.put("company_tel", information_corporate_phone_editText.getText().toString());
-        map.put("user_a", other_relatives_name.getText().toString());
-        map.put("relation_a", "");
-        map.put("mobile_a", other_relatives_phone.getText().toString());
-        map.put("user_b", other_contacts_name.getText().toString());
-        map.put("relation_b", "");
-        map.put("mobile_b", other_contacts_phone.getText().toString());
-        OkHttpManager.postAsync(HttpURL.getInstance().OTHER_INFO, "other", map, this);
+        map.put( "uid", Long.parseLong( SharedPreferencesUtils.get( this, "uid", "" ).toString() ) );
+        map.put( "pid", Long.parseLong( pid ) );
+        map.put( "email", information_mailbox_editText.getText().toString() );
+        map.put( "mate", information_spouse_editText.getText().toString() );
+        map.put( "dwell_address", information_live_editText.getText().toString() );
+        map.put( "dwell_type", information_mode_text.getText().toString() );
+        map.put( "company_name", information_corporate_editText.getText().toString() );
+        map.put( "company_addr", information_corporate_address_editText.getText().toString() );
+        map.put( "company_tel", information_corporate_phone_editText.getText().toString() );
+        map.put( "user_a", other_relatives_name.getText().toString() );
+        map.put( "relation_a", "配偶" );
+        map.put( "mobile_a", other_relatives_phone.getText().toString() );
+        map.put( "user_b", other_contacts_name.getText().toString() );
+        map.put( "relation_b", "紧急联系人" );
+        map.put( "mobile_b", other_contacts_phone.getText().toString() );
+        OkHttpManager.postAsync( HttpURL.getInstance().OTHER_INFO, "other", map, this );
     }
 
-    private void getOther(){
-        Map<String,Object> map = new HashMap<>(  );
-        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        OkHttpManager.postAsync( HttpURL.getInstance().USERDETAILOTHER,"other_details",map,this );
+    private void getOther() {
+        Map<String, Object> map = new HashMap<>();
+        map.put( "uid", Long.parseLong( SharedPreferencesUtils.get( this, "uid", "" ).toString() ) );
+        OkHttpManager.postAsync( HttpURL.getInstance().USERDETAILOTHER, "other_details", map, this );
     }
 
     @Override
     protected void initView() {
-        information_mode_text.setOnClickListener(this);
-        information_please_button.setOnClickListener(this);
-        other_relatives_wathet.setOnClickListener(this);
-        other_contacts_wathet.setOnClickListener(this);
+        information_mode_text.setOnClickListener( this );
+        information_please_button.setOnClickListener( this );
+        other_relatives_wathet.setOnClickListener( this );
+        other_contacts_wathet.setOnClickListener( this );
         getOther();
     }
 
@@ -335,35 +335,50 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-        switch (name){
+        switch (name) {
             case "other":
-                JSONObject object = new JSONObject(result);
-                if (object.optString("code").equals("0000")) {
+                JSONObject object = new JSONObject( result );
+                if (object.optString( "code" ).equals( "0000" )) {
                     intent = new Intent();
-                    intent.putExtra("operator", "1");
-                    setResult(RESULT_CANCELED, intent);
+                    intent.putExtra( "operator", "1" );
+                    setResult( RESULT_CANCELED, intent );
                     finish();
                 } else {
-                    ToatUtils.showShort1(this, object.optString("msg"));
+                    ToatUtils.showShort1( this, object.optString( "msg" ) );
                 }
                 break;
             case "other_details":
                 object = new JSONObject( result );
                 object = new JSONObject( object.optString( "data" ) );
                 JSONArray array = new JSONArray( object.optString( "data" ) );
-                if(array.length() > 0){
-//                JSONObject jsonObject = array.optJSONObject( 0 );
-//                loan_basic_please_in_editText.setText( jsonObject.optString( "name" ) );
-//                loan_details_basic_id_editText.setText( jsonObject.optString( "idcard" ) );
-//                loan_basic_application.setText( jsonObject.optString( "money" ) );
-//                loan_loan_application.setText( jsonObject.optString( "deadline" ) );
-//                loan_loan_highest_editText.setText( jsonObject.optString( "limit" ) );
-//                loan_education_level.setText( jsonObject.optString( "edu" ) );
-//                loan_basic_security.setText( jsonObject.optString( "insurance" ) );
-//                loan_basic_cat.setText( jsonObject.optString( "car_status" ) );
-//                loan_basic_typ.setText( jsonObject.optString( "profession" ) );
-//                loan_basic_content_editText.setText( jsonObject.optString( "salary" ) );
-//                loan_basic_life.setText( jsonObject.optString( "work_year" ) );
+                if (array.length() > 0) {
+                    JSONObject jsonObject = array.optJSONObject( 0 );
+                    if (TextUtils.isEmpty( jsonObject.optString( "email" ) ) && "null".equals( jsonObject.optString( "email" ) ))
+                        information_mailbox_editText.setText( jsonObject.optString( "email" ) );
+                    if (TextUtils.isEmpty( jsonObject.optString( "mate" ) ) && "null".equals( jsonObject.optString( "mate" ) ))
+                        information_spouse_editText.setText( jsonObject.optString( "mate" ) );
+                    if (TextUtils.isEmpty( jsonObject.optString( "dwell_address" ) ) && "null".equals( jsonObject.optString( "dwell_address" ) ))
+                        information_live_editText.setText( jsonObject.optString( "dwell_address" ) );
+                    if (TextUtils.isEmpty( jsonObject.optString( "dwell_type" ) ) && "null".equals( jsonObject.optString( "dwell_type" ) ))
+                        information_mode_text.setText( jsonObject.optString( "dwell_type" ) );
+                    if (TextUtils.isEmpty( jsonObject.optString( "company_name" ) ) && "null".equals( jsonObject.optString( "company_name" ) ))
+                        information_corporate_editText.setText( jsonObject.optString( "company_name" ) );
+                    if (TextUtils.isEmpty( jsonObject.optString( "company_addr" ) ) && "null".equals( jsonObject.optString( "company_addr" ) ))
+                        information_corporate_address_editText.setText( jsonObject.optString( "company_addr" ) );
+                    if (TextUtils.isEmpty( jsonObject.optString( "company_tel" ) ) && "null".equals( jsonObject.optString( "company_tel" ) ))
+                        information_corporate_phone_editText.setText( jsonObject.optString( "company_tel" ) );
+                    if (TextUtils.isEmpty( jsonObject.optString( "user_a" ) ) && "null".equals( jsonObject.optString( "user_a" ) ))
+                        other_relatives_name.setText( jsonObject.optString( "user_a" ) );
+//                    if(TextUtils.isEmpty( jsonObject.optString( "email" ) ) && "null".equals( jsonObject.optString( "email" ) ))
+//                loan_basic_typ.setText( jsonObject.optString( "relation_a" ) );
+                    if (TextUtils.isEmpty( jsonObject.optString( "mobile_a" ) ) && "null".equals( jsonObject.optString( "mobile_a" ) ))
+                        other_relatives_phone.setText( jsonObject.optString( "mobile_a" ) );
+                    if (TextUtils.isEmpty( jsonObject.optString( "user_b" ) ) && "null".equals( jsonObject.optString( "user_b" ) ))
+                        other_contacts_name.setText( jsonObject.optString( "user_b" ) );
+//                    if(TextUtils.isEmpty( jsonObject.optString( "email" ) ) && "null".equals( jsonObject.optString( "email" ) ))
+//                loan_basic_life.setText( jsonObject.optString( "relation_b" ) );
+                    if (TextUtils.isEmpty( jsonObject.optString( "mobile_b" ) ) && "null".equals( jsonObject.optString( "mobile_b" ) ))
+                        other_contacts_phone.setText( jsonObject.optString( "mobile_b" ) );
                 }
                 break;
         }
@@ -374,20 +389,20 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+            super.handleMessage( msg );
             switch (msg.what) {
                 case 1000:
-                    information_mode_text.setText(msg.obj.toString());
+                    information_mode_text.setText( msg.obj.toString() );
                     break;
                 case 100:
-                    get = msg.obj.toString().split(",");
-                    other_relatives_phone.setText(get[1]);
-                    other_relatives_name.setText(get[0]);
+                    get = msg.obj.toString().split( "," );
+                    other_relatives_phone.setText( get[1] );
+                    other_relatives_name.setText( get[0] );
                     break;
                 case 101:
-                    get = msg.obj.toString().split(",");
-                    other_contacts_phone.setText(get[1]);
-                    other_contacts_name.setText(get[0]);
+                    get = msg.obj.toString().split( "," );
+                    other_contacts_phone.setText( get[1] );
+                    other_contacts_name.setText( get[0] );
                     break;
 
             }
@@ -404,21 +419,21 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
         List<Map<String, Object>> list_car_life = new ArrayList<>();
         for (String aPurpose : mode_Strings) {
             Map<String, Object> map = new HashMap<>();
-            map.put("name", aPurpose);
-            map.put("boolean", "1");
-            list_car_life.add(map);
+            map.put( "name", aPurpose );
+            map.put( "boolean", "1" );
+            list_car_life.add( map );
         }
         return list_car_life;
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult( requestCode, permissions, grantResults );
         if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_CONTACTS) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                userCenterRealize.getContactID(OtherInformationActivity.this, mHandler, id);
+                userCenterRealize.getContactID( OtherInformationActivity.this, mHandler, id );
             } else {
-                Toast.makeText(this, "请授予联系人权限", Toast.LENGTH_SHORT).show();
+                Toast.makeText( this, "请授予联系人权限", Toast.LENGTH_SHORT ).show();
             }
         }
     }
@@ -428,11 +443,11 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             intent = new Intent();
-            intent.putExtra("operator", "2");
-            setResult(RESULT_CANCELED, intent);
+            intent.putExtra( "operator", "2" );
+            setResult( RESULT_CANCELED, intent );
             finish();
             return true;
         }
-        return super.onKeyDown(keyCode, event);
+        return super.onKeyDown( keyCode, event );
     }
 }
