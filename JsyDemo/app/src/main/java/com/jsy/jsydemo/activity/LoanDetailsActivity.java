@@ -181,7 +181,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                         intent = new Intent( LoanDetailsActivity.this, LoanWebViewActivity.class );
                         intent.putExtra( "url", loanDatailsData.getPro_link() );
                         startActivity( intent );
-                    }else{
+                    } else {
                         ToatUtils.showShort1( this, "还有信息没有认证完,请认证完再点击" );
                     }
                 } else {
@@ -253,7 +253,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initView() {
-        getHttp();
+
     }
 
     private void getHttp() {
@@ -455,6 +455,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
+        getHttp();
         MobclickAgent.onResume( this );
     }
 

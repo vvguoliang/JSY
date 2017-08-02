@@ -44,11 +44,11 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
 
     private EditText other_relatives_name;
 
-    private TextView other_relatives_phone;
+    private EditText other_relatives_phone;
 
     private EditText other_contacts_name;
 
-    private TextView other_contacts_phone;
+    private EditText other_contacts_phone;
 
     private UserCenterRealize userCenterRealize = new UserCenterRealize();
 

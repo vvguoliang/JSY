@@ -395,6 +395,7 @@ public class JsonData {
                 map.put("creditcard", jsonObject.optString("creditcard"));
                 map.put("credit_record", jsonObject.optString("credit_record"));
                 map.put("liabilities_status", jsonObject.optString("liabilities_status"));
+                map.put("loan_record", jsonObject.optString("loan_record"));
                 map.put("taobao_id", jsonObject.optString("taobao_id"));
                 map.put("loan_use", jsonObject.optString("loan_use"));
                 map.put("created_at", jsonObject.optString("created_at"));
@@ -544,5 +545,7 @@ public class JsonData {
         }
         return list;
     }
+
+
 
 }

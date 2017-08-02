@@ -259,7 +259,7 @@ public class PersonalDataFamilyActivity extends BaseActivity implements View.OnC
         } ).setTitleText( "" )
                 .setDividerColor( Color.GRAY )
                 .setTextColorCenter( Color.GRAY )
-                .setContentTextSize( 13 )
+                .setContentTextSize( 18 )
                 .setOutSideCancelable( false )
                 .build();
           /*pvOptions.setPicker(options1Items);//一级选择器

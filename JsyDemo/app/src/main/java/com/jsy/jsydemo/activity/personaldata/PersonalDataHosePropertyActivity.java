@@ -296,7 +296,7 @@ public class PersonalDataHosePropertyActivity extends BaseActivity implements Vi
         } ).setTitleText( "" )
                 .setDividerColor( Color.GRAY )
                 .setTextColorCenter( Color.GRAY )
-                .setContentTextSize( 13 )
+                .setContentTextSize( 18 )
                 .setOutSideCancelable( false )
                 .build();
           /*pvOptions.setPicker(options1Items);//一级选择器

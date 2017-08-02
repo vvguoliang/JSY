@@ -66,13 +66,13 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
     private EditText information_corporate_phone_editText;
     private Button information_please_button;
     private LinearLayout loan_personal_linear;
-    private TextView other_relatives_name;
+    private EditText other_relatives_name;
     private Button other_relatives_wathet;
-    private TextView other_relatives_phone;
+    private EditText other_relatives_phone;
     private LinearLayout other_contacts_linear;
-    private TextView other_contacts_name;
+    private EditText other_contacts_name;
     private Button other_contacts_wathet;
-    private TextView other_contacts_phone;
+    private EditText other_contacts_phone;
 
     private String other = "";
 

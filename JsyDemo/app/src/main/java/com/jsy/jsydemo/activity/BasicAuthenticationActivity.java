@@ -29,6 +29,7 @@ import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -80,12 +81,12 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_basic_authentication);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.act_basic_authentication );
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.getInstance().getW_add_B(this);
+            ImmersiveUtils.getInstance().getW_add_B( this );
         }
         initView();
     }
@@ -100,7 +101,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 } else {
                     String[] strings = new String[]{"1期", "3期", "6期", "12期", "24期", "36期", "48期"};
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(this, "application", strings, mHandler, 6);
+                    ShowDialog.getInstance().showDialog( this, "application", strings, mHandler, 6 );
                 }
                 break;
             case R.id.loan_education_level_linear:
@@ -110,7 +111,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 } else {
                     String[] strings = new String[]{"硕士以上", "本科", "大专", "中专/高中及一下"};
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(this, "education_level", strings, mHandler, 1);
+                    ShowDialog.getInstance().showDialog( this, "education_level", strings, mHandler, 1 );
                 }
                 break;
             case R.id.loan_basic_security_linear:
@@ -120,7 +121,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 } else {
                     String[] strings = new String[]{"缴纳本地社保", "未缴纳社保"};
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(this, "basic_security", strings, mHandler, 2);
+                    ShowDialog.getInstance().showDialog( this, "basic_security", strings, mHandler, 2 );
                 }
                 break;
             case R.id.loan_basic_cat_linear:
@@ -130,7 +131,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 } else {
                     String[] strings = new String[]{"无车", "本人名下有车,无贷款", "本人名下有车,有按揭贷款", "本人名下有车,但已被抵押", "其他(请备注)"};
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(this, "basic_cat", strings, mHandler, 3);
+                    ShowDialog.getInstance().showDialog( this, "basic_cat", strings, mHandler, 3 );
                 }
                 break;
             case R.id.loan_basic_typ_linear:
@@ -140,7 +141,7 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 } else {
                     String[] strings = new String[]{"企业主", "个体工商户", "上班人群", "学生", "无固定职业"};
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(this, "basic_typ", strings, mHandler, 4);
+                    ShowDialog.getInstance().showDialog( this, "basic_typ", strings, mHandler, 4 );
                 }
                 break;
             case R.id.loan_basic_life_linear:
@@ -150,44 +151,44 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 } else {
                     String[] strings = new String[]{"0-5个月", "6-12个月", "1-3年", "3-7年", "7年以上"};
                     //弹出Toast或者Dialog
-                    ShowDialog.getInstance().showDialog(this, "basic_life", strings, mHandler,
-                            5);
+                    ShowDialog.getInstance().showDialog( this, "basic_life", strings, mHandler,
+                            5 );
                 }
                 break;
             case R.id.loan_basic_button:
                 if (ischerBox) {
-                    if (TextUtils.isEmpty(loan_basic_please_in_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入本人姓名");
+                    if (TextUtils.isEmpty( loan_basic_please_in_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入本人姓名" );
                     } else if (loan_basic_please_in_editText.getText().toString().length() < 2) {
-                        ToatUtils.showShort1(this, "输入本人姓名不正确");
-                        loan_basic_please_in_editText.setText("");
-                    } else if (TextUtils.isEmpty(loan_details_basic_id_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入身份证号");
-                    } else if (!IdcardValidator.getInstance().isValidatedAllIdcard(loan_details_basic_id_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入正确身份证号");
-                        loan_details_basic_id_editText.setText("");
-                    } else if (TextUtils.isEmpty(loan_basic_application.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入申请金额");
-                    } else if (TextUtils.isEmpty(loan_loan_highest_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入最高还款额度");
-                    } else if (TextUtils.isEmpty(loan_basic_content_editText.getText().toString())) {
-                        ToatUtils.showShort1(this, "请输入月工资");
+                        ToatUtils.showShort1( this, "输入本人姓名不正确" );
+                        loan_basic_please_in_editText.setText( "" );
+                    } else if (TextUtils.isEmpty( loan_details_basic_id_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入身份证号" );
+                    } else if (!IdcardValidator.getInstance().isValidatedAllIdcard( loan_details_basic_id_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入正确身份证号" );
+                        loan_details_basic_id_editText.setText( "" );
+                    } else if (TextUtils.isEmpty( loan_basic_application.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入申请金额" );
+                    } else if (TextUtils.isEmpty( loan_loan_highest_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入最高还款额度" );
+                    } else if (TextUtils.isEmpty( loan_basic_content_editText.getText().toString() )) {
+                        ToatUtils.showShort1( this, "请输入月工资" );
                     } else {
                         getHttp();
                     }
                 } else {
-                    ToatUtils.showShort1(this, "您有些数据没有填写完或者没有同意贷款通知书");
+                    ToatUtils.showShort1( this, "您有些数据没有填写完或者没有同意贷款通知书" );
                 }
                 break;
             case R.id.loan_details_basic_loan_text:
-                intent = new Intent(BasicAuthenticationActivity.this, LoanWebViewActivity.class);
-                intent.putExtra("url", HttpURL.getInstance().HTTP_DETAILS);
-                startActivity(intent);
+                intent = new Intent( BasicAuthenticationActivity.this, LoanWebViewActivity.class );
+                intent.putExtra( "url", HttpURL.getInstance().HTTP_DETAILS );
+                startActivity( intent );
                 break;
             case R.id.title_image:
                 intent = new Intent();
-                intent.putExtra("operator", "2");
-                setResult(RESULT_CANCELED, intent);
+                intent.putExtra( "operator", "2" );
+                setResult( RESULT_CANCELED, intent );
                 finish();
                 break;
         }
@@ -196,148 +197,155 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
 
     @Override
     protected void findViewById() {
-        findViewById(R.id.title_image).setVisibility(View.VISIBLE);
-        findViewById(R.id.title_image).setOnClickListener(this);
-        TextView title_view = findViewById(R.id.title_view);
-        title_view.setText(this.getString(R.string.name_loan_basic_information));
+        findViewById( R.id.title_image ).setVisibility( View.VISIBLE );
+        findViewById( R.id.title_image ).setOnClickListener( this );
+        TextView title_view = findViewById( R.id.title_view );
+        title_view.setText( this.getString( R.string.name_loan_basic_information ) );
 
-        loan_basic_please_in_text = findViewById(R.id.loan_basic_please_in_text);
-        loan_basic_number_text = findViewById(R.id.loan_basic_number_text);
-        loan_basic_application_text = findViewById(R.id.loan_basic_application_text);
-        loan_loan_application_text = findViewById(R.id.loan_loan_application_text);
-        loan_loan_highest_text = findViewById(R.id.loan_loan_highest_text);
-        loan_education_level_text = findViewById(R.id.loan_education_level_text);
-        loan_basic_security_text = findViewById(R.id.loan_basic_security_text);
-        loan_basic_cat_text = findViewById(R.id.loan_basic_cat_text);
-        loan_basic_typ_text = findViewById(R.id.loan_basic_typ_text);
+        loan_basic_please_in_text = findViewById( R.id.loan_basic_please_in_text );
+        loan_basic_number_text = findViewById( R.id.loan_basic_number_text );
+        loan_basic_application_text = findViewById( R.id.loan_basic_application_text );
+        loan_loan_application_text = findViewById( R.id.loan_loan_application_text );
+        loan_loan_highest_text = findViewById( R.id.loan_loan_highest_text );
+        loan_education_level_text = findViewById( R.id.loan_education_level_text );
+        loan_basic_security_text = findViewById( R.id.loan_basic_security_text );
+        loan_basic_cat_text = findViewById( R.id.loan_basic_cat_text );
+        loan_basic_typ_text = findViewById( R.id.loan_basic_typ_text );
 
-        findViewById(R.id.loan_basic_application_linear).setOnClickListener(this);
-        findViewById(R.id.loan_loan_application_linear).setOnClickListener(this);
-        findViewById(R.id.loan_education_level_linear).setOnClickListener(this);
-        findViewById(R.id.loan_basic_security_linear).setOnClickListener(this);
-        findViewById(R.id.loan_basic_cat_linear).setOnClickListener(this);
-        findViewById(R.id.loan_basic_typ_linear).setOnClickListener(this);
-        findViewById(R.id.loan_basic_life_linear).setOnClickListener(this);
+        findViewById( R.id.loan_basic_application_linear ).setOnClickListener( this );
+        findViewById( R.id.loan_loan_application_linear ).setOnClickListener( this );
+        findViewById( R.id.loan_education_level_linear ).setOnClickListener( this );
+        findViewById( R.id.loan_basic_security_linear ).setOnClickListener( this );
+        findViewById( R.id.loan_basic_cat_linear ).setOnClickListener( this );
+        findViewById( R.id.loan_basic_typ_linear ).setOnClickListener( this );
+        findViewById( R.id.loan_basic_life_linear ).setOnClickListener( this );
 
-        loan_basic_please_in_editText = findViewById(R.id.loan_basic_please_in_editText);
-        loan_details_basic_id_editText = findViewById(R.id.loan_details_basic_id_editText);
-        loan_loan_highest_editText = findViewById(R.id.loan_loan_highest_editText);
-        loan_basic_content_editText = findViewById(R.id.loan_basic_content_editText);
+        loan_basic_please_in_editText = findViewById( R.id.loan_basic_please_in_editText );
+        loan_details_basic_id_editText = findViewById( R.id.loan_details_basic_id_editText );
+        loan_loan_highest_editText = findViewById( R.id.loan_loan_highest_editText );
+        loan_basic_content_editText = findViewById( R.id.loan_basic_content_editText );
 
-        loan_basic_application = findViewById(R.id.loan_basic_application);
-        loan_loan_application = findViewById(R.id.loan_loan_application);
-        loan_education_level = findViewById(R.id.loan_education_level);
-        loan_basic_security = findViewById(R.id.loan_basic_security);
-        loan_basic_typ = findViewById(R.id.loan_basic_typ);
-        loan_basic_cat = findViewById(R.id.loan_basic_cat);
-        loan_basic_life = findViewById(R.id.loan_basic_life);
+        loan_basic_application = findViewById( R.id.loan_basic_application );
+        loan_loan_application = findViewById( R.id.loan_loan_application );
+        loan_education_level = findViewById( R.id.loan_education_level );
+        loan_basic_security = findViewById( R.id.loan_basic_security );
+        loan_basic_typ = findViewById( R.id.loan_basic_typ );
+        loan_basic_cat = findViewById( R.id.loan_basic_cat );
+        loan_basic_life = findViewById( R.id.loan_basic_life );
 
-        loan_details_basic_loan_text = findViewById(R.id.loan_details_basic_loan_text);
-        loan_basic_image_image = findViewById(R.id.loan_basic_image_image);
-        loan_basic_button = findViewById(R.id.loan_basic_button);
+        loan_details_basic_loan_text = findViewById( R.id.loan_details_basic_loan_text );
+        loan_basic_image_image = findViewById( R.id.loan_basic_image_image );
+        loan_basic_button = findViewById( R.id.loan_basic_button );
 
 
     }
 
     @Override
     protected void initView() {
-        loan_basic_button.setOnClickListener(this);
-        loan_loan_application.setOnClickListener(this);
-        loan_education_level.setOnClickListener(this);
-        loan_basic_security.setOnClickListener(this);
-        loan_basic_typ.setOnClickListener(this);
-        loan_basic_cat.setOnClickListener(this);
-        loan_basic_life.setOnClickListener(this);
-        loan_details_basic_loan_text.setOnClickListener(this);
+        getDetails();
+        loan_basic_button.setOnClickListener( this );
+        loan_loan_application.setOnClickListener( this );
+        loan_education_level.setOnClickListener( this );
+        loan_basic_security.setOnClickListener( this );
+        loan_basic_typ.setOnClickListener( this );
+        loan_basic_cat.setOnClickListener( this );
+        loan_basic_life.setOnClickListener( this );
+        loan_details_basic_loan_text.setOnClickListener( this );
 
-        if (!TextUtils.isEmpty(SharedPreferencesUtils.get(this, "realname", "").toString())) {
-            loan_basic_please_in_editText.setText(SharedPreferencesUtils.get(this, "realname", "").toString());
+        if (!TextUtils.isEmpty( SharedPreferencesUtils.get( this, "realname", "" ).toString() )) {
+            loan_basic_please_in_editText.setText( SharedPreferencesUtils.get( this, "realname", "" ).toString() );
         }
 
-        if (!TextUtils.isEmpty(SharedPreferencesUtils.get(this, "idcard", "").toString())) {
-            loan_details_basic_id_editText.setText(SharedPreferencesUtils.get(this, "idcard", "").toString());
+        if (!TextUtils.isEmpty( SharedPreferencesUtils.get( this, "idcard", "" ).toString() )) {
+            loan_details_basic_id_editText.setText( SharedPreferencesUtils.get( this, "idcard", "" ).toString() );
         }
 
-        loan_basic_image_image.setChecked(true);
+        loan_basic_image_image.setChecked( true );
         ischerBox = true;
-        loan_basic_image_image.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        loan_basic_image_image.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
             @SuppressLint("ResourceType")
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     ischerBox = true;
-                    loan_basic_button.setBackgroundResource(R.color.common_basic_red);
+                    loan_basic_button.setBackgroundResource( R.color.common_basic_red );
                 } else {
                     ischerBox = false;
-                    loan_basic_button.setBackgroundResource(R.color.common_loan_personal);
+                    loan_basic_button.setBackgroundResource( R.color.common_loan_personal );
                 }
             }
-        });
+        } );
     }
 
     private void getHttp() {
         Map<String, Object> map = new HashMap<>();
-        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        map.put("name", loan_basic_please_in_editText.getText().toString());
-        map.put("idcard", loan_details_basic_id_editText.getText().toString());
-        map.put("money", loan_basic_application.getText().toString());
-        map.put("deadline", loan_loan_application.getText().toString());
-        map.put("limit", loan_loan_highest_editText.getText().toString());
-        map.put("edu", loan_education_level.getText().toString());
-        map.put("insurance", loan_basic_security.getText().toString());
-        map.put("car_status", loan_basic_cat.getText().toString());
-        map.put("profession", loan_basic_typ.getText().toString());
-        map.put("salary", loan_basic_content_editText.getText().toString());
-        map.put("work_year", loan_basic_life.getText().toString());
-        OkHttpManager.postAsync(HttpURL.getInstance().BASEADD, "basic", map, this);
+        map.put( "uid", Long.parseLong( SharedPreferencesUtils.get( this, "uid", "" ).toString() ) );
+        map.put( "name", loan_basic_please_in_editText.getText().toString() );
+        map.put( "idcard", loan_details_basic_id_editText.getText().toString() );
+        map.put( "money", loan_basic_application.getText().toString() );
+        map.put( "deadline", loan_loan_application.getText().toString() );
+        map.put( "limit", loan_loan_highest_editText.getText().toString() );
+        map.put( "edu", loan_education_level.getText().toString() );
+        map.put( "insurance", loan_basic_security.getText().toString() );
+        map.put( "car_status", loan_basic_cat.getText().toString() );
+        map.put( "profession", loan_basic_typ.getText().toString() );
+        map.put( "salary", loan_basic_content_editText.getText().toString() );
+        map.put( "work_year", loan_basic_life.getText().toString() );
+        OkHttpManager.postAsync( HttpURL.getInstance().BASEADD, "basic", map, this );
+    }
+
+    private void getDetails() {
+        Map<String, Object> map = new HashMap<>();
+        map.put( "uid", Long.parseLong( SharedPreferencesUtils.get( this, "uid", "" ).toString() ) );
+        OkHttpManager.postAsync( HttpURL.getInstance().USERDETAILBASE, "basic_details", map, this );
     }
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+            super.handleMessage( msg );
             switch (msg.what) {
                 case 1:
-                    if (TextUtils.isEmpty(msg.obj.toString())) {
+                    if (TextUtils.isEmpty( msg.obj.toString() )) {
                         ischerBox = false;
                     } else {
-                        loan_education_level.setText(msg.obj.toString());
+                        loan_education_level.setText( msg.obj.toString() );
                     }
                     break;
                 case 2:
-                    if (TextUtils.isEmpty(msg.obj.toString())) {
+                    if (TextUtils.isEmpty( msg.obj.toString() )) {
                         ischerBox = false;
                     } else {
-                        loan_basic_security.setText(msg.obj.toString());
+                        loan_basic_security.setText( msg.obj.toString() );
                     }
                     break;
                 case 3:
-                    if (TextUtils.isEmpty(msg.obj.toString())) {
+                    if (TextUtils.isEmpty( msg.obj.toString() )) {
                         ischerBox = false;
                     } else {
-                        loan_basic_cat.setText(msg.obj.toString());
+                        loan_basic_cat.setText( msg.obj.toString() );
                     }
                     break;
                 case 4:
-                    if (TextUtils.isEmpty(msg.obj.toString())) {
+                    if (TextUtils.isEmpty( msg.obj.toString() )) {
                         ischerBox = false;
                     } else {
-                        loan_basic_typ.setText(msg.obj.toString());
+                        loan_basic_typ.setText( msg.obj.toString() );
                     }
                     break;
                 case 5:
-                    if (TextUtils.isEmpty(msg.obj.toString())) {
+                    if (TextUtils.isEmpty( msg.obj.toString() )) {
                         ischerBox = false;
                     } else {
-                        loan_basic_life.setText(msg.obj.toString());
+                        loan_basic_life.setText( msg.obj.toString() );
                     }
                     break;
                 case 6:
-                    if (TextUtils.isEmpty(msg.obj.toString())) {
+                    if (TextUtils.isEmpty( msg.obj.toString() )) {
                         ischerBox = false;
                     } else {
-                        loan_loan_application.setText(msg.obj.toString());
+                        loan_loan_application.setText( msg.obj.toString() );
                     }
                     break;
             }
@@ -347,20 +355,23 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+        MobclickAgent.onResume( this );
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+        MobclickAgent.onPause( this );
     }
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "basic":
-                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
+                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
+                break;
+            case "basic_details":
+                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
                 break;
         }
 
@@ -370,15 +381,32 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
     public void requestSuccess(String result, String name) throws Exception {
         switch (name) {
             case "basic":
-                JSONObject object = new JSONObject(result);
-                if (object.optString("code").equals("0000")) {
+                JSONObject object = new JSONObject( result );
+                if (object.optString( "code" ).equals( "0000" )) {
                     intent = new Intent();
-                    intent.putExtra("operator", "1");
-                    setResult(RESULT_CANCELED, intent);
+                    intent.putExtra( "operator", "1" );
+                    setResult( RESULT_CANCELED, intent );
                     finish();
                 } else {
-                    ToatUtils.showShort1(this, object.optString("msg"));
+                    ToatUtils.showShort1( this, object.optString( "msg" ) );
                 }
+                break;
+            case "basic_details":
+                object = new JSONObject( result );
+                object = new JSONObject( object.optString( "data" ) );
+                JSONArray array = new JSONArray( object.optString( "data" ) );
+                JSONObject jsonObject = array.optJSONObject( 0 );
+                loan_basic_please_in_editText.setText( jsonObject.optString( "name" ) );
+                loan_details_basic_id_editText.setText( jsonObject.optString( "idcard" ) );
+                loan_basic_application.setText( jsonObject.optString( "money" ) );
+                loan_loan_application.setText( jsonObject.optString( "deadline" ) );
+                loan_loan_highest_editText.setText( jsonObject.optString( "limit" ) );
+                loan_education_level.setText( jsonObject.optString( "edu" ) );
+                loan_basic_security.setText( jsonObject.optString( "insurance" ) );
+                loan_basic_cat.setText( jsonObject.optString( "car_status" ) );
+                loan_basic_typ.setText( jsonObject.optString( "profession" ) );
+                loan_basic_content_editText.setText( jsonObject.optString( "salary" ) );
+                loan_basic_life.setText( jsonObject.optString( "work_year" ) );
                 break;
         }
     }
@@ -388,11 +416,11 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             intent = new Intent();
-            intent.putExtra("operator", "2");
-            setResult(RESULT_CANCELED, intent);
+            intent.putExtra( "operator", "2" );
+            setResult( RESULT_CANCELED, intent );
             finish();
             return true;
         }
-        return super.onKeyDown(keyCode, event);
+        return super.onKeyDown( keyCode, event );
     }
 }

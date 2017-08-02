@@ -52,11 +52,11 @@ public class HttpURL implements Serializable {
     private String HTTP_PATH = "http://47.93.122.140:8001//index.php?g=app";
 
     public void initUrl(Context context) {
-        if (SharedPreferencesUtils.contains(context, HTTP_URL_KEY)) {
-            HTTP_URL = SharedPreferencesUtils.get(context, HTTP_URL_KEY, HTTP_URL).toString();
+        if (SharedPreferencesUtils.contains( context, HTTP_URL_KEY )) {
+            HTTP_URL = SharedPreferencesUtils.get( context, HTTP_URL_KEY, HTTP_URL ).toString();
         }
-        HTTP_URL = HTTP_URL.replace("\n", "");
-        HTTP_URL = HTTP_URL.replace(" ", "");
+        HTTP_URL = HTTP_URL.replace( "\n", "" );
+        HTTP_URL = HTTP_URL.replace( " ", "" );
 
     }
 
@@ -67,7 +67,7 @@ public class HttpURL implements Serializable {
      * @param url
      */
     public void updateUrl(Context context, String url) {
-        SharedPreferencesUtils.put(context, HTTP_URL_KEY, url);
+        SharedPreferencesUtils.put( context, HTTP_URL_KEY, url );
     }
 
     public String CODE = HTTP_URL + "&m=login&a=send_code";
@@ -159,4 +159,6 @@ public class HttpURL implements Serializable {
     public String HITSPRODUCT = HTTP_URL + "&m=product&a=hits";
 
     public String REGISTERCODE = HTTP_URL + "&m=register&a=bycode";
+
+    public String USERDETAILBASE = HTTP_URL + "&m=userdetail&a=base_list";
 }

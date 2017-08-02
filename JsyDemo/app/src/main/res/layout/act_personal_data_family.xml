@@ -138,7 +138,7 @@
         <LinearLayout
             android:id="@+id/personal_family_household_register_linear"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="@dimen/common_10dp">

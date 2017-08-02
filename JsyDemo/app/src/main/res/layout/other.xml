@@ -71,30 +71,36 @@
                 android:layout_marginRight="@dimen/common_20dp"
                 android:background="@color/common_gray" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:padding="@dimen/common_15dp">
 
                 <com.jsy.jsydemo.control.MyTextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true"
+                    android:layout_weight="1"
                     android:text="@string/name_loan_personal_data_phone"
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp" />
 
-                <com.jsy.jsydemo.control.MyTextView
+                <com.jsy.jsydemo.control.MyEdittextView
                     android:id="@+id/other_relatives_phone"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
+                    android:layout_weight="1"
+                    android:digits="1234567890"
+                    android:gravity="right|center"
+                    android:hint="@string/name_loan_set_up_password_phone"
+                    android:inputType="number|phone"
+                    android:maxLength="11"
                     android:textColor="@color/common_loan_personal"
+                    android:textColorHint="@color/common_gray"
                     android:textSize="@dimen/common_14dp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
@@ -164,30 +170,36 @@
                 android:layout_marginRight="@dimen/common_20dp"
                 android:background="@color/common_gray" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:padding="@dimen/common_18dp">
 
                 <com.jsy.jsydemo.control.MyTextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true"
+                    android:layout_weight="1"
                     android:text="@string/name_loan_personal_data_phone"
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp" />
 
-                <com.jsy.jsydemo.control.MyTextView
+                <com.jsy.jsydemo.control.MyEdittextView
                     android:id="@+id/other_contacts_phone"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
+                    android:layout_weight="1"
+                    android:gravity="right|center"
+                    android:hint="@string/name_loan_set_up_password_phone"
+                    android:inputType="number|phone"
+                    android:digits="1234567890"
+                    android:maxLength="11"
                     android:textColor="@color/common_loan_personal"
+                    android:textColorHint="@color/common_gray"
                     android:textSize="@dimen/common_14dp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
