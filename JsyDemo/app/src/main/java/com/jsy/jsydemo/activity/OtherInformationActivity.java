@@ -30,6 +30,7 @@ import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.TimeUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -312,30 +313,58 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
         OkHttpManager.postAsync(HttpURL.getInstance().OTHER_INFO, "other", map, this);
     }
 
+    private void getOther(){
+        Map<String,Object> map = new HashMap<>(  );
+        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
+        OkHttpManager.postAsync( HttpURL.getInstance().USERDETAILOTHER,"other_details",map,this );
+    }
+
     @Override
     protected void initView() {
         information_mode_text.setOnClickListener(this);
         information_please_button.setOnClickListener(this);
         other_relatives_wathet.setOnClickListener(this);
         other_contacts_wathet.setOnClickListener(this);
-
+        getOther();
     }
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
-
+        ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
     }
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-        JSONObject object = new JSONObject(result);
-        if (object.optString("code").equals("0000")) {
-            intent = new Intent();
-            intent.putExtra("operator", "1");
-            setResult(RESULT_CANCELED, intent);
-            finish();
-        } else {
-            ToatUtils.showShort1(this, object.optString("msg"));
+        switch (name){
+            case "other_details":
+//                object = new JSONObject( result );
+//                object = new JSONObject( object.optString( "data" ) );
+//                JSONArray array = new JSONArray( object.optString( "data" ) );
+//                JSONObject jsonObject = array.optJSONObject( 0 );
+//                loan_basic_please_in_editText.setText( jsonObject.optString( "name" ) );
+//                loan_details_basic_id_editText.setText( jsonObject.optString( "idcard" ) );
+//                loan_basic_application.setText( jsonObject.optString( "money" ) );
+//                loan_loan_application.setText( jsonObject.optString( "deadline" ) );
+//                loan_loan_highest_editText.setText( jsonObject.optString( "limit" ) );
+//                loan_education_level.setText( jsonObject.optString( "edu" ) );
+//                loan_basic_security.setText( jsonObject.optString( "insurance" ) );
+//                loan_basic_cat.setText( jsonObject.optString( "car_status" ) );
+//                loan_basic_typ.setText( jsonObject.optString( "profession" ) );
+//                loan_basic_content_editText.setText( jsonObject.optString( "salary" ) );
+//                loan_basic_life.setText( jsonObject.optString( "work_year" ) );
+
+                break;
+            case "other":
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    intent = new Intent();
+                    intent.putExtra("operator", "1");
+                    setResult(RESULT_CANCELED, intent);
+                    finish();
+                } else {
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                }
+                break;
         }
     }
 

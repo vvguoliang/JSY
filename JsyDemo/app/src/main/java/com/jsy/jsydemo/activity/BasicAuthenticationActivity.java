@@ -395,18 +395,20 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 object = new JSONObject( result );
                 object = new JSONObject( object.optString( "data" ) );
                 JSONArray array = new JSONArray( object.optString( "data" ) );
-                JSONObject jsonObject = array.optJSONObject( 0 );
-                loan_basic_please_in_editText.setText( jsonObject.optString( "name" ) );
-                loan_details_basic_id_editText.setText( jsonObject.optString( "idcard" ) );
-                loan_basic_application.setText( jsonObject.optString( "money" ) );
-                loan_loan_application.setText( jsonObject.optString( "deadline" ) );
-                loan_loan_highest_editText.setText( jsonObject.optString( "limit" ) );
-                loan_education_level.setText( jsonObject.optString( "edu" ) );
-                loan_basic_security.setText( jsonObject.optString( "insurance" ) );
-                loan_basic_cat.setText( jsonObject.optString( "car_status" ) );
-                loan_basic_typ.setText( jsonObject.optString( "profession" ) );
-                loan_basic_content_editText.setText( jsonObject.optString( "salary" ) );
-                loan_basic_life.setText( jsonObject.optString( "work_year" ) );
+                if (array.length() > 0) {
+                    JSONObject jsonObject = array.optJSONObject( 0 );
+                    loan_basic_please_in_editText.setText( jsonObject.optString( "name" ) );
+                    loan_details_basic_id_editText.setText( jsonObject.optString( "idcard" ) );
+                    loan_basic_application.setText( jsonObject.optString( "money" ) );
+                    loan_loan_application.setText( jsonObject.optString( "deadline" ) );
+                    loan_loan_highest_editText.setText( jsonObject.optString( "limit" ) );
+                    loan_education_level.setText( jsonObject.optString( "edu" ) );
+                    loan_basic_security.setText( jsonObject.optString( "insurance" ) );
+                    loan_basic_cat.setText( jsonObject.optString( "car_status" ) );
+                    loan_basic_typ.setText( jsonObject.optString( "profession" ) );
+                    loan_basic_content_editText.setText( jsonObject.optString( "salary" ) );
+                    loan_basic_life.setText( jsonObject.optString( "work_year" ) );
+                }
                 break;
         }
     }

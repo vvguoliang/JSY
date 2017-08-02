@@ -161,4 +161,8 @@ public class HttpURL implements Serializable {
     public String REGISTERCODE = HTTP_URL + "&m=register&a=bycode";
 
     public String USERDETAILBASE = HTTP_URL + "&m=userdetail&a=base_list";
+
+    public String USERDETAILOTHER = HTTP_URL + "&m=userdetail&a=other_info_list";
+
+    public String USERDETAILIDCARD = HTTP_URL + "&m=userdetail&a= idcard_list";
 }
