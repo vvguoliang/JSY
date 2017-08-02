@@ -336,10 +336,22 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
     @Override
     public void requestSuccess(String result, String name) throws Exception {
         switch (name){
+            case "other":
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    intent = new Intent();
+                    intent.putExtra("operator", "1");
+                    setResult(RESULT_CANCELED, intent);
+                    finish();
+                } else {
+                    ToatUtils.showShort1(this, object.optString("msg"));
+                }
+                break;
             case "other_details":
-//                object = new JSONObject( result );
-//                object = new JSONObject( object.optString( "data" ) );
-//                JSONArray array = new JSONArray( object.optString( "data" ) );
+                object = new JSONObject( result );
+                object = new JSONObject( object.optString( "data" ) );
+                JSONArray array = new JSONArray( object.optString( "data" ) );
+                if(array.length() > 0){
 //                JSONObject jsonObject = array.optJSONObject( 0 );
 //                loan_basic_please_in_editText.setText( jsonObject.optString( "name" ) );
 //                loan_details_basic_id_editText.setText( jsonObject.optString( "idcard" ) );
@@ -352,17 +364,6 @@ public class OtherInformationActivity extends BaseActivity implements View.OnCli
 //                loan_basic_typ.setText( jsonObject.optString( "profession" ) );
 //                loan_basic_content_editText.setText( jsonObject.optString( "salary" ) );
 //                loan_basic_life.setText( jsonObject.optString( "work_year" ) );
-
-                break;
-            case "other":
-                JSONObject object = new JSONObject(result);
-                if (object.optString("code").equals("0000")) {
-                    intent = new Intent();
-                    intent.putExtra("operator", "1");
-                    setResult(RESULT_CANCELED, intent);
-                    finish();
-                } else {
-                    ToatUtils.showShort1(this, object.optString("msg"));
                 }
                 break;
         }

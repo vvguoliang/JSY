@@ -531,8 +531,9 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult( requestCode, resultCode, data );
-        String datastring = data.getStringExtra( "operator" );
+        String datastring = "";
         if (requestCode == 1000) {
+            datastring = data.getStringExtra( "operator" );
             if (!TextUtils.isEmpty( datastring ) && datastring.equals( "1" )) {
                 phone_operator = true;
                 loan_details_phone_operator.setBackgroundResource( R.mipmap.ic_loan_details_authentication );
@@ -542,6 +543,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             }
             return;
         } else if (requestCode == 1001) {
+            datastring = data.getStringExtra( "operator" );
             if (!TextUtils.isEmpty( datastring ) && datastring.equals( "1" )) {
                 basic_information = true;
                 loan_details_basic_information.setBackgroundResource( R.mipmap.ic_loan_details_authentication );
@@ -551,6 +553,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             }
             return;
         } else if (requestCode == 1002) {
+            datastring = data.getStringExtra( "operator" );
             if (!TextUtils.isEmpty( datastring ) && datastring.equals( "1" )) {
                 details_id = true;
                 loan_details_id.setBackgroundResource( R.mipmap.ic_loan_details_authentication );
@@ -560,6 +563,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             }
             return;
         } else if (requestCode == 1003) {
+            datastring = data.getStringExtra( "operator" );
             if (!TextUtils.isEmpty( datastring ) && datastring.equals( "1" )) {
                 details_other = true;
                 loan_details_other.setBackgroundResource( R.mipmap.ic_loan_details_authentication );

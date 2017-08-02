@@ -397,17 +397,28 @@ public class BasicAuthenticationActivity extends BaseActivity implements View.On
                 JSONArray array = new JSONArray( object.optString( "data" ) );
                 if (array.length() > 0) {
                     JSONObject jsonObject = array.optJSONObject( 0 );
-                    loan_basic_please_in_editText.setText( jsonObject.optString( "name" ) );
-                    loan_details_basic_id_editText.setText( jsonObject.optString( "idcard" ) );
-                    loan_basic_application.setText( jsonObject.optString( "money" ) );
-                    loan_loan_application.setText( jsonObject.optString( "deadline" ) );
-                    loan_loan_highest_editText.setText( jsonObject.optString( "limit" ) );
-                    loan_education_level.setText( jsonObject.optString( "edu" ) );
-                    loan_basic_security.setText( jsonObject.optString( "insurance" ) );
-                    loan_basic_cat.setText( jsonObject.optString( "car_status" ) );
-                    loan_basic_typ.setText( jsonObject.optString( "profession" ) );
-                    loan_basic_content_editText.setText( jsonObject.optString( "salary" ) );
-                    loan_basic_life.setText( jsonObject.optString( "work_year" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "name" ) ) && !"null".equals( jsonObject.optString( "name" ) ))
+                        loan_basic_please_in_editText.setText( jsonObject.optString( "name" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "idcard" ) ) && !"null".equals( jsonObject.optString( "idcard" ) ))
+                        loan_details_basic_id_editText.setText( jsonObject.optString( "idcard" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "money" ) ) && !"null".equals( jsonObject.optString( "money" ) ))
+                        loan_basic_application.setText( jsonObject.optString( "money" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "deadline" ) ) && !"null".equals( jsonObject.optString( "deadline" ) ))
+                        loan_loan_application.setText( jsonObject.optString( "deadline" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "limit" ) ) && !"null".equals( jsonObject.optString( "limit" ) ))
+                        loan_loan_highest_editText.setText( jsonObject.optString( "limit" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "edu" ) ) && !"null".equals( jsonObject.optString( "edu" ) ))
+                        loan_education_level.setText( jsonObject.optString( "edu" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "insurance" ) ) && !"null".equals( jsonObject.optString( "insurance" ) ))
+                        loan_basic_security.setText( jsonObject.optString( "insurance" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "car_status" ) ) && !"null".equals( jsonObject.optString( "car_status" ) ))
+                        loan_basic_cat.setText( jsonObject.optString( "car_status" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "profession" ) ) && !"null".equals( jsonObject.optString( "profession" ) ))
+                        loan_basic_typ.setText( jsonObject.optString( "profession" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "salary" ) ) && !"null".equals( jsonObject.optString( "salary" ) ))
+                        loan_basic_content_editText.setText( jsonObject.optString( "salary" ) );
+                    if (!TextUtils.isEmpty( jsonObject.optString( "work_year" ) ) && !"null".equals( jsonObject.optString( "work_year" ) ))
+                        loan_basic_life.setText( jsonObject.optString( "work_year" ) );
                 }
                 break;
         }
