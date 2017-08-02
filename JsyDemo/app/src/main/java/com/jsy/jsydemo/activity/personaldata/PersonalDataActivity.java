@@ -48,61 +48,61 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_personal_data);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.act_personal_data );
         getHpptuserInfo();
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.getInstance().getW_add_B(this);
+            ImmersiveUtils.getInstance().getW_add_B( this );
         }
     }
 
     @Override
     protected void findViewById() {
-        findViewById(R.id.title_image).setVisibility(View.VISIBLE);
-        findViewById(R.id.title_image).setOnClickListener(this);
-        findViewById(R.id.title_complete).setVisibility(View.VISIBLE);
-        findViewById(R.id.title_complete).setOnClickListener(this);
-        TextView title_view = findViewById(R.id.title_view);
-        title_view.setText(this.getString(R.string.name_loan_personal_data));
-        findViewById(R.id.personal_data_credit).setOnClickListener(this);
-        findViewById(R.id.personal_data_enterprise).setOnClickListener(this);
-        findViewById(R.id.personal_data_family).setOnClickListener(this);
-        findViewById(R.id.personal_data_other).setOnClickListener(this);
-        findViewById(R.id.personal_data_hose_property).setOnClickListener(this);
-        findViewById(R.id.personal_data_car_production).setOnClickListener(this);
-        findViewById(R.id.personal_data_operator).setOnClickListener(this);
+        findViewById( R.id.title_image ).setVisibility( View.VISIBLE );
+        findViewById( R.id.title_image ).setOnClickListener( this );
+        findViewById( R.id.title_complete ).setVisibility( View.VISIBLE );
+        findViewById( R.id.title_complete ).setOnClickListener( this );
+        TextView title_view = findViewById( R.id.title_view );
+        title_view.setText( this.getString( R.string.name_loan_personal_data ) );
+        findViewById( R.id.personal_data_credit ).setOnClickListener( this );
+        findViewById( R.id.personal_data_enterprise ).setOnClickListener( this );
+        findViewById( R.id.personal_data_family ).setOnClickListener( this );
+        findViewById( R.id.personal_data_other ).setOnClickListener( this );
+        findViewById( R.id.personal_data_hose_property ).setOnClickListener( this );
+        findViewById( R.id.personal_data_car_production ).setOnClickListener( this );
+        findViewById( R.id.personal_data_operator ).setOnClickListener( this );
 //        findViewById(R.id.personal_data_online_shopping).setOnClickListener(this);
-        findViewById(R.id.personal_data_certificates).setOnClickListener(this);
-        findViewById(R.id.personal_data_bank_card).setOnClickListener(this);
+        findViewById( R.id.personal_data_certificates ).setOnClickListener( this );
+        findViewById( R.id.personal_data_bank_card ).setOnClickListener( this );
 
-        personal_data_phone = findViewById(R.id.personal_data_phone);
-        personal_data_name = findViewById(R.id.personal_data_name);
-        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "uid", "").toString())) {
-            personal_data_phone.setText(SharedPreferencesUtils.get(this, "username", "").toString());
+        personal_data_phone = findViewById( R.id.personal_data_phone );
+        personal_data_name = findViewById( R.id.personal_data_name );
+        if (!StringUtil.isNullOrEmpty( SharedPreferencesUtils.get( this, "uid", "" ).toString() )) {
+            personal_data_phone.setText( SharedPreferencesUtils.get( this, "username", "" ).toString() );
         }
-        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "realname", "").toString())) {
-            personal_data_name.setText(SharedPreferencesUtils.get(this, "realname", "").toString());
+        if (!StringUtil.isNullOrEmpty( SharedPreferencesUtils.get( this, "realname", "" ).toString() )) {
+            personal_data_name.setText( SharedPreferencesUtils.get( this, "realname", "" ).toString() );
         } else {
-            personal_data_name.setText("");
+            personal_data_name.setText( "" );
         }
-        personal_data_id = findViewById(R.id.personal_data_id);
-        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(this, "idcard", "").toString())) {
-            personal_data_id.setText(SharedPreferencesUtils.get(this, "idcard", "").toString());
+        personal_data_id = findViewById( R.id.personal_data_id );
+        if (!StringUtil.isNullOrEmpty( SharedPreferencesUtils.get( this, "idcard", "" ).toString() )) {
+            personal_data_id.setText( SharedPreferencesUtils.get( this, "idcard", "" ).toString() );
         } else {
-            personal_data_id.setText("");
+            personal_data_id.setText( "" );
         }
-        personal_data_complete0 = findViewById(R.id.personal_data_complete0);
-        personal_data_complete1 = findViewById(R.id.personal_data_complete1);
-        personal_data_complete2 = findViewById(R.id.personal_data_complete2);
-        personal_data_complete3 = findViewById(R.id.personal_data_complete3);
-        personal_data_complete4 = findViewById(R.id.personal_data_complete4);
-        personal_data_complete5 = findViewById(R.id.personal_data_complete5);
-        personal_data_complete6 = findViewById(R.id.personal_data_complete6);
+        personal_data_complete0 = findViewById( R.id.personal_data_complete0 );
+        personal_data_complete1 = findViewById( R.id.personal_data_complete1 );
+        personal_data_complete2 = findViewById( R.id.personal_data_complete2 );
+        personal_data_complete3 = findViewById( R.id.personal_data_complete3 );
+        personal_data_complete4 = findViewById( R.id.personal_data_complete4 );
+        personal_data_complete5 = findViewById( R.id.personal_data_complete5 );
+        personal_data_complete6 = findViewById( R.id.personal_data_complete6 );
 //        personal_data_complete7 = (TextView) findViewById(R.id.personal_data_complete7);
-        personal_data_complete8 = findViewById(R.id.personal_data_complete8);
-        personal_data_complete9 = findViewById(R.id.personal_data_complete9);
+        personal_data_complete8 = findViewById( R.id.personal_data_complete8 );
+        personal_data_complete9 = findViewById( R.id.personal_data_complete9 );
 
     }
 
@@ -112,16 +112,16 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
 
     private void getHpptuserInfo() {
         Map<String, Object> map = new HashMap<>();
-        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        OkHttpManager.postAsync(HttpURL.getInstance().USERINFO, "username_uid", map, this);
+        map.put( "uid", Long.parseLong( SharedPreferencesUtils.get( this, "uid", "" ).toString() ) );
+        OkHttpManager.postAsync( HttpURL.getInstance().USERINFO, "username_uid", map, this );
     }
 
     private void getHttp() {
         Map<String, Object> map = new HashMap<>();
-        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        map.put("realname", personal_data_name.getText().toString());
-        map.put("idcard", personal_data_id.getText().toString());
-        OkHttpManager.postAsync(HttpURL.getInstance().USERINFOADD, "username_add", map, this);
+        map.put( "uid", Long.parseLong( SharedPreferencesUtils.get( this, "uid", "" ).toString() ) );
+        map.put( "realname", personal_data_name.getText().toString() );
+        map.put( "idcard", personal_data_id.getText().toString() );
+        OkHttpManager.postAsync( HttpURL.getInstance().USERINFOADD, "username_add", map, this );
     }
 
     /**
@@ -129,8 +129,8 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
      */
     private void getHttpstater() {
         Map<String, Object> map = new HashMap<>();
-        map.put("uid", Long.parseLong(SharedPreferencesUtils.get(this, "uid", "").toString()));
-        OkHttpManager.postAsync(HttpURL.getInstance().STATUS, "username_list", map, this);
+        map.put( "uid", Long.parseLong( SharedPreferencesUtils.get( this, "uid", "" ).toString() ) );
+        OkHttpManager.postAsync( HttpURL.getInstance().STATUS, "username_list", map, this );
     }
 
     @Override
@@ -143,116 +143,116 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 getHttp();
                 break;
             case R.id.personal_data_credit://个人资信
-                intent = new Intent(PersonalDataActivity.this, PersonalDataCreditActivity.class);
-                startActivityForResult(intent, 100);
+                intent = new Intent( PersonalDataActivity.this, PersonalDataCreditActivity.class );
+                startActivityForResult( intent, 100 );
                 break;
             case R.id.personal_data_enterprise://企业经营情况
-                intent = new Intent(PersonalDataActivity.this, PersonalDataEnterpriseActivity.class);
-                startActivityForResult(intent, 101);
+                intent = new Intent( PersonalDataActivity.this, PersonalDataEnterpriseActivity.class );
+                startActivityForResult( intent, 101 );
                 break;
             case R.id.personal_data_family://家庭情况
-                intent = new Intent(PersonalDataActivity.this, PersonalDataFamilyActivity.class);
-                startActivityForResult(intent, 102);
+                intent = new Intent( PersonalDataActivity.this, PersonalDataFamilyActivity.class );
+                startActivityForResult( intent, 102 );
                 break;
             case R.id.personal_data_other://其他情况
-                intent = new Intent(PersonalDataActivity.this, PersonalDataOtherActivity.class);
-                startActivityForResult(intent, 103);
+                intent = new Intent( PersonalDataActivity.this, PersonalDataOtherActivity.class );
+                startActivityForResult( intent, 103 );
                 break;
             case R.id.personal_data_hose_property://房产
-                intent = new Intent(PersonalDataActivity.this, PersonalDataHosePropertyActivity.class);
-                startActivityForResult(intent, 104);
+                intent = new Intent( PersonalDataActivity.this, PersonalDataHosePropertyActivity.class );
+                startActivityForResult( intent, 104 );
                 break;
             case R.id.personal_data_car_production://车产
-                intent = new Intent(PersonalDataActivity.this, PersonalDataCarActivity.class);
-                startActivityForResult(intent, 105);
+                intent = new Intent( PersonalDataActivity.this, PersonalDataCarActivity.class );
+                startActivityForResult( intent, 105 );
                 break;
             case R.id.personal_data_operator://运营商验证
-                intent = new Intent(PersonalDataActivity.this, PersonalDataOperatorActivity.class);
-                intent.putExtra("operator", personal_data_complete6.getText().toString());
-                startActivityForResult(intent, 106);
+                intent = new Intent( PersonalDataActivity.this, PersonalDataOperatorActivity.class );
+                intent.putExtra( "operator", personal_data_complete6.getText().toString() );
+                startActivityForResult( intent, 106 );
                 break;
 //            case R.id.personal_data_online_shopping://网购信用
 //                break;
             case R.id.personal_data_certificates://证件上传
-                intent = new Intent(PersonalDataActivity.this, PersonalDataUploadActivity.class);
-                startActivityForResult(intent, 107);
+                intent = new Intent( PersonalDataActivity.this, PersonalDataUploadActivity.class );
+                startActivityForResult( intent, 107 );
                 break;
             case R.id.personal_data_bank_card://我的银行卡
-                intent = new Intent(PersonalDataActivity.this, PersonalDataBankCardActivity.class);
-                startActivityForResult(intent, 108);
+                intent = new Intent( PersonalDataActivity.this, PersonalDataBankCardActivity.class );
+                startActivityForResult( intent, 108 );
                 break;
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult( requestCode, resultCode, data );
         String complete = "";
-        if (!TextUtils.isEmpty(data.getExtras().getString("complete"))) {
-            complete = data.getExtras().getString("complete");
+        if (!TextUtils.isEmpty( data.getExtras().getString( "complete" ) )) {
+            complete = data.getExtras().getString( "complete" );
         }
         switch (requestCode) {
             case 100:
-                if (!TextUtils.isEmpty(complete) && complete.equals("1")) {
-                    personal_data_complete0.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if (!TextUtils.isEmpty( complete ) && complete.equals( "1" )) {
+                    personal_data_complete0.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_complete ) );
                 } else {
-                    personal_data_complete0.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                    personal_data_complete0.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_no_complete ) );
                 }
                 break;
             case 101:
-                if (!TextUtils.isEmpty(complete) && complete.equals("1")) {
-                    personal_data_complete1.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if (!TextUtils.isEmpty( complete ) && complete.equals( "1" )) {
+                    personal_data_complete1.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_complete ) );
                 } else {
-                    personal_data_complete1.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                    personal_data_complete1.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_no_complete ) );
                 }
                 break;
             case 102:
-                if (!TextUtils.isEmpty(complete) && complete.equals("1")) {
-                    personal_data_complete2.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if (!TextUtils.isEmpty( complete ) && complete.equals( "1" )) {
+                    personal_data_complete2.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_complete ) );
                 } else {
-                    personal_data_complete3.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                    personal_data_complete3.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_no_complete ) );
                 }
                 break;
             case 103:
-                if (!TextUtils.isEmpty(complete) && complete.equals("1")) {
-                    personal_data_complete3.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if (!TextUtils.isEmpty( complete ) && complete.equals( "1" )) {
+                    personal_data_complete3.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_complete ) );
                 } else {
-                    personal_data_complete3.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                    personal_data_complete3.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_no_complete ) );
                 }
                 break;
             case 104:
-                if (!TextUtils.isEmpty(complete) && complete.equals("1")) {
-                    personal_data_complete4.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if (!TextUtils.isEmpty( complete ) && complete.equals( "1" )) {
+                    personal_data_complete4.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_complete ) );
                 } else {
-                    personal_data_complete4.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                    personal_data_complete4.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_no_complete ) );
                 }
                 break;
             case 105:
-                if (!TextUtils.isEmpty(complete) && complete.equals("1")) {
-                    personal_data_complete5.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if (!TextUtils.isEmpty( complete ) && complete.equals( "1" )) {
+                    personal_data_complete5.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_complete ) );
                 } else {
-                    personal_data_complete5.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                    personal_data_complete5.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_no_complete ) );
                 }
                 break;
             case 106:
-                if (!TextUtils.isEmpty(complete) && complete.equals("1")) {
-                    personal_data_complete6.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if (!TextUtils.isEmpty( complete ) && complete.equals( "1" )) {
+                    personal_data_complete6.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_complete ) );
                 } else {
-                    personal_data_complete6.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                    personal_data_complete6.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_no_complete ) );
                 }
                 break;
             case 107:
-                if (!TextUtils.isEmpty(complete) && complete.equals("1")) {
-                    personal_data_complete8.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if (!TextUtils.isEmpty( complete ) && complete.equals( "1" )) {
+                    personal_data_complete8.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_complete ) );
                 } else {
-                    personal_data_complete8.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                    personal_data_complete8.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_no_complete ) );
                 }
                 break;
             case 108:
-                if (!TextUtils.isEmpty(complete) && complete.equals("1")) {
-                    personal_data_complete9.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_complete));
+                if (!TextUtils.isEmpty( complete ) && complete.equals( "1" )) {
+                    personal_data_complete9.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_complete ) );
                 } else {
-                    personal_data_complete9.setText(PersonalDataActivity.this.getString(R.string.name_loan_personal_data_no_complete));
+                    personal_data_complete9.setText( PersonalDataActivity.this.getString( R.string.name_loan_personal_data_no_complete ) );
                 }
                 break;
         }
@@ -262,26 +262,26 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
     protected void onResume() {
         super.onResume();
         getHttpstater();
-        MobclickAgent.onResume(this);
+        MobclickAgent.onResume( this );
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+        MobclickAgent.onPause( this );
     }
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "username_uid":
-                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
+                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
                 break;
             case "username_add":
-                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
+                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
                 break;
             case "username_list":
-                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
+                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
                 break;
         }
 
@@ -292,81 +292,93 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         JSONObject object;
         switch (name) {
             case "username_uid":
-                object = new JSONObject(result);
-                if (object.optString("code").equals("0000")) {
-                    object = new JSONObject(object.optString("data"));
-                    object = new JSONObject(object.optString("data"));
-                    SharedPreferencesUtils.put(this, "uid", object.optString("uid"));
-                    personal_data_name.setText(object.optString("realname"));
-                    personal_data_id.setText(object.optString("idcard"));
-                    SharedPreferencesUtils.put(this, "realname", personal_data_name.getText().toString());
-                    SharedPreferencesUtils.put(this, "idcard", personal_data_id.getText().toString());
+                object = new JSONObject( result );
+                if (object.optString( "code" ).equals( "0000" )) {
+                    object = new JSONObject( object.optString( "data" ) );
+                    object = new JSONObject( object.optString( "data" ) );
+                    SharedPreferencesUtils.put( this, "uid", object.optString( "uid" ) );
+                    personal_data_name.setText( object.optString( "realname" ) );
+                    personal_data_id.setText( object.optString( "idcard" ) );
+                    SharedPreferencesUtils.put( this, "realname", personal_data_name.getText().toString() );
+                    SharedPreferencesUtils.put( this, "idcard", personal_data_id.getText().toString() );
                 }
                 break;
             case "username_add":
-                object = new JSONObject(result);
-                if (object.optString("code").equals("0000")) {
-                    SharedPreferencesUtils.put(this, "realname", personal_data_name.getText().toString());
-                    SharedPreferencesUtils.put(this, "idcard", personal_data_id.getText().toString());
+                object = new JSONObject( result );
+                if (object.optString( "code" ).equals( "0000" )) {
+                    SharedPreferencesUtils.put( this, "realname", personal_data_name.getText().toString() );
+                    SharedPreferencesUtils.put( this, "idcard", personal_data_id.getText().toString() );
                     finish();
                 } else {
-                    ToatUtils.showShort1(this, object.optString("msg"));
+                    ToatUtils.showShort1( this, object.optString( "msg" ) );
                 }
                 break;
             case "username_list":
-                object = new JSONObject(result);
-                object = new JSONObject(object.optString("data"));
-                if (object.optString("credit_status").equals("1")) {//人资信完成状态
-                    personal_data_complete0.setText(this.getString(R.string.name_loan_personal_data_complete));
+                object = new JSONObject( result );
+                if ("null".equals( object.optString( "data" ) )) {
+                    personal_data_complete0.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    personal_data_complete1.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    personal_data_complete2.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    personal_data_complete3.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    personal_data_complete4.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    personal_data_complete5.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    personal_data_complete6.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    personal_data_complete8.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    personal_data_complete9.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
                 } else {
-                    personal_data_complete0.setText(this.getString(R.string.name_loan_personal_data_no_complete));
-                }
-                if (object.optString("company_status").equals("1")) {//企业情况完成状态
-                    personal_data_complete1.setText(this.getString(R.string.name_loan_personal_data_complete));
-                } else {
-                    personal_data_complete1.setText(this.getString(R.string.name_loan_personal_data_no_complete));
-                }
-                if (object.optString("other_status").equals("1")) {//其他联系人完成状态
-                    personal_data_complete3.setText(this.getString(R.string.name_loan_personal_data_complete));
-                } else {
-                    personal_data_complete3.setText(this.getString(R.string.name_loan_personal_data_no_complete));
-                }
-                if (object.optString("house_status").equals("1")) {//房产完成状态
-                    personal_data_complete4.setText(this.getString(R.string.name_loan_personal_data_complete));
-                } else {
-                    personal_data_complete4.setText(this.getString(R.string.name_loan_personal_data_no_complete));
-                }
-                if (object.optString("car_status").equals("1")) {//车产完成状态
-                    personal_data_complete5.setText(this.getString(R.string.name_loan_personal_data_complete));
-                } else {
-                    personal_data_complete5.setText(this.getString(R.string.name_loan_personal_data_no_complete));
-                }
-                if (object.optString("operator_status").equals("1")) {//运营商完成状态
-                    personal_data_complete6.setText(this.getString(R.string.name_loan_personal_data_complete));
-                } else {
-                    personal_data_complete6.setText(this.getString(R.string.name_loan_personal_data_no_complete));
+                    object = new JSONObject( object.optString( "data" ) );
+                    if (object.optString( "credit_status" ).equals( "1" )) {//人资信完成状态
+                        personal_data_complete0.setText( this.getString( R.string.name_loan_personal_data_complete ) );
+                    } else {
+                        personal_data_complete0.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    }
+                    if (object.optString( "company_status" ).equals( "1" )) {//企业情况完成状态
+                        personal_data_complete1.setText( this.getString( R.string.name_loan_personal_data_complete ) );
+                    } else {
+                        personal_data_complete1.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    }
+                    if (object.optString( "other_status" ).equals( "1" )) {//其他联系人完成状态
+                        personal_data_complete3.setText( this.getString( R.string.name_loan_personal_data_complete ) );
+                    } else {
+                        personal_data_complete3.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    }
+                    if (object.optString( "house_status" ).equals( "1" )) {//房产完成状态
+                        personal_data_complete4.setText( this.getString( R.string.name_loan_personal_data_complete ) );
+                    } else {
+                        personal_data_complete4.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    }
+                    if (object.optString( "car_status" ).equals( "1" )) {//车产完成状态
+                        personal_data_complete5.setText( this.getString( R.string.name_loan_personal_data_complete ) );
+                    } else {
+                        personal_data_complete5.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    }
+                    if (object.optString( "operator_status" ).equals( "1" )) {//运营商完成状态
+                        personal_data_complete6.setText( this.getString( R.string.name_loan_personal_data_complete ) );
+                    } else {
+                        personal_data_complete6.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
 
-                }
-                if (object.optString("shopping_status").equals("1")) {//网购信用完成状态
+                    }
+                    if (object.optString( "shopping_status" ).equals( "1" )) {//网购信用完成状态
 
-                } else {
+                    } else {
 
-                }
-                if (object.optString("papers_status").equals("1")) {//证件上传完成状态
-                    personal_data_complete8.setText(this.getString(R.string.name_loan_personal_data_complete));
-                } else {
-                    personal_data_complete8.setText(this.getString(R.string.name_loan_personal_data_no_complete));
-                }
+                    }
+                    if (object.optString( "papers_status" ).equals( "1" )) {//证件上传完成状态
+                        personal_data_complete8.setText( this.getString( R.string.name_loan_personal_data_complete ) );
+                    } else {
+                        personal_data_complete8.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    }
 
-                if (object.optString("bankcard_status").equals("1")) {//我的银行卡完成状态
-                    personal_data_complete9.setText(this.getString(R.string.name_loan_personal_data_complete));
-                } else {
-                    personal_data_complete9.setText(this.getString(R.string.name_loan_personal_data_no_complete));
-                }
-                if (object.optString("family_status").equals("1")) {//家庭情况完成状态
-                    personal_data_complete2.setText(this.getString(R.string.name_loan_personal_data_complete));
-                } else {
-                    personal_data_complete2.setText(this.getString(R.string.name_loan_personal_data_no_complete));
+                    if (object.optString( "bankcard_status" ).equals( "1" )) {//我的银行卡完成状态
+                        personal_data_complete9.setText( this.getString( R.string.name_loan_personal_data_complete ) );
+                    } else {
+                        personal_data_complete9.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    }
+                    if (object.optString( "family_status" ).equals( "1" )) {//家庭情况完成状态
+                        personal_data_complete2.setText( this.getString( R.string.name_loan_personal_data_complete ) );
+                    } else {
+                        personal_data_complete2.setText( this.getString( R.string.name_loan_personal_data_no_complete ) );
+                    }
                 }
                 break;
         }
