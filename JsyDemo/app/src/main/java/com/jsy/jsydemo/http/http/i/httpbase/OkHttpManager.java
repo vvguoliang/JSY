@@ -471,9 +471,9 @@ public class OkHttpManager {
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
-                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
-                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
-                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .addFormDataPart( "photo2", name2.toString(), fileBody2 )
+                    .addFormDataPart( "photo3", name3.toString(), fileBody3 )
+                    .addFormDataPart( "photo4", name4.toString(), fileBody4 )
                     .build();
 
         } else if (name1 != null && name2 != null && name3 != null) {
@@ -483,8 +483,8 @@ public class OkHttpManager {
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
-                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
-                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
+                    .addFormDataPart( "photo2", name2.toString(), fileBody2 )
+                    .addFormDataPart( "photo3", name3.toString(), fileBody3 )
                     .build();
         } else if (name2 != null && name3 != null && name4 != null) {
             fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
@@ -492,9 +492,9 @@ public class OkHttpManager {
             fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
-                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
-                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
-                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .addFormDataPart( "photo2", name2.toString(), fileBody2 )
+                    .addFormDataPart( "photo3", name3.toString(), fileBody3 )
+                    .addFormDataPart( "photo4", name4.toString(), fileBody4 )
                     .build();
         } else if (name1 != null && name3 != null && name4 != null) {
             fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
@@ -503,8 +503,8 @@ public class OkHttpManager {
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
-                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
-                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .addFormDataPart( "photo3", name3.toString(), fileBody3 )
+                    .addFormDataPart( "photo4", name4.toString(), fileBody4 )
                     .build();
         } else if (name1 != null && name2 != null && name4 != null) {
             fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
@@ -513,8 +513,8 @@ public class OkHttpManager {
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
-                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
-                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .addFormDataPart( "photo2", name2.toString(), fileBody2 )
+                    .addFormDataPart( "photo4", name4.toString(), fileBody4 )
                     .build();
         } else if (name1 != null && name2 != null) {
             fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
@@ -522,7 +522,7 @@ public class OkHttpManager {
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
-                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
+                    .addFormDataPart( "photo2", name2.toString(), fileBody2 )
                     .build();
         } else if (name1 != null && name3 != null) {
             fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
@@ -530,7 +530,7 @@ public class OkHttpManager {
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
-                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
+                    .addFormDataPart( "photo3", name3.toString(), fileBody3 )
                     .build();
         } else if (name1 != null && name4 != null) {
             fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
@@ -538,31 +538,31 @@ public class OkHttpManager {
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
-                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .addFormDataPart( "photo4", name4.toString(), fileBody4 )
                     .build();
         } else if (name2 != null && name3 != null) {
             fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
             fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
-                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
-                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
+                    .addFormDataPart( "photo2", name2.toString(), fileBody2 )
+                    .addFormDataPart( "photo3", name3.toString(), fileBody3 )
                     .build();
         } else if (name2 != null && name4 != null) {
             fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
             fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
-                    .addFormDataPart( "photo2", name1.toString(), fileBody2 )
-                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .addFormDataPart( "photo2", name2.toString(), fileBody2 )
+                    .addFormDataPart( "photo4", name4.toString(), fileBody4 )
                     .build();
         } else if (name3 != null && name4 != null) {
             fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
             fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
-                    .addFormDataPart( "photo3", name1.toString(), fileBody3 )
-                    .addFormDataPart( "photo4", name1.toString(), fileBody4 )
+                    .addFormDataPart( "photo3", name3.toString(), fileBody3 )
+                    .addFormDataPart( "photo4", name4.toString(), fileBody4 )
                     .build();
         } else if (name1 != null) {
             fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );

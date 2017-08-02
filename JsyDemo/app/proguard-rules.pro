@@ -84,8 +84,6 @@
 -keep class com.android.moblie.zmxy.antgroup.creditsdk.**{*;}
 -keep class com.antgroup.zmxy.mobile.android.container.**{*;}
 -keep class org.json.alipayzhima.**{*;}
-#这个是警告，警告路过
--dontwarn okio.**
 
 -dontwarn android.net.**
 -keep class android.net.SSLCertificateSocketFactory {*;}
@@ -140,7 +138,16 @@ public static final android.os.Parcelable$Creator *;
   **[] $VALUES;
   public *;
 }
+# OkHttp3
+-dontwarn com.squareup.okhttp3.**
+-keep class com.squareup.okhttp3.** { *;}
+-dontwarn okio.**
 
+# Okio
+-dontwarn com.squareup.**
+-dontwarn okio.**
+-keep public class org.codehaus.* { *; }
+-keep public class java.nio.* { *; }
 -keepattributes Signature
 -ignorewarnings
 
