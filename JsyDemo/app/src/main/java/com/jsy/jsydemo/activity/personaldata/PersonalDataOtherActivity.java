@@ -178,14 +178,14 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
                 break;
             case "other_add":
                 JSONObject object = new JSONObject(result);
+                intent = new Intent();
                 if (object.optString("code").equals("0000")) {
-                    intent = new Intent();
                     intent.putExtra("complete", "1");
-                    setResult(103, intent);
-                    finish();
                 } else {
-                    ToatUtils.showShort1(this, object.optString("msg"));
+                    intent.putExtra("complete", "2");
                 }
+                setResult(103, intent);
+                finish();
                 break;
         }
     }

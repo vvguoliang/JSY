@@ -228,11 +228,11 @@ public class AppUtil {
      * 渠道id
      */
     private String mChannle(int id_channle, String channle) {
-        if ("AJJJBF".equals(channle)) {
+        if ("QD0111".equals(channle)) {
             if (id_channle == 1) {
-                return "安卓应用市场" + "100026";
+                return "安卓应用市场" + "QD0111";
             } else {
-                return "AJJJBF";
+                return "QD0111";
             }
         } else if ("QD0026".equals(channle)) {
             if (id_channle == 1) {
@@ -246,11 +246,11 @@ public class AppUtil {
             } else {
                 return "QD0029";
             }
-        } else if ("AJJJCJ".equals(channle)) {
+        } else if ("QD0107".equals(channle)) {
             if (id_channle == 1) {
-                return "木蚂蚁开发者中心" + "100030";
+                return "木蚂蚁开发者中心" + "QD0107";
             } else {
-                return "AJJJCJ";
+                return "QD0107";
             }
         } else if ("QD0035".equals(channle)) {
             if (id_channle == 1) {
@@ -306,23 +306,17 @@ public class AppUtil {
             } else {
                 return "QD0024";
             }
-        } else if ("AJJJDJ".equals(channle)) {
+        } else if ("QD0108".equals(channle)) {
             if (id_channle == 1) {
-                return "应用汇" + "100040";
+                return "应用汇" + "QD0108";
             } else {
-                return "AJJJDJ";
+                return "QD0108";
             }
-        } else if ("AJJJDA".equals(channle)) {
+        } else if ("QD0109".equals(channle)) {
             if (id_channle == 1) {
-                return "乐商店" + "100041";
+                return "酷派" + "QD0109";
             } else {
-                return "AJJJDA";
-            }
-        } else if ("AJJJDB".equals(channle)) {
-            if (id_channle == 1) {
-                return "酷派" + "100042";
-            } else {
-                return "AJJJDB";
+                return "QD0109";
             }
         } else if ("QD0034".equals(channle)) {
             if (id_channle == 1) {
@@ -336,29 +330,29 @@ public class AppUtil {
             } else {
                 return "QD0031";
             }
-        } else if ("AJJACB".equals(channle)) {
+        } else if ("QD0112".equals(channle)) {
             if (id_channle == 1) {
-                return "机锋开发者平台" + "100045";
+                return "机锋开发者平台" + "QD0112";
             } else {
-                return "AJJACB";
+                return "QD0112";
             }
-        } else if ("AJJJDH".equals(channle)) {
+        } else if ("QD0113".equals(channle)) {
             if (id_channle == 1) {
-                return "自然" + "100048";
+                return "自然" + "QD0113";
             } else {
-                return "AJJJDH";
+                return "QD0113";
             }
-        } else if ("AJJBFC".equals(channle)) {
+        } else if ("QD0106".equals(channle)) {
             if (id_channle == 1) {
-                return "三星" + "100045";
+                return "三星" + "QD0106";
             } else {
-                return "AJJBFC";
+                return "QD0106";
             }
-        } else if ("AJJCFD".equals(channle)) {
+        } else if ("QD0110".equals(channle)) {
             if (id_channle == 1) {
-                return "神马" + "100046";
+                return "神马" + "QD0110";
             } else {
-                return "AJJCFD";
+                return "QD0110";
             }
         } else if ("QD0023 ".equals(channle)) {
             if (id_channle == 1) {

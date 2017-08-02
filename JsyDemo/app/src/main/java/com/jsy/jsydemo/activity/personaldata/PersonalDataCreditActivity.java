@@ -342,14 +342,14 @@ public class PersonalDataCreditActivity extends BaseActivity implements View.OnC
                 break;
             case "user_credit_add":
                 JSONObject object = new JSONObject(result);
+                intent = new Intent();
                 if (object.optString("code").equals("0000")) {
-                    intent = new Intent();
                     intent.putExtra("complete", "1");
-                    setResult(100, intent);
-                    finish();
                 } else {
-                    ToatUtils.showShort1(this, object.optString("msg"));
+                    intent.putExtra("complete", "2");
                 }
+                setResult(100, intent);
+                finish();
                 break;
         }
     }

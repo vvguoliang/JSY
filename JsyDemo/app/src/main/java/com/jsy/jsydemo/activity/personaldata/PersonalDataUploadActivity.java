@@ -151,8 +151,12 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
     }
 
     private void getHttp() {
-        OkHttpManager.uploadAsync( HttpURL.getInstance().PARPERSADD, "parees",
-                SharedPreferencesUtils.get( this, "uid", "" ).toString(), file1, file2, file3, file4, this );
+        if (file1 != null || file2 != null || file3 != null || file4 != null) {
+            OkHttpManager.uploadAsync( HttpURL.getInstance().PARPERSADD, "parees",
+                    SharedPreferencesUtils.get( this, "uid", "" ).toString(), file1, file2, file3, file4, this );
+        } else {
+            ToatUtils.showShort1( this, "请上传一张图片，在点击完成" );
+        }
     }
 
     private void setGetpath() {
@@ -185,8 +189,13 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
     @Override
     public void requestSuccess(String result, String name) throws Exception {
         if (name.equals( "parees" )) {
+            JSONObject object = new JSONObject( result );
             intent = new Intent();
-            intent.putExtra( "complete", "1" );
+            if (object.optString( "code" ).equals( "0000" )) {
+                intent.putExtra( "complete", "1" );
+            } else {
+                intent.putExtra( "complete", "2" );
+            }
             setResult( 107, intent );
             finish();
         } else if (name.equals( "parees_list" )) {

@@ -459,11 +459,15 @@ public class OkHttpManager {
                                  final DataCallBack callBack) {
         String file1Name = "jsy.png";
         MultipartBody mBody = null;
+        RequestBody fileBody1;
+        RequestBody fileBody2;
+        RequestBody fileBody3;
+        RequestBody fileBody4;
         if (name1 != null && name2 != null && name3 != null && name4 != null) {
-            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
-            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
-            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
-            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
@@ -473,9 +477,9 @@ public class OkHttpManager {
                     .build();
 
         } else if (name1 != null && name2 != null && name3 != null) {
-            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
-            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
-            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
@@ -483,9 +487,9 @@ public class OkHttpManager {
                     .addFormDataPart( "photo3", name1.toString(), fileBody3 )
                     .build();
         } else if (name2 != null && name3 != null && name4 != null) {
-            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
-            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
-            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo2", name1.toString(), fileBody2 )
@@ -493,9 +497,9 @@ public class OkHttpManager {
                     .addFormDataPart( "photo4", name1.toString(), fileBody4 )
                     .build();
         } else if (name1 != null && name3 != null && name4 != null) {
-            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
-            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
-            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
@@ -503,9 +507,9 @@ public class OkHttpManager {
                     .addFormDataPart( "photo4", name1.toString(), fileBody4 )
                     .build();
         } else if (name1 != null && name2 != null && name4 != null) {
-            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
-            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
-            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
@@ -513,57 +517,78 @@ public class OkHttpManager {
                     .addFormDataPart( "photo4", name1.toString(), fileBody4 )
                     .build();
         } else if (name1 != null && name2 != null) {
-            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
-            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
                     .addFormDataPart( "photo2", name1.toString(), fileBody2 )
                     .build();
         } else if (name1 != null && name3 != null) {
-            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
-            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
                     .addFormDataPart( "photo3", name1.toString(), fileBody3 )
                     .build();
         } else if (name1 != null && name4 != null) {
-            RequestBody fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
-            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo1", name1.toString(), fileBody1 )
                     .addFormDataPart( "photo4", name1.toString(), fileBody4 )
                     .build();
         } else if (name2 != null && name3 != null) {
-            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
-            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo2", name1.toString(), fileBody2 )
                     .addFormDataPart( "photo3", name1.toString(), fileBody3 )
                     .build();
         } else if (name2 != null && name4 != null) {
-            RequestBody fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
-            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo2", name1.toString(), fileBody2 )
                     .addFormDataPart( "photo4", name1.toString(), fileBody4 )
                     .build();
         } else if (name3 != null && name4 != null) {
-            RequestBody fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
-            RequestBody fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
             mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
                     .addFormDataPart( "uid", uid )
                     .addFormDataPart( "photo3", name1.toString(), fileBody3 )
                     .addFormDataPart( "photo4", name1.toString(), fileBody4 )
                     .build();
-        } else {
-            deliverDataFailure( null, name, null, callBack );
+        } else if (name1 != null) {
+            fileBody1 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name1 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo1", name1.toString(), fileBody1 )
+                    .build();
+        } else if (name2 != null) {
+            fileBody2 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name2 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo2", name2.toString(), fileBody2 )
+                    .build();
+        } else if (name3 != null) {
+            fileBody3 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name3 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo3", name3.toString(), fileBody3 )
+                    .build();
+        } else if (name4 != null) {
+            fileBody4 = RequestBody.create( MediaType.parse( "application/octet-stream" ), name4 );
+            mBody = new MultipartBody.Builder( file1Name ).setType( MultipartBody.FORM )
+                    .addFormDataPart( "uid", uid )
+                    .addFormDataPart( "photo4", name4.toString(), fileBody4 )
+                    .build();
         }
-
         //结果返回
         final Request request = new Request.Builder().url( url ).post( mBody ).build();
         mClient.newCall( request ).enqueue( new Callback() {

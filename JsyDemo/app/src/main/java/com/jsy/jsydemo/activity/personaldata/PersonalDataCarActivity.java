@@ -262,14 +262,14 @@ public class PersonalDataCarActivity extends BaseActivity implements View.OnClic
         switch (name) {
             case "car_add":
                 JSONObject object = new JSONObject(result);
+                intent = new Intent();
                 if (object.optString("code").equals("0000")) {
-                    intent = new Intent();
                     intent.putExtra("complete", "1");
-                    setResult(105, intent);
-                    finish();
                 } else {
-                    ToatUtils.showShort1(this, object.optString("msg"));
+                    intent.putExtra("complete", "2");
                 }
+                setResult(105, intent);
+                finish();
                 break;
             case "car_list":
                 List<Map<String, String>> maps = JsonData.getInstance().getJsonPersonalDataCar(result);

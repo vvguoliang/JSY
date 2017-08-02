@@ -188,14 +188,13 @@ public class PersonalDataCertificatesActivity extends BaseActivity implements Vi
         switch (name) {
             case "username_add":
                 JSONObject object = new JSONObject(result);
+                intent = new Intent();
                 if (object.optString("code").equals("0000")) {
-                    intent = new Intent();
                     intent.putExtra("operator", "1");
-                    setResult(RESULT_CANCELED, intent);
-                    finish();
                 } else {
-                    ToatUtils.showShort1(this, object.optString("msg"));
+                    intent.putExtra("operator", "2");
                 }
+                setResult(RESULT_CANCELED, intent);
                 finish();
                 break;
         }

@@ -406,15 +406,14 @@ public class PersonalDataEnterpriseActivity extends BaseActivity implements View
                 break;
             case "company_status_add":
                 JSONObject object = new JSONObject(result);
+                intent = new Intent();
                 if (object.optString("code").equals("0000")) {
-                    intent = new Intent();
                     intent.putExtra("complete", "1");
-                    setResult(101, intent);
-                    finish();
                 } else {
-                    ToatUtils.showShort1(this, object.optString("msg"));
+                    intent.putExtra("complete", "2");
                 }
-
+                setResult(101, intent);
+                finish();
                 break;
         }
     }
