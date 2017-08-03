@@ -391,7 +391,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                         details_id = false;
                         loan_details_id.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
                     }
-                    if (object.optString( "base_auth" ).equals( "1" )) {
+                    if (object.optString( "other_auth" ).equals( "1" )) {
                         details_other = true;
                         loan_details_other.setBackgroundResource( R.mipmap.ic_loan_details_authentication );
                     } else {
