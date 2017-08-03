@@ -82,7 +82,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     private ViewPager loan_viewpage;
 
     //图片地址集合( 项目中一般是对于的HTTP地址 )
-    List<Map<String, String>> mImageUrl = new ArrayList<>();
+    List<Map<String, String>> mImageUrl = null;
     //banner中图片的集合
     List<ImageView> mBannerImageViews = new ArrayList<>();
     //banner上点点的集合
@@ -140,16 +140,11 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-//                if(isRefresh){
-                    page = 1;
-                    mAdapter.clear();
-                    mAdapter.addAll(VirtualData);
-                    mRecyclerView.dismissSwipeRefresh();
-                    mRecyclerView.getRecyclerView().scrollToPosition(0);
-//                }else{
-//                    getHttp();
-//                }
-
+                page = 1;
+                mAdapter.clear();
+                mAdapter.addAll(VirtualData);
+                mRecyclerView.dismissSwipeRefresh();
+                mRecyclerView.getRecyclerView().scrollToPosition(0);
             }
         }, 1000);
     }
@@ -276,7 +271,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                 ToatUtils.showShort1(mActivity, this.getString(R.string.network_timed));
                 break;
         }
-
     }
 
     @Override
@@ -284,6 +278,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         switch (name) {
             case "banner":
                 HomeLoanBannerList homeLoanBannerList = JsonData.getInstance().getJsonLaonHome(result);
+                mImageUrl = new ArrayList<>();
                 for (int i = 0; homeLoanBannerList.getLoanBanners().size() > i; i++) {
                     Map<String, String> map = new HashMap<>();
                     map.put("path", HttpURL.getInstance().HTTP_URL_PATH + homeLoanBannerList.getLoanBanners().get(i).getImg().
@@ -401,7 +396,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
                 bannerTimer.schedule(bannerTask, AppUtil.getInstance().TIME);
             }
         }
-
     }
 
 
@@ -429,14 +423,5 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("LoanFragment");
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged( hidden );
-        if(!hidden){
-            getHttp();
-            OkHttpManager.postAsync(HttpURL.getInstance().BANNER, "banner", null, this);
-        }
     }
 }

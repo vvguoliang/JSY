@@ -61,7 +61,7 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
     private ViewPager loan_viewpage;
 
     //图片地址集合( 项目中一般是对于的HTTP地址 )
-    List<Map<String, String>> mImageUrl = new ArrayList<>();
+    List<Map<String, String>> mImageUrl = null;
     //banner中图片的集合
     List<ImageView> mBannerImageViews = new ArrayList<>();
     //banner上点点的集合
@@ -205,6 +205,7 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
             case "banner":
                 homeLoanBannerList = new HomeLoanBannerList();
                 homeLoanBannerList = JsonData.getInstance().getJsonLaonHome(result);
+                mImageUrl = new ArrayList<>();
                 for (int i = 0; homeLoanBannerList.getLoanBanners().size() > i; i++) {
                     Map<String, String> map = new HashMap<>();
                     map.put("path", HttpURL.getInstance().HTTP_URL_PATH + homeLoanBannerList.getLoanBanners().get(i).getImg().
