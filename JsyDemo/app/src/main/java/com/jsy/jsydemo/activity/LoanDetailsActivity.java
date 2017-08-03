@@ -363,41 +363,41 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                     oan_details_esame_credit.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
                 } else {
                     JSONObject object = new JSONObject( loanDatailsData.getUser_auth() );
-                    if (object.optString( "base_auth" ).equals( "1" )) {
+                    if (!TextUtils.isEmpty( object.optString( "base_auth" ) ) && object.optString( "base_auth" ).equals( "1" )) {
                         basic_information = true;
                         loan_details_basic_information.setBackgroundResource( R.mipmap.ic_loan_details_authentication );
                     } else {
                         basic_information = false;
                         loan_details_basic_information.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
                     }
-                    if (object.optString( "mobile_auth" ).equals( "1" )) {
+                    if (!TextUtils.isEmpty( object.optString( "mobile_auth" ) ) && object.optString( "mobile_auth" ).equals( "1" )) {
                         phone_operator = true;
                         loan_details_phone_operator.setBackgroundResource( R.mipmap.ic_loan_details_authentication );
                     } else {
                         phone_operator = false;
                         loan_details_phone_operator.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
                     }
-                    if (object.optString( "zhima_auth" ).equals( "1" )) {
+                    if (!TextUtils.isEmpty( object.optString( "zhima_auth" ) ) && object.optString( "zhima_auth" ).equals( "1" )) {
                         credit_linear = true;
                         oan_details_esame_credit.setBackgroundResource( R.mipmap.ic_loan_details_authentication );
                     } else {
                         credit_linear = false;
                         oan_details_esame_credit.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
                     }
-                    if (object.optString( "idcard_auth" ).equals( "1" )) {
+                    if (!TextUtils.isEmpty( object.optString( "idcard_auth" ) ) && object.optString( "idcard_auth" ).equals( "1" )) {
                         details_id = true;
                         loan_details_id.setBackgroundResource( R.mipmap.ic_loan_details_authentication );
                     } else {
                         details_id = false;
                         loan_details_id.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
                     }
-                    if (object.optString( "other_auth" ).equals( "1" )) {
-                        details_other = true;
-                        loan_details_other.setBackgroundResource( R.mipmap.ic_loan_details_authentication );
-                    } else {
-                        details_other = false;
-                        loan_details_other.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
-                    }
+                }
+                if (!TextUtils.isEmpty( loanDatailsData.getOther_auth() ) && loanDatailsData.getOther_auth().equals( "1" )) {
+                    details_other = true;
+                    loan_details_other.setBackgroundResource( R.mipmap.ic_loan_details_authentication );
+                } else {
+                    details_other = false;
+                    loan_details_other.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
                 }
                 String data_id = loanDatailsData.getData_id();
                 Pattern pattern = Pattern.compile( "\\[(.*)\\]" );
