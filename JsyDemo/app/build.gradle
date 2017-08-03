@@ -215,6 +215,12 @@ android {
                                     app_name           : "@string/app_name",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
+        QD0026 {
+            applicationId "com.jsy.jsydemo"
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0026",
+                                    app_name           : "@string/app_name",
+                                    app_icon           : "@mipmap/ic_launcher"]
+        }
 
 
     }
