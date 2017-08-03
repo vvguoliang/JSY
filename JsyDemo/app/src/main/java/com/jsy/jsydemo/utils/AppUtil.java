@@ -398,7 +398,13 @@ public class AppUtil {
             }
         } else if ("QD0115".equals( channle )) {
             if (id_channle == 1) {
-                return "乐视" + "QD0115";
+                return "酷安" + "QD0115";
+            } else {
+                return "QD0115";
+            }
+        } else if ("QD0116".equals( channle )) {
+            if (id_channle == 1) {
+                return "阿里平台" + "QD0116";
             } else {
                 return "QD0115";
             }
