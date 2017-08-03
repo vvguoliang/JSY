@@ -101,7 +101,7 @@ public class AppUtil {
         try {
             PackageManager packageManager = context.getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo(
-                    context.getPackageName(), 0);
+                    context.getPackageName(), 0 );
             if (code == 1) {
                 return packageInfo.versionName;
             } else {
@@ -115,9 +115,9 @@ public class AppUtil {
 
 
     public void getManager(Context context, View view) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        InputMethodManager imm = (InputMethodManager) context.getSystemService( Context.INPUT_METHOD_SERVICE );
+        imm.showSoftInput( view, InputMethodManager.SHOW_FORCED );
+        imm.hideSoftInputFromWindow( view.getWindowToken(), 0 );
     }
 
     /**
@@ -128,7 +128,7 @@ public class AppUtil {
      */
     @SuppressWarnings("deprecation")
     public static int[] getScreenDispaly(Context context) {
-        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager windowManager = (WindowManager) context.getSystemService( Context.WINDOW_SERVICE );
         int width = windowManager.getDefaultDisplay().getWidth();// 手机屏幕的宽度
         int height = windowManager.getDefaultDisplay().getHeight();// 手机屏幕的高度
         int result[] = {width, height};
@@ -146,12 +146,12 @@ public class AppUtil {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             AssetManager assetManager = context.getAssets();
-            InputStream inputStream = assetManager.open(fileName);
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+            InputStream inputStream = assetManager.open( fileName );
+            BufferedInputStream bufferedInputStream = new BufferedInputStream( inputStream );
             byte[] buffer = new byte[1024];
             int len;
-            while ((len = bufferedInputStream.read(buffer)) != -1) {
-                baos.write(buffer, 0, len);
+            while ((len = bufferedInputStream.read( buffer )) != -1) {
+                baos.write( buffer, 0, len );
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -171,15 +171,15 @@ public class AppUtil {
      */
     public String getChannel(Context context, int id_channle) {
         // 从apk中获取
-        mChannel = getChannelFromApk1(context, CHANNEL_KEY);
-        return mChannle(id_channle, mChannel);
+        mChannel = getChannelFromApk1( context, CHANNEL_KEY );
+        return mChannle( id_channle, mChannel );
     }
 
     private String getChannelFromApk1(Context context, String channelKey) {
         try {
-            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(),
-                    PackageManager.GET_META_DATA);
-            return appInfo.metaData.getString(channelKey);
+            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo( context.getPackageName(),
+                    PackageManager.GET_META_DATA );
+            return appInfo.metaData.getString( channelKey );
         } catch (Exception exception) {
             return null;
         }
@@ -193,7 +193,7 @@ public class AppUtil {
      */
     public byte[] bitmap2Bytes(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bm.compress( Bitmap.CompressFormat.PNG, 100, baos );
         return baos.toByteArray();
     }
 
@@ -202,19 +202,19 @@ public class AppUtil {
         StringBuffer buf = new StringBuffer();
         NetworkInterface networkInterface;
         try {
-            networkInterface = NetworkInterface.getByName("eth1");
+            networkInterface = NetworkInterface.getByName( "eth1" );
             if (networkInterface == null) {
-                networkInterface = NetworkInterface.getByName("wlan0");
+                networkInterface = NetworkInterface.getByName( "wlan0" );
             }
             if (networkInterface == null) {
                 return "02:00:00:00:00:02";
             }
             byte[] addr = networkInterface.getHardwareAddress();
             for (byte b : addr) {
-                buf.append(String.format("%02X:", b));
+                buf.append( String.format( "%02X:", b ) );
             }
             if (buf.length() > 0) {
-                buf.deleteCharAt(buf.length() - 1);
+                buf.deleteCharAt( buf.length() - 1 );
             }
             macAddress = buf.toString();
         } catch (SocketException e) {
@@ -228,173 +228,179 @@ public class AppUtil {
      * 渠道id
      */
     private String mChannle(int id_channle, String channle) {
-        if ("QD0111".equals(channle)) {
+        if ("QD0111".equals( channle )) {
             if (id_channle == 1) {
                 return "安卓应用市场" + "QD0111";
             } else {
                 return "QD0111";
             }
-        } else if ("QD0026".equals(channle)) {
+        } else if ("QD0026".equals( channle )) {
             if (id_channle == 1) {
                 return "360手机助手" + "QD0026";
             } else {
                 return "QD0026";
             }
-        } else if ("QD0029".equals(channle)) {
+        } else if ("QD0029".equals( channle )) {
             if (id_channle == 1) {
                 return "豌豆荚开发者中心" + "QD0029";
             } else {
                 return "QD0029";
             }
-        } else if ("QD0107".equals(channle)) {
+        } else if ("QD0107".equals( channle )) {
             if (id_channle == 1) {
                 return "木蚂蚁开发者中心" + "QD0107";
             } else {
                 return "QD0107";
             }
-        } else if ("QD0035".equals(channle)) {
+        } else if ("QD0035".equals( channle )) {
             if (id_channle == 1) {
                 return "小米应用商店" + "QD0035";
             } else {
                 return "QD0035";
             }
-        } else if ("QD0085".equals(channle)) {
+        } else if ("QD0085".equals( channle )) {
             if (id_channle == 1) {
                 return "华为应用商店" + "QD0085";
             } else {
                 return "QD0085";
             }
-        } else if ("QD0028".equals(channle)) {
+        } else if ("QD0028".equals( channle )) {
             if (id_channle == 1) {
                 return "PP助手开发者中心" + "QD0028";
             } else {
                 return "QD0028";
             }
-        } else if ("QD0030".equals(channle)) {
+        } else if ("QD0030".equals( channle )) {
             if (id_channle == 1) {
                 return "安智开发者联盟" + "QD0030";
             } else {
                 return "QD0030";
             }
-        } else if ("QD0021".equals(channle)) {
+        } else if ("QD0021".equals( channle )) {
             if (id_channle == 1) {
                 return "OPPO商店" + "QD0021";
             } else {
                 return "QD0021";
             }
-        } else if ("QD0025".equals(channle)) {
+        } else if ("QD0025".equals( channle )) {
             if (id_channle == 1) {
                 return "魅族商店" + "QD0025";
             } else {
                 return "QD0025";
             }
-        } else if ("QD0022".equals(channle)) {
+        } else if ("QD0022".equals( channle )) {
             if (id_channle == 1) {
                 return "VIVO商店" + "QD0022";
             } else {
                 return "QD0022";
             }
-        } else if ("QD0018".equals(channle)) {
+        } else if ("QD0018".equals( channle )) {
             if (id_channle == 1) {
                 return "联通沃商店" + "QD0018";
             } else {
                 return "QD0018";
             }
-        } else if ("QD0024".equals(channle)) {
+        } else if ("QD0024".equals( channle )) {
             if (id_channle == 1) {
                 return "搜狗手机助手" + "QD0024";
             } else {
                 return "QD0024";
             }
-        } else if ("QD0108".equals(channle)) {
+        } else if ("QD0108".equals( channle )) {
             if (id_channle == 1) {
                 return "应用汇" + "QD0108";
             } else {
                 return "QD0108";
             }
-        } else if ("QD0109".equals(channle)) {
+        } else if ("QD0109".equals( channle )) {
             if (id_channle == 1) {
                 return "酷派" + "QD0109";
             } else {
                 return "QD0109";
             }
-        } else if ("QD0034".equals(channle)) {
+        } else if ("QD0034".equals( channle )) {
             if (id_channle == 1) {
                 return "应用宝" + "QD0034";
             } else {
                 return "QD0034";
             }
-        } else if ("QD0031".equals(channle)) {
+        } else if ("QD0031".equals( channle )) {
             if (id_channle == 1) {
                 return "历趣市场" + "QD0031";
             } else {
                 return "QD0031";
             }
-        } else if ("QD0112".equals(channle)) {
+        } else if ("QD0112".equals( channle )) {
             if (id_channle == 1) {
                 return "机锋开发者平台" + "QD0112";
             } else {
                 return "QD0112";
             }
-        } else if ("QD0113".equals(channle)) {
+        } else if ("QD0113".equals( channle )) {
             if (id_channle == 1) {
                 return "自然" + "QD0113";
             } else {
                 return "QD0113";
             }
-        } else if ("QD0106".equals(channle)) {
+        } else if ("QD0106".equals( channle )) {
             if (id_channle == 1) {
                 return "三星" + "QD0106";
             } else {
                 return "QD0106";
             }
-        } else if ("QD0110".equals(channle)) {
+        } else if ("QD0110".equals( channle )) {
             if (id_channle == 1) {
                 return "神马" + "QD0110";
             } else {
                 return "QD0110";
             }
-        } else if ("QD0023 ".equals(channle)) {
+        } else if ("QD0023".equals( channle )) {
             if (id_channle == 1) {
                 return "百度手机助手" + "QD0023";
             } else {
                 return "QD0023";
             }
-        } else if ("QD0020 ".equals(channle)) {
+        } else if ("QD0020".equals( channle )) {
             if (id_channle == 1) {
                 return "sogou开发者" + "QD0020";
             } else {
                 return "QD0020";
             }
-        } else if ("QD0019 ".equals(channle)) {
+        } else if ("QD0019".equals( channle )) {
             if (id_channle == 1) {
                 return "优亿市场" + "QD0019";
             } else {
                 return "QD0019";
             }
-        } else if ("QD0016 ".equals(channle)) {
+        } else if ("QD0016".equals( channle )) {
             if (id_channle == 1) {
                 return "91手机商城发布中心" + "QD0016";
             } else {
                 return "QD0016";
             }
-        } else if ("QD0033 ".equals(channle)) {
+        } else if ("QD0033".equals( channle )) {
             if (id_channle == 1) {
                 return "联想乐商店" + "QD0033";
             } else {
                 return "QD0033";
             }
-        } else if ("QD0032 ".equals(channle)) {
+        } else if ("QD0032".equals( channle )) {
             if (id_channle == 1) {
                 return "锤子科技开发者" + "QD0032";
             } else {
                 return "QD0032";
             }
-        } else if ("QD0012 ".equals(channle)) {
+        } else if ("QD0012".equals( channle )) {
             if (id_channle == 1) {
                 return "乐视" + "QD0012";
             } else {
                 return "QD0012";
+            }
+        } else if ("QD0115".equals( channle )) {
+            if (id_channle == 1) {
+                return "乐视" + "QD0115";
+            } else {
+                return "QD0115";
             }
         } else {
             return "";
