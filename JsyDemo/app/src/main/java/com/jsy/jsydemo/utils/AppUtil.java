@@ -240,12 +240,12 @@ public class AppUtil {
             } else {
                 return "QD0026";
             }
-        } else if ("QD0029".equals( channle )) {
-            if (id_channle == 1) {
-                return "豌豆荚开发者中心" + "QD0029";
-            } else {
-                return "QD0029";
-            }
+//        } else if ("QD0029".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "豌豆荚开发者中心" + "QD0029";
+//            } else {
+//                return "QD0029";
+//            }
         } else if ("QD0107".equals( channle )) {
             if (id_channle == 1) {
                 return "木蚂蚁开发者中心" + "QD0107";
@@ -264,12 +264,12 @@ public class AppUtil {
             } else {
                 return "QD0085";
             }
-        } else if ("QD0028".equals( channle )) {
-            if (id_channle == 1) {
-                return "PP助手开发者中心" + "QD0028";
-            } else {
-                return "QD0028";
-            }
+//        } else if ("QD0028".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "PP助手开发者中心" + "QD0028";
+//            } else {
+//                return "QD0028";
+//            }
         } else if ("QD0030".equals( channle )) {
             if (id_channle == 1) {
                 return "安智开发者联盟" + "QD0030";
@@ -348,12 +348,12 @@ public class AppUtil {
             } else {
                 return "QD0106";
             }
-        } else if ("QD0110".equals( channle )) {
-            if (id_channle == 1) {
-                return "神马" + "QD0110";
-            } else {
-                return "QD0110";
-            }
+//        } else if ("QD0110".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "神马" + "QD0110";
+//            } else {
+//                return "QD0110";
+//            }
         } else if ("QD0023".equals( channle )) {
             if (id_channle == 1) {
                 return "百度手机助手" + "QD0023";
@@ -407,6 +407,12 @@ public class AppUtil {
                 return "阿里平台" + "QD0116";
             } else {
                 return "QD0115";
+            }
+        } else if ("QD0007".equals( channle )) {
+            if (id_channle == 1) {
+                return "今日头条" + "QD0007";
+            } else {
+                return "QD0007";
             }
         } else {
             return "";

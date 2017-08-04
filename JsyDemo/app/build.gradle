@@ -59,12 +59,12 @@ android {
                                     app_name           : "@string/app_name",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
-        QD0029 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0029",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
+//        QD0029 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0029",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
         QD0035 {
             applicationId "com.jsy.jsydemo"
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0035",
@@ -179,12 +179,12 @@ android {
                                     app_name           : "@string/app_name",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
-        QD0110 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0110",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
+//        QD0110 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0110",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
         QD0109 {
             applicationId "com.jsy.jsydemo"
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0109",
@@ -230,6 +230,12 @@ android {
         QD0116 {
             applicationId "com.jsy.jsydemo"
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0116",
+                                    app_name           : "@string/app_name",
+                                    app_icon           : "@mipmap/ic_launcher"]
+        }
+        QD0007 {
+            applicationId "com.jsy.jsydemo"
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0007",
                                     app_name           : "@string/app_name",
                                     app_icon           : "@mipmap/ic_launcher"]
         }

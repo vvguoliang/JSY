@@ -39,7 +39,7 @@
             android:background="@drawable/bg_commissioning_selector"
             android:textColor="@color/white"
             android:textSize="@dimen/common_14dp"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </RelativeLayout>
 
