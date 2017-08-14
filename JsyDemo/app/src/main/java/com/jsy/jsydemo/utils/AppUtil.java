@@ -414,6 +414,42 @@ public class AppUtil {
             } else {
                 return "QD0007";
             }
+        } else if ("QD0081".equals( channle )) {
+            if (id_channle == 1) {
+                return "广点通-分包-3" + "QD0081";
+            } else {
+                return "QD0081";
+            }
+        } else if ("QD0080".equals( channle )) {
+            if (id_channle == 1) {
+                return "广点通-分包-2" + "QD0080";
+            } else {
+                return "QD0080";
+            }
+        } else if ("QD0079".equals( channle )) {
+            if (id_channle == 1) {
+                return "广点通-分包-3" + "QD0079";
+            } else {
+                return "QD0079";
+            }
+        } else if ("QD0073".equals( channle )) {
+            if (id_channle == 1) {
+                return "新浪A" + "QD0073";
+            } else {
+                return "QD0073";
+            }
+        } else if ("QD0074".equals( channle )) {
+            if (id_channle == 1) {
+                return "新浪B" + "QD0074";
+            } else {
+                return "QD0074";
+            }
+        } else if ("QD0075".equals( channle )) {
+            if (id_channle == 1) {
+                return "新浪C" + "QD0075";
+            } else {
+                return "QD0075";
+            }
         } else {
             return "";
         }

@@ -50,6 +50,8 @@ import java.util.Map;
 
 import okhttp3.Request;
 
+import static com.jsy.jsydemo.utils.AppUtil.getInstance;
+
 /**
  * Created by vvguoliang on 2017/6/23.
  * <p>
@@ -141,7 +143,7 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                         ImmersiveUtils.getInstance().getWhite( CommissioningActivity.this );
                     }
                     commissioning_loan_button.setVisibility( View.VISIBLE );
-                }else{
+                } else {
                     commissioning_loan_button.setVisibility( View.GONE );
                 }
             }
@@ -205,8 +207,8 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
     private void getHTTPActivity() {
         Map<String, Object> map = new HashMap<>();
         map.put( "imei", getImei );
-        map.put( "mac", AppUtil.getInstance().getMacAddress() );
-        map.put( "channel", AppUtil.getInstance().getChannel( this, 2 ) );
+        map.put( "mac", getInstance().getMacAddress() );
+        map.put( "channel", getInstance().getChannel( this, 2 ) );
         OkHttpManager.postAsync( HttpURL.getInstance().ACTIVITY, "commissioning_activity", map, this );
     }
 
@@ -216,7 +218,7 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
 
     private void getUPDATE() {
         Map<String, Object> map = new HashMap<>();
-        map.put( "version", AppUtil.getInstance().getVersionName( 1, this ) );
+        map.put( "version", getInstance().getVersionName( 1, this ) );
         OkHttpManager.postAsync( HttpURL.getInstance().UPDATE, "update", map, this );
     }
 
@@ -325,20 +327,21 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult( requestCode, permissions, grantResults );
-        if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_PHONE_IMEI) {
+        if (requestCode == getInstance().MY_PERMISSIONS_PHONE_IMEI) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getIMEIPHONE( this, mHandler, 100 );
             } else {
                 ToatUtils.showShort1( this, "请授予手机权限" );
             }
-        } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK) {
+        } else if (requestCode == getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getUpdata( this, update_url );
                 getBOOTAPP();
             } else {
                 ToatUtils.showShort1( this, "请授予SD卡权限" );
             }
+        } else {
+            super.onRequestPermissionsResult( requestCode, permissions, grantResults );
         }
     }
 
