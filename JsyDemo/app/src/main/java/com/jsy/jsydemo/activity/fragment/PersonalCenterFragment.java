@@ -44,12 +44,8 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
     }
 
     public PersonalCenterFragment(Activity activity) {
-        super(activity);
-        if (activity == null) {
-            this.mActivity = getActivity();
-        } else {
-            this.mActivity = activity;
-        }
+        super( activity );
+        this.mActivity = activity;
     }
 
     @Override
@@ -70,65 +66,65 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 
     @Override
     protected void initView() {
-        TextView title_view = (TextView) findViewById(R.id.title_view);
-        title_view.setText(mActivity.getString(R.string.name_personal_center));
+        TextView title_view = (TextView) findViewById( R.id.title_view );
+        title_view.setText( mActivity.getString( R.string.name_personal_center ) );
 
-        personal_camera = (ImageView) findViewById(R.id.personal_camera);
-        personal_camera.setOnClickListener(this);
+        personal_camera = (ImageView) findViewById( R.id.personal_camera );
+        personal_camera.setOnClickListener( this );
 
-        personal_logo = (TextView) findViewById(R.id.personal_logo);
-        personal_logo.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
-        personal_logo.getPaint().setAntiAlias(true);//抗锯齿
-        personal_logo.setOnClickListener(this);
+        personal_logo = (TextView) findViewById( R.id.personal_logo );
+        personal_logo.getPaint().setFlags( Paint.UNDERLINE_TEXT_FLAG ); //下划线
+        personal_logo.getPaint().setAntiAlias( true );//抗锯齿
+        personal_logo.setOnClickListener( this );
 
 //        findViewById(R.id.personal_loan_my).setOnClickListener(this);
 //        findViewById(R.id.personal_loan_my_package).setOnClickListener(this);
 //        personal_numder = (TextView) findViewById(R.id.personal_numder);
 
-        findViewById(R.id.personal_loan_data).setOnClickListener(this);
-        findViewById(R.id.personal_loan_inviting_friends).setOnClickListener(this);
-        findViewById(R.id.personal_loan_help_center).setOnClickListener(this);
-        findViewById(R.id.personal_loan_feedback).setOnClickListener(this);
-        findViewById(R.id.personal_loan_setup).setOnClickListener(this);
+        findViewById( R.id.personal_loan_data ).setOnClickListener( this );
+        findViewById( R.id.personal_loan_inviting_friends ).setOnClickListener( this );
+        findViewById( R.id.personal_loan_help_center ).setOnClickListener( this );
+        findViewById( R.id.personal_loan_feedback ).setOnClickListener( this );
+        findViewById( R.id.personal_loan_setup ).setOnClickListener( this );
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.personal_loan_data:// 个人资料
-                if (TextUtils.isEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
-                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                if (TextUtils.isEmpty( SharedPreferencesUtils.get( mActivity, "uid", "" ).toString() )) {
+                    mActivity.startActivity( new Intent( mActivity, LogoActivity.class ) );
                 } else {
-                    mActivity.startActivity(new Intent(mActivity, PersonalDataActivity.class));
+                    mActivity.startActivity( new Intent( mActivity, PersonalDataActivity.class ) );
                 }
                 break;
             case R.id.personal_loan_inviting_friends://邀请好哟
-                if (TextUtils.isEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
-                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                if (TextUtils.isEmpty( SharedPreferencesUtils.get( mActivity, "uid", "" ).toString() )) {
+                    mActivity.startActivity( new Intent( mActivity, LogoActivity.class ) );
                 } else {
-                    mActivity.startActivity(new Intent(mActivity, FriendsActivity.class));
+                    mActivity.startActivity( new Intent( mActivity, FriendsActivity.class ) );
                 }
                 break;
             case R.id.personal_loan_help_center://帮助中心
-                mActivity.startActivity(new Intent(mActivity, HelpCenterActivity.class));
+                mActivity.startActivity( new Intent( mActivity, HelpCenterActivity.class ) );
                 break;
             case R.id.personal_loan_feedback://意见反馈
-                if (TextUtils.isEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
-                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                if (TextUtils.isEmpty( SharedPreferencesUtils.get( mActivity, "uid", "" ).toString() )) {
+                    mActivity.startActivity( new Intent( mActivity, LogoActivity.class ) );
                 } else {
-                    mActivity.startActivity(new Intent(mActivity, FeedbackActivity.class));
+                    mActivity.startActivity( new Intent( mActivity, FeedbackActivity.class ) );
                 }
                 break;
             case R.id.personal_loan_setup://设置
-                mActivity.startActivity(new Intent(mActivity, SetUPActivity.class));
+                mActivity.startActivity( new Intent( mActivity, SetUPActivity.class ) );
                 break;
 //            case R.id.personal_loan_my://我的借款
 //                break;
 //            case R.id.personal_loan_my_package://我的卡包
 //                break;
             case R.id.personal_logo://登录
-                if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
-                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
+                if (StringUtil.isNullOrEmpty( SharedPreferencesUtils.get( mActivity, "uid", "" ).toString() )) {
+                    mActivity.startActivity( new Intent( mActivity, LogoActivity.class ) );
                 }
                 break;
             case R.id.personal_camera://照片
@@ -139,34 +135,34 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 
     // 提示对话框方法
     public void showDialog(String btn_take, String btn_pick) {
-        final BottomDialog sxsDialog = new BottomDialog(mActivity, R.layout.buttom_dialog);
-        sxsDialog.getWindow().setWindowAnimations(R.style.AnimBottom);
-        sxsDialog.setWidthHeight(AppUtil.getInstance().Dispay(mActivity)[0], 0);
-        sxsDialog.getWindow().setGravity(Gravity.BOTTOM);
-        Button button1 = (Button) sxsDialog.findViewById(R.id.btn_pick_photo1);
-        button1.setText(btn_take);
-        Button button = (Button) sxsDialog.findViewById(R.id.btn_pick_photo2);
-        button.setText(btn_pick);
-        button1.setOnClickListener(new View.OnClickListener() {
+        final BottomDialog sxsDialog = new BottomDialog( mActivity, R.layout.buttom_dialog );
+        sxsDialog.getWindow().setWindowAnimations( R.style.AnimBottom );
+        sxsDialog.setWidthHeight( AppUtil.getInstance().Dispay( mActivity )[0], 0 );
+        sxsDialog.getWindow().setGravity( Gravity.BOTTOM );
+        Button button1 = (Button) sxsDialog.findViewById( R.id.btn_pick_photo1 );
+        button1.setText( btn_take );
+        Button button = (Button) sxsDialog.findViewById( R.id.btn_pick_photo2 );
+        button.setText( btn_pick );
+        button1.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userCenterRealize.getFileByPhotograph(mActivity);//拍照外部调用
+                userCenterRealize.getFileByPhotograph( mActivity );//拍照外部调用
                 sxsDialog.dismiss();
             }
-        });
-        button.setOnClickListener(new View.OnClickListener() {//有
+        } );
+        button.setOnClickListener( new View.OnClickListener() {//有
             @Override
             public void onClick(View v) {
-                userCenterRealize.getFileByPhotoAlbum(mActivity);//相册外部调用
+                userCenterRealize.getFileByPhotoAlbum( mActivity );//相册外部调用
                 sxsDialog.dismiss();
             }
-        });
-        sxsDialog.setOnClick(R.id.btn_cancel, new View.OnClickListener() {//取消
+        } );
+        sxsDialog.setOnClick( R.id.btn_cancel, new View.OnClickListener() {//取消
             @Override
             public void onClick(View v) {
                 sxsDialog.dismiss();
             }
-        });
+        } );
         if (!mActivity.isFinishing()) {
             sxsDialog.show();
         }
@@ -176,29 +172,29 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
     @Override
     public void onResume() {
         super.onResume();
-        if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
-            if (!StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "realname", "").toString())) {
-                String realname = SharedPreferencesUtils.get(mActivity, "realname", "").toString();
-                realname = realname.substring(0, 1) +
-                        IdcardValidator.getInstance().getIDager(SharedPreferencesUtils.get(mActivity,"idcard","").toString());
-                personal_logo.setText(realname);
-                findViewById(R.id.personal_logo_image).setVisibility(View.GONE);
+        if (!StringUtil.isNullOrEmpty( SharedPreferencesUtils.get( mActivity, "uid", "" ).toString() )) {
+            if (!StringUtil.isNullOrEmpty( SharedPreferencesUtils.get( mActivity, "realname", "" ).toString() )) {
+                String realname = SharedPreferencesUtils.get( mActivity, "realname", "" ).toString();
+                realname = realname.substring( 0, 1 ) +
+                        IdcardValidator.getInstance().getIDager( SharedPreferencesUtils.get( mActivity, "idcard", "" ).toString() );
+                personal_logo.setText( realname );
+                findViewById( R.id.personal_logo_image ).setVisibility( View.GONE );
             } else {
-                String username = SharedPreferencesUtils.get(mActivity, "username", "").toString();
-                personal_logo.setText("****" + username.substring(username.length() - 4, username.length()));
-                findViewById(R.id.personal_logo_image).setVisibility(View.GONE);
+                String username = SharedPreferencesUtils.get( mActivity, "username", "" ).toString();
+                personal_logo.setText( "****" + username.substring( username.length() - 4, username.length() ) );
+                findViewById( R.id.personal_logo_image ).setVisibility( View.GONE );
             }
         } else {
-            personal_logo.setText(mActivity.getString(R.string.name_loan_personal_logn));
-            findViewById(R.id.personal_logo_image).setVisibility(View.VISIBLE);
+            personal_logo.setText( mActivity.getString( R.string.name_loan_personal_logn ) );
+            findViewById( R.id.personal_logo_image ).setVisibility( View.VISIBLE );
         }
-        MobclickAgent.onPageStart("PersonalCenterFragment"); //统计页面，"MainScreen"为页面名称，可自定义
+        MobclickAgent.onPageStart( "PersonalCenterFragment" ); //统计页面，"MainScreen"为页面名称，可自定义
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if(!hidden){
+        super.onHiddenChanged( hidden );
+        if (!hidden) {
             onResume();
         }
     }
@@ -206,6 +202,6 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd("PersonalCenterFragment");
+        MobclickAgent.onPageEnd( "PersonalCenterFragment" );
     }
 }
