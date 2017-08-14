@@ -2,6 +2,7 @@ package com.jsy.jsydemo.activity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -59,6 +60,12 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
     public QuickCardFragment(Activity activity) {
         super(activity);
         this.mActivity = activity;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach( context );
+        this.mActivity = (Activity) context;
     }
 
     @Override

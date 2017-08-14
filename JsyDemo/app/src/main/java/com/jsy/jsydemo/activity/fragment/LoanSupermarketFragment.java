@@ -2,6 +2,7 @@ package com.jsy.jsydemo.activity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
@@ -54,6 +55,12 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
     public LoanSupermarketFragment(Activity activity) {
         super(activity);
         this.mActivity = activity;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach( context );
+        this.mActivity = (Activity) context;
     }
 
     private LinearLayout loan_frame;

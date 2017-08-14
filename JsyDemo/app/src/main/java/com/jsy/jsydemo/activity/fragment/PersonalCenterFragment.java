@@ -2,6 +2,7 @@ package com.jsy.jsydemo.activity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.text.TextUtils;
@@ -49,6 +50,12 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
         } else {
             this.mActivity = activity;
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach( context );
+        this.mActivity = (Activity) context;
     }
 
     @Override

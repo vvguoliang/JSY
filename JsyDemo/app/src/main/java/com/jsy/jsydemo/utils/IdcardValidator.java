@@ -438,7 +438,7 @@ public class IdcardValidator {
         } else if (id.length() == 18) {
             id = id.substring(id.length() - 2, id.length() - 1);
         }
-        if (Integer.parseInt(id) % 2 == 0) {
+        if (Long.parseLong(id) % 2 == 0) {
             return "女士";
         } else {
             return "先生";

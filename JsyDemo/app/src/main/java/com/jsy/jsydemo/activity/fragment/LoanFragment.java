@@ -2,6 +2,7 @@ package com.jsy.jsydemo.activity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -67,6 +68,12 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     public LoanFragment(Activity activity) {
         super(activity);
         this.mActivity = activity;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach( context );
+        this.mActivity = (Activity) context;
     }
 
     private RefreshRecyclerView mRecyclerView;
