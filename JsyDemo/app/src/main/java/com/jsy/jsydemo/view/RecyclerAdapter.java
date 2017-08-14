@@ -59,7 +59,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     public RecyclerAdapter(Context context) {
         mContext = context;
-        initStatusView( context );
+        initStatusView();
     }
 
     public RecyclerAdapter(Context context, T[] data) {
@@ -68,15 +68,15 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     public RecyclerAdapter(Context context, List<T> data) {
         mContext = context;
-        initStatusView( context );
+        initStatusView();
         this.mData = data;
         mViewCount += data.size();
         notifyDataSetChanged();
     }
 
     @SuppressLint("InflateParams")
-    public void initStatusView(Context context) {
-        mStatusView = LayoutInflater.from( context ).inflate( R.layout.view_rectcler_status_last, null );
+    public void initStatusView() {
+        mStatusView = LayoutInflater.from( mContext ).inflate( R.layout.view_rectcler_status_last, null );
         mStatusView.setLayoutParams( new FrameLayout.LayoutParams( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT ) );
         mLoadMoreView = mStatusView.findViewById( R.id.load_more_view );
         mNoMoreView = mStatusView.findViewById( R.id.no_more_view );
