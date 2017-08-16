@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -161,7 +162,7 @@ public class FriendsActivity extends BaseActivity implements View.OnClickListene
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_PHONE_READWRITE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getReadWRite(this, mHandler);
             } else {
                 Toast.makeText(this, "请授予SD卡权限", Toast.LENGTH_SHORT).show();

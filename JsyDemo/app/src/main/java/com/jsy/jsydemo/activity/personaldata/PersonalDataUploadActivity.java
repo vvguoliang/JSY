@@ -278,31 +278,31 @@ public class PersonalDataUploadActivity extends BaseActivity implements View.OnC
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult( requestCode, permissions, grantResults );
         if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_CAMERA) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getFileByPhotograph( this );
             } else {
                 Toast.makeText( this, "请授予相机权限", Toast.LENGTH_SHORT ).show();
             }
         } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_READ_SD) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getFileByPhotograph( this );
             } else {
                 Toast.makeText( this, "请授予读SD卡权限", Toast.LENGTH_SHORT ).show();
             }
         } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getFileByPhotograph( this );
             } else {
                 Toast.makeText( this, "请授予写SD卡权限", Toast.LENGTH_SHORT ).show();
             }
         } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_READ_SD_PHOTOALBUM) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.startPhotoAlbum( this );
             } else {
                 Toast.makeText( this, "请授予读SD卡权限", Toast.LENGTH_SHORT ).show();
             }
         } else if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK_PHOTOALBUM) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.startPhotoAlbum( this );
             } else {
                 Toast.makeText( this, "请授予写SD卡权限", Toast.LENGTH_SHORT ).show();

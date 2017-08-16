@@ -468,7 +468,7 @@ public class OperatorActivity extends BaseActivity implements View.OnClickListen
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_PHONE_DIAL) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getType2();
             } else {
                 Toast.makeText(this, "请授予拨打电话权限", Toast.LENGTH_SHORT).show();

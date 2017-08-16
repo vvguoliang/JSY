@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -214,7 +215,7 @@ public class PersonalDataOtherActivity extends BaseActivity implements View.OnCl
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == AppUtil.getInstance().MY_PERMISSIONS_REQUEST_CONTACTS) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getContactID(PersonalDataOtherActivity.this, mHandler, id);
             } else {
                 Toast.makeText(this, "请授予联系人权限", Toast.LENGTH_SHORT).show();

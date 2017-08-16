@@ -29,7 +29,6 @@ import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
-import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.CameraUtils.UserCenterRealize;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.PublicClass.CommissioningTimerUtils;
@@ -328,13 +327,13 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == getInstance().MY_PERMISSIONS_PHONE_IMEI) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getIMEIPHONE( this, mHandler, 100 );
             } else {
                 ToatUtils.showShort1( this, "请授予手机权限" );
             }
         } else if (requestCode == getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 userCenterRealize.getUpdata( this, update_url );
                 getBOOTAPP();
             } else {
