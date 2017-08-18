@@ -450,6 +450,18 @@ public class AppUtil {
             } else {
                 return "QD0075";
             }
+        } else if ("QD0054".equals( channle )) {
+            if (id_channle == 1) {
+                return "应用宝-推广" + "QD0054";
+            } else {
+                return "QD0054";
+            }
+        } else if ("QD0009".equals( channle )) {
+            if (id_channle == 1) {
+                return "今日头条" + "QD0009";
+            } else {
+                return "QD0009";
+            }
         } else {
             return "";
         }
