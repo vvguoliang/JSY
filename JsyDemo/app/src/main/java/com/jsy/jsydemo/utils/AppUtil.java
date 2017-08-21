@@ -462,6 +462,36 @@ public class AppUtil {
             } else {
                 return "QD0009";
             }
+        } else if ("QD0099".equals( channle )) {
+            if (id_channle == 1) {
+                return "乐推-E" + "QD0099";
+            } else {
+                return "QD0099";
+            }
+        } else if ("QD0098".equals( channle )) {
+            if (id_channle == 1) {
+                return "乐推-D" + "QD0098";
+            } else {
+                return "QD0098";
+            }
+        } else if ("QD0097".equals( channle )) {
+            if (id_channle == 1) {
+                return "乐推-C" + "QD0097";
+            } else {
+                return "QD0097";
+            }
+        } else if ("QD0096".equals( channle )) {
+            if (id_channle == 1) {
+                return "乐推-B" + "QD0096";
+            } else {
+                return "QD0096";
+            }
+        } else if ("QD0095".equals( channle )) {
+            if (id_channle == 1) {
+                return "乐推-A" + "QD0095";
+            } else {
+                return "QD0095";
+            }
         } else {
             return "";
         }
