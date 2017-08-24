@@ -504,6 +504,12 @@ public class AppUtil {
             } else {
                 return "QD0056";
             }
+        } else if ("QD0008".equals( channle )) {
+            if (id_channle == 1) {
+                return "QQ浏览器" + "QD0008";
+            } else {
+                return "QD0008";
+            }
         } else {
             return "";
         }
