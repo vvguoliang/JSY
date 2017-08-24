@@ -136,7 +136,7 @@ public class LoanWebViewActivity extends BaseActivity implements View.OnClickLis
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished( view, url );
-            if (view.getTitle().contains( "404" ) || view.getTitle().contains( "找不到" )) {
+            if (TextUtils.isEmpty( view.getTitle() ) || view.getTitle().contains( "404" ) || view.getTitle().contains( "找不到" )) {
                 title_view.setText( "" );
                 banner_linear.setVisibility( View.GONE );
                 fail_linear.setVisibility( View.VISIBLE );
