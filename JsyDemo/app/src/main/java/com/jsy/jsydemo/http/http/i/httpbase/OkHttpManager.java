@@ -229,6 +229,8 @@ public class OkHttpManager {
                     try {
                         if (getjson( result )) {
                             callBack.requestSuccess( result, name );
+                        } else {
+                            callBack.requestFailure( null, name, null );
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
