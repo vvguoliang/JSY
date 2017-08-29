@@ -6,6 +6,9 @@ import android.os.Looper;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.utils.ToatUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -224,7 +227,9 @@ public class OkHttpManager {
             public void run() {
                 if (callBack != null) {
                     try {
-                        callBack.requestSuccess( result, name );
+                        if (getjson( result )) {
+                            callBack.requestSuccess( result, name );
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -232,6 +237,17 @@ public class OkHttpManager {
             }
         } );
     }
+
+    private boolean getjson(String result) {
+        try {
+            JSONObject object = new JSONObject( result );
+            return true;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     //-------------------------提交表单--------------------------
 

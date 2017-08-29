@@ -141,6 +141,8 @@ public class LoanWebViewActivity extends BaseActivity implements View.OnClickLis
                 banner_linear.setVisibility( View.GONE );
                 fail_linear.setVisibility( View.VISIBLE );
             } else {
+                banner_linear.setVisibility( View.VISIBLE );
+                fail_linear.setVisibility( View.GONE );
                 title_view.setText( view.getTitle() );
             }
         }
