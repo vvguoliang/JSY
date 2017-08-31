@@ -220,4 +220,31 @@
     <string name="loan_fragment_rate">费率</string>
     <string name="loan_commossooning">立即体验</string>
 
+    <string-array name="tips">
+        <item>赵</item>
+        <item>钱</item>
+        <item>孙</item>
+        <item>李</item>
+        <item>周</item>
+        <item>吴</item>
+        <item>郑</item>
+        <item>王</item>
+        <item>冯</item>
+        <item>陈</item>
+        <item>褚</item>
+        <item>卫</item>
+        <item>蒋</item>
+        <item>沈</item>
+        <item>韩</item>
+        <item>杨</item>
+        <item>秦</item>
+        <item>许</item>
+        <item>何</item>
+        <item>魏</item>
+        <item>金</item>
+        <item>窦</item>
+        <item>昌</item>
+    </string-array>
+
+
 </resources>

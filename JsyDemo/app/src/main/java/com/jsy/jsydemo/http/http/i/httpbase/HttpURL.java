@@ -165,4 +165,6 @@ public class HttpURL implements Serializable {
     public String USERDETAILOTHER = HTTP_URL + "&m=userdetail&a=other_info_list";
 
     public String USERDETAILIDCARD = HTTP_URL + "&m=userdetail&a=idcard_list";
+
+    public String PRODUCTCATELIST = HTTP_URL + "&m=productcate&a=getList";
 }

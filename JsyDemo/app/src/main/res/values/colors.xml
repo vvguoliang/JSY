@@ -38,4 +38,7 @@
     <color name="common_operator_text_color">#4C4C4C</color>
     <color name="common_operator_clause_color">#2F5493</color>
     <color name="common_operator_edit_color">#EDEDED</color>
+    <color name="common_loan_fra_color">#343434</color>
+    <color name="common_loan_fra_color_line">#D7D7D7</color>
+    <color name="common_loan_fra_color_text">#727272</color>
 </resources>
