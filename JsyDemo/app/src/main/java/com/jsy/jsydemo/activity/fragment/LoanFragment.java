@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -189,6 +190,13 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         loan_viewpage.setLayoutParams( lp );
         loan_viewpage.setOnPageChangeListener( new NavigationPageChangeListener() );
         loan_frame = mHeader.findViewById( R.id.loan_frame );
+
+        loan_frame_gridView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        } );
     }
 
     private void getHttp() {

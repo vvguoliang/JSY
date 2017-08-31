@@ -134,6 +134,7 @@
     <string name="name_loan_details_borrow_possible">按日计息,随借随还</string>
     <string name="name_loan_details_basic_information">基础信息认证</string>
     <string name="name_loan_details_information">认证材料</string>
+    <string name="name_loan_details_evaluate">用户评价</string>
     <string name="name_loan_details_phone_operator">手机运营商</string>
     <string name="name_loan_details_esame_credit">芝麻信用</string>
     <string name="name_loan_details_id">身份证</string>
@@ -219,6 +220,7 @@
     <string name="loan_fragment_applicants">申请人数</string>
     <string name="loan_fragment_rate">费率</string>
     <string name="loan_commossooning">立即体验</string>
+    <string name="loan_evaluate_my">我要评价</string>
 
     <string-array name="tips">
         <item>赵</item>

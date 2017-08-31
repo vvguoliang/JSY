@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.moblie.zmxy.antgroup.creditsdk.app.CreditApp;
@@ -119,6 +120,12 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     private boolean details_other = false;
     private boolean credit_linear = false;
 
+    private LinearLayout view_information;
+
+    private LinearLayout details_information_line;
+    private LinearLayout details_evaluate_line;
+    private RelativeLayout evaluate_line;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -130,6 +137,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         if (ImmersiveUtils.BuildVERSION()) {
             ImmersiveUtils.getInstance().getW_add_B( this );
         }
+        getfindview();
         findViewById();
         initView();
     }
@@ -194,6 +202,14 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
 
+    }
+
+    private void getfindview() {
+        view_information = findViewById( R.id.view_information );
+
+        details_information_line = findViewById( R.id.details_information_line );
+        details_evaluate_line = findViewById( R.id.details_evaluate_line );
+        evaluate_line = findViewById( R.id.evaluate_line );
     }
 
     @Override

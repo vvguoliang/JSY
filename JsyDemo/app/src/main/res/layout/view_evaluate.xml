@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/evaluate_line"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/common_50dp"
+        android:visibility="visible">
+
+        <com.jsy.jsydemo.view.RefreshRecyclerView
+            android:id="@+id/loan_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+    <com.jsy.jsydemo.control.MyButton
+        android:id="@+id/evaluate_line_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_evaluate_hadow_selector"
+        android:paddingBottom="@dimen/common_10dp"
+        android:paddingLeft="@dimen/common_30dp"
+        android:paddingRight="@dimen/common_30dp"
+        android:paddingTop="@dimen/common_10dp"
+        android:text="@string/loan_evaluate_my"
+        android:textColor="@color/common_loan_evaluate_text"
+        android:textSize="@dimen/common_14dp" />
+
+</RelativeLayout>
