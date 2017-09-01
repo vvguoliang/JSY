@@ -16,6 +16,7 @@
         android:id="@+id/loan_fra_adapter_item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/common_10dp"
         android:layout_marginTop="@dimen/common_10dp"
         android:text="@string/app_name"
         android:textColor="@color/common_loan_fra_color_text"

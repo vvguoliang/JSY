@@ -42,4 +42,6 @@
     <color name="common_loan_fra_color_line">#D7D7D7</color>
     <color name="common_loan_fra_color_text">#727272</color>
     <color name="common_loan_evaluate_text">#78B2EE</color>
+    <color name="common_loan_record_text">#626262</color>
+    <color name="common_loan_record_line">#D5D5D5</color>
 </resources>

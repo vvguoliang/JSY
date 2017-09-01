@@ -167,4 +167,9 @@ public class HttpURL implements Serializable {
     public String USERDETAILIDCARD = HTTP_URL + "&m=userdetail&a=idcard_list";
 
     public String PRODUCTCATELIST = HTTP_URL + "&m=productcate&a=getList";
+    /* 评论 拉去*/
+    public String COMMENTLIST = HTTP_URL + "&m=comment&a=getList";
+
+    /* 借款记录 */
+    public String USERINFORECORD = HTTP_URL + "&m=userinfo&a=record";
 }

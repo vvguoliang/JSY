@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,12 @@ import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
 import com.jsy.jsydemo.EntityClass.HomeProduct;
 import com.jsy.jsydemo.EntityClass.HomeProductList;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.activity.LoanDetailsActivity;
+import com.jsy.jsydemo.activity.LogoActivity;
+import com.jsy.jsydemo.activity.SpeedLoanActivity;
+import com.jsy.jsydemo.activity.SpeedLoanDetailsListActivity;
 import com.jsy.jsydemo.adapter.LoanFragAdaperListview;
+import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.adapter.BannerLoopAdapter;
 import com.jsy.jsydemo.adapter.CardRecordAdapter;
@@ -36,6 +42,7 @@ import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.view.Marquee;
 import com.jsy.jsydemo.view.MarqueeView;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
@@ -132,7 +139,7 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         //添加Header
         View mHeader = LayoutInflater.from( mActivity ).inflate( R.layout.fra_loan_top, null );
         mHeader.setLayoutParams( new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,
-                AppUtil.getInstance().Dispay( mActivity )[1] / 2 + DisplayUtils.dip2px( mActivity , 100 )) );
+                AppUtil.getInstance().Dispay( mActivity )[1] / 2 + DisplayUtils.dip2px( mActivity, 100 ) ) );
         getHeader( mHeader );
         mAdapter.setHeader( mHeader );
         mAdapter.removeFooter();
@@ -194,7 +201,29 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
         loan_frame_gridView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                if (mapList != null && mapList.size() > 0) {
+                    if (!TextUtils.isEmpty( SharedPreferencesUtils.get( mActivity, "uid", "" ).toString() )) {
+                        if (mapList.size() - 1 == i) {
+                            intent = new Intent( mActivity, LoanWebViewActivity.class );
+                            intent.putExtra( "url", HttpURL.getInstance().HTTP_URL_JUAICHA );
+                            mActivity.startActivity( intent );
+                        } else {
+                            if (mapList.get( i ).get( "cat_name" ).equals( getString( R.string.name_Loan_recommend ) )) {
+                                intent = new Intent( mActivity, SpeedLoanDetailsListActivity.class );
+                                intent.putExtra( "type", 0 );
+                                mActivity.startActivity( intent );
+                            } else if (mapList.get( i ).get( "cat_name" ).equals( getString( R.string.name_sky_loan ) )) {
+                                mActivity.startActivity( new Intent( mActivity, SpeedLoanActivity.class ) );
+                            } else {
+                                intent = new Intent( mActivity, LoanDetailsActivity.class );
+                                intent.putExtra( "id", mapList.get( i ).get( "id" ) );
+                                mActivity.startActivity( intent );
+                            }
+                        }
+                    } else {
+                        mActivity.startActivity( new Intent( mActivity, LogoActivity.class ) );
+                    }
+                }
             }
         } );
     }
@@ -405,9 +434,9 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     }
 
     // 获得欢迎语资源
-    public String getWellcometips(){
-        welcomeArrays = this.getResources().getStringArray(R.array.tips);
-        int id = (int) (Math.random()*(welcomeArrays.length-1));//随机产生一个index索引
+    public String getWellcometips() {
+        welcomeArrays = this.getResources().getStringArray( R.array.tips );
+        int id = (int) (Math.random() * (welcomeArrays.length - 1));//随机产生一个index索引
         return welcomeArrays[id];
     }
 
@@ -425,15 +454,11 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
 //                if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
 //                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
 //                } else {
-//                    intent = new Intent(mActivity, SpeedLoanDetailsListActivity.class);
-//                    intent.putExtra("type", 0);
-//                    mActivity.startActivity(intent);
+//
 //                }
 //                break;
 //            case R.id.loan_speed2_linear:
-//                intent = new Intent(mActivity, LoanWebViewActivity.class);
-//                intent.putExtra("url", HttpURL.getInstance().HTTP_URL_JUAICHA);
-//                mActivity.startActivity(intent);
+//
 //                break;
             case R.id.loan_tab_linear:
                 page++;

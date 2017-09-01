@@ -135,6 +135,9 @@
         <activity
             android:name=".activity.helpFeedbackFriendsMyPackage.OperatorActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.helpFeedbackFriendsMyPackage.LoanRecordAcitivty"
+            android:screenOrientation="portrait" />
 
         <service android:name=".service.UpdataService" />
 

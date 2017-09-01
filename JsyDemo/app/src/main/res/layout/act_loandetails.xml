@@ -216,7 +216,7 @@
                         android:gravity="center"
                         android:padding="@dimen/common_10dp"
                         android:text="@string/name_loan_details_information"
-                        android:textColor="@color/common_brown_text"
+                        android:textColor="@color/common_loan_evaluate_text"
                         android:textSize="@dimen/common_14dp" />
 
                     <View
@@ -237,10 +237,25 @@
 
                 </LinearLayout>
 
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/common_gray" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/view_infor1"
+                        android:layout_width="0dp"
+                        android:layout_height="0.5dp"
+                        android:layout_weight="1"
+                        android:background="@color/common_loan_evaluate_text" />
+
+                    <View
+                        android:id="@+id/view_infor2"
+                        android:layout_width="0dp"
+                        android:layout_height="0.5dp"
+                        android:layout_weight="1"
+                        android:background="@color/common_gray" />
+                </LinearLayout>
 
                 <include layout="@layout/view_information" />
 

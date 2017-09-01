@@ -18,6 +18,7 @@ import com.jsy.jsydemo.activity.SetUp.SetUPActivity;
 import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.FeedbackActivity;
 import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.FriendsActivity;
 import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.HelpCenterActivity;
+import com.jsy.jsydemo.activity.helpFeedbackFriendsMyPackage.LoanRecordAcitivty;
 import com.jsy.jsydemo.activity.personaldata.PersonalDataActivity;
 import com.jsy.jsydemo.base.BaseFragment;
 import com.jsy.jsydemo.utils.AppUtil;
@@ -86,6 +87,7 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
         findViewById( R.id.personal_loan_help_center ).setOnClickListener( this );
         findViewById( R.id.personal_loan_feedback ).setOnClickListener( this );
         findViewById( R.id.personal_loan_setup ).setOnClickListener( this );
+        findViewById( R.id.personal_Loan_record ).setOnClickListener( this );
     }
 
     @Override
@@ -129,6 +131,14 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
                 break;
             case R.id.personal_camera://照片
 //                showDialog(mActivity.getString(R.string.name_loan_personal_camera), mActivity.getString(R.string.name_loan_personal_album));
+                break;
+
+            case R.id.personal_Loan_record:
+                if (TextUtils.isEmpty( SharedPreferencesUtils.get( mActivity, "uid", "" ).toString() )) {
+                    mActivity.startActivity( new Intent( mActivity, LogoActivity.class ) );
+                } else {
+                    mActivity.startActivity( new Intent( mActivity, LoanRecordAcitivty.class ) );
+                }
                 break;
         }
     }

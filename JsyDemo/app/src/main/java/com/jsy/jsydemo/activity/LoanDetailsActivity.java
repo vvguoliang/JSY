@@ -121,10 +121,16 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     private boolean credit_linear = false;
 
     private LinearLayout view_information;
-
-    private LinearLayout details_information_line;
-    private LinearLayout details_evaluate_line;
+    private LinearLayout product_details_line;
     private RelativeLayout evaluate_line;
+
+    private TextView details_information_line;
+    private TextView details_evaluate_line;
+    private View view_infor1;
+    private View view_infor2;
+
+
+    private boolean Apitype = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,16 +206,31 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             case R.id.oan_details_esame_credit://芝麻信用
                 getSesameCredit();
                 break;
+            case R.id.details_information_line:
+                getVISI( 1 );
+                break;
+            case R.id.details_evaluate_line:
+                getVISI( 2 );
+                break;
         }
-
     }
 
+    /**
+     * 控制 显示或者隐藏
+     */
     private void getfindview() {
         view_information = findViewById( R.id.view_information );
+        product_details_line = findViewById( R.id.product_details_line );
+        evaluate_line = findViewById( R.id.evaluate_line );
 
         details_information_line = findViewById( R.id.details_information_line );
         details_evaluate_line = findViewById( R.id.details_evaluate_line );
-        evaluate_line = findViewById( R.id.evaluate_line );
+
+        view_infor1 = findViewById( R.id.view_infor1 );
+        view_infor2 = findViewById( R.id.view_infor2 );
+
+        details_information_line.setOnClickListener( this );
+        details_evaluate_line.setOnClickListener( this );
     }
 
     @Override
@@ -269,7 +290,6 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initView() {
-
     }
 
     private void getHttp() {
@@ -277,6 +297,14 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
         map.put( "uid", SharedPreferencesUtils.get( this, "uid", "" ).toString() );
         map.put( "id", Long.parseLong( id ) );
         OkHttpManager.postAsync( HttpURL.getInstance().PRODUCT_DETAIL, "product_detail", map, this );
+    }
+
+    private void getHttpcommentlist() {
+        Map<String, Object> map = new HashMap<>();
+        map.put( "id", Long.parseLong( id ) );
+        map.put( "page", 1 );
+        map.put( "page_size", 10 );
+        OkHttpManager.postAsync( HttpURL.getInstance().COMMENTLIST, "comment_list", map, this );
     }
 
     private void getSesameCredit() {
@@ -294,21 +322,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
-        switch (name) {
-            case "product_detail":
-                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
-                break;
-            case "SesameCredit":
-                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
-                break;
-            case "authorize":
-                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
-                break;
-            case "product_sign":
-                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
-                break;
-        }
-
+        ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
     }
 
     @SuppressLint("SetTextI18n")
@@ -370,7 +384,20 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 day_monthMin = Double.parseDouble( edufan1[0] );
                 loan_details_editText_day.setText( edufan1[1] );
 
-                if (StringUtil.isNullOrEmpty( loanDatailsData.getUser_auth() ) || loanDatailsData.getUser_auth().equals( "null" )
+                //判断认证还是产品详情
+                if (!TextUtils.isEmpty( loanDatailsData.getApi_type() ) && loanDatailsData.getApi_type().equals( "3" )) {//认证
+                    details_information_line.setText( getString( R.string.name_loan_details_information ) );
+                    Apitype = false;
+                    view_information.setVisibility( View.VISIBLE );
+                    product_details_line.setVisibility( View.GONE );
+                } else {
+                    Apitype = true;
+                    details_information_line.setText( getString( R.string.name_loan_details_product_details ) );
+                    view_information.setVisibility( View.GONE );
+                    product_details_line.setVisibility( View.VISIBLE );
+                }
+
+                if (TextUtils.isEmpty( loanDatailsData.getUser_auth() ) || loanDatailsData.getUser_auth().equals( "null" )
                         || loanDatailsData.getUser_auth().equals( "0" )) {
                     loan_details_basic_information.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
                     loan_details_phone_operator.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
@@ -464,6 +491,9 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                     oan_details_esame_credit.setBackgroundResource( R.mipmap.ic_loan_detail_no_authentication );
                 }
                 break;
+            case "comment_list":
+                Log.e( "", "============" + result );
+                break;
         }
 
     }
@@ -472,6 +502,7 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
     protected void onResume() {
         super.onResume();
         getHttp();
+        getHttpcommentlist();
         MobclickAgent.onResume( this );
     }
 
@@ -623,4 +654,37 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
             Log.d( "", "" );
         }
     };
+
+    /**
+     * 控制点击事件 操作显示那个页面
+     *
+     * @param i
+     */
+    private void getVISI(int i) {
+        switch (i) {
+            case 1:
+                if (Apitype) {
+                    view_information.setVisibility( View.GONE );
+                    product_details_line.setVisibility( View.VISIBLE );
+                } else {
+                    view_information.setVisibility( View.VISIBLE );
+                    product_details_line.setVisibility( View.GONE );
+                }
+                product_details_line.setVisibility( View.GONE );
+                view_infor1.setBackgroundColor( Color.parseColor( "#78B2EE" ) );
+                view_infor2.setBackgroundColor( Color.parseColor( "#a6a6a6" ) );
+                details_information_line.setTextColor( Color.parseColor( "#78B2EE" ) );
+                details_evaluate_line.setTextColor( Color.parseColor( "#a6a6a6" ) );
+                break;
+            case 2:
+                product_details_line.setVisibility( View.VISIBLE );
+                view_information.setVisibility( View.GONE );
+                product_details_line.setVisibility( View.GONE );
+                view_infor2.setBackgroundColor( Color.parseColor( "#78B2EE" ) );
+                view_infor1.setBackgroundColor( Color.parseColor( "#a6a6a6" ) );
+                details_evaluate_line.setTextColor( Color.parseColor( "#78B2EE" ) );
+                details_information_line.setTextColor( Color.parseColor( "#a6a6a6" ) );
+                break;
+        }
+    }
 }
