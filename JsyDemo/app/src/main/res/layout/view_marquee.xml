@@ -45,5 +45,5 @@
         android:gravity="center_vertical"
         android:padding="@dimen/common_5dp"
         android:textColor="@color/common_loan_fra_color_text"
-        android:textSize="@dimen/common_14dp" />
+        android:textSize="@dimen/common_12dp" />
 </RelativeLayout>

@@ -58,6 +58,7 @@
     <dimen name="common_150dp">150dp</dimen>
     <dimen name="common_160dp">160dp</dimen>
     <dimen name="common_165dp">165dp</dimen>
+    <dimen name="common_170dp">170dp</dimen>
     <dimen name="common_180dp">180dp</dimen>
     <dimen name="common_200dp">200dp</dimen>
     <dimen name="common_250dp">250dp</dimen>

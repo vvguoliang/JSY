@@ -443,23 +443,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.loan_speed_linear:
-//                if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
-//                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
-//                } else {
-//                    mActivity.startActivity(new Intent(mActivity, SpeedLoanActivity.class));
-//                }
-//                break;
-//            case R.id.loan_speed1_linear:
-//                if (StringUtil.isNullOrEmpty(SharedPreferencesUtils.get(mActivity, "uid", "").toString())) {
-//                    mActivity.startActivity(new Intent(mActivity, LogoActivity.class));
-//                } else {
-//
-//                }
-//                break;
-//            case R.id.loan_speed2_linear:
-//
-//                break;
             case R.id.loan_tab_linear:
                 page++;
                 getHttp();

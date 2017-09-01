@@ -16,7 +16,7 @@
     <GridView
         android:id="@+id/loan_frame_gridView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_180dp"
+        android:layout_height="@dimen/common_170dp"
         android:layout_marginTop="@dimen/common_5dp"
         android:background="@color/white"
         android:fastScrollEnabled="false"
@@ -172,7 +172,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/common_10dp"
+        android:padding="@dimen/common_5dp"
         android:visibility="visible">
 
         <LinearLayout
