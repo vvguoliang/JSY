@@ -179,12 +179,6 @@ public class LoanFragment extends BaseFragment implements DataCallBack, View.OnC
 
     private void getHeader(View mHeader) {
         marqueeView = mHeader.findViewById( R.id.marqueeView );
-//        mHeader.findViewById(R.id.loan_speed_linear).setOnClickListener(this);
-//        ImageView loan_speed = mHeader.findViewById(R.id.loan_speed);
-//        mHeader.findViewById(R.id.loan_speed1_linear).setOnClickListener(this);
-//        ImageView loan_speed1 = mHeader.findViewById(R.id.loan_speed1);
-//        mHeader.findViewById(R.id.loan_speed2_linear).setOnClickListener(this);
-//        ImageView loan_speed2 = mHeader.findViewById(R.id.loan_speed2);
         loan_frame_gridView = mHeader.findViewById( R.id.loan_frame_gridView );
         loanFragAdaperListview = new LoanFragAdaperListview( mActivity );
         loan_frame_gridView.setAdapter( loanFragAdaperListview );

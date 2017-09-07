@@ -85,7 +85,7 @@
                     android:layout_height="@dimen/common_25dp"
                     android:layout_gravity="center|right"
                     android:layout_marginTop="@dimen/common_10dp"
-                    android:background="@drawable/bg_record_shadow_selector"
+                    android:background="@mipmap/ic_record_selector"
                     android:text="@string/loan_record"
                     android:textColor="@color/common_navy_blue"
                     android:textSize="@dimen/common_14dp" />
