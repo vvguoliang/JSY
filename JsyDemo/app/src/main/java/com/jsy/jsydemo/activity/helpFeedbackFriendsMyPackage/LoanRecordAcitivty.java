@@ -169,10 +169,9 @@ public class LoanRecordAcitivty extends BaseActivity implements DataCallBack, Vi
                 && loanRecordBandList.getLoanRecordBands().size() > 0) {
             loanRecordBand = new LoanRecordBand[loanRecordBandList.getLoanRecordBands().size()];
             for (int i = 0; loanRecordBandList.getLoanRecordBands().size() > i; i++) {
-                loanRecordBand[i] = new LoanRecordBand( loanRecordBandList.getLoanRecordBands().get( i ).getPro_name(),
-                        loanRecordBandList.getLoanRecordBands().get( i ).getPro_describe(),
-                        HttpURL.getInstance().HTTP_URL_PATH + loanRecordBandList.getLoanRecordBands().get( i ).getImg(),
-                        loanRecordBandList.getLoanRecordBands().get( i ).getCreated_at() );
+//                loanRecordBand[i] = new LoanRecordBand( loanRecordBandList.getLoanRecordBands().get( i ).getPro_name(),
+//                        HttpURL.getInstance().HTTP_URL_PATH + loanRecordBandList.getLoanRecordBands().get( i ).getImg(),
+//                        loanRecordBandList.getLoanRecordBands().get( i ).getCreated_at() );
             }
         }
     }

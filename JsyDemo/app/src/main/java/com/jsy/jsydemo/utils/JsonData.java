@@ -559,7 +559,7 @@ public class JsonData {
                 LoanRecordBand loanRecordBand = new LoanRecordBand();
                 loanRecordBand.setCreated_at( jsonObject.getString( "created_at" ) );
                 loanRecordBand.setImg( jsonObject.optString( "img" ) );
-                loanRecordBand.setPro_describe( jsonObject.optString( "pro_describe" ) );
+//                loanRecordBand.setPro_describe( jsonObject.optString( "pro_describe" ) );
                 loanRecordBand.setPro_name( jsonObject.optString( "pro_name" ) );
                 loanRecordBands.add( loanRecordBand );
             }

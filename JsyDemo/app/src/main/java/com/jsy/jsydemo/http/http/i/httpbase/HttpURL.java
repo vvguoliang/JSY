@@ -171,5 +171,6 @@ public class HttpURL implements Serializable {
     public String COMMENTLIST = HTTP_URL + "&m=comment&a=getList";
 
     /* 借款记录 */
-    public String USERINFORECORD = HTTP_URL + "&m=userinfo&a=record";
+    public String USERINFORECORD = HTTP_URL + "&m=loanrecord&a=getLis";
+//    public String USERINFORECORD = HTTP_URL + "&m=userinfo&a=record";
 }

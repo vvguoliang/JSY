@@ -252,7 +252,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="@dimen/common_10dp"
                     android:layout_toRightOf="@id/personal_Loan_record_image"
-                    android:text="@string/name_loan_personal_feedback"
+                    android:text="@string/name_loan_personal_Loan_record"
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp"
                     tools:ignore="RelativeOverlap,RtlHardcoded" />

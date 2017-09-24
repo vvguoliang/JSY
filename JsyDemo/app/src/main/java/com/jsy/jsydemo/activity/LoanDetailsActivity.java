@@ -373,13 +373,23 @@ public class LoanDetailsActivity extends BaseActivity implements View.OnClickLis
                 }
                 loan_details_textView_rang.setText( "额度范围" + loanDatailsData.getEdufanwei() );
 
-                String[] edufan = loanDatailsData.getEdufanwei().split( "-" );
+                String[] edufan;
+                if (loanDatailsData.getEdufanwei().contains( "," )) {
+                    edufan = loanDatailsData.getEdufanwei().split( "," );
+                } else {
+                    edufan = loanDatailsData.getEdufanwei().split( "-" );
+                }
                 loanMax = Double.parseDouble( edufan[1] );
                 loanMin = Double.parseDouble( edufan[0] );
                 loan_details_editText_range.setText( edufan[1] );
 
                 loan_details_textView_day.setText( "期限范围" + loanDatailsData.getQixianfanwei() );
-                String[] edufan1 = loanDatailsData.getQixianfanwei().split( "-" );
+                String[] edufan1;
+                if (loanDatailsData.getQixianfanwei().contains( "," )) {
+                    edufan1 = loanDatailsData.getQixianfanwei().split( "," );
+                } else {
+                    edufan1 = loanDatailsData.getQixianfanwei().split( "-" );
+                }
                 day_monthMax = Double.parseDouble( edufan1[1] );
                 day_monthMin = Double.parseDouble( edufan1[0] );
                 loan_details_editText_day.setText( edufan1[1] );

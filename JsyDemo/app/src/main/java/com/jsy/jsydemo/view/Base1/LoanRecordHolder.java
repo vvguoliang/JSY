@@ -59,7 +59,7 @@ public class LoanRecordHolder extends BaseViewHolder<LoanRecordBand> {
                     } )
                     .into( record_loan_img );
             record_loan_name.setText( data.getPro_name() );
-            record_loan_money.setText( data.getPro_describe() );
+//            record_loan_money.setText( data.getPro_describe() );
             record_loan_end.setText( data.getCreated_at() );
         }
     }
