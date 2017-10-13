@@ -276,6 +276,12 @@ public class AppUtil {
             } else {
                 return "QD0030";
             }
+        } else if ("QD0141".equals( channle )) {
+            if (id_channle == 1) {
+                return "易云市场" + "QD0141";
+            } else {
+                return "QD0141";
+            }
         } else if ("QD0021".equals( channle )) {
             if (id_channle == 1) {
                 return "OPPO商店" + "QD0021";
