@@ -233,6 +233,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_15dp"
+                android:visibility="gone"
                 android:background="@drawable/bg_fillet_shadow_selector"
                 android:padding="@dimen/common_10dp">
 
