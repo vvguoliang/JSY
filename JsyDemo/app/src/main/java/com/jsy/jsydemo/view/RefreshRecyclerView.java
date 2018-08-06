@@ -13,8 +13,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.jsy.jsydemo.EntityClass.EvaluateData;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.interfaces.Action;
+import com.jsy.jsydemo.utils.CommonAdapter;
 
 /**
  * vvguolaing 2017-6-23
@@ -129,4 +131,5 @@ public class RefreshRecyclerView extends FrameLayout {
     public void dismissSwipeRefresh() {
         mSwipeRefreshLayout.setRefreshing(false);
     }
+
 }

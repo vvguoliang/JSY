@@ -157,7 +157,7 @@ public class MarqueeView extends ViewFlipper {
 
         SpannableStringBuilder builder = new SpannableStringBuilder( marquee.getContext() );
         ForegroundColorSpan redSpan = new ForegroundColorSpan( Color.RED );
-        builder.setSpan( redSpan, marquee.getContext().length() - 9, marquee.getContext().length() - 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE );
+        builder.setSpan( redSpan, 21, marquee.getContext().length() - 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE );
         marquee_text.setText( builder );
         if (isImage) {
             ivMarquee.setVisibility( VISIBLE );

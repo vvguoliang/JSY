@@ -32,6 +32,8 @@ import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.MainActivityView;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
+import com.meiqia.core.MQManager;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
@@ -50,11 +52,11 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
 
     private MainActivityView mainActivityView;
 
-    private int[] titles = {R.string.name_loan, R.string.name_loan_supermarket, R.string.name_quick_card, R.string.name_personal_center};
-    private int[] selectedImage = {R.mipmap.ic_loan_dark, R.mipmap.ic_loansupermarket_dark, R.mipmap.ic_quickcrd_dark,
-            R.mipmap.ic_personalcenter_dark};
-    private int[] unSelectedImage = {R.mipmap.ic_loan_brightness, R.mipmap.ic_loansupermarket_brightness, R.mipmap.ic_quickcard_brightness,
-            R.mipmap.ic_personalcenter_brightness};
+    private int[] titles = {R.string.name_loan, R.string.name_loan_supermarket,  R.string.name_personal_center};//R.string.name_quick_card,
+    private int[] selectedImage = {R.mipmap.ic_loan_dark, R.mipmap.ic_loansupermarket_dark,
+            R.mipmap.ic_personalcenter_dark};// R.mipmap.ic_quickcrd_dark,
+    private int[] unSelectedImage = {R.mipmap.ic_loan_brightness, R.mipmap.ic_loansupermarket_brightness,
+            R.mipmap.ic_personalcenter_brightness};//R.mipmap.ic_quickcard_brightness,
 
     private int mHeight;
     private boolean isGetHeight = true;
@@ -76,6 +78,13 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
         userCenterRealize = new UserCenterRealize();
         setContentView(R.layout.activity_main);
         findViewById();
+
+        String url = getIntent().getStringExtra("url")+"";
+        if (url!="" &&!url.isEmpty() && !url.equals("null")){
+            Intent intent = new Intent( MainActivity.this, LoanWebViewActivity.class );
+            intent.putExtra( "url", url );
+            startActivity( intent );
+        }
     }
 
     @Override
@@ -106,7 +115,7 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
         }
         listnewftagment.add(new LoanFragment(MainActivity.this));
         listnewftagment.add(new LoanSupermarketFragment(MainActivity.this));
-        listnewftagment.add(new QuickCardFragment(MainActivity.this));
+//        listnewftagment.add(new QuickCardFragment(MainActivity.this));
         listnewftagment.add(new PersonalCenterFragment(MainActivity.this));
 
         // 获取屏幕宽度
@@ -307,5 +316,11 @@ public class MainActivity extends BaseActivity implements MainActivityView.OnIte
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MQManager.getInstance(MainActivity.this).closeMeiqiaService();
     }
 }

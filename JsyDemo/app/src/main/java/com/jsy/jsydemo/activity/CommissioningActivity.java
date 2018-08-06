@@ -84,50 +84,52 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
 
     private String update_url = "";
 
+    private boolean isClickImage = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.act_commissioning );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.act_commissioning);
         findViewById();
         initView();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
-            ImmersiveUtils.getInstance().getWhite( this );
+            ImmersiveUtils.getInstance().getWhite(this);
         }
     }
 
     protected void findViewById() {
-        commissioning_image = findViewById( R.id.commissioning_image );
-        commissioning_image1 = findViewById( R.id.commissioning_image1 );
-        commissioning_button = findViewById( R.id.commissioning_button );
-        viewpager = findViewById( R.id.viewpager );
-        viewpager_relat = findViewById( R.id.viewpager_relat );
-        indicator = findViewById( R.id.indicator );
+        commissioning_image = findViewById(R.id.commissioning_image);
+        commissioning_image1 = findViewById(R.id.commissioning_image1);
+        commissioning_button = findViewById(R.id.commissioning_button);
+        viewpager = findViewById(R.id.viewpager);
+        viewpager_relat = findViewById(R.id.viewpager_relat);
+        indicator = findViewById(R.id.indicator);
 
-        commissioning_relat = findViewById( R.id.commissioning_relat );
+        commissioning_relat = findViewById(R.id.commissioning_relat);
 
-        commissioning_loan_button = findViewById( R.id.commissioning_loan_button );
+        commissioning_loan_button = findViewById(R.id.commissioning_loan_button);
 
     }
 
     protected void initView() {
-        if (TextUtils.isEmpty( SharedPreferencesUtils.get( this, "first_time", "" ).toString() )) {
-            commissioning_relat.setVisibility( View.GONE );
-            viewpager_relat.setVisibility( View.VISIBLE );
-            userCenterRealize.getIMEIPHONE( this, mHandler, 100 );
+        if (TextUtils.isEmpty(SharedPreferencesUtils.get(this, "first_time", "").toString())) {
+            commissioning_relat.setVisibility(View.GONE);
+            viewpager_relat.setVisibility(View.VISIBLE);
+            userCenterRealize.getIMEIPHONE(this, mHandler, 100);
         } else {
-            commissioning_relat.setVisibility( View.VISIBLE );
-            viewpager_relat.setVisibility( View.GONE );
+            commissioning_relat.setVisibility(View.VISIBLE);
+            viewpager_relat.setVisibility(View.GONE);
             getUPDATE();
         }
-        commissioning_button.setOnClickListener( this );
-        commissioning_image1.setOnClickListener( this );
+        commissioning_button.setOnClickListener(this);
+        commissioning_image1.setOnClickListener(this);
         initData();
-        viewpager.setAdapter( pagerAdapter );
-        indicator.setViewPager( viewpager );
-        commissioning_loan_button.setOnClickListener( this );
+        viewpager.setAdapter(pagerAdapter);
+        indicator.setViewPager(viewpager);
+        commissioning_loan_button.setOnClickListener(this);
 
-        viewpager.setOnPageChangeListener( new ViewPager.OnPageChangeListener() {
+        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -135,15 +137,15 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 2) {
+                if (position == 3) {
                     if (ImmersiveUtils.BuildVERSION()) {
-                        ImmersiveUtils.getInstance().getBlack( CommissioningActivity.this );
+                        ImmersiveUtils.getInstance().getBlack(CommissioningActivity.this);
                     } else {
-                        ImmersiveUtils.getInstance().getWhite( CommissioningActivity.this );
+                        ImmersiveUtils.getInstance().getWhite(CommissioningActivity.this);
                     }
-                    commissioning_loan_button.setVisibility( View.VISIBLE );
+                    commissioning_loan_button.setVisibility(View.VISIBLE);
                 } else {
-                    commissioning_loan_button.setVisibility( View.GONE );
+                    commissioning_loan_button.setVisibility(View.GONE);
                 }
             }
 
@@ -151,35 +153,39 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
             public void onPageScrollStateChanged(int state) {
 
             }
-        } );
+        });
     }
 
     private void initData() {
         viewList = new ArrayList<>();
-        ImageView imageView = new ImageView( this );
-        imageView.setImageResource( R.mipmap.ic_boot_page1 );
-        imageView.setScaleType( ImageView.ScaleType.FIT_XY );
-        viewList.add( imageView );
-        imageView = new ImageView( this );
-        imageView.setImageResource( R.mipmap.ic_boot_page2 );
-        imageView.setScaleType( ImageView.ScaleType.FIT_XY );
-        viewList.add( imageView );
-        imageView = new ImageView( this );
-        imageView.setImageResource( R.mipmap.ic_boot_page3 );
-        imageView.setScaleType( ImageView.ScaleType.FIT_XY );
-        viewList.add( imageView );
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(R.mipmap.ic_boot_page1);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        viewList.add(imageView);
+        imageView = new ImageView(this);
+        imageView.setImageResource(R.mipmap.ic_boot_page2);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        viewList.add(imageView);
+        imageView = new ImageView(this);
+        imageView.setImageResource(R.mipmap.ic_boot_page3);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        viewList.add(imageView);
+        imageView = new ImageView(this);
+        imageView.setImageResource(R.mipmap.ic_boot_page4);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        viewList.add(imageView);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onResume( this );
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause( this );
+        MobclickAgent.onPause(this);
     }
 
     @Override
@@ -190,51 +196,55 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                 finish();
                 break;
             case R.id.commissioning_image1:
-                if (!TextUtils.isEmpty( boot_url )) {
-                    Intent intent = new Intent( this, LoanWebViewActivity.class );
-                    intent.putExtra( "url", boot_url );
-                    startActivity( intent );
-                }
+
+                isClickImage = true;
+                commissioningTimerUtils.onFinish();
+//                finish();
                 break;
             case R.id.commissioning_loan_button:
-                SharedPreferencesUtils.put( this, "first_time", "1" );
+                SharedPreferencesUtils.put(this, "first_time", "1");
                 getHTTPActivity();
+//                finish();
                 break;
         }
     }
 
     private void getHTTPActivity() {
         Map<String, Object> map = new HashMap<>();
-        map.put( "imei", getImei );
-        map.put( "mac", getInstance().getMacAddress() );
-        map.put( "channel", getInstance().getChannel( this, 2 ) );
-        OkHttpManager.postAsync( HttpURL.getInstance().ACTIVITY, "commissioning_activity", map, this );
+        map.put("imei", getImei);
+        map.put("mac", getInstance().getMacAddress());
+        map.put("channel", getInstance().getChannel(this, 2));
+        OkHttpManager.postAsync(HttpURL.getInstance().ACTIVITY, "commissioning_activity", map, this);
     }
 
     private void getBOOTAPP() {
-        OkHttpManager.postAsync( HttpURL.getInstance().BOOTAPP, "boot_app", null, this );
+        OkHttpManager.postAsync(HttpURL.getInstance().BOOTAPP, "boot_app", null, this);
     }
 
     private void getUPDATE() {
         Map<String, Object> map = new HashMap<>();
-        map.put( "version", getInstance().getVersionName( 1, this ) );
-        OkHttpManager.postAsync( HttpURL.getInstance().UPDATE, "update", map, this );
+        map.put("version", getInstance().getVersionName(1, this));
+        OkHttpManager.postAsync(HttpURL.getInstance().UPDATE, "update", map, this);
     }
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
         switch (name) {
             case "commissioning_activity":
-                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "boot_app":
-                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
             case "update":
-                ToatUtils.showShort1( this, this.getString( R.string.network_timed ) );
+                ToatUtils.showShort1(this, this.getString(R.string.network_timed));
                 break;
         }
-        startActivity( new Intent( this, MainActivity.class ) );
+        if (!TextUtils.isEmpty(SharedPreferencesUtils.get(CommissioningActivity.this, "uid", "").toString())) {
+            startActivity(new Intent(this, MainActivity.class));
+        } else {
+            startActivity(new Intent(this, LogoActivity.class));
+        }
         finish();
     }
 
@@ -245,21 +255,21 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                 getUPDATE();
                 break;
             case "boot_app":
-                JSONObject object = new JSONObject( result );
-                if (object.optString( "code" ).equals( "0000" )) {
-                    commissioning_button.setVisibility( View.VISIBLE );
-                    commissioning_image1.setVisibility( View.VISIBLE );
-                    commissioning_image.setVisibility( View.GONE );
-                    object = new JSONObject( object.optString( "data" ) );
-                    boot_url = object.optString( "boot_url" );
-                    Glide.with( this )
-                            .load( HttpURL.getInstance().HTTP_URL_PATH + object.optString( "boot_img" ) )
-                            .listener( new RequestListener<Drawable>() {
+                JSONObject object = new JSONObject(result);
+                if (object.optString("code").equals("0000")) {
+                    commissioning_button.setVisibility(View.VISIBLE);
+                    commissioning_image1.setVisibility(View.VISIBLE);
+                    commissioning_image.setVisibility(View.GONE);
+                    object = new JSONObject(object.optString("data"));
+                    boot_url = object.optString("boot_url");
+                    Glide.with(this)
+                            .load(HttpURL.getInstance().HTTP_URL_PATH + object.optString("boot_img"))
+                            .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
-                                    commissioning_button.setVisibility( View.GONE );
-                                    commissioning_image1.setVisibility( View.GONE );
-                                    commissioning_image.setVisibility( View.VISIBLE );
+                                    commissioning_button.setVisibility(View.GONE);
+                                    commissioning_image1.setVisibility(View.GONE);
+                                    commissioning_image.setVisibility(View.VISIBLE);
                                     return false;
                                 }
 
@@ -268,79 +278,83 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                                                                boolean b) {
                                     return false;
                                 }
-                            } )
-                            .into( commissioning_image1 );
-                    commissioningTimerUtils = new CommissioningTimerUtils( this, mHandler, commissioning_button,
-                            (Long.parseLong( object.optString( "time" ) ) + 1) * 1000, 1000 );
+                            })
+                            .into(commissioning_image1);
+                    commissioningTimerUtils = new CommissioningTimerUtils(this, mHandler, commissioning_button,
+                            (Long.parseLong(object.optString("time")) + 1) * 1000, 1000);
                     commissioningTimerUtils.start();
                 } else {
-                    commissioning_button.setVisibility( View.GONE );
-                    commissioning_image1.setVisibility( View.GONE );
-                    commissioning_image.setVisibility( View.VISIBLE );
-                    startActivity( new Intent( this, MainActivity.class ) );
+                    commissioning_button.setVisibility(View.GONE);
+                    commissioning_image1.setVisibility(View.GONE);
+                    commissioning_image.setVisibility(View.VISIBLE);
+                    if (!TextUtils.isEmpty(SharedPreferencesUtils.get(CommissioningActivity.this, "uid", "").toString())) {
+                        startActivity(new Intent(this, MainActivity.class));
+                    } else {
+                        startActivity(new Intent(this, LogoActivity.class));
+                    }
                 }
                 break;
             case "update":
-                object = new JSONObject( result );
-                if (object.optString( "code" ).equals( "0001" )) {
-                    commissioning_relat.setVisibility( View.VISIBLE );
-                    viewpager_relat.setVisibility( View.GONE );
-                    commissioning_button.setVisibility( View.GONE );
+                object = new JSONObject(result);
+                if (object.optString("code").equals("0001")) {
+                    commissioning_relat.setVisibility(View.VISIBLE);
+                    viewpager_relat.setVisibility(View.GONE);
+                    commissioning_button.setVisibility(View.GONE);
                     getBOOTAPP();
-                } else if (object.optString( "code" ).equals( "0000" )) {
-                    object = new JSONObject( object.optString( "data" ) );
-                    update_url = object.optString( "update_url" );
-                    String type = object.optString( "type" );
-                    String content = object.optString( "content" );
-                    getPhone( content, type );
+                } else if (object.optString("code").equals("0000")) {
+                    object = new JSONObject(object.optString("data"));
+                    update_url = object.optString("update_url");
+                    String type = object.optString("type");
+                    String content = object.optString("content");
+                    getPhone(content, type);
                 }
                 break;
         }
     }
 
     private void getPhone(String msg, final String phone) {
-        PublicPhoneDialog.Builder builder = new PublicPhoneDialog.Builder( this );
-        builder.setTiltleMsg( msg );
-        if (phone.equals( "2" )) {
-            builder.setTitle( "建议更新" );
-            builder.setContentViewCancel( "取消", new DialogInterface.OnClickListener() {
+        PublicPhoneDialog.Builder builder = new PublicPhoneDialog.Builder(this);
+        builder.setTiltleMsg(msg);
+        if (phone.equals("2")) {
+            builder.setTitle("建议更新");
+            builder.setContentViewCancel("取消", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     getBOOTAPP();
                     dialog.dismiss();
                 }
-            } );
+            });
         } else {
-            builder.setTitle( "强制更新" );
+            builder.setTitle("强制更新");
         }
-        builder.setContentViewDetermine( "确定", new DialogInterface.OnClickListener() {
+        builder.setContentViewDetermine("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                userCenterRealize.getUpdata( CommissioningActivity.this, update_url );
+                userCenterRealize.getUpdata(CommissioningActivity.this, update_url);
                 getBOOTAPP();
                 dialog.dismiss();
             }
-        } );
+        });
         builder.create().show();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == getInstance().MY_PERMISSIONS_PHONE_IMEI) {
-            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                userCenterRealize.getIMEIPHONE( this, mHandler, 100 );
+            if (!TextUtils.isEmpty(grantResults[0] + "") && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.getIMEIPHONE(this, mHandler, 100);
             } else {
-                ToatUtils.showShort1( this, "请授予手机权限" );
+                ToatUtils.showShort1(this, "请授予手机权限");
             }
         } else if (requestCode == getInstance().MY_PERMISSIONS_REQUEST_WRITE_SK) {
-            if (!TextUtils.isEmpty( grantResults[0] + "" ) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                userCenterRealize.getUpdata( this, update_url );
+            if (!TextUtils.isEmpty(grantResults[0] + "") && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                userCenterRealize.getUpdata(this, update_url);
                 getBOOTAPP();
             } else {
-                ToatUtils.showShort1( this, "请授予SD卡权限" );
+                ToatUtils.showShort1(this, "请授予SD卡权限");
             }
         } else {
-            super.onRequestPermissionsResult( requestCode, permissions, grantResults );
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 
@@ -349,26 +363,36 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
 
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage( msg );
+            super.handleMessage(msg);
             switch (msg.what) {
                 case 100:
-                    String[] phonestrings = msg.obj.toString().split( "#" );
-                    if (TextUtils.isEmpty( SharedPreferencesUtils.get( CommissioningActivity.this, "username", "" ).
-                            toString() )) {
+                    String[] phonestrings = msg.obj.toString().split("#");
+                    if (TextUtils.isEmpty(SharedPreferencesUtils.get(CommissioningActivity.this, "username", "").
+                            toString())) {
                         if (phonestrings.length > 2) {
                             getImei = phonestrings[1] + "," + phonestrings[2];
                         } else {
                             getImei = phonestrings[1];
                         }
-                    } else if (phonestrings[0].equals( SharedPreferencesUtils.get( CommissioningActivity.this,
-                            "username", "" ).toString() )) {
+                    } else if (phonestrings[0].equals(SharedPreferencesUtils.get(CommissioningActivity.this,
+                            "username", "").toString())) {
                         getImei = phonestrings[1];
                     } else {
                         getImei = phonestrings[1];
                     }
                     break;
                 case 101:
-                    startActivity( new Intent( CommissioningActivity.this, MainActivity.class ) );
+//                    startActivity( new Intent( CommissioningActivity.this, MainActivity.class ) );
+//                    SharedPreferencesUtils.put(this, "uid", registerSignCodeModify1.getUid());
+                    if (!TextUtils.isEmpty(SharedPreferencesUtils.get(CommissioningActivity.this, "uid", "").toString())) {
+                        Intent intent = new Intent(CommissioningActivity.this, MainActivity.class);
+                        if (isClickImage) {
+                            intent.putExtra("url", boot_url);
+                        }
+                        startActivity(intent);
+                    } else {
+                        startActivity(new Intent(CommissioningActivity.this, LogoActivity.class));
+                    }
                     finish();
                     break;
             }
@@ -389,7 +413,7 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView( viewList.get( position ) );
+            container.removeView(viewList.get(position));
         }
 
         @Override
@@ -399,8 +423,8 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            container.addView( viewList.get( position ) );
-            return viewList.get( position );
+            container.addView(viewList.get(position));
+            return viewList.get(position);
         }
     };
 }

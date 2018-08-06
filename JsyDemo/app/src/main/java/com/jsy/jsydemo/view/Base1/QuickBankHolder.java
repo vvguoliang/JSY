@@ -21,6 +21,9 @@ import com.jsy.jsydemo.utils.SharedPreferencesUtils;
 import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.jsy.jsydemo.view.BaseViewHolder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by vvguoliang on 2017/7/3.
  * 快读办卡 类
@@ -39,6 +42,8 @@ public class QuickBankHolder extends BaseViewHolder<QuickBank> {
     public QuickBankHolder(Context context, ViewGroup parent) {
         super(context, parent, R.layout.holder_quick_bank);
         this.context = context;
+
+        List<ImageView> imgLists = new ArrayList<>();
     }
 
     @Override

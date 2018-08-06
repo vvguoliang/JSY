@@ -20,7 +20,9 @@
         android:roundIcon="${app_icon}"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="name,icon,allowBackup,label">
+        tools:replace="name,icon,allowBackup,label"
+        android:largeHeap="true"
+        >
 
         <activity android:name=".activity.CommissioningActivity">
             <intent-filter>
@@ -114,10 +116,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".webview.LoanWebViewActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
         <activity
             android:name=".activity.LoanDetailsActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".activity.SubmitEvaluateActiviay"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".activity.SpeedLoanActivity"
@@ -138,7 +145,6 @@
         <activity
             android:name=".activity.helpFeedbackFriendsMyPackage.LoanRecordAcitivty"
             android:screenOrientation="portrait" />
-
         <service android:name=".service.UpdataService" />
 
         <provider
@@ -198,6 +204,77 @@
             </intent-filter>
         </activity>
 
+        <!--美洽-->
+
+        <!--聊天界面-->
+        <activity
+            android:name="com.meiqia.meiqiasdk.activity.MQConversationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MQTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <!--图片查看界面-->
+        <activity
+            android:name="com.meiqia.meiqiasdk.activity.MQPhotoPreviewActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MQTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <!--图片选择界面-->
+        <activity
+            android:name="com.meiqia.meiqiasdk.activity.MQPhotoPickerActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MQTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <!--图片选择预览界面-->
+        <activity
+            android:name="com.meiqia.meiqiasdk.activity.MQPhotoPickerPreviewActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MQTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <!--WebView 界面-->
+        <activity
+            android:name=".activity.MQWebViewActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MQTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <!--询前表单-->
+        <activity
+            android:name=".activity.MQInquiryFormActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MQTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
+            android:name=".activity.MQCollectInfoActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MQTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <service android:name="com.meiqia.core.MeiQiaService" />
+
+        <!--身份证识别-->
+        <activity android:name=".activity.MegIDCards.ResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MegIDCards.ResultNewActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MegIDCards.LoadingActivity"
+            android:screenOrientation="portrait"/>
+
+
     </application>
     <uses-sdk android:minSdkVersion="8"></uses-sdk>
 
@@ -227,6 +304,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /><!-- 允许相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.BROADCAST_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
 </manifest>

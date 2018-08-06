@@ -10,8 +10,10 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -58,6 +60,10 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
 
     private Intent intent;
 
+    private LinearLayout linearLayout_tag1,linearLayout_tag2;
+
+    private ImageView image_tag1,image_tag2;
+
     private LoanDatailsData loanDatailsData;
 
     public CardRecordHolder(Context context, ViewGroup parent) {
@@ -86,6 +92,39 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
                         }
                     })
                     .into(home_loan_product_image);
+             Glide.with(context)
+                    .load(object.getIs_activity())
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                            linearLayout_tag1.setVisibility(View.INVISIBLE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                            linearLayout_tag1.setVisibility(View.VISIBLE);
+                            return false;
+                        }
+                    })
+                    .into(image_tag1);
+             Glide.with(context)
+                    .load(object.getIs_new())
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                            linearLayout_tag2.setVisibility(View.INVISIBLE);;
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                            linearLayout_tag2.setVisibility(View.VISIBLE);
+                            return false;
+                        }
+                    })
+                    .into(image_tag2);
+
             home_loan_product_title.setText(object.getPro_name());
             home_loan_product_quota.setText(object.getPro_describe());
             home_loan_product_interest_rate.setText(parent.getContext().getString(R.string.name_loan_product_interest_rat) + object.getFeilv());
@@ -94,7 +133,7 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
             ForegroundColorSpan redSpan = new ForegroundColorSpan(Color.RED);
             builder.setSpan(redSpan, 3, home_loan_product_interest_rate.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             home_loan_product_interest_rate.setText(builder);
-            home_loan_product_number.setText(context.getString(R.string.loan_fragment_applicants) + object.getPro_hits() + "人");
+            home_loan_product_number.setText(object.getEdufanwei()+"元");
             builder = new SpannableStringBuilder(home_loan_product_number.getText().toString());
             //ForegroundColorSpan 为文字前景色，BackgroundColorSpan为文字背景色
             redSpan = new ForegroundColorSpan(Color.RED);
@@ -112,6 +151,12 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
         home_loan_product_quota = findViewById(R.id.home_loan_product_quota);
         home_loan_product_number = findViewById(R.id.home_loan_product_number);
         home_loan_product_interest_rate = findViewById(R.id.home_loan_product_interest_rate);
+        linearLayout_tag1 = findViewById(R.id.home_loan_list_item_tag_1);
+        linearLayout_tag2 = findViewById(R.id.home_loan_list_item_tag_2);
+
+        image_tag1 = findViewById(R.id.home_loan_list_item_tag_image_1);
+        image_tag2 = findViewById(R.id.home_loan_list_item_tag_image_2);
+
     }
 
     @Override
@@ -121,23 +166,29 @@ public class CardRecordHolder extends BaseViewHolder<HomeProduct> implements Dat
             parent.getContext().startActivity(new Intent(parent.getContext(), LogoActivity.class));
         } else {
             getHITSPRODUCT(object);
-            switch (object.getApi_type()) {
-                case "1":
-                    if (!TextUtils.isEmpty(object.getPro_link())) {
-                        intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
-                        intent.putExtra("url", object.getPro_link());
-                        context.startActivity(intent);
-                    }
-                    break;
-                case "2":
-                    getHttp(object.getId());
-                    break;
-                case "3":
-                    intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                    intent.putExtra("id", object.getId());
-                    parent.getContext().startActivity(intent);
-                    break;
-            }
+//            switch (object.getApi_type()) {
+//                case "1":
+//                    if (!TextUtils.isEmpty(object.getPro_link())) {
+//                        intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
+//                        intent.putExtra("url", object.getPro_link());
+//                        context.startActivity(intent);
+//                    }
+//                    break;
+//                case "2":
+//                    getHttp(object.getId());
+//                    break;
+//                case "3":
+//                    intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+//                    intent.putExtra("id", object.getId());
+//                    parent.getContext().startActivity(intent);
+//                    break;
+//            }
+            intent = new Intent(context, LoanDetailsActivity.class);
+            intent.putExtra("Api_type",object.getApi_type());
+//        intent.putExtra("Api_type","3");
+            intent.putExtra("id", object.getId());
+            context.startActivity(intent);
+
         }
     }
 

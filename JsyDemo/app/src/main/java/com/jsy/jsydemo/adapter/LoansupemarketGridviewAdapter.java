@@ -90,6 +90,8 @@ public class LoansupemarketGridviewAdapter extends BaseAdapter {
             viewHolder.adapter_gtidview_supemarket_linear = convertView.findViewById(R.id.adapter_gtidview_supemarket_linear);
             viewHolder.adapter_gtidview_loan_linear = convertView.findViewById(R.id.adapter_gtidview_loan_linear);
             viewHolder.adapter_gtidview_loan_text = convertView.findViewById(R.id.adapter_gtidview_loan_text);
+            viewHolder.ed = convertView.findViewById(R.id.loan_supermarket_grild_item_ed);
+            viewHolder.qx = convertView.findViewById(R.id.loan_supermarket_grild_item_qixian);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -113,7 +115,17 @@ public class LoansupemarketGridviewAdapter extends BaseAdapter {
                     })
                     .into(viewHolder.supemarket_image);
             viewHolder.supemarket_text.setText(productSuList.get(position).getPro_name());
-            viewHolder.supemarket_text_qinyin.setText(productSuList.get(position).getPro_name());
+            viewHolder.supemarket_text_qinyin.setText("放款时间："+productSuList.get(position).getZuikuaifangkuan());
+            viewHolder.ed.setText(productSuList.get(position).getEdufanwei()+"元");
+            String unitCode = productSuList.get(position).getQx_unit()+"";
+            String unit = "";
+            if (unitCode.equals("1")){
+                unit = " 天";
+            }else {
+                unit = " 月";
+            }
+            viewHolder.qx.setText(productSuList.get(position).getQixianfanwei()+unit);
+
             viewHolder.supemarket_text_textview.setText(productSuList.get(position).getPro_describe());
         } else if (mapList != null && mapList.size() > 0) {
             viewHolder.adapter_gtidview_supemarket_linear.setVisibility(View.GONE);
@@ -127,6 +139,8 @@ public class LoansupemarketGridviewAdapter extends BaseAdapter {
         ImageView supemarket_image;
         TextView supemarket_text;
         TextView supemarket_text_qinyin;
+        TextView ed;
+        TextView qx;
         TextView supemarket_text_textview;
         LinearLayout adapter_gtidview_supemarket_linear;
         LinearLayout adapter_gtidview_loan_linear;

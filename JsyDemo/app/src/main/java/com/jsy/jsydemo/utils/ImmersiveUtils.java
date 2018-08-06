@@ -335,7 +335,7 @@ public class ImmersiveUtils {
 
     public void getW_add_B(Activity activity) {
         setTranslucentStatus(activity, true);
-        setStateBar(activity, Color.parseColor("#305591"));
+        setStateBar(activity, Color.parseColor("#43a7fd"));//设置状态栏为湖蓝色
         stateBarTint(activity, "#305591", true, false);
         //设置状态栏白色字体
         StatusFragmentBarDarkMode(activity);

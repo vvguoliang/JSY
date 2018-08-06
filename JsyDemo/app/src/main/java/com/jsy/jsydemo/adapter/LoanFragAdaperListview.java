@@ -120,7 +120,11 @@ public class LoanFragAdaperListview extends BaseAdapter {
                         }
                     } )
                     .into( viewHolder.loan_fra_adapter_item_imag );
-            viewHolder.loan_fra_adapter_item_text.setText( list.get( position ).get( "cat_name" ) );
+            String cat_name = list.get(position).get("cat_name");
+            if (cat_name.equals("学生贷")){
+                cat_name = "分期贷";
+            }
+            viewHolder.loan_fra_adapter_item_text.setText(cat_name);
         }
         return convertView;
     }

@@ -3,7 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
-
+//use legacy for android 6.0
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId rootProject.ext.applicationId
         minSdkVersion rootProject.ext.minSdkVersion
@@ -14,7 +15,7 @@ android {
 
         ndk {
             //选择要添加的对应cpu类型的.so库
-            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'arm64-v8a'
             // 还可以添加
             //'x86', 'x86_64', 'mips', 'mips64'
         }
@@ -77,12 +78,12 @@ android {
                                     app_name           : "@string/app_name_DQ",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
-        QD0030 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0030",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
+//        QD0030 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0030",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
         QD0021 {
             applicationId "com.jsy.jsydemo"
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0021",
@@ -101,12 +102,12 @@ android {
                                     app_name           : "@string/app_name",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
-        QD0018 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0018",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
+//        QD0018 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0018",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
         QD0024 {
             applicationId "com.jsy.jsydemo"
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0024",
@@ -119,36 +120,36 @@ android {
                                     app_name           : "@string/app_name",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
-        QD0031 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0031",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
+//        QD0031 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0031",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
         QD0023 {
             applicationId "com.jsy.jsydemo"
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0023",
                                     app_name           : "@string/app_name",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
-        QD0020 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0020",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0019 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0019",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0016 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0016",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
+//        QD0020 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0020",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0019 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0019",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0016 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0016",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
         QD0033 {
             applicationId "com.jsy.jsydemo"
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0033",
@@ -161,54 +162,54 @@ android {
                                     app_name           : "@string/app_name",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
-        QD0012 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0012",
-                                    app_name           : "@string/app_name_DQ",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0107 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0107",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
+//        QD0012 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0012",
+//                                    app_name           : "@string/app_name_DQ",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0107 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0107",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
         QD0106 {
             applicationId "com.jsy.jsydemo"
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0106",
                                     app_name           : "@string/app_name_DQ",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
-//        QD0110 {
+////        QD0110 {
+////            applicationId "com.jsy.jsydemo"
+////            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0110",
+////                                    app_name           : "@string/app_name",
+////                                    app_icon           : "@mipmap/ic_launcher"]
+////        }
+//        QD0109 {
 //            applicationId "com.jsy.jsydemo"
-//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0110",
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0109",
 //                                    app_name           : "@string/app_name",
 //                                    app_icon           : "@mipmap/ic_launcher"]
 //        }
-        QD0109 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0109",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0108 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0108",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0113 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0113",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0112 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0112",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
+//        QD0108 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0108",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0113 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0113",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0112 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0112",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
         QD0111 {
             applicationId "com.jsy.jsydemo"
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0111",
@@ -221,126 +222,126 @@ android {
                                     app_name           : "@string/app_name_DQ",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
-        QD0115 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0115",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
+//        QD0115 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0115",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
         QD0116 {
             applicationId "com.jsy.jsydemo"
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0116",
                                     app_name           : "@string/app_name_DQ",
                                     app_icon           : "@mipmap/ic_launcher"]
         }
-        QD0007 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0007",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0081 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0081",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0080 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0080",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0079 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0079",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0073 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0073",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0074 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0074",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0075 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0075",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0054 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0054",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0009 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0009",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0099 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0099",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0098 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0098",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0097 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0097",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0096 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0096",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0095 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0095",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0057 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0057",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0056 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0056",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0008 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0008",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
-        QD0141 {
-            applicationId "com.jsy.jsydemo"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0141",
-                                    app_name           : "@string/app_name",
-                                    app_icon           : "@mipmap/ic_launcher"]
-        }
+//        QD0007 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0007",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0081 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0081",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0080 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0080",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0079 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0079",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0073 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0073",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0074 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0074",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0075 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0075",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0054 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0054",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD00141 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD00141",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0009 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0009",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0099 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0099",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0098 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0098",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0097 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0097",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0096 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0096",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0095 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0095",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0057 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0057",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0056 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0056",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
+//        QD0008 {
+//            applicationId "com.jsy.jsydemo"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QD0008",
+//                                    app_name           : "@string/app_name",
+//                                    app_icon           : "@mipmap/ic_launcher"]
+//        }
     }
     sourceSets {
         main {
@@ -372,17 +373,12 @@ android {
 
 }
 
-//系统时间
-def static releaseTime() {
-    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
-}
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
     //应用OKhttp 中的3.2.0版本
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
@@ -394,4 +390,13 @@ dependencies {
     //友盟
     compile files('libs/utdid4all-1.0.4.jar')
     compile files('libs/umeng-analytics-v6.1.2.jar')
+    //美洽
+    compile project(':meiqiasdk')
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    //Face++
+}
+//系统时间
+
+def static releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }

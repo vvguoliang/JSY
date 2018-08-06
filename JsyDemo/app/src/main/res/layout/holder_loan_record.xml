@@ -88,7 +88,9 @@
                     android:background="@mipmap/ic_record_selector"
                     android:text="@string/loan_record"
                     android:textColor="@color/common_navy_blue"
-                    android:textSize="@dimen/common_14dp" />
+                    android:textSize="@dimen/common_14dp"
+                    android:visibility="invisible"
+                    />
 
 
                 <com.jsy.jsydemo.control.MyTextView

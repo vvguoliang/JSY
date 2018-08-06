@@ -12,8 +12,8 @@
     <include
         layout="@layout/view_viewpage"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_150dp" />
-
+        android:layout_height="@dimen/common_150dp"
+        />
     <ListView
         android:id="@+id/loan_supermarket_listview"
         android:layout_width="match_parent"

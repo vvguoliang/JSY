@@ -17,7 +17,7 @@
             <!-- SHADOW LAYER -->
             <item android:left="0.5dp" android:top="0.5dp">
                 <shape>
-                    <solid android:color="@color/common_grey_disabled" />
+                    <solid android:color="@color/common_light_grey" />
                     <corners android:radius="@dimen/common_10dp" />
                 </shape>
             </item>
@@ -27,7 +27,7 @@
                 <shape>
                     <solid android:color="@color/white" />
                     <corners android:radius="@dimen/common_5dp" android:topLeftRadius="@dimen/common_2dp" />
-                    <stroke android:width="0.2dp" android:color="@color/common_loan_personal" />
+                    <stroke android:width="0.2dp" android:color="@color/common_light_grey" />
                 </shape>
             </item>
         </layer-list>

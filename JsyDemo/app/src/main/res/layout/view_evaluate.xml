@@ -3,21 +3,19 @@
     android:id="@+id/evaluate_line"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone"
-    android:orientation="vertical">
+    >
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/common_50dp"
         android:visibility="visible">
-
         <com.jsy.jsydemo.view.RefreshRecyclerView
             android:id="@+id/loan_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </FrameLayout>
+    </LinearLayout>
 
     <com.jsy.jsydemo.control.MyButton
         android:id="@+id/evaluate_line_button"

@@ -106,38 +106,52 @@ public class LoanSupAdaperListview extends BaseAdapter implements DataCallBack {
                 } else {
                     switch (viewHolder.loan_gridView.getTag().toString()) {
                         case "0":
-                            getHITSPRODUCT(productSuList.getProductSuList().get(position).getId());
-                            if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
-                                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                                intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
-                                context.startActivity(intent);
-                            } else if (productSuList.getProductSuList().get(position).getApi_type().equals("2")) {
-                                getHttp(productSuList.getProductSuList().get(position).getId());
-                            } else {
-                                if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
-                                    intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
-                                    intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
-                                    context.startActivity(intent);
-                                }
-                            }
+                            getHITSPRODUCT(productSuList.getProductSuList().get(position).getId());//产品点击记录
+//                            if (productSuList.getProductSuList().get(position).getApi_type().equals("3")) {
+//                                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+//                                intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
+//                                context.startActivity(intent);
+//                            } else if (productSuList.getProductSuList().get(position).getApi_type().equals("2")) {
+//                                getHttp(productSuList.getProductSuList().get(position).getId());
+//                            } else {
+//                                if (!TextUtils.isEmpty(productSuList.getProductSuList().get(position).getPro_link())) {
+//                                    intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
+//                                    intent.putExtra("url", productSuList.getProductSuList().get(position).getPro_link());
+//                                    context.startActivity(intent);
+//                                }
+//                            }
+                            intent = new Intent(context, LoanDetailsActivity.class);
+                            intent.putExtra("Api_type",productSuList.getProductSuList().get(position).getApi_type());
+//        intent.putExtra("Api_type","3");
+                            intent.putExtra("id", productSuList.getProductSuList().get(position).getId());
+                            context.startActivity(intent);
+
                             break;
                         case "1":
-                            getHITSPRODUCT(productSuList.getProductSus().get(position).getId());
-                            if (productSuList.getProductSus().get(position).getApi_type().equals("3")) {
-                                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
-                                intent.putExtra("id", productSuList.getProductSus().get(position).getId());
-                                context.startActivity(intent);
-                            } else if (productSuList.getProductSus().get(position).getApi_type().equals("2")) {
-                                getHttp(productSuList.getProductSus().get(position).getId());
-                            } else {
-                                if (!TextUtils.isEmpty(productSuList.getProductSus().get(position).getPro_link())) {
-                                    intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
-                                    intent.putExtra("url", productSuList.getProductSus().get(position).getPro_link());
-                                    context.startActivity(intent);
-                                }
-                            }
-                            break;
+                            getHITSPRODUCT(productSuList.getProductSus().get(position).getId());//产品点击记录
+//                            if (productSuList.getProductSus().get(position).getApi_type().equals("3")) {
+//                                intent = new Intent(parent.getContext(), LoanDetailsActivity.class);
+//                                intent.putExtra("id", productSuList.getProductSus().get(position).getId());
+//                                context.startActivity(intent);
+//                            } else if (productSuList.getProductSus().get(position).getApi_type().equals("2")) {
+//                                getHttp(productSuList.getProductSus().get(position).getId());
+//                            } else {
+//                                if (!TextUtils.isEmpty(productSuList.getProductSus().get(position).getPro_link())) {
+//                                    intent = new Intent(parent.getContext(), LoanWebViewActivity.class);
+//                                    intent.putExtra("url", productSuList.getProductSus().get(position).getPro_link());
+//                                    context.startActivity(intent);
+//                                }
+//                            }
+
+                            intent = new Intent(context, LoanDetailsActivity.class);
+                            intent.putExtra("Api_type",productSuList.getProductSus().get(position).getApi_type());
+//        intent.putExtra("Api_type","3");
+                            intent.putExtra("id", productSuList.getProductSus().get(position).getId());
+                            context.startActivity(intent);
+
+//                            break;
                     }
+
                 }
             }
         });

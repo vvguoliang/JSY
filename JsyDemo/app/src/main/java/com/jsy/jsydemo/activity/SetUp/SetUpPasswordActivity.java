@@ -85,6 +85,7 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     mCountDownTimerUtils.start();
                     Map<String, Object> map = new HashMap<>();
                     map.put("mobile", Long.parseLong(password_phone.getText().toString().trim()));
+                    map.put("source", AppUtil.SOURCE);
                     OkHttpManager.postAsync(HttpURL.getInstance().REGISTER_CODE, "code", map, this);
                 }
                 break;
@@ -100,6 +101,7 @@ public class SetUpPasswordActivity extends BaseActivity implements View.OnClickL
                     Map<String, Object> map = new HashMap<>();
                     map.put("mobile", Long.parseLong(password_phone.getText().toString()));
                     map.put("code", Long.parseLong(password_edittext_code.getText().toString()));
+
                     if (name.equals("1")) {
                         map.put("no", AppUtil.getInstance().getChannel(SetUpPasswordActivity.this, 2));
                         OkHttpManager.postAsync(HttpURL.getInstance().REGISTERCODE, "register_code", map, this);

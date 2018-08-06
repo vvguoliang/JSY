@@ -88,6 +88,7 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
         findViewById( R.id.personal_loan_feedback ).setOnClickListener( this );
         findViewById( R.id.personal_loan_setup ).setOnClickListener( this );
         findViewById( R.id.personal_Loan_record ).setOnClickListener( this );
+        findViewById(R.id.personal_Loan_brose).setOnClickListener(this);
     }
 
     @Override
@@ -133,12 +134,24 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
 //                showDialog(mActivity.getString(R.string.name_loan_personal_camera), mActivity.getString(R.string.name_loan_personal_album));
                 break;
 
-            case R.id.personal_Loan_record:
+            case R.id.personal_Loan_record://借款记录
                 if (TextUtils.isEmpty( SharedPreferencesUtils.get( mActivity, "uid", "" ).toString() )) {
                     mActivity.startActivity( new Intent( mActivity, LogoActivity.class ) );
                 } else {
-                    mActivity.startActivity( new Intent( mActivity, LoanRecordAcitivty.class ) );
+                    Intent intent = new Intent(mActivity,LoanRecordAcitivty.class);
+                    intent.putExtra("loanrecord",0);
+                    mActivity.startActivity(intent);
                 }
+                break;
+            case R.id.personal_Loan_brose://浏览记录
+                if (TextUtils.isEmpty( SharedPreferencesUtils.get( mActivity, "uid", "" ).toString() )) {
+                    mActivity.startActivity( new Intent( mActivity, LogoActivity.class ) );
+                } else {
+                    Intent intent = new Intent(mActivity,LoanRecordAcitivty.class);
+                    intent.putExtra("loanrecord",1);
+                    mActivity.startActivity( intent );
+                }
+
                 break;
         }
     }
@@ -191,7 +204,7 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
                 findViewById( R.id.personal_logo_image ).setVisibility( View.GONE );
             } else {
                 String username = SharedPreferencesUtils.get( mActivity, "username", "" ).toString();
-                personal_logo.setText( "****" + username.substring( username.length() - 4, username.length() ) );
+                personal_logo.setText(username.substring(0,3)+ "****" + username.substring( username.length() - 4, username.length() ) );
                 findViewById( R.id.personal_logo_image ).setVisibility( View.GONE );
             }
         } else {

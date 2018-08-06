@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * Created by vvguoliang on 2017/6/24.
@@ -79,6 +82,7 @@ public class AppUtil {
     public final int MY_PERMISSIONS_PHONE_READWRITE = 110;
 
     public final int TIME = 2000;
+    public static final int SOURCE = 30;
 
 
     public Integer mBuildVersion = android.os.Build.VERSION.SDK_INT;//当前SDK版本
@@ -240,18 +244,18 @@ public class AppUtil {
             } else {
                 return "QD0026";
             }
-//        } else if ("QD0029".equals( channle )) {
+////        } else if ("QD0029".equals( channle )) {
+////            if (id_channle == 1) {
+////                return "豌豆荚开发者中心" + "QD0029";
+////            } else {
+////                return "QD0029";
+////            }
+//        } else if ("QD0107".equals( channle )) {
 //            if (id_channle == 1) {
-//                return "豌豆荚开发者中心" + "QD0029";
+//                return "木蚂蚁开发者中心" + "QD0107";
 //            } else {
-//                return "QD0029";
+//                return "QD0107";
 //            }
-        } else if ("QD0107".equals( channle )) {
-            if (id_channle == 1) {
-                return "木蚂蚁开发者中心" + "QD0107";
-            } else {
-                return "QD0107";
-            }
         } else if ("QD0035".equals( channle )) {
             if (id_channle == 1) {
                 return "小米应用商店" + "QD0035";
@@ -264,24 +268,18 @@ public class AppUtil {
             } else {
                 return "QD0085";
             }
-//        } else if ("QD0028".equals( channle )) {
+////        } else if ("QD0028".equals( channle )) {
+////            if (id_channle == 1) {
+////                return "PP助手开发者中心" + "QD0028";
+////            } else {
+////                return "QD0028";
+////            }
+//        } else if ("QD0030".equals( channle )) {
 //            if (id_channle == 1) {
-//                return "PP助手开发者中心" + "QD0028";
+//                return "安智开发者联盟" + "QD0030";
 //            } else {
-//                return "QD0028";
+//                return "QD0030";
 //            }
-        } else if ("QD0030".equals( channle )) {
-            if (id_channle == 1) {
-                return "安智开发者联盟" + "QD0030";
-            } else {
-                return "QD0030";
-            }
-        } else if ("QD0141".equals( channle )) {
-            if (id_channle == 1) {
-                return "易云市场" + "QD0141";
-            } else {
-                return "QD0141";
-            }
         } else if ("QD0021".equals( channle )) {
             if (id_channle == 1) {
                 return "OPPO商店" + "QD0021";
@@ -300,90 +298,90 @@ public class AppUtil {
             } else {
                 return "QD0022";
             }
-        } else if ("QD0018".equals( channle )) {
-            if (id_channle == 1) {
-                return "联通沃商店" + "QD0018";
-            } else {
-                return "QD0018";
-            }
+//        } else if ("QD0018".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "联通沃商店" + "QD0018";
+//            } else {
+//                return "QD0018";
+//            }
         } else if ("QD0024".equals( channle )) {
             if (id_channle == 1) {
                 return "搜狗手机助手" + "QD0024";
             } else {
                 return "QD0024";
             }
-        } else if ("QD0108".equals( channle )) {
-            if (id_channle == 1) {
-                return "应用汇" + "QD0108";
-            } else {
-                return "QD0108";
-            }
-        } else if ("QD0109".equals( channle )) {
-            if (id_channle == 1) {
-                return "酷派" + "QD0109";
-            } else {
-                return "QD0109";
-            }
+//        } else if ("QD0108".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "应用汇" + "QD0108";
+//            } else {
+//                return "QD0108";
+//            }
+//        } else if ("QD0109".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "酷派" + "QD0109";
+//            } else {
+//                return "QD0109";
+//            }
         } else if ("QD0034".equals( channle )) {
             if (id_channle == 1) {
                 return "应用宝" + "QD0034";
             } else {
                 return "QD0034";
             }
-        } else if ("QD0031".equals( channle )) {
-            if (id_channle == 1) {
-                return "历趣市场" + "QD0031";
-            } else {
-                return "QD0031";
-            }
-        } else if ("QD0112".equals( channle )) {
-            if (id_channle == 1) {
-                return "机锋开发者平台" + "QD0112";
-            } else {
-                return "QD0112";
-            }
-        } else if ("QD0113".equals( channle )) {
-            if (id_channle == 1) {
-                return "自然" + "QD0113";
-            } else {
-                return "QD0113";
-            }
+//        } else if ("QD0031".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "历趣市场" + "QD0031";
+//            } else {
+//                return "QD0031";
+//            }
+//        } else if ("QD0112".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "机锋开发者平台" + "QD0112";
+//            } else {
+//                return "QD0112";
+//            }
+//        } else if ("QD0113".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "自然" + "QD0113";
+//            } else {
+//                return "QD0113";
+//            }
         } else if ("QD0106".equals( channle )) {
             if (id_channle == 1) {
                 return "三星" + "QD0106";
             } else {
                 return "QD0106";
             }
-//        } else if ("QD0110".equals( channle )) {
-//            if (id_channle == 1) {
-//                return "神马" + "QD0110";
-//            } else {
-//                return "QD0110";
-//            }
+////        } else if ("QD0110".equals( channle )) {
+////            if (id_channle == 1) {
+////                return "神马" + "QD0110";
+////            } else {
+////                return "QD0110";
+////            }
         } else if ("QD0023".equals( channle )) {
             if (id_channle == 1) {
                 return "百度手机助手" + "QD0023";
             } else {
                 return "QD0023";
             }
-        } else if ("QD0020".equals( channle )) {
-            if (id_channle == 1) {
-                return "sogou开发者" + "QD0020";
-            } else {
-                return "QD0020";
-            }
-        } else if ("QD0019".equals( channle )) {
-            if (id_channle == 1) {
-                return "优亿市场" + "QD0019";
-            } else {
-                return "QD0019";
-            }
-        } else if ("QD0016".equals( channle )) {
-            if (id_channle == 1) {
-                return "91手机商城发布中心" + "QD0016";
-            } else {
-                return "QD0016";
-            }
+//        } else if ("QD0020".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "sogou开发者" + "QD0020";
+//            } else {
+//                return "QD0020";
+//            }
+//        } else if ("QD0019".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "优亿市场" + "QD0019";
+//            } else {
+//                return "QD0019";
+//            }
+//        } else if ("QD0016".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "91手机商城发布中心" + "QD0016";
+//            } else {
+//                return "QD0016";
+//            }
         } else if ("QD0033".equals( channle )) {
             if (id_channle == 1) {
                 return "联想乐商店" + "QD0033";
@@ -396,126 +394,132 @@ public class AppUtil {
             } else {
                 return "QD0032";
             }
-        } else if ("QD0012".equals( channle )) {
-            if (id_channle == 1) {
-                return "乐视" + "QD0012";
-            } else {
-                return "QD0012";
-            }
-        } else if ("QD0115".equals( channle )) {
-            if (id_channle == 1) {
-                return "酷安" + "QD0115";
-            } else {
-                return "QD0115";
-            }
+//        } else if ("QD0012".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "乐视" + "QD0012";
+//            } else {
+//                return "QD0012";
+//            }
+//        } else if ("QD0115".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "酷安" + "QD0115";
+//            } else {
+//                return "QD0115";
+//            }
         } else if ("QD0116".equals( channle )) {
             if (id_channle == 1) {
                 return "阿里平台" + "QD0116";
             } else {
-                return "QD0115";
+                return "QD0116";
             }
-        } else if ("QD0007".equals( channle )) {
-            if (id_channle == 1) {
-                return "今日头条" + "QD0007";
-            } else {
-                return "QD0007";
-            }
-        } else if ("QD0081".equals( channle )) {
-            if (id_channle == 1) {
-                return "广点通-分包-3" + "QD0081";
-            } else {
-                return "QD0081";
-            }
-        } else if ("QD0080".equals( channle )) {
-            if (id_channle == 1) {
-                return "广点通-分包-2" + "QD0080";
-            } else {
-                return "QD0080";
-            }
-        } else if ("QD0079".equals( channle )) {
-            if (id_channle == 1) {
-                return "广点通-分包-3" + "QD0079";
-            } else {
-                return "QD0079";
-            }
-        } else if ("QD0073".equals( channle )) {
-            if (id_channle == 1) {
-                return "新浪A" + "QD0073";
-            } else {
-                return "QD0073";
-            }
-        } else if ("QD0074".equals( channle )) {
-            if (id_channle == 1) {
-                return "新浪B" + "QD0074";
-            } else {
-                return "QD0074";
-            }
-        } else if ("QD0075".equals( channle )) {
-            if (id_channle == 1) {
-                return "新浪C" + "QD0075";
-            } else {
-                return "QD0075";
-            }
-        } else if ("QD0054".equals( channle )) {
-            if (id_channle == 1) {
-                return "应用宝-推广" + "QD0054";
-            } else {
-                return "QD0054";
-            }
-        } else if ("QD0009".equals( channle )) {
-            if (id_channle == 1) {
-                return "今日头条" + "QD0009";
-            } else {
-                return "QD0009";
-            }
-        } else if ("QD0099".equals( channle )) {
-            if (id_channle == 1) {
-                return "乐推-E" + "QD0099";
-            } else {
-                return "QD0099";
-            }
-        } else if ("QD0098".equals( channle )) {
-            if (id_channle == 1) {
-                return "乐推-D" + "QD0098";
-            } else {
-                return "QD0098";
-            }
-        } else if ("QD0097".equals( channle )) {
-            if (id_channle == 1) {
-                return "乐推-C" + "QD0097";
-            } else {
-                return "QD0097";
-            }
-        } else if ("QD0096".equals( channle )) {
-            if (id_channle == 1) {
-                return "乐推-B" + "QD0096";
-            } else {
-                return "QD0096";
-            }
-        } else if ("QD0095".equals( channle )) {
-            if (id_channle == 1) {
-                return "乐推-A" + "QD0095";
-            } else {
-                return "QD0095";
-            }
-        } else if ("QD0057".equals( channle )) {
-            if (id_channle == 1) {
-                return "应用宝推广" + "QD0057";
-            } else {
-                return "QD0057";
-            }
-        } else if ("QD0056".equals( channle )) {
-            if (id_channle == 1) {
-                return "应用宝推广" + "QD0056";
-            } else {
-                return "QD0056";
-            }
-        } else if ("QD0008".equals( channle )) {
-            if (id_channle == 1) {
-                return "QQ浏览器" + "QD0008";
-            } else {
-                return "QD0008";
-            }
+//        } else if ("QD0007".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "今日头条" + "QD0007";
+//            } else {
+//                return "QD0007";
+//            }
+//        } else if ("QD0141".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "易云市场" + "QD0141";
+//            } else {
+//                return "QD0141";
+//            }
+//        }  else if ("QD0081".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "广点通-分包-3" + "QD0081";
+//            } else {
+//                return "QD0081";
+//            }
+//        } else if ("QD0080".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "广点通-分包-2" + "QD0080";
+//            } else {
+//                return "QD0080";
+//            }
+//        } else if ("QD0079".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "广点通-分包-3" + "QD0079";
+//            } else {
+//                return "QD0079";
+//            }
+//        } else if ("QD0073".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "新浪A" + "QD0073";
+//            } else {
+//                return "QD0073";
+//            }
+//        } else if ("QD0074".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "新浪B" + "QD0074";
+//            } else {
+//                return "QD0074";
+//            }
+//        } else if ("QD0075".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "新浪C" + "QD0075";
+//            } else {
+//                return "QD0075";
+//            }
+//        } else if ("QD0054".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "应用宝-推广" + "QD0054";
+//            } else {
+//                return "QD0054";
+//            }
+//        } else if ("QD0009".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "今日头条" + "QD0009";
+//            } else {
+//                return "QD0009";
+//            }
+//        } else if ("QD0099".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "乐推-E" + "QD0099";
+//            } else {
+//                return "QD0099";
+//            }
+//        } else if ("QD0098".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "乐推-D" + "QD0098";
+//            } else {
+//                return "QD0098";
+//            }
+//        } else if ("QD0097".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "乐推-C" + "QD0097";
+//            } else {
+//                return "QD0097";
+//            }
+//        } else if ("QD0096".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "乐推-B" + "QD0096";
+//            } else {
+//                return "QD0096";
+//            }
+//        } else if ("QD0095".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "乐推-A" + "QD0095";
+//            } else {
+//                return "QD0095";
+//            }
+//        } else if ("QD0057".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "应用宝推广" + "QD0057";
+//            } else {
+//                return "QD0057";
+//            }
+//        } else if ("QD0056".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "应用宝推广" + "QD0056";
+//            } else {
+//                return "QD0056";
+//            }
+//        } else if ("QD0008".equals( channle )) {
+//            if (id_channle == 1) {
+//                return "QQ浏览器" + "QD0008";
+//            } else {
+//                return "QD0008";
+//            }
         } else {
             return "";
         }

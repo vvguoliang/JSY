@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">及时雨贷款</string>
-    <string name="app_name_DQ">及时雨借款</string>
+    <string name="app_name_DQ">及时雨贷款</string>
     <string name="network_timed">网络连接超时，请重试</string>
     <string name="no_network_timed">暂无网络,请稍后再试</string>
     <string name="name_loan">借款</string>
@@ -8,6 +8,11 @@
     <string name="name_quick_card">快速办卡</string>
     <string name="name_personal_center">个人中心</string>
     <string name="name_sky_loan">极速贷款</string>
+    <string name="name_loan_credit_card">信用卡贷</string>
+    <string name="name_loan_credit_payroll">工薪贷</string>
+    <string name="name_loan_credit_taobao">淘宝贷</string>
+    <string name="name_loan_credit_Business_owners">企业主贷</string>
+    <string name="name_loan_credit_students">学生贷</string>
     <string name="name_Loan_classification">贷款分类引导</string>
     <string name="name_Loan_recommend">贷款推荐</string>
     <string name="name_Loan_recommend_accurately">精确推荐贷款</string>
@@ -26,6 +31,7 @@
     <string name="name_loan_personal_help_center">帮助中心</string>
     <string name="name_loan_personal_feedback">意见反馈</string>
     <string name="name_loan_personal_Loan_record">借款记录</string>
+    <string name="name_loan_personal_Loan_brows">浏览记录</string>
     <string name="name_loan_personal_setup">设置</string>
     <string name="name_loan_personal_data_phone">手机号码</string>
     <string name="name_loan_personal_data_name">姓名</string>
@@ -137,6 +143,8 @@
     <string name="name_loan_details_information">认证材料</string>
     <string name="name_loan_details_product_details">产品详情</string>
     <string name="name_loan_details_evaluate">用户评价</string>
+    <string name="name_loan_details_state">用户状态</string>
+
     <string name="name_loan_details_phone_operator">手机运营商</string>
     <string name="name_loan_details_esame_credit">芝麻信用</string>
     <string name="name_loan_details_id">身份证</string>
@@ -225,6 +233,25 @@
     <string name="loan_evaluate_my">我要评价</string>
     <string name="loan_record">立即还款</string>
 
+    <string name="permission_camera">摄像头</string>
+    <string name="permission_storage">文件</string>
+    <string name="permission_accounts">信息</string>
+    <string name="permission_phone">状态</string>
+    <string name="permission_location">定位</string>
+    <string name="permission_audio">录音</string>
+
+    <string name="already_loan">已放款</string>
+    <string name="noalready_loan">未放款</string>
+    <string name="commen_evaluate">发表评价</string>
+    <string name="valuate_hint">请详细描述您的问题或建议，我们将及时跟进解决。</string>
+    <string name="loan_detail_info">借款审核细节</string>
+    <string name="loan_apply_condition">申请条件</string>
+    <string name="loan_newpersion_guid">新手指导</string>
+    <string name="loan_apply_now">立即申请</string>
+    <string name="loan_service">客 服</string>
+    <string name="loan_min">500</string>
+
+
     <string-array name="tips">
         <item>赵</item>
         <item>钱</item>
@@ -250,6 +277,36 @@
         <item>窦</item>
         <item>昌</item>
     </string-array>
+
+    <string-array name="phonestarnum">
+        <item>139</item>
+        <item>138</item>
+        <item>137</item>
+        <item>136</item>
+        <item>135</item>
+        <item>134</item>
+        <item>188</item>
+        <item>187</item>
+        <item>186</item>
+        <item>185</item>
+        <item>176</item>
+        <item>145</item>
+        <item>156</item>
+        <item>155</item>
+        <item>132</item>
+        <item>131</item>
+        <item>130</item>
+        <item>175</item>
+        <item>189</item>
+        <item>153</item>
+        <item>133</item>
+        <item>151</item>
+        <item>152</item>
+        <item>157</item>
+
+
+    </string-array>
+
 
 
 </resources>

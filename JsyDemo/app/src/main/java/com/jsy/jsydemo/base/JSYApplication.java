@@ -1,8 +1,11 @@
 package com.jsy.jsydemo.base;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
+import com.meiqia.core.callback.OnInitCallback;
+import com.meiqia.meiqiasdk.util.MQConfig;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -24,5 +27,23 @@ public class JSYApplication extends Application {
         HttpURL.getInstance().initUrl( this );
 //使用集成测试服务
         MobclickAgent.setDebugMode( true );
+
+
+//美洽
+        // 替换成自己的key
+        String meiqiaKey = "b3d50baced8039719ce30b1e2b0d1187";
+        MQConfig.init(this, meiqiaKey, new OnInitCallback() {
+            @Override
+            public void onSuccess(String clientId) {
+            }
+
+            @Override
+            public void onFailure(int code, String message) {
+//                Toast.makeText(JSYApplication.this, "int failure message = " + message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
+
 }

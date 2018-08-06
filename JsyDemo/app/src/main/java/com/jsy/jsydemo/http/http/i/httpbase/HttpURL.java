@@ -52,11 +52,11 @@ public class HttpURL implements Serializable {
     private String HTTP_PATH = "http://47.93.122.140:8001//index.php?g=app";
 
     public void initUrl(Context context) {
-        if (SharedPreferencesUtils.contains( context, HTTP_URL_KEY )) {
-            HTTP_URL = SharedPreferencesUtils.get( context, HTTP_URL_KEY, HTTP_URL ).toString();
+        if (SharedPreferencesUtils.contains(context, HTTP_URL_KEY)) {
+            HTTP_URL = SharedPreferencesUtils.get(context, HTTP_URL_KEY, HTTP_URL).toString();
         }
-        HTTP_URL = HTTP_URL.replace( "\n", "" );
-        HTTP_URL = HTTP_URL.replace( " ", "" );
+        HTTP_URL = HTTP_URL.replace("\n", "");
+        HTTP_URL = HTTP_URL.replace(" ", "");
 
     }
 
@@ -67,16 +67,18 @@ public class HttpURL implements Serializable {
      * @param url
      */
     public void updateUrl(Context context, String url) {
-        SharedPreferencesUtils.put( context, HTTP_URL_KEY, url );
+        SharedPreferencesUtils.put(context, HTTP_URL_KEY, url);
     }
 
-    public String CODE = HTTP_URL + "&m=login&a=send_code";
+    public String CODE = HTTP_URL + "&m=login&a=sendcode";
 
     public String LOGO = HTTP_URL + "&m=login&a=dologin";
 
+    public String logoinString = "http://47.93.122.140:8003/index.php?g=app" + "&m=login&a=dologin";//登录测试
+
     public String PASSWORD = HTTP_URL + "&m=register&a=reset_password";
 
-    public String REGISTER_CODE = HTTP_URL + "&m=register&a=send_code";
+    public String REGISTER_CODE = HTTP_URL + "&m=register&a=sendcode";
 
     public String REGISTER = HTTP_URL + "&m=register&a=doregister";
 
@@ -88,7 +90,7 @@ public class HttpURL implements Serializable {
 
     public String PRODUCT = HTTP_URL + "&m=product&a=postList";
 
-    public String PRODUCT_DETAIL = HTTP_URL + "&m=product&a=postDetail";
+    public String PRODUCT_DETAIL = HTTP_URL + "&m=product&a=postDetail";//产品详情
 
     public String PRODUCT_FILTER = HTTP_URL + "&m=product&a=filter";
 
@@ -167,9 +169,26 @@ public class HttpURL implements Serializable {
     public String USERDETAILIDCARD = HTTP_URL + "&m=userdetail&a=idcard_list";
 
     public String PRODUCTCATELIST = HTTP_URL + "&m=productcate&a=getList";
-    /* 评论 拉去*/
+
+    //提交评论
+    public String SUBMITEVALUATE = HTTP_URL + "&m=comment&a=postAdd";
+
+    /* 评论 拉取*/
     public String COMMENTLIST = HTTP_URL + "&m=comment&a=getList";
 
-    /* 借款记录 */
-    public String USERINFORECORD = HTTP_URL + "&m=userinfo&a=record";
+    /* 拉取借款记录 */
+    public String USERINFORECORD = HTTP_URL + "&m=loanrecord&a=getList";
+    /*提交借款记录*/
+    public String USERINFOPOSTHISTRY = HTTP_URL + "&m=loanrecord&a=postAdd";
+
+    /*浏览记录*/
+    public String USERINFORBROWS = HTTP_URL + "&m=userinfo&a=record";
+
+    /*开关*/
+    public String USERSTATUS = HTTP_URL + "&m=check&a=status&source=40";
+
+    /* 开关*/
+    public String USERSTA = HTTP_URL + "&m=check&a=android_status";
+
+
 }

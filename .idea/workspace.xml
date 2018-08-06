@@ -1,7 +1,230 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01245dc6-3133-4572-8ec4-1de051d95ad8" name="Default" comment="" />
+    <list default="true" id="01245dc6-3133-4572-8ec4-1de051d95ad8" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/.gitignore" afterPath="$PROJECT_DIR$/JsyDemo/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/.idea/gradle.xml" afterPath="$PROJECT_DIR$/JsyDemo/.idea/gradle.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/.idea/misc.xml" afterPath="$PROJECT_DIR$/JsyDemo/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/.idea/modules.xml" afterPath="$PROJECT_DIR$/JsyDemo/.idea/modules.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/.gitignore" afterPath="$PROJECT_DIR$/JsyDemo/app/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/build.gradle" afterPath="$PROJECT_DIR$/JsyDemo/app/build.gradle" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/proguard-rules.pro" afterPath="$PROJECT_DIR$/JsyDemo/app/proguard-rules.pro" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/AndroidManifest.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/assets/province_data.json" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/assets/province_data.json" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/ContactInfo.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/ContactInfo.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/HomeLoanBanner.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/HomeLoanBanner.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/HomeLoanBannerList.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/HomeLoanBannerList.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/HomeProduct.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/HomeProduct.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/HomeProductList.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/HomeProductList.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/LoanDatailsData.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/LoanDatailsData.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/LoanRecordBand.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/LoanRecordBand.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/LoanRecordBandList.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/LoanRecordBandList.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/ProductSu.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/ProductSu.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/ProductSuList.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/ProductSuList.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/QuickBank.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/QuickBank.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/QuickBankList.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/QuickBankList.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/RegisterSignCodeModify.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/RegisterSignCodeModify.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/SpeedLoanData.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/SpeedLoanData.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/SpeedLoanDataList.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/SpeedLoanDataList.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/SpeedLoanDetailsListData.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/SpeedLoanDetailsListData.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/SpeedLoanDetailsListDataList.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/SpeedLoanDetailsListDataList.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/model/JsonBean.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/EntityClass/model/JsonBean.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/Share/BaseUIListener.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/Share/BaseUIListener.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/Share/BitmapUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/Share/BitmapUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/Share/ShareWxapTencent.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/Share/ShareWxapTencent.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/Share/Util.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/Share/Util.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/BasicAuthenticationActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/BasicAuthenticationActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/CommissioningActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/CommissioningActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/LoanDetailsActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/LoanDetailsActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/LogoActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/LogoActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/MainActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/MainActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/OtherInformationActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/OtherInformationActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/SetUp/SetUPActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/SetUp/SetUPActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/SetUp/SetUpAboutActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/SetUp/SetUpAboutActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/SetUp/SetUpPasswordActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/SetUp/SetUpPasswordActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/SpeedLoanActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/SpeedLoanActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/SpeedLoanDetailsListActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/SpeedLoanDetailsListActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/LoanFragment.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/LoanFragment.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/LoanSupermarketFragment.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/LoanSupermarketFragment.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/PersonalCenterFragment.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/PersonalCenterFragment.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/QuickCardFragment.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/QuickCardFragment.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/helpFeedbackFriendsMyPackage/FeedbackActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/helpFeedbackFriendsMyPackage/FeedbackActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/helpFeedbackFriendsMyPackage/FriendsActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/helpFeedbackFriendsMyPackage/FriendsActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/helpFeedbackFriendsMyPackage/HelpCenterActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/helpFeedbackFriendsMyPackage/HelpCenterActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/helpFeedbackFriendsMyPackage/LoanRecordAcitivty.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/helpFeedbackFriendsMyPackage/LoanRecordAcitivty.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/helpFeedbackFriendsMyPackage/OperatorActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/helpFeedbackFriendsMyPackage/OperatorActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataBankCardActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataBankCardActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataCarActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataCarActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataCertificatesActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataCertificatesActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataCreditActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataCreditActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataEnterpriseActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataEnterpriseActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataFamilyActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataFamilyActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataHosePropertyActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataHosePropertyActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataOperatorActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataOperatorActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataOtherActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataOtherActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataUploadActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/personaldata/PersonalDataUploadActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/BannerLoopAdapter.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/BannerLoopAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/CardRecordAdapter.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/CardRecordAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/DialogListView.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/DialogListView.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/LoanFragAdaperListview.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/LoanFragAdaperListview.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/LoanRecordAdapter.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/LoanRecordAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/LoanSupAdaperListview.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/LoanSupAdaperListview.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/LoansupemarketGridviewAdapter.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/LoansupemarketGridviewAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/QuickCardAdapter.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/QuickCardAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/SpeedLoanAdapter.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/SpeedLoanAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/SpeedLoanDetailsListAdapter.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/adapter/SpeedLoanDetailsListAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/base/BaseActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/base/BaseActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/base/BaseActivityManager.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/base/BaseActivityManager.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/base/BaseFragment.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/base/BaseFragment.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/base/JSYApplication.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/base/JSYApplication.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/base/UnCeHandler.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/base/UnCeHandler.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/control/MyButton.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/control/MyButton.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/control/MyEdittextView.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/control/MyEdittextView.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/control/MyGridView.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/control/MyGridView.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/control/MyTextView.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/control/MyTextView.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/http/http/i/DataCallBack.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/http/http/i/DataCallBack.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/http/http/i/httpbase/HttpURL.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/http/http/i/httpbase/HttpURL.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/http/http/i/httpbase/OkHttpManager.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/http/http/i/httpbase/OkHttpManager.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/interfaces/Action.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/interfaces/Action.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/interfaces/UserCenterModel.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/interfaces/UserCenterModel.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/service/UpdataService.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/service/UpdataService.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/AppUtil.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/AppUtil.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/CTelephoneInfo.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/CTelephoneInfo.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/CameraUtils/BitmapUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/CameraUtils/BitmapUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/CameraUtils/UserCenterRealize.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/CameraUtils/UserCenterRealize.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/DisplayUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/DisplayUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/IdcardValidator.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/IdcardValidator.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/ImmersiveUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/ImmersiveUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/JsonData.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/JsonData.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/NetWorkUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/NetWorkUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/PublicClass/CommissioningTimerUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/PublicClass/CommissioningTimerUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/PublicClass/CountDownTimerUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/PublicClass/CountDownTimerUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/PublicClass/ShowDialog.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/PublicClass/ShowDialog.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/SDCardUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/SDCardUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/SharedPreferencesUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/SharedPreferencesUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/StringUtil.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/StringUtil.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/TimeUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/TimeUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/ToatUtils.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/utils/ToatUtils.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/CardRecordHolder.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/CardRecordHolder.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/LoanRecordHolder.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/LoanRecordHolder.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/QuickBankHolder.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/QuickBankHolder.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/ShapeHolder.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/ShapeHolder.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/SpeedLoanDetailsListHolder.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/SpeedLoanDetailsListHolder.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/SpeedLoanHolder.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Base1/SpeedLoanHolder.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/BaseViewHolder.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/BaseViewHolder.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/BottomDialog.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/BottomDialog.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/CircleIndicator.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/CircleIndicator.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/MainActivityView.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/MainActivityView.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Marquee.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/Marquee.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/MarqueeView.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/MarqueeView.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/MyGridView.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/MyGridView.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/PublicDialog.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/PublicDialog.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/PublicEditTextDialog.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/PublicEditTextDialog.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/PublicPhoneDialog.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/PublicPhoneDialog.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/RecyclerAdapter.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/RecyclerAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/RefreshRecyclerView.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/view/RefreshRecyclerView.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/webview/LoanWebViewActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/webview/LoanWebViewActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/wxapi/WXEntryActivity.java" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/wxapi/WXEntryActivity.java" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/anim/anim_marquee_in.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/anim/anim_marquee_in.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/anim/anim_marquee_out.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/anim/anim_marquee_out.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/anim/push_bottom_in.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/anim/push_bottom_in.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/anim/push_bottom_out.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/anim/push_bottom_out.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_commissioning_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_commissioning_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_evaluate_hadow_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_evaluate_hadow_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_fillet_shadow_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_fillet_shadow_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_fillet_shadow_wathet_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_fillet_shadow_wathet_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_loan_blue_val.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_loan_blue_val.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_personal_right_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_personal_right_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_record_shadow_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_record_shadow_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_shape_corner.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_shape_corner.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_speedloan_blue_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_speedloan_blue_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_speedloan_red_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/bg_speedloan_red_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/button_photo_bottom_shape.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/button_photo_bottom_shape.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/button_photo_middle_shape.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/button_photo_middle_shape.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/button_photo_top_shape.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/button_photo_top_shape.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/button_white_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/button_white_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/button_white_shape.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/button_white_shape.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/checkbox_basic_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/checkbox_basic_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/checkbox_selector.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/checkbox_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/progressbar_color.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/progressbar_color.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/share_selector_tv_color.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/drawable/share_selector_tv_color.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_basic_authentication.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_basic_authentication.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_commissioning.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_commissioning.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_feedback.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_feedback.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_friends.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_friends.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_help_center.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_help_center.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_loandetails.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_loandetails.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_logo.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_logo.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_operator.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_operator.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_other_information.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_other_information.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_bank_card.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_bank_card.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_car.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_car.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_certifcates.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_certifcates.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_credit.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_credit.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_enterprise.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_enterprise.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_family.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_family.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_hose_peoerty.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_hose_peoerty.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_operator.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_operator.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_other.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_other.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_upload.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_personal_data_upload.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_set_up.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_set_up.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_set_up_password.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_set_up_password.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_setup_about.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_setup_about.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_speedloan.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_speedloan.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_speedloan_details_list.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_speedloan_details_list.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_webview.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/act_webview.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/activity_main.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/adapter_loan_supemarket_gridview.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/adapter_loan_supemarket_gridview.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/buttom_dialog.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/buttom_dialog.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/dialog_bottom_urbanarea.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/dialog_bottom_urbanarea.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/dialog_edittext.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/dialog_edittext.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/dialog_listview_item.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/dialog_listview_item.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/dialog_normal_layout.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/dialog_normal_layout.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/dialog_phone.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/dialog_phone.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fail_layout.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fail_layout.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_loan.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_loan.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_loan_top.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_loan_top.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_loansupermarketfragment.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_loansupermarketfragment.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_personalcenterfragment.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_personalcenterfragment.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_quickcardfragment.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_quickcardfragment.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/holder_consume.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/holder_consume.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/holder_loan_record.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/holder_loan_record.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/holder_quick_bank.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/holder_quick_bank.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/loan_frag_adapter_item.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/loan_frag_adapter_item.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/my_friends_botton_popupwindow.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/my_friends_botton_popupwindow.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/other.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/other.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/tab_activity_fra.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/tab_activity_fra.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_evaluate.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_evaluate.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_information.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_information.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_loan_bvh.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_loan_bvh.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_marquee.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_marquee.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_product_details_listview.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_product_details_listview.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_rectcler_status_last.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_rectcler_status_last.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_refresh_recycler.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_refresh_recycler.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_viewpage.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/view_viewpage.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/mipmap-xxxhdpi/ic_personal_src.png" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/mipmap-xxxhdpi/ic_personal_src.png" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values-v11/styles.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values-v11/styles.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values-v14/styles.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values-v14/styles.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values-v21/styles.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values-v21/styles.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values-v23/styles.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values-v23/styles.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/attrs.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/attrs.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/colors.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/dimens.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/ids.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/ids.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/strings.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/values/styles.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/app/src/main/res/xml/file_paths.xml" afterPath="$PROJECT_DIR$/JsyDemo/app/src/main/res/xml/file_paths.xml" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/build.gradle" afterPath="$PROJECT_DIR$/JsyDemo/build.gradle" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/gradle.properties" afterPath="$PROJECT_DIR$/JsyDemo/gradle.properties" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/JsyDemo/gradle/wrapper/gradle-wrapper.properties" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/gradlew" afterPath="$PROJECT_DIR$/JsyDemo/gradlew" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/gradlew.bat" afterPath="$PROJECT_DIR$/JsyDemo/gradlew.bat" />
+      <change beforePath="$PROJECT_DIR$/JsyDemo/settings.gradle" afterPath="$PROJECT_DIR$/JsyDemo/settings.gradle" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,25 +233,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="LoanFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/LoanFragment.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/JsyDemo/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="125" column="32" lean-forward="false" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fra_loan_top.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_loan_top.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="27" column="37" lean-forward="false" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="37" />
+            <state relative-caret-position="256">
+              <caret line="16" column="32" lean-forward="true" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -44,7 +254,7 @@
       <projects_view />
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="43" />
     <option name="y" value="23" />
     <option name="width" value="1397" />
@@ -65,130 +275,16 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
               <item name="JSY" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="jsy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="jsy" type="462c0819:PsiDirectoryNode" />
-              <item name="jsydemo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="jsy" type="462c0819:PsiDirectoryNode" />
-              <item name="jsydemo" type="462c0819:PsiDirectoryNode" />
-              <item name="activity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="jsy" type="462c0819:PsiDirectoryNode" />
-              <item name="jsydemo" type="462c0819:PsiDirectoryNode" />
-              <item name="activity" type="462c0819:PsiDirectoryNode" />
-              <item name="fragment" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JSY" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JSY" type="462c0819:PsiDirectoryNode" />
-              <item name="JsyDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -303,21 +399,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="43" y="23" width="1397" height="877" extended-state="0" />
-    <editor active="true" />
+    <frame x="67" y="-8" width="1861" height="1096" extended-state="6" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25355273" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18869995" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -333,6 +427,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -348,8 +443,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/LoanFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="125" column="32" lean-forward="false" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="32" />
+        <state relative-caret-position="1024">
+          <caret line="125" column="13" lean-forward="true" selection-start-line="125" selection-start-column="13" selection-end-line="125" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -361,6 +456,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="27" column="37" lean-forward="false" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JsyDemo/app/src/main/res/layout/fra_loan_top.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="78" column="54" lean-forward="false" selection-start-line="78" selection-start-column="54" selection-end-line="78" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JsyDemo/app/src/main/java/com/jsy/jsydemo/activity/fragment/LoanFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="125" column="13" lean-forward="true" selection-start-line="125" selection-start-column="13" selection-end-line="125" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JsyDemo/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" column="32" lean-forward="true" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
           <folding />
         </state>
       </provider>

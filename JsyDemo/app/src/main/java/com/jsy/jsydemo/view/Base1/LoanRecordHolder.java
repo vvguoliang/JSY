@@ -59,8 +59,14 @@ public class LoanRecordHolder extends BaseViewHolder<LoanRecordBand> {
                     } )
                     .into( record_loan_img );
             record_loan_name.setText( data.getPro_name() );
-            record_loan_money.setText( data.getPro_describe() );
+//            record_loan_money.setText( data.getPro_describe() );
             record_loan_end.setText( data.getCreated_at() );
+            record_loan_money.setText("借款金额："+data.getAmount()+"元");
+            if (data.getUnit().equals("1")) {
+                record_loan_day.setText("借款期限：" + data.getDeadline() + "天");
+            }else {
+                record_loan_day.setText("借款期限：" + data.getDeadline() + "月");
+            }
         }
     }
 
@@ -79,6 +85,6 @@ public class LoanRecordHolder extends BaseViewHolder<LoanRecordBand> {
     @Override
     public void onItemViewClick(LoanRecordBand data) {
         super.onItemViewClick( data );
-        ToatUtils.showShort1( parent.getContext(), "你想去哪里？" );
+//        ToatUtils.showShort1( parent.getContext(), "你想去哪里？" );
     }
 }

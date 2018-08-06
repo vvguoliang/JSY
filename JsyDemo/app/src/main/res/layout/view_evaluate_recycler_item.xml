@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:padding="10dp"
+            >
+            <TextView
+                android:id="@+id/evaluate_recycler_user_name"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/common_14dp"
+                android:text="1866iejajdfkjei"
+                />
+            <TextView
+                android:id="@+id/evaluate_recycler_user_time"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/common_14dp"
+                android:text="2017-10-18"
+                android:gravity="right"
+                />
+        </LinearLayout>
+
+        <com.jsy.jsydemo.view.Base1.RatingBar
+            android:id="@+id/evaluate_recycler_user_ratingbar"
+            android:layout_marginLeft="@dimen/common_12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:starEmpty="@mipmap/ratingbar_1"
+            app:starHalf="@mipmap/ratingbar_1"
+            app:starFill="@mipmap/ratingbar_2"
+            app:starImageSize="@dimen/common_14dp"
+            app:starPadding="@dimen/common_3dp"
+            app:starStep="1"
+            app:stepSize="Full"
+            app:clickable="false"
+            app:starCount="5"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <com.jsy.jsydemo.control.MyTextView
+                android:id="@+id/evaluate_recycler_user_isloan1"
+                android:layout_marginTop="@dimen/common_5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/already_loan"
+                android:textSize="@dimen/common_12dp"
+                android:layout_marginLeft="@dimen/common_10dp"
+                android:background="@drawable/corner_view"
+                android:textColor="@color/white"
+                android:paddingLeft="@dimen/common_5dp"
+                android:paddingRight="@dimen/common_5dp"
+                />
+              <com.jsy.jsydemo.control.MyTextView
+                  android:visibility="gone"
+                android:id="@+id/evaluate_recycler_user_isloan2"
+                android:layout_marginTop="@dimen/common_5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/noalready_loan"
+                android:textSize="@dimen/common_12dp"
+                android:layout_marginLeft="@dimen/common_10dp"
+                android:background="@drawable/corner_view2"
+                android:textColor="@color/common_reminder_face"
+                android:paddingLeft="@dimen/common_5dp"
+                android:paddingRight="@dimen/common_5dp"
+                />
+
+
+        </LinearLayout>
+
+        <com.jsy.jsydemo.control.MyTextView
+            android:id="@+id/evaluate_recycler_user_va"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="好评下次还会再来"
+            android:padding="@dimen/common_10dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

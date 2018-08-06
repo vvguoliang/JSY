@@ -10,10 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jsy.jsydemo.EntityClass.LoanBrowsData;
+import com.jsy.jsydemo.EntityClass.LoanBrowsDataList;
 import com.jsy.jsydemo.EntityClass.LoanRecordBand;
 import com.jsy.jsydemo.EntityClass.LoanRecordBandList;
 import com.jsy.jsydemo.EntityClass.SpeedLoanData;
 import com.jsy.jsydemo.R;
+import com.jsy.jsydemo.adapter.LoanBrowsAdapter;
 import com.jsy.jsydemo.adapter.LoanRecordAdapter;
 import com.jsy.jsydemo.adapter.SpeedLoanAdapter;
 import com.jsy.jsydemo.base.BaseActivity;
@@ -38,7 +41,7 @@ import okhttp3.Request;
 /**
  * Created by vvguoliang on 2017/9/1.
  * <p>
- * 借款记录
+ * 借款记录   、   浏览记录
  */
 
 public class LoanRecordAcitivty extends BaseActivity implements DataCallBack, View.OnClickListener {
@@ -55,10 +58,19 @@ public class LoanRecordAcitivty extends BaseActivity implements DataCallBack, Vi
 
     private LoanRecordBandList loanRecordBandList;
 
+    private LoanBrowsAdapter mBrowsAdapter;
+
+    private LoanBrowsData[] loanBrowsData;
+
+    private LoanBrowsDataList loanBrowsDataList;
+
+    private int type = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.fra_loan );
+        type = getIntent().getIntExtra("loanrecord",0);
         findViewById();
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
@@ -70,26 +82,40 @@ public class LoanRecordAcitivty extends BaseActivity implements DataCallBack, Vi
     @Override
     protected void findViewById() {
         mHandler = new Handler();
-        mAdapter = new LoanRecordAdapter( this );
 
         findViewById( R.id.title_image ).setVisibility( View.VISIBLE );
         findViewById( R.id.title_image ).setOnClickListener( this );
         TextView title_view = findViewById( R.id.title_view );
-        title_view.setText( this.getString( R.string.name_loan_personal_Loan_record ) );
+        mRecyclerView = findViewById( R.id.loan_recycler_view );
 
-        mAdapter.removeHeader();
-        //添加footer
         final TextView footer = new TextView( this );
         footer.setLayoutParams( new LinearLayoutCompat.LayoutParams( ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtils.dip2px( this, 24 ) ) );
         footer.setTextSize( 16 );
         footer.setGravity( Gravity.CENTER );
         footer.setText( "" );
-        mAdapter.setFooter( footer );
 
-        mRecyclerView = findViewById( R.id.loan_recycler_view );
         mRecyclerView.setSwipeRefreshColors( 0xFF437845, 0xFFE44F98, 0xFF2FAC21 );
         mRecyclerView.setLayoutManager( new LinearLayoutManager( this ) );
-        mRecyclerView.setAdapter( mAdapter );
+
+        if (type ==0){
+
+            mAdapter = new LoanRecordAdapter( this );
+            title_view.setText( this.getString( R.string.name_loan_personal_Loan_record ) );
+            mAdapter.removeHeader();
+            //添加footer
+            mAdapter.setFooter( footer );
+            mRecyclerView.setAdapter( mAdapter );
+        }else {
+            mBrowsAdapter = new LoanBrowsAdapter(this);
+            title_view.setText(R.string.name_loan_personal_Loan_brows);
+            mBrowsAdapter.removeHeader();
+            //添加footer
+            mBrowsAdapter.setFooter( footer );
+            mRecyclerView.setAdapter( mBrowsAdapter );
+        }
+
+
+
         mRecyclerView.setBackgroundResource( R.color.common_light_grey );
         mRecyclerView.setRefreshAction( new Action() {
             @Override
@@ -97,6 +123,7 @@ public class LoanRecordAcitivty extends BaseActivity implements DataCallBack, Vi
                 getData( true );
             }
         } );
+
 
         mRecyclerView.setLoadMoreAction( new Action() {
             @Override
@@ -122,10 +149,17 @@ public class LoanRecordAcitivty extends BaseActivity implements DataCallBack, Vi
             public void run() {
                 if (isRefresh) {
                     page = 1;
-                    mAdapter.clear();
-                    mAdapter.addAll( loanRecordBand );
-                    mRecyclerView.dismissSwipeRefresh();
-                    mRecyclerView.getRecyclerView().scrollToPosition( 0 );
+                    if (type ==0){
+                        mAdapter.clear();
+                        mAdapter.addAll( loanRecordBand );
+                        mRecyclerView.dismissSwipeRefresh();
+                        mRecyclerView.getRecyclerView().scrollToPosition( 0 );
+                    }else {
+                        mBrowsAdapter.clear();
+                        mBrowsAdapter.addAll( loanBrowsData );
+                        mRecyclerView.dismissSwipeRefresh();
+                        mRecyclerView.getRecyclerView().scrollToPosition( 0 );
+                    }
                 } else {
                     page++;
                     getHttp();
@@ -142,7 +176,11 @@ public class LoanRecordAcitivty extends BaseActivity implements DataCallBack, Vi
     private void getHttp() {
         Map<String, Object> map = new HashMap<>();
         map.put( "uid", Long.parseLong( SharedPreferencesUtils.get( this, "uid", "" ).toString() ) );
-        OkHttpManager.postAsync( HttpURL.getInstance().USERINFORECORD, "record", map, this );
+        if (type==0) {
+            OkHttpManager.postAsync( HttpURL.getInstance().USERINFORECORD, "record", map, this );
+        }else {
+            OkHttpManager.postAsync( HttpURL.getInstance().USERINFORBROWS, "brows", map, this );
+        }
     }
 
     @Override
@@ -164,18 +202,47 @@ public class LoanRecordAcitivty extends BaseActivity implements DataCallBack, Vi
 
     @Override
     public void requestSuccess(String result, String name) throws Exception {
-        loanRecordBandList = JsonData.getInstance().getJsonLoanRexord( result );
-        if (loanRecordBandList != null && loanRecordBandList.getLoanRecordBands() != null
-                && loanRecordBandList.getLoanRecordBands().size() > 0) {
-            loanRecordBand = new LoanRecordBand[loanRecordBandList.getLoanRecordBands().size()];
-            for (int i = 0; loanRecordBandList.getLoanRecordBands().size() > i; i++) {
-                loanRecordBand[i] = new LoanRecordBand( loanRecordBandList.getLoanRecordBands().get( i ).getPro_name(),
-                        loanRecordBandList.getLoanRecordBands().get( i ).getPro_describe(),
-                        HttpURL.getInstance().HTTP_URL_PATH + loanRecordBandList.getLoanRecordBands().get( i ).getImg(),
-                        loanRecordBandList.getLoanRecordBands().get( i ).getCreated_at() );
+        if (name.equals("record")) {
+            loanRecordBandList = JsonData.getInstance().getJsonLoanRexord(result);
+            if (loanRecordBandList != null && loanRecordBandList.getLoanRecordBands() != null
+                    && loanRecordBandList.getLoanRecordBands().size() > 0) {
+                loanRecordBand = new LoanRecordBand[loanRecordBandList.getLoanRecordBands().size()];
+                String proName = "";
+                String amount = "";
+                String iamge = "";
+                String time = "";
+                String loanTime = "";
+                String loanTimeM = "";
+
+                for (int i = 0; loanRecordBandList.getLoanRecordBands().size() > i; i++) {
+                    proName = loanRecordBandList.getLoanRecordBands().get(i).getPro_name()+"";
+                    amount = loanRecordBandList.getLoanRecordBands().get(i).getAmount()+"";
+                    iamge = HttpURL.getInstance().HTTP_URL_PATH + loanRecordBandList.getLoanRecordBands().get( i ).getImg()+"";
+                    time = loanRecordBandList.getLoanRecordBands().get( i ).getCreated_at()+"";
+                    loanTime = loanRecordBandList.getLoanRecordBands().get(i).getDeadline()+"";
+                    loanTimeM = loanRecordBandList.getLoanRecordBands().get(i).getUnit()+"";
+
+                loanRecordBand[i] = new LoanRecordBand( proName,amount,iamge,time,loanTime,loanTimeM);
+                }
+                mAdapter.clear();
+                mAdapter.addAll(loanRecordBand);
+                mAdapter.notifyDataSetChanged();
             }
+        }else {
+            loanRecordBandList = JsonData.getInstance().getJsonLoanRexord(result);
+            if (loanRecordBandList != null && loanRecordBandList.getLoanRecordBands() != null
+                    && loanRecordBandList.getLoanRecordBands().size() > 0) {
+                loanRecordBand = new LoanRecordBand[loanRecordBandList.getLoanRecordBands().size()];
+                for (int i = 0; loanRecordBandList.getLoanRecordBands().size() > i; i++) {
+//                loanRecordBand[i] = new LoanRecordBand( loanRecordBandList.getLoanRecordBands().get( i ).getPro_name(),
+//                        HttpURL.getInstance().HTTP_URL_PATH + loanRecordBandList.getLoanRecordBands().get( i ).getImg(),
+//                        loanRecordBandList.getLoanRecordBands().get( i ).getCreated_at() );
+                }
+            }
+
         }
     }
+
 
     @Override
     public void onClick(View view) {

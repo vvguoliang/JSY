@@ -5,7 +5,8 @@
     <color name="accent">#FF4081</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="common_navy_blue">#305591</color>
+    <color name="home_listview_line">#f3e725</color>
+    <color name="common_navy_blue">#43a7fd</color>
     <color name="common_transparent">#ffffff00</color>
     <color name="common_sky_blue">#40b9b1</color>
     <color name="common_gray">#a6a6a6</color>
@@ -23,6 +24,8 @@
     <color name="common_pop_blue">#177FFE</color>
     <color name="common_reminder_bg">#eaeaea</color>
     <color name="common_reminder_face">#004eb7</color>
+    <color name="common_details_point">#1786e2</color>
+
     <color name="transparent">#00000000</color>
     <color name="common_blue">#007CCB</color>
     <color name="common_blue_details">#176FDB</color>
@@ -44,4 +47,31 @@
     <color name="common_loan_evaluate_text">#78B2EE</color>
     <color name="common_loan_record_text">#626262</color>
     <color name="common_loan_record_line">#D5D5D5</color>
+
+
+
+<!--美洽-->
+    <color name="colorPrimary">#6C9EFC</color>
+    <color name="colorPrimaryDark">@color/colorPrimary</color>
+
+    <color name="test_red">#fc5369</color>
+    <color name="test_green">#00ce7d</color>
+    <color name="test_blue">#50a3fc</color>
+
+
+    <!--通过覆盖资源id的形式自定义美洽UI START-->
+    <color name="mq_colorPrimary">@color/colorPrimary</color>
+    <color name="mq_colorPrimaryDark">@color/colorPrimaryDark</color>
+
+    <color name="mq_activity_title_textColor">@android:color/white</color>
+    <color name="mq_activity_title_bg">@color/colorPrimary</color>
+
+    <color name="mq_chat_left_textColor">@android:color/black</color>
+    <color name="mq_chat_right_textColor">@android:color/white</color>
+
+    <color name="mq_chat_left_bubble">#E6E6EA</color>
+    <color name="mq_chat_right_bubble">@color/colorPrimary</color>
+    <!--通过覆盖资源id的形式自定义美洽UI END-->
+
+
 </resources>

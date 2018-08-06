@@ -3,176 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/common_light_grey"
     android:orientation="vertical">
 
     <include
+        android:id="@+id/old_viewpager"
         layout="@layout/view_viewpage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible" />
+        android:visibility="visible"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_6dp"
+        android:background="@color/common_light_grey"
+        />
 
     <GridView
         android:id="@+id/loan_frame_gridView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_170dp"
-        android:layout_marginTop="@dimen/common_5dp"
         android:background="@color/white"
         android:fastScrollEnabled="false"
         android:gravity="center"
         android:listSelector="@color/transparent"
         android:numColumns="4"
         android:scrollbars="none" />
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_6dp"
+        android:background="@color/common_light_grey"
+        />
     <com.jsy.jsydemo.view.MarqueeView
         android:id="@+id/marqueeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_10dp"
         android:background="@color/white"
         app:mvAnimDuration="500"
         app:mvInterval="3000"
         app:mvTextSize="@dimen/common_14dp" />
-
-    <!--<LinearLayout-->
-    <!--android:stretchMode="columnWidth"-->
-    <!--android:columnWidth="@dimen/common_100dp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_marginTop="@dimen/common_5dp"-->
-    <!--android:background="@color/white"-->
-    <!--android:orientation="vertical"-->
-    <!--tools:ignore="DisableBaselineAlignment">-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/loan_speed_linear"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical"-->
-    <!--android:padding="@dimen/common_10dp"-->
-    <!--tools:ignore="UselessParent">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/loan_speed"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:adjustViewBounds="true"-->
-    <!--android:src="@mipmap/ic_loan_sky"-->
-    <!--tools:ignore="ContentDescription" />-->
-
-    <!--<com.jsy.jsydemo.control.MyTextView-->
-    <!--android:id="@+id/loan_sky"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="@dimen/common_10dp"-->
-    <!--android:text="@string/name_sky_loan"-->
-    <!--android:textColor="@color/common_sky_blue"-->
-    <!--android:textSize="@dimen/common_14dp" />-->
-
-    <!--<com.jsy.jsydemo.control.MyTextView-->
-    <!--android:id="@+id/Loan_classification"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="@dimen/common_5dp"-->
-    <!--android:text="@string/name_Loan_classification"-->
-    <!--android:textColor="@color/common_gray"-->
-    <!--android:textSize="@dimen/common_10dp" />-->
-    <!--</LinearLayout>-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/common_5dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:src="@color/common_light_grey" />-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/loan_speed1_linear"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical"-->
-    <!--android:padding="@dimen/common_10dp"-->
-    <!--tools:ignore="UselessParent">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/loan_speed1"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@mipmap/ic_loan_recommend"-->
-    <!--tools:ignore="ContentDescription" />-->
-
-    <!--<com.jsy.jsydemo.control.MyTextView-->
-    <!--android:id="@+id/loan_recommend"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="@dimen/common_10dp"-->
-    <!--android:text="@string/name_Loan_recommend"-->
-    <!--android:textColor="@color/common_green"-->
-    <!--android:textSize="@dimen/common_14dp" />-->
-
-    <!--<com.jsy.jsydemo.control.MyTextView-->
-    <!--android:id="@+id/Loan_recommend_accurately"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="@dimen/common_5dp"-->
-    <!--android:text="@string/name_Loan_recommend_accurately"-->
-    <!--android:textColor="@color/common_gray"-->
-    <!--android:textSize="@dimen/common_10dp" />-->
-    <!--</LinearLayout>-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/common_5dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:src="@color/common_light_grey" />-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/loan_speed2_linear"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical"-->
-    <!--android:padding="@dimen/common_10dp"-->
-    <!--tools:ignore="UselessParent">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/loan_speed2"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@mipmap/ic_loan_credit_report"-->
-    <!--tools:ignore="ContentDescription" />-->
-
-    <!--<com.jsy.jsydemo.control.MyTextView-->
-    <!--android:id="@+id/loan_credit_report"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="@dimen/common_10dp"-->
-    <!--android:text="@string/name_loan_credit_report"-->
-    <!--android:textColor="@color/common_violet"-->
-    <!--android:textSize="@dimen/common_14dp" />-->
-
-    <!--<com.jsy.jsydemo.control.MyTextView-->
-    <!--android:id="@+id/Loan_personal_credit"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="@dimen/common_5dp"-->
-    <!--android:text="@string/name_loan_personal_credit"-->
-    <!--android:textColor="@color/common_gray"-->
-    <!--android:textSize="@dimen/common_10dp" />-->
-    <!--</LinearLayout>-->
-
-    <!--</LinearLayout>-->
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_6dp"
+        android:background="@color/common_light_grey"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/common_5dp"
+        android:background="@color/white"
         android:visibility="visible">
 
         <LinearLayout
@@ -181,7 +62,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="@dimen/common_5dp">
+            >
 
             <ImageView
                 android:layout_width="@dimen/common_20dp"
@@ -191,6 +72,7 @@
                 android:src="@color/common_deep_blue" />
 
             <ImageView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/common_5dp"
@@ -201,8 +83,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/name_loan_hot_sky_loan"
-                android:textColor="@color/common_deep_blue"
-                android:textSize="@dimen/common_14dp" />
+                android:textColor="@color/test_red"
+                android:textSize="@dimen/common_16dp"
+                />
 
             <ImageView
                 android:layout_width="@dimen/common_20dp"
@@ -219,12 +102,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/common_10dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/common_10dp"
             android:paddingRight="@dimen/common_10dp"
-            android:paddingTop="@dimen/common_10dp"
             tools:ignore="RtlHardcoded">
 
             <com.jsy.jsydemo.control.MyTextView
@@ -241,6 +121,7 @@
                 android:layout_marginLeft="@dimen/common_5dp"
                 android:src="@mipmap/ic_loan_batch" />
         </LinearLayout>
+
     </RelativeLayout>
 
 </LinearLayout>

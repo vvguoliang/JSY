@@ -20,6 +20,17 @@
 
 #指定代码的压缩级别
 -optimizationpasses 5
+#Okio相关
+-keep class sun.misc.Unsafe { *; }
+-dontwarn java.nio.file.*
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn okio.**
+
+#UIL相关
+-keep class com.nostra13.universalimageloader.** { *; }
+-keepclassmembers class com.nostra13.universalimageloader.** {*;}
+-dontwarn com.nostra13.universalimageloader.**
+
 
 #是否使用大小写混合
 -dontusemixedcaseclassnames
@@ -32,6 +43,10 @@
 
 #混淆时是否记录日志
 -verbose
+#因为混淆的问题，点击又会没有反应，这是因为openFileChooser()是系统api，所以需要在混淆是不混淆该方法
+-keepclassmembers class * extends android.webkit.WebChromeClient{
+public void openFileChooser(...);
+}
 
 #混淆时所采用的算法
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*

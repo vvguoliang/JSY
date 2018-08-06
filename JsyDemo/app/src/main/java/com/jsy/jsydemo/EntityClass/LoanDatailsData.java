@@ -34,6 +34,57 @@ public class LoanDatailsData {
     private String hits = "";
 
     private String tags = "";
+    private String detail="";
+    private String platform = "";
+
+    public LoanDatailsData() {
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public LoanDatailsData(String id, String pro_name, String pro_describe, String pro_link, String pro_hits, String img, String order, String edufanwei, String feilv, String fv_unit, String zuikuaifangkuan, String qixianfanwei, String qx_unit, String type, String data_id, String other_id, String status, String created_at, String updated_at, String tiaojian, String api_type, String user_auth, String other_auth, String hits, String tags, String detail, String platform) {
+        this.id = id;
+        this.pro_name = pro_name;
+        this.pro_describe = pro_describe;
+        this.pro_link = pro_link;
+        this.pro_hits = pro_hits;
+        this.img = img;
+        this.order = order;
+        this.edufanwei = edufanwei;
+        this.feilv = feilv;
+        this.fv_unit = fv_unit;
+        this.zuikuaifangkuan = zuikuaifangkuan;
+        this.qixianfanwei = qixianfanwei;
+        this.qx_unit = qx_unit;
+        this.type = type;
+        this.data_id = data_id;
+        this.other_id = other_id;
+        this.status = status;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.tiaojian = tiaojian;
+        this.api_type = api_type;
+        this.user_auth = user_auth;
+        this.other_auth = other_auth;
+        this.hits = hits;
+        this.tags = tags;
+        this.detail = detail;
+        this.platform = platform;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
 
     public String getTags() {
         return tags;

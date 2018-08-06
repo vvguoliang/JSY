@@ -1,17 +1,22 @@
 package com.jsy.jsydemo.view.Base1;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -57,6 +62,10 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
 
     private TextView speed_loan_detailsList_rate;
 
+    private LinearLayout tagBackLL2,tagBackLL1;
+    private ImageView imageView1,imageView2;
+
+
     private Context context;
 
     private Intent intent = null;
@@ -88,6 +97,37 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
                         }
                     })
                     .into(speed_loan_detailsList_image);
+            Glide.with(context).load(data.getIs_new()).listener(new RequestListener<Drawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                    tagBackLL1.setVisibility(View.INVISIBLE);
+                    return false;
+                }
+
+                @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                    tagBackLL1.setVisibility(View.VISIBLE);
+                    tagBackLL1.setBackground(drawable);
+                    return false;
+                }
+            }).into(imageView1);
+             Glide.with(context).load(data.getIs_activity()).listener(new RequestListener<Drawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                    tagBackLL2.setVisibility(View.INVISIBLE);
+                    return false;
+                }
+
+                @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                    tagBackLL2.setVisibility(View.VISIBLE);
+                    tagBackLL2.setBackground(drawable);
+                    return false;
+                }
+            }).into(imageView2);
+
             speed_loan_detailsList_name.setText(data.getPro_name());
             speed_loan_detailsList_text.setText("申请人数:" + data.getPro_hits());
             SpannableStringBuilder builder = new SpannableStringBuilder(speed_loan_detailsList_text.getText().toString());
@@ -111,29 +151,43 @@ public class SpeedLoanDetailsListHolder extends BaseViewHolder<SpeedLoanDetailsL
         speed_loan_detailsList_name = findViewById(R.id.speed_loan_detailsList_name);
         speed_loan_detailsList_text = findViewById(R.id.speed_loan_detailsList_text);
         speed_loan_detailsList_rate = findViewById(R.id.speed_loan_detailsList_rate);
+        tagBackLL1 = findViewById(R.id.speed_loan_list_item_tag_1);
+        tagBackLL2 = findViewById(R.id.speed_loan_list_item_tag_2);
+        imageView1 = findViewById(R.id.speed_loan_list_item_tag_image_1);
+        imageView2 = findViewById(R.id.speed_loan_list_item_tag_image_2);
     }
 
     @Override
     public void onItemViewClick(SpeedLoanDetailsListData data) {
         super.onItemViewClick(data);
         getHITSPRODUCT(data);
-        switch (data.getApi_type()) {
-            case "1":
-                if (!TextUtils.isEmpty(data.getPro_link())) {
-                    intent = new Intent(context, LoanWebViewActivity.class);
-                    intent.putExtra("url", data.getPro_link());
-                    context.startActivity(intent);
-                }
-                break;
-            case "2":
-                getHttp(data.getId());
-                break;
-            case "3":
-                intent = new Intent(context, LoanDetailsActivity.class);
-                intent.putExtra("id", data.getId());
-                context.startActivity(intent);
-                break;
-        }
+//        switch (data.getApi_type()) {
+////            case "1":
+//            case "3":
+//                if (!TextUtils.isEmpty(data.getPro_link())) {
+//                    intent = new Intent(context, LoanWebViewActivity.class);
+//                    intent.putExtra("url", data.getPro_link());
+//                    context.startActivity(intent);
+//                }
+//                break;
+//            case "2":
+//                getHttp(data.getId());
+////                intent = new Intent(context, LoanDetailsActivity.class);
+////                intent.putExtra("id", data.getId());
+////                context.startActivity(intent);
+//                break;
+////            case "3":
+//            case "1":
+//                intent = new Intent(context, LoanDetailsActivity.class);
+//                intent.putExtra("id", data.getId());
+//                context.startActivity(intent);
+//                break;
+//        }
+        intent = new Intent(context, LoanDetailsActivity.class);
+        intent.putExtra("Api_type",data.getApi_type());
+//        intent.putExtra("Api_type","3");
+        intent.putExtra("id", data.getId());
+        context.startActivity(intent);
     }
 
     private void getHITSPRODUCT(SpeedLoanDetailsListData speedLoanDetailsListData) {

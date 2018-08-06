@@ -1,5 +1,7 @@
 package com.jsy.jsydemo.EntityClass;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by vvguoliang on 2017/7/7.
  * 详情列表数据
@@ -29,38 +31,78 @@ public class SpeedLoanDetailsListData {
     private String tiaojian = "";
     private String api_type = "";
     private String tags = "";
+    /**
+     * pro_hits : null
+     * hits : 306
+     * cat_id : 1
+     * is_new : /20170904/xinpin.png
+     * is_activity : /20170904/huodong.png
+     */
+
+    private String hits;
+    private String cat_id;
+    private String is_new;
+    private String is_activity;
 
     public SpeedLoanDetailsListData() {
     }
 
-    public SpeedLoanDetailsListData(String id, String pro_name, String pro_describe, String pro_link, String pro_hits, String img,
-                                    String order, String edufanwei, String feilv, String fv_unit, String zuikuaifangkuan,
-                                    String qixianfanwei, String qx_unit, String type, String data_id, String other_id, String status,
-                                    String created_at, String updated_at, String tiaojian, String api_type, String tags) {
+//    public SpeedLoanDetailsListData(String id, String pro_name, String pro_describe, String pro_link, String pro_hits, String img,
+//                                    String order, String edufanwei, String feilv, String fv_unit, String zuikuaifangkuan,
+//                                    String qixianfanwei, String qx_unit, String type, String data_id, String other_id, String status,
+//                                    String created_at, String updated_at, String tiaojian, String api_type, String tags) {
+//        this.id = id;
+//        this.pro_describe = pro_describe;
+//        this.pro_hits = pro_hits;
+//        this.pro_link = pro_link;
+//        this.pro_name = pro_name;
+//        this.img = img;
+//        this.order = order;
+//        this.api_type = api_type;
+//        this.edufanwei = edufanwei;
+//        this.feilv = feilv;
+//        this.fv_unit = fv_unit;
+//        this.qixianfanwei = qixianfanwei;
+//        this.qx_unit = qx_unit;
+//        this.tags = tags;
+//        this.tiaojian = tiaojian;
+//        this.type = type;
+//        this.data_id = data_id;
+//        this.zuikuaifangkuan = zuikuaifangkuan;
+//        this.other_id = other_id;
+//        this.created_at = created_at;
+//        this.updated_at = updated_at;
+//        this.status = status;
+//    }
+
+    public SpeedLoanDetailsListData(String id, String pro_name, String pro_describe, String pro_link, String pro_hits, String img, String order, String edufanwei, String feilv, String fv_unit, String zuikuaifangkuan, String qixianfanwei, String qx_unit, String type, String data_id, String other_id, String status, String created_at, String updated_at, String tiaojian, String api_type, String tags, String hits, String cat_id, String is_new, String is_activity) {
         this.id = id;
-        this.pro_describe = pro_describe;
-        this.pro_hits = pro_hits;
-        this.pro_link = pro_link;
         this.pro_name = pro_name;
+        this.pro_describe = pro_describe;
+        this.pro_link = pro_link;
+        this.pro_hits = pro_hits;
         this.img = img;
         this.order = order;
-        this.api_type = api_type;
         this.edufanwei = edufanwei;
         this.feilv = feilv;
         this.fv_unit = fv_unit;
+        this.zuikuaifangkuan = zuikuaifangkuan;
         this.qixianfanwei = qixianfanwei;
         this.qx_unit = qx_unit;
-        this.tags = tags;
-        this.tiaojian = tiaojian;
         this.type = type;
         this.data_id = data_id;
-        this.zuikuaifangkuan = zuikuaifangkuan;
         this.other_id = other_id;
+        this.status = status;
         this.created_at = created_at;
         this.updated_at = updated_at;
-        this.status = status;
+        this.tiaojian = tiaojian;
+        this.api_type = api_type;
+        this.tags = tags;
+        this.hits = hits;
+        this.cat_id = cat_id;
+        this.is_new = is_new;
+        this.is_activity = is_activity;
     }
-
 
     public String getId() {
         return id;
@@ -236,5 +278,37 @@ public class SpeedLoanDetailsListData {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public String getHits() {
+        return hits;
+    }
+
+    public void setHits(String hits) {
+        this.hits = hits;
+    }
+
+    public String getCat_id() {
+        return cat_id;
+    }
+
+    public void setCat_id(String cat_id) {
+        this.cat_id = cat_id;
+    }
+
+    public String getIs_new() {
+        return is_new;
+    }
+
+    public void setIs_new(String is_new) {
+        this.is_new = is_new;
+    }
+
+    public String getIs_activity() {
+        return is_activity;
+    }
+
+    public void setIs_activity(String is_activity) {
+        this.is_activity = is_activity;
     }
 }

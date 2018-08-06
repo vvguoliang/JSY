@@ -3,6 +3,7 @@ package com.jsy.jsydemo.activity.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,6 +32,7 @@ import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.ToatUtils;
 import com.jsy.jsydemo.view.RefreshRecyclerView;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
@@ -190,6 +192,15 @@ public class QuickCardFragment extends BaseFragment implements DataCallBack {
 
             iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            final int finalI = i;
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mActivity, LoanWebViewActivity.class);
+                    intent.putExtra("url", mImageUrl.get(finalI).get("url"));
+                    mActivity.startActivity(intent);
+                }
+            });
             mBannerImageViews.add(iv);
         }
 

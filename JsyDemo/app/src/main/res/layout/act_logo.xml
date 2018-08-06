@@ -21,6 +21,7 @@
             android:src="@mipmap/ic_act_login_header" />
 
         <include
+            android:layout_marginTop="@dimen/status_bar_height"
             layout="@layout/tab_activity_fra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

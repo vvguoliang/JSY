@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_light_grey"
+
+    >
+
+    <include
+        layout="@layout/tab_activity_fra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_10dp"
+                android:text="@string/name_loan_details_state"
+                android:textSize="@dimen/common_16dp" />
+
+            <RadioGroup
+                android:id="@+id/radiogroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+
+                    android:id="@+id/submit_valuate_ready_loan1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_20dp"
+                    android:background="@drawable/submit_loan_state"
+                    android:button="@null"
+                    android:checked="true"
+                    android:clickable="true"
+                    android:onClick="submitClick"
+                    android:text="@string/already_loan"
+                    android:textColor="@drawable/submit_loan_text_state" />
+
+                <RadioButton
+                    android:id="@+id/submit_valuate_noready_loan1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_20dp"
+                    android:background="@drawable/submit_loan_state"
+                    android:button="@null"
+                    android:clickable="true"
+                    android:onClick="submitClick"
+                    android:text="@string/noalready_loan"
+                    android:textColor="@drawable/submit_loan_text_state" />
+
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_6dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_10dp">
+
+            <com.jsy.jsydemo.control.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_10dp"
+                android:text="描述相符"
+                android:textSize="@dimen/common_16dp" />
+
+            <com.jsy.jsydemo.view.Base1.RatingBar
+                android:id="@+id/submit_valuate_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:clickable="true"
+                app:starCount="5"
+                app:starEmpty="@mipmap/ratingbar_1"
+                app:starFill="@mipmap/ratingbar_2"
+                app:starHalf="@mipmap/ratingbar_1"
+                app:starImageSize="@dimen/common_20dp"
+                app:starPadding="@dimen/common_20dp"
+                app:starStep="5"
+                app:stepSize="Full"></com.jsy.jsydemo.view.Base1.RatingBar>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_6dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/submit_valuate_edittext1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_150dp"
+                android:background="@null"
+                android:enabled="true"
+                android:gravity="top"
+                android:hint="@string/valuate_hint"
+                android:padding="@dimen/common_10dp"
+                android:textSize="@dimen/common_16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/common_100dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/submit_valuate_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/common_30dp"
+                android:layout_marginRight="@dimen/common_30dp"
+                android:background="@drawable/big_corner_view"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="submitClick"
+                android:padding="@dimen/common_10dp"
+                android:text="@string/name_loan_basic_submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/common_20dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

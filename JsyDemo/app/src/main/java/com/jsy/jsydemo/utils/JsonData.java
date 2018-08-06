@@ -152,6 +152,10 @@ public class JsonData {
                 homeProduct.setType( jsonObject.optString( "type" ) );
                 homeProduct.setUpdated_at( jsonObject.optString( "updated_at" ) );
                 homeProduct.setZuikuaifangkuan( jsonObject.optString( "zuikuaifangkuan" ) );
+                homeProduct.setHits( jsonObject.optString( "hits" ) );
+                homeProduct.setCat_id( jsonObject.optString( "cat_id" ) );
+                homeProduct.setIs_activity( jsonObject.optString( "is_new" ) );
+                homeProduct.setIs_new( jsonObject.optString( "is_activity" ) );
                 productList.add( homeProduct );
             }
             homeProductList.setHomeProductList( productList );
@@ -292,6 +296,8 @@ public class JsonData {
             loanDatailsData.setZuikuaifangkuan( object.optString( "zuikuaifangkuan" ) );
             loanDatailsData.setHits( object.optString( "hits" ) );
             loanDatailsData.setTags( object.optString( "tags" ) );
+            loanDatailsData.setDetail(object.optString("detail"));
+            loanDatailsData.setPlatform(object.optString("platform"));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -370,7 +376,13 @@ public class JsonData {
                 speedLoanDetailsListData.setTiaojian( jsonObject.optString( "tiaojian" ) );
                 speedLoanDetailsListData.setType( jsonObject.optString( "type" ) );
                 speedLoanDetailsListData.setUpdated_at( jsonObject.optString( "updated_at" ) );
-                speedLoanDetailsListData.setZuikuaifangkuan( jsonObject.optString( "zuikuaifangkuan" ) );
+
+                //新加的内容
+                speedLoanDetailsListData.setHits( jsonObject.optString( "hits" ) );
+                speedLoanDetailsListData.setCat_id( jsonObject.optString( "cat_id" ) );
+                speedLoanDetailsListData.setIs_new( jsonObject.optString( "is_new" ) );
+                speedLoanDetailsListData.setIs_activity( jsonObject.optString( "is_activity" ) );
+
                 loanDetailsListData.add( speedLoanDetailsListData );
             }
         } catch (JSONException e) {
@@ -559,8 +571,11 @@ public class JsonData {
                 LoanRecordBand loanRecordBand = new LoanRecordBand();
                 loanRecordBand.setCreated_at( jsonObject.getString( "created_at" ) );
                 loanRecordBand.setImg( jsonObject.optString( "img" ) );
-                loanRecordBand.setPro_describe( jsonObject.optString( "pro_describe" ) );
+//                loanRecordBand.setPro_describe( jsonObject.optString( "pro_describe" ) );
                 loanRecordBand.setPro_name( jsonObject.optString( "pro_name" ) );
+                loanRecordBand.setAmount(jsonObject.optString("amount"));
+                loanRecordBand.setDeadline(jsonObject.optString("deadline"));
+                loanRecordBand.setUnit(jsonObject.optString("unit"));
                 loanRecordBands.add( loanRecordBand );
             }
             loanRecordBandList.setLoanRecordBands( loanRecordBands );

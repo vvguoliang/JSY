@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -35,7 +36,7 @@ public class BannerLoopAdapter extends PagerAdapter implements View.OnClickListe
 
     private List<Map<String, String>> mapList;
 
-    private int position = 0;
+    private int position1 = 0;
 
     public BannerLoopAdapter(Context context, List<ImageView> _list, List<Map<String, String>> mapList) {
         this.list = _list;
@@ -45,27 +46,28 @@ public class BannerLoopAdapter extends PagerAdapter implements View.OnClickListe
 
     @Override
     public void destroyItem(View container, int position, Object object) {
-        //    ((ViewPager) container).removeView((View)object);
+//            ((ViewPager) container).removeView((View)object);
 
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         //对ViewPager页号求模取出View列表中要显示的项
-        position %= list.size();
-        this.position = position;
-        if (position < 0) {
-            position = list.size() + position;
+        position = position % list.size();
+        this.position1 = position;
+        if (position1 < 0) {
+            position1 = list.size() + position;
         }
-        final ImageView view = list.get(position);
+        final ImageView view = list.get(position1);
         //如果View已经在之前添加到了一个父组件，则必须先remove，否则会抛出IllegalStateException。
         ViewParent vp = view.getParent();
         if (vp != null) {
             ViewGroup parent = (ViewGroup) vp;
             parent.removeView(view);
         }
+
         Glide.with(context)
-                .load(mapList.get(position).get("path"))
+                .load(mapList.get(position1).get("path"))
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
@@ -80,7 +82,6 @@ public class BannerLoopAdapter extends PagerAdapter implements View.OnClickListe
                 })
                 .into(view);
         view.setScaleType(ImageView.ScaleType.FIT_XY);
-        view.setOnClickListener(this);
         container.addView(view);
         return view;
     }
@@ -98,9 +99,9 @@ public class BannerLoopAdapter extends PagerAdapter implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(context, LoanWebViewActivity.class);
-        intent.putExtra("url", mapList.get(position).get("url"));
-        context.startActivity(intent);
+//        Intent intent = new Intent(context, LoanWebViewActivity.class);
+//        intent.putExtra("url", mapList.get(position1).get("url"));
+//        context.startActivity(intent);
     }
 }
 

@@ -233,7 +233,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_15dp"
-                android:visibility="gone"
                 android:background="@drawable/bg_fillet_shadow_selector"
                 android:padding="@dimen/common_10dp">
 
@@ -253,7 +252,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="@dimen/common_10dp"
                     android:layout_toRightOf="@id/personal_Loan_record_image"
-                    android:text="@string/name_loan_personal_feedback"
+                    android:text="@string/name_loan_personal_Loan_record"
                     android:textColor="@color/common_loan_personal"
                     android:textSize="@dimen/common_14dp"
                     tools:ignore="RelativeOverlap,RtlHardcoded" />
@@ -270,6 +269,47 @@
                     tools:ignore="RtlHardcoded" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/personal_Loan_brose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_15dp"
+                android:background="@drawable/bg_fillet_shadow_selector"
+                android:padding="@dimen/common_10dp">
+
+                <ImageView
+                    android:id="@+id/personal_Loan_brose_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/common_18dp"
+                    android:src="@mipmap/ic_loan_record"
+                    tools:ignore="RtlHardcoded" />
+
+                <com.jsy.jsydemo.control.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/common_10dp"
+                    android:layout_toRightOf="@id/personal_Loan_brose_image"
+                    android:text="@string/name_loan_personal_Loan_brows"
+                    android:textColor="@color/common_loan_personal"
+                    android:textSize="@dimen/common_14dp"
+                    tools:ignore="RelativeOverlap,RtlHardcoded" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="@dimen/common_20dp"
+                    android:padding="@dimen/common_10dp"
+                    android:src="@drawable/bg_personal_right_selector"
+                    tools:ignore="RtlHardcoded" />
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/personal_loan_setup"
                 android:layout_width="match_parent"

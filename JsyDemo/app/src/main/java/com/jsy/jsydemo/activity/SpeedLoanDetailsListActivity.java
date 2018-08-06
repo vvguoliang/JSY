@@ -28,6 +28,7 @@ import com.umeng.analytics.MobclickAgent;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import okhttp3.Request;
 
@@ -54,7 +55,7 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fra_loan);
-        type = getIntent().getExtras().getLong("type");
+        type = Long.parseLong(getIntent().getIntExtra("type", 0) + "");
         //沉浸式状态设置
         if (ImmersiveUtils.BuildVERSION()) {
             ImmersiveUtils.getInstance().getW_add_B(this);
@@ -75,24 +76,28 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
     protected void findViewById() {
         TextView title_view = findViewById(R.id.title_view);
         if (type == 0) {
-            title_view.setText(this.getString(R.string.name_Loan_recommend));
-            getHttpIndex();
+//            title_view.setText(this.getString(R.string.name_Loan_recommend));
+//            getHttpIndex();
+
+            title_view.setText(getIntent().getStringExtra("cat_name"));
+            String classData = getIntent().getStringExtra("data");
+            setData(classData);
+
         } else {
-            title_view.setText(this.getString(R.string.name_loan_speed_loan_x));
-            getHttp();
+//            title_view.setText(this.getString(R.string.name_loan_speed_loan_x));
+//            getHttp();
         }
         findViewById(R.id.title_image).setOnClickListener(this);
         findViewById(R.id.title_image).setVisibility(View.VISIBLE);
         mHandler = new Handler();
         mAdapter = new SpeedLoanDetailsListAdapter(this);
-
         mAdapter.removeHeader();
         //添加footer
         final TextView footer = new TextView(this);
         footer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtils.dip2px(this, 24)));
         footer.setTextSize(16);
         footer.setGravity(Gravity.CENTER);
-        footer.setText("");
+//        footer.setText("没有更多了...");
         mAdapter.setFooter(footer);
 
         mRecyclerView = findViewById(R.id.loan_recycler_view);
@@ -100,28 +105,38 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setBackgroundResource(R.color.common_light_grey);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setRefreshAction(new Action() {
-            @Override
-            public void onAction() {
-                getData(true);
-            }
-        });
+//        mRecyclerView.showNoMore();
+        if (type == 0) {
+            mRecyclerView.setRefreshAction(new Action() {
+                @Override
+                public void onAction() {
+                    getData(true);
+                }
+            });
 
-        mRecyclerView.setLoadMoreAction(new Action() {
-            @Override
-            public void onAction() {
-                getData(false);
-                page++;
-            }
-        });
+//            mRecyclerView.setLoadMoreAction(new Action() {
+//                @Override
+//                public void onAction() {
+//                    getData(false);
+//                    page++;
+//                }
+//            });
 
-        mRecyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                mRecyclerView.showSwipeRefresh();
-                getData(true);
-            }
-        });
+            mRecyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    mRecyclerView.showSwipeRefresh();
+                    getData(true);
+                }
+            });
+        } else {
+            mAdapter.clear();
+            mAdapter.addAll(speedLoanDetailsListData);
+//            mAdapter.notifyDataSetChanged();
+            mRecyclerView.dismissSwipeRefresh();
+            mRecyclerView.getRecyclerView().scrollToPosition(0);
+        }
+
 
     }
 
@@ -133,11 +148,9 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
                     page = 1;
                     mAdapter.clear();
                     mAdapter.addAll(speedLoanDetailsListData);
+                    mAdapter.notifyDataSetChanged();
                     mRecyclerView.dismissSwipeRefresh();
                     mRecyclerView.getRecyclerView().scrollToPosition(0);
-                } else {
-                    page++;
-                    getHttp();
                 }
             }
         }, 1500);
@@ -169,34 +182,47 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
     @Override
     public void requestSuccess(String result, String name) throws Exception {
         if (name.equals("product_filter")) {
-            SpeedLoanDetailsListDataList loanDetailsListData = JsonData.getInstance().getJsonSpeedLoanDetailsList(result);
-            speedLoanDetailsListData = new SpeedLoanDetailsListData[loanDetailsListData.getLoanDetailsListData().size()];
-            for (int i = 0; loanDetailsListData.getLoanDetailsListData().size() > i; i++) {
-                speedLoanDetailsListData[i] = new SpeedLoanDetailsListData(loanDetailsListData.getLoanDetailsListData().get(i).getId(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getPro_name(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getPro_describe(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getPro_link(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getPro_hits(),
-                        HttpURL.getInstance().HTTP_URL_PATH + loanDetailsListData.getLoanDetailsListData().get(i).getImg(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getOrder(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getEdufanwei(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getFeilv(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getFv_unit(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getZuikuaifangkuan(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getQixianfanwei(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getQx_unit(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getType(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getData_id(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getOther_id(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getStatus(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getCreated_at(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getUpdated_at(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getTiaojian(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getApi_type(),
-                        loanDetailsListData.getLoanDetailsListData().get(i).getTags());
-            }
+            analysic(result);
         }
     }
+
+    private void analysic(String result) {
+//        System.out.println(result);
+        SpeedLoanDetailsListDataList loanDetailsListData = JsonData.getInstance().getJsonSpeedLoanDetailsList(result);
+        speedLoanDetailsListData = new SpeedLoanDetailsListData[loanDetailsListData.getLoanDetailsListData().size()];
+        int s = speedLoanDetailsListData.length;
+        for (int i = 0; loanDetailsListData.getLoanDetailsListData().size() > i; i++) {
+            speedLoanDetailsListData[i] = new SpeedLoanDetailsListData
+                    (loanDetailsListData.getLoanDetailsListData().get(i).getId(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getPro_name(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getPro_describe(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getPro_link(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getPro_hits(),
+                    HttpURL.getInstance().HTTP_URL_PATH + loanDetailsListData.getLoanDetailsListData().get(i).getImg(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getOrder(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getEdufanwei(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getFeilv(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getFv_unit(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getZuikuaifangkuan(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getQixianfanwei(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getQx_unit(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getType(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getData_id(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getOther_id(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getStatus(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getCreated_at(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getUpdated_at(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getTiaojian(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getApi_type(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getTags(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getHits(),
+                    loanDetailsListData.getLoanDetailsListData().get(i).getCat_id(),
+                    HttpURL.getInstance().HTTP_URL_PATH + loanDetailsListData.getLoanDetailsListData().get(i).getIs_new(),
+                    HttpURL.getInstance().HTTP_URL_PATH + loanDetailsListData.getLoanDetailsListData().get(i).getIs_activity());
+
+        }
+    }
+
 
     @Override
     public void onResume() {
@@ -208,5 +234,10 @@ public class SpeedLoanDetailsListActivity extends BaseActivity implements View.O
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("LoanFragment");
+    }
+
+    public void setData(String data) {
+        data = "{data:"+data+"}";
+        analysic(data);
     }
 }

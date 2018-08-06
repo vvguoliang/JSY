@@ -3,19 +3,32 @@ package com.jsy.jsydemo.activity.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.jsy.jsydemo.EntityClass.HomeLoanBannerList;
 import com.jsy.jsydemo.EntityClass.ProductSuList;
 import com.jsy.jsydemo.R;
 import com.jsy.jsydemo.adapter.BannerLoopAdapter;
+import com.jsy.jsydemo.adapter.BannerLoopAdapter2;
 import com.jsy.jsydemo.adapter.LoanSupAdaperListview;
+import com.jsy.jsydemo.adapter.MyViewPagerAdapter;
 import com.jsy.jsydemo.base.BaseFragment;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
@@ -24,6 +37,7 @@ import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.JsonData;
 import com.jsy.jsydemo.utils.ToatUtils;
+import com.jsy.jsydemo.webview.LoanWebViewActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
@@ -79,7 +93,6 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
     private HomeLoanBannerList homeLoanBannerList;
 
     private ProductSuList productSuList;
-
     @Override
     protected int getLayout() {
         return R.layout.fra_loansupermarketfragment;
@@ -87,8 +100,8 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
 
     @Override
     protected void initView() {
-        getHttp();
         getHeader();
+        getHttp();
     }
 
     private void getHttp() {
@@ -120,6 +133,16 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
                     ViewGroup.LayoutParams.MATCH_PARENT));
 
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            final int finalI = i;
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mActivity, LoanWebViewActivity.class);
+                    intent.putExtra("url", mImageUrl.get(finalI).get("url"));
+                    mActivity.startActivity(intent);
+                }
+            });
+
             mBannerImageViews.add(iv);
         }
 
@@ -157,7 +180,7 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
             e.printStackTrace();
         }
         currentItem = Integer.MAX_VALUE / 2;
-        loan_viewpage.setAdapter(new BannerLoopAdapter(mActivity, mBannerImageViews, mImageUrl));
+        loan_viewpage.setAdapter(new BannerLoopAdapter2(mActivity, mBannerImageViews, mImageUrl));
         pollBanner();
     }
 
@@ -178,7 +201,6 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
             bannerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    currentItem = currentItem + 1;
                     bannerHandler.obtainMessage().sendToTarget();
                 }
 
@@ -190,9 +212,10 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
     @SuppressLint("HandlerLeak")
     private Handler bannerHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
-            loan_viewpage.setCurrentItem(currentItem);
+            loan_viewpage.setCurrentItem(currentItem + 1);
         }
     };
+
 
     @Override
     public void requestFailure(Request request, String name, IOException e) {
@@ -231,6 +254,8 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
         }
     }
 
+
+
     class NavigationPageChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override
@@ -259,7 +284,6 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
                 bannerTask = new TimerTask() {
                     @Override
                     public void run() {
-                        currentItem = currentItem + 1;
                         bannerHandler.obtainMessage().sendToTarget();
                     }
                 };
@@ -268,7 +292,6 @@ public class LoanSupermarketFragment extends BaseFragment implements DataCallBac
         }
 
     }
-
 
     @Override
     public void onStop() {

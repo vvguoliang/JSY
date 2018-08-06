@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -24,6 +25,7 @@ import com.jsy.jsydemo.activity.SetUp.SetUpPasswordActivity;
 import com.jsy.jsydemo.http.http.i.DataCallBack;
 import com.jsy.jsydemo.http.http.i.httpbase.HttpURL;
 import com.jsy.jsydemo.http.http.i.httpbase.OkHttpManager;
+import com.jsy.jsydemo.utils.AppUtil;
 import com.jsy.jsydemo.utils.DisplayUtils;
 import com.jsy.jsydemo.utils.ImmersiveUtils;
 import com.jsy.jsydemo.utils.JsonData;
@@ -80,6 +82,7 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
 
     private Intent intent;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +130,7 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
                     map.put("mobile", Long.parseLong(phone));
                     map.put("password", "");
                     map.put("code", 0);
+                    map.put("source", AppUtil.SOURCE);
                     OkHttpManager.postAsync(HttpURL.getInstance().CODE, "code", map, this);
                 }
                 break;
@@ -141,6 +145,8 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
                 }
                 Map<String, Object> map = new HashMap<>();
                 map.put("username", Long.parseLong(phone));
+                String no = AppUtil.getInstance().getChannel(LogoActivity.this, 2) + "";
+                map.put("no", no);//渠道号
                 if (loan_logo_account_number.getText().toString().equals(LogoActivity.this.getString(logoCodeLogo))) {
                     logintype = 1;
                     if (StringUtil.isNullOrEmpty(loan_logo_edittext_password_code.getText().toString())) {
@@ -160,7 +166,9 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
                     map.put("password", "");
                     map.put("logintype", logintype);
                 }
+                map.put("version", "0.0.4");//后台区分标识符
                 OkHttpManager.postAsync(HttpURL.getInstance().LOGO, "logo_code", map, this);
+//                OkHttpManager.postAsync(HttpURL.getInstance().logoinString, "logo_code", map, this);
                 break;
             case R.id.title_complete://注册
                 intent = new Intent(LogoActivity.this, SetUpPasswordActivity.class);
@@ -188,7 +196,7 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
         title_image.setOnClickListener(this);
 
         title_complete = findViewById(R.id.title_complete);
-        title_complete.setVisibility(View.VISIBLE);
+//        title_complete.setVisibility(View.VISIBLE);
         title_complete.setOnClickListener(this);
         title_complete.setText(this.getString(R.string.name_loan_logo_register));
 
@@ -271,6 +279,7 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
                             SharedPreferencesUtils.put(this, "username", registerSignCodeModify1.getUsername());
                             SharedPreferencesUtils.put(this, "uid", registerSignCodeModify1.getUid());
                             SharedPreferencesUtils.put(this, "password", loan_logo_edittext_password_code.getText().toString());
+                            startActivity(new Intent(this, MainActivity.class));
                             finish();
                         } else {
                             ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());
@@ -284,6 +293,7 @@ public class LogoActivity extends FragmentActivity implements View.OnClickListen
                         if (registerSignCodeModify1.getStatus() == 1 && registerSignCodeModify1.getState().equals("success")) {
                             SharedPreferencesUtils.put(this, "username", registerSignCodeModify1.getUsername());
                             SharedPreferencesUtils.put(this, "uid", registerSignCodeModify1.getUid());
+                            startActivity(new Intent(this, MainActivity.class));
                             finish();
                         } else {
                             ToatUtils.showShort1(this, registerSignCodeModify1.getInfo());

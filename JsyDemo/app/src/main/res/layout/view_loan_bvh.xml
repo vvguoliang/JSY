@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_10dp"
             android:text="@string/name_loan_praise_recommend"
-            android:textColor="@color/common_brown_text"
+            android:textColor="#f85c27"
             android:textSize="@dimen/common_14dp"
             tools:ignore="RtlHardcoded" />
     </LinearLayout>
@@ -41,7 +41,7 @@
         android:fastScrollEnabled="false"
         android:gravity="center"
         android:listSelector="@color/transparent"
-        android:numColumns="2"
+        android:numColumns="1"
         android:scrollbars="none"
         android:stretchMode="columnWidth" />
 
