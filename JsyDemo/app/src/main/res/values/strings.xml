@@ -122,6 +122,7 @@
     <string name="parse_photo_error">解析图片失败</string>
     <string name="name_loan_logo_register">注册</string>
     <string name="name_loan_logo_phone">输入手机号</string>
+    <string name="name_loan_logo_phone1">请输入本人常用的手机号</string>
     <string name="name_loan_logo_code">输入验证码</string>
     <string name="name_loan_logo_logo">立即登录</string>
     <string name="name_loan_logo_account_number">账号密码登录</string>
@@ -250,6 +251,8 @@
     <string name="loan_apply_now">立即申请</string>
     <string name="loan_service">客 服</string>
     <string name="loan_min">500</string>
+    <string name="logo_zuigao">最高可借额度（元）</string>
+    <string name="go_money">马上领钱</string>
 
 
     <string-array name="tips">
@@ -306,7 +309,6 @@
 
 
     </string-array>
-
 
 
 </resources>

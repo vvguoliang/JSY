@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_250dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_logo_tab"
+        tools:ignore="ContentDescription" />
+
+    <include
+        layout="@layout/tab_activity_fra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/status_bar_height" />
+
+    <LinearLayout
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/common_30dp"
+        android:layout_marginRight="@dimen/common_30dp"
+        android:layout_marginTop="@dimen/common_190dp"
+        android:background="@mipmap/ic_logo_zhong"
+        android:orientation="vertical">
+
+        <com.jsy.jsydemo.control.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/common_20dp"
+            android:text="@string/logo_zuigao"
+            android:textColor="@color/common_gray"
+            android:textSize="@dimen/common_16dp" />
+
+        <com.jsy.jsydemo.control.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/common_10dp"
+            android:text="20000"
+            android:textColor="@color/common_basic_red"
+            android:textSize="@dimen/common_35dp" />
+
+        <com.jsy.jsydemo.control.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/common_35dp"
+            android:text="一千元借12月，日费用最低2毛7"
+            android:textColor="@color/common_gray"
+            android:textSize="@dimen/common_14dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/logo1_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line2"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_35dp"
+            android:layout_marginRight="@dimen/common_35dp"
+            android:layout_marginTop="@dimen/common_10dp"
+            android:background="@drawable/eittext_logo_shape"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_logo_phone" />
+
+            <com.jsy.jsydemo.control.MyEdittextView
+                android:id="@+id/loan_logo_edittext_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:digits="1234567890"
+                android:hint="@string/name_loan_logo_phone1"
+                android:inputType="phone|number"
+                android:maxLength="12"
+                android:padding="@dimen/common_5dp"
+                android:paddingLeft="@dimen/common_50dp"
+                android:textColor="@color/common_brown_text"
+                android:textColorHint="@color/common_gray"
+                android:textSize="@dimen/common_14dp"
+                tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_35dp"
+            android:layout_marginRight="@dimen/common_35dp"
+            android:layout_marginTop="@dimen/common_10dp"
+            android:background="@drawable/eittext_logo_shape"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_logo_passwore" />
+
+            <com.jsy.jsydemo.control.MyEdittextView
+                android:id="@+id/loan_logo_edittext_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:digits="1234567890"
+                android:hint="@string/name_loan_logo_code"
+                android:inputType="phone|number"
+                android:maxLength="6"
+                android:padding="@dimen/common_10dp"
+                android:textColor="@color/common_brown_text"
+                android:textColorHint="@color/common_gray"
+                android:textSize="@dimen/common_14dp" />
+
+
+            <Button
+                android:id="@+id/loan_logo_button_code"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/common_30dp"
+                android:background="@drawable/corner_green_logo"
+                android:text="@string/name_loan_set_up_password_obtain_code"
+                android:textColor="@color/white"
+                android:textSize="@dimen/common_14dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/loan_logo_button_logo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_45dp"
+        android:layout_below="@id/logo1_linear"
+        android:layout_marginLeft="@dimen/common_35dp"
+        android:layout_marginRight="@dimen/common_35dp"
+        android:layout_marginTop="@dimen/common_20dp"
+        android:background="@drawable/bg_logo_bule"
+        android:text="@string/go_money"
+        android:textColor="@color/white"
+        android:textSize="@dimen/common_16dp" />
+
+
+</RelativeLayout>

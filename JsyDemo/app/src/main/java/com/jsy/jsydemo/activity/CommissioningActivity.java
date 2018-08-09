@@ -243,7 +243,7 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
         if (!TextUtils.isEmpty(SharedPreferencesUtils.get(CommissioningActivity.this, "uid", "").toString())) {
             startActivity(new Intent(this, MainActivity.class));
         } else {
-            startActivity(new Intent(this, LogoActivity.class));
+            startActivity(new Intent(this, LogoActivity1.class));
         }
         finish();
     }
@@ -290,7 +290,7 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                     if (!TextUtils.isEmpty(SharedPreferencesUtils.get(CommissioningActivity.this, "uid", "").toString())) {
                         startActivity(new Intent(this, MainActivity.class));
                     } else {
-                        startActivity(new Intent(this, LogoActivity.class));
+                        startActivity(new Intent(this, LogoActivity1.class));
                     }
                 }
                 break;
@@ -391,7 +391,7 @@ public class CommissioningActivity extends FragmentActivity implements View.OnCl
                         }
                         startActivity(intent);
                     } else {
-                        startActivity(new Intent(CommissioningActivity.this, LogoActivity.class));
+                        startActivity(new Intent(CommissioningActivity.this, LogoActivity1.class));
                     }
                     finish();
                     break;

@@ -112,6 +112,9 @@
             android:name=".activity.LogoActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.LogoActivity1"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.SetUp.SetUpPasswordActivity"
             android:screenOrientation="portrait" />
         <activity

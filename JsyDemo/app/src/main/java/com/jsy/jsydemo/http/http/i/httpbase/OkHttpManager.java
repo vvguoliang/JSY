@@ -64,9 +64,9 @@ public class OkHttpManager {
         /*
           在这里直接设置连接超时.读取超时，写入超时
          */
-        mClient.newBuilder().connectTimeout( 10 * 1000, TimeUnit.SECONDS );
-        mClient.newBuilder().readTimeout( 10 * 1000, TimeUnit.SECONDS );
-        mClient.newBuilder().writeTimeout( 10 * 1000, TimeUnit.SECONDS );
+        mClient.newBuilder().connectTimeout( 60 * 1000, TimeUnit.SECONDS );
+        mClient.newBuilder().readTimeout( 60 * 1000, TimeUnit.SECONDS );
+        mClient.newBuilder().writeTimeout( 60 * 1000, TimeUnit.SECONDS );
 
         /*
          * 如果是用的3.0之前的版本  使用以下直接设置连接超时.读取超时，写入超时
